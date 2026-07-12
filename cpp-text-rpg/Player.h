@@ -28,10 +28,10 @@ public:
 	virtual void showAttackMessage() const = 0;
 
 	// Getters
-	EPlayerJob getJob() = 0;
-	int getLevel() = 0;
+	EPlayerJob getJob();
+	int getLevel();
 
 	// Setters
-	void setJob(EPlayerJob job) = 0;
-	void setLevel(int level) = 0;
+	void setJob(EPlayerJob job);
+	void setLevel(int level);
 };
