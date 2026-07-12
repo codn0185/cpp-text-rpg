@@ -2,7 +2,7 @@
 
 #include "Singleton.h"
 
-#include "Player.h"
+#include "Players.h"
 #include "PotionSystem.h"
 
 using namespace std;
@@ -50,6 +50,7 @@ private:
 
 	PotionSystem* potionSystem; // 포션 시스템
 
+	Player* player; // 플레이어
 public:
 	// 실행
 	void run();

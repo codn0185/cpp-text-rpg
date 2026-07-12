@@ -3,11 +3,13 @@
 GameManager::GameManager()
 {
 	potionSystem = new PotionSystem();
+	player = new NoJob();
 }
 
 GameManager::~GameManager()
 {
 	delete potionSystem;
+	delete player;
 }
 
 void GameManager::run()
