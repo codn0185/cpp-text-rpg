@@ -15,9 +15,13 @@ GameManager::~GameManager()
 
 void GameManager::run()
 {
-	while (currentGameState != EGameState::GAME_EXIT)
+	while (true)
 	{
 		update();
+		if (currentGameState == EGameState::GAME_EXIT)
+		{
+			break;
+		}
 	}
 }
 
@@ -220,6 +224,37 @@ void GameManager::onPlayerResitration()
 
 void GameManager::onMainMenu()
 {
+	cout << "" << "\n";
+	cout << "============================================" << "\n";
+	cout << "< 메인 메뉴 >" << "\n";
+	cout << "1. 던전 입장" << "\n";
+	cout << "2. 인벤토리 확인" << "\n";
+	cout << "3. 포션 제작소" << "\n";
+	cout << "0. 게임 종료" << "\n";
+	cout << "============================================" << "\n";
+
+
+	int option;
+	cout << "선택: ";
+	cin >> option;
+
+	switch (option)
+	{
+	case 1:
+		switchGameState(EGameState::DUNGEON_ENTER);
+		break;
+	case 2:
+		switchGameState(EGameState::INVENTORY_VIEW);
+		break;
+	case 3:
+		switchGameState(EGameState::POTION_SHOP_ENTER);
+		break;
+	case 0:
+		switchGameState(EGameState::GAME_EXIT);
+		break;
+	default:
+		break;
+	}
 }
 
 void GameManager::onDungeonEnter()
@@ -248,4 +283,7 @@ void GameManager::onPotionShopSearch()
 
 void GameManager::onGameExit()
 {
+	cout << "============================================" << "\n";
+	cout << "게임 종료" << "\n";
+	cout << "============================================" << "\n";
 }
