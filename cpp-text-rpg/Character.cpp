@@ -59,5 +59,5 @@ void Character::setPower(int power)
 
 void Character::setDefence(int defence)
 {
-	this->defence = defence
+	this->defence = defence;
 }
