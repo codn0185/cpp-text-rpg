@@ -24,6 +24,9 @@ protected:
 public:
 	Player(string name, int hp, int mp, int power, int defence);
 
+	// 공격 메시지
+	virtual void showAttackMessage() const = 0;
+
 	// Getters
 	virtual EPlayerJob getJob() = 0;
 	virtual int getLevel() = 0;
