@@ -21,8 +21,7 @@ enum class EGameState
 
 	// 게임 시작
 	GAME_START, // 게임 시작
-	PLAYER_STAT_REGISTRATION, // 플레이어 이름 및 스탯 등록
-	PLAYER_JOB_SELECTION, // 플레이어 직업 선택
+	PLAYER_REGISTRATION, // 플레이어 이름 및 스탯 입력, 직업 선택
 
 	// 메뉴 선택 화면
 	MAIN_MENU, // 메인 메뉴
@@ -64,8 +63,7 @@ public:
 
 	void onGameStart(); // 게임 시작
 
-	void onPlayerResitration(); // 플레이어 이름, 스탯 등록
-	void onJobSelection(); // 플레이어 직업 선택
+	void onPlayerResitration(); // 플레이어 이름 및 스탯 입력, 직업 선택
 
 	void onMainMenu(); // 메인 메뉴 
 

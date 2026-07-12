@@ -15,11 +15,8 @@ void GameManager::update()
 	case EGameState::GAME_START:
 		onGameStart();
 		break;
-	case EGameState::PLAYER_STAT_REGISTRATION:
+	case EGameState::PLAYER_REGISTRATION:
 		onPlayerResitration();
-		break;
-	case EGameState::PLAYER_JOB_SELECTION:
-		onJobSelection();
 		break;
 	case EGameState::MAIN_MENU:
 		onMainMenu();
@@ -63,7 +60,7 @@ void GameManager::onPlayerResitration()
 {
 }
 
-void GameManager::onJobSelection()
+		cout << "HP나 MP의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
 {
 }
 
