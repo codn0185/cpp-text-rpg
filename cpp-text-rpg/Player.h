@@ -9,7 +9,7 @@ enum class EPlayerJob
 {
 	None,		// 무직
 	Warrior,	// 전사
-	Mage,	// 마법사
+	Mage,	    // 마법사
 	Rogue,		// 도적
 	Archer,		// 궁수
 };
