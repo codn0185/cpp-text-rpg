@@ -5,18 +5,17 @@
 template <typename T>
 class Singleton
 {
-private:
+protected:
 	Singleton() = default;
-	~Singleton() = default;
+	virtual ~Singleton() = default;
 
+public:
 	Singleton(const Singleton&) = delete;
 	Singleton& operator=(const Singleton&) = delete;
 
-public:
 	static T& GetInstance()
 	{
 		static T instance;
 		return instance;
 	}
 };
-
