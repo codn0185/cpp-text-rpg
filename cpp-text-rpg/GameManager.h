@@ -3,6 +3,7 @@
 #include "Singleton.h"
 
 #include "Player.h"
+#include "PotionSystem.h"
 
 using namespace std;
 
