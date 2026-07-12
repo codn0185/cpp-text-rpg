@@ -31,24 +31,24 @@ protected:
 public:
 	virtual ~Character() = default;
 
-	virtual void takeDamage(int damage) = 0;
-	virtual bool isDead() = 0;
+	void takeDamage(int damage) = 0;
+	bool isDead() = 0;
 
 	// Life Cycles
 	//  virtual void onEnable() = 0;
 	//  virtual void onDisable() = 0;
 
 	// Getters
-	virtual string getName() = 0;
-	virtual int getHP() = 0;
-	virtual int getMP() = 0;
-	virtual int getPower() = 0;
-	virtual int getDefence() = 0;
+	string getName() = 0;
+	int getHP() = 0;
+	int getMP() = 0;
+	int getPower() = 0;
+	int getDefence() = 0;
 
 	// Setters
-	virtual void setName(string name) = 0;
-	virtual void setHP(int hp) = 0;
-	virtual void setMP(int mp) = 0;
-	virtual void setPower(int power) = 0;
-	virtual void setDefence(int defence) = 0;
+	void setName(string name) = 0;
+	void setHP(int hp) = 0;
+	void setMP(int mp) = 0;
+	void setPower(int power) = 0;
+	void setDefence(int defence) = 0;
 };
