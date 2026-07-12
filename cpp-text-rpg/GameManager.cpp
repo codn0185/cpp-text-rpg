@@ -1,5 +1,15 @@
 #include "GameManager.h"
 
+GameManager::GameManager()
+{
+	potionSystem = new PotionSystem();
+}
+
+GameManager::~GameManager()
+{
+	delete potionSystem;
+}
+
 void GameManager::run()
 {
 	while (currentGameState != EGameState::GAME_EXIT)

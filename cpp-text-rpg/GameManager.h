@@ -47,7 +47,7 @@ class GameManager : public Singleton<GameManager>
 private:
 	EGameState currentGameState = EGameState::GAME_START; // 현재 게임 상태
 
-	Player* player = nullptr; // 플레이어
+	PotionSystem* potionSystem; // 포션 시스템
 
 public:
 	// 실행
