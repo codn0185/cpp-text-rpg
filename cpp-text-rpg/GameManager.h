@@ -43,7 +43,7 @@ enum class EGameState
 	GAME_EXIT,
 };
 
-class GameManager : public Singleton
+class GameManager : public Singleton<GameManager>
 {
 private:
 	EGameState currentGameState = EGameState::GAME_START; // 현재 게임 상태
