@@ -18,7 +18,7 @@ void GameManager::update()
 	case EGameState::PLAYER_STAT_REGISTRATION:
 		onPlayerResitration();
 		break;
-	case EGameState::PALYER_JOB_SELECTION:
+	case EGameState::PLAYER_JOB_SELECTION:
 		onJobSelection();
 		break;
 	case EGameState::MAIN_MENU:

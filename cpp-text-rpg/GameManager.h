@@ -22,7 +22,7 @@ enum class EGameState
 	// 게임 시작
 	GAME_START, // 게임 시작
 	PLAYER_STAT_REGISTRATION, // 플레이어 이름 및 스탯 등록
-	PALYER_JOB_SELECTION, // 플레이어 직업 선택
+	PLAYER_JOB_SELECTION, // 플레이어 직업 선택
 
 	// 메뉴 선택 화면
 	MAIN_MENU, // 메인 메뉴
