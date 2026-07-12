@@ -5,6 +5,6 @@
 class UISystem
 {
 public:
-	static void printPlayerStat(Player* player);
+	static void PrintPlayerStat(Player* player);
 };
 

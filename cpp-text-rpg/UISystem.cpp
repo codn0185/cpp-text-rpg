@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-void UISystem::printPlayerStat(Player* player)
+void UISystem::PrintPlayerStat(Player* player)
 {
 	cout << "\n\n";
 	cout << "===========================================" << "\n";
