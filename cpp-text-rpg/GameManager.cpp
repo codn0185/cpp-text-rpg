@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-GameManager::GameManager()
+GameManager::GameManager() :isRunning(true)
 {
 	potionSystem = new PotionSystem();
 }
@@ -15,13 +15,9 @@ GameManager::~GameManager()
 
 void GameManager::run()
 {
-	while (true)
+	while (isRunning)
 	{
 		update();
-		if (currentGameState == EGameState::GAME_EXIT)
-		{
-			break;
-		}
 	}
 }
 
@@ -286,4 +282,5 @@ void GameManager::onGameExit()
 	cout << "============================================" << "\n";
 	cout << "게임 종료" << "\n";
 	cout << "============================================" << "\n";
+	isRunning = false;
 }
