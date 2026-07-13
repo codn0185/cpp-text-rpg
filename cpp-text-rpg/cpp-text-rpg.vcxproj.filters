@@ -46,6 +46,9 @@
     <Filter Include="Systems\InventorySystem">
       <UniqueIdentifier>{829cfc02-9f02-4d15-9342-268590176d43}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\RandomSystem">
+      <UniqueIdentifier>{2c603394-d111-4944-8cbb-9c36325668dd}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -108,6 +111,9 @@
     <ClCompile Include="ItemSorter.cpp">
       <Filter>Systems\InventorySystem</Filter>
     </ClCompile>
+    <ClCompile Include="RandomSystem.cpp">
+      <Filter>Systems\RandomSystem</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -133,9 +139,6 @@
     </ClInclude>
     <ClInclude Include="Item.h">
       <Filter>Items</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="NoJob.h">
       <Filter>Characters\Players</Filter>
@@ -175,6 +178,12 @@
     </ClInclude>
     <ClInclude Include="ItemSorter.h">
       <Filter>Systems\InventorySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="RandomSystem.h">
+      <Filter>Systems\RandomSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

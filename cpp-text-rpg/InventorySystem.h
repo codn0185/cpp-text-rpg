@@ -9,17 +9,17 @@ class InventorySystem
 {
 private:
 	int maxSlots;
-	vector<Item*> inventory;
+	vector<EItemID> inventory;
 
 public:
 	InventorySystem();
-	~InventorySystem();
+	~InventorySystem() = default;
 
 	bool isFull();
 	int getSize();
 
-	void addItem(Item* item);
-	Item* removeItem(int slot);
+	void addItem(EItemID itemID);
+	EItemID removeItem(int slot);
 
 	void displayInventory();
 };

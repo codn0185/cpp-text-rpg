@@ -138,6 +138,7 @@
     <ClCompile Include="NoJob.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PotionSystem.cpp" />
+    <ClCompile Include="RandomSystem.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Slime.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="PotionSystem.h" />
+    <ClInclude Include="RandomSystem.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />

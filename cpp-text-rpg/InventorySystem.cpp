@@ -4,14 +4,6 @@ InventorySystem::InventorySystem() : maxSlots(10)
 {
 }
 
-InventorySystem::~InventorySystem()
-{
-	for (Item* item : inventory)
-	{
-		delete item;
-	}
-}
-
 bool InventorySystem::isFull()
 {
 	return inventory.size() == maxSlots;
@@ -22,25 +14,25 @@ int InventorySystem::getSize()
 	return inventory.size();
 }
 
-void InventorySystem::addItem(Item* item)
+void InventorySystem::addItem(EItemID itemID)
 {
 	if (!isFull())
 	{
-		inventory.push_back(item);
+		inventory.push_back(itemID);
 	}
 }
 
-Item* InventorySystem::removeItem(int slot)
+EItemID InventorySystem::removeItem(int slot)
 {
 	slot--;
 	if (slot < 0 || inventory.size() <= slot)
 	{
-		return nullptr;
+		return EItemID::NONE;
 	}
 
-	Item* item = inventory[slot];
+	EItemID itemID = inventory[slot];
 	inventory.erase(inventory.begin() + slot);
-	return item;
+	return itemID;
 }
 
 void InventorySystem::displayInventory()
@@ -48,8 +40,8 @@ void InventorySystem::displayInventory()
 	cout << "========== < 인벤토리 (" << inventory.size() << "/" << maxSlots << ") > ==========" << "\n";
 	for (int i = 0; i < inventory.size(); i++)
 	{
-		Item* item = inventory[i];
-		cout << i + 1 << ". " << item->name << " (" << item->price << "g)" << "\n";
+		EItemID itemID = inventory[i];
+		cout << i + 1 << ". " << ITEM_TABLE[itemID]->name << " (" << ITEM_TABLE[itemID]->price << "g)" << "\n";
 	}
 	cout << "\n\n";
 }

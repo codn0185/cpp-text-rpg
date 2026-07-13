@@ -1,8 +1,8 @@
 #pragma once
 
 #include "Character.h"
-
 #include "Item.h"
+#include "RandomSystem.h"
 
 enum class EMosnterType
 {
@@ -15,16 +15,15 @@ class Monster : public Character
 {
 protected:
 	EMosnterType monsterType;
-	Item* dropItem;
 
 public:
 	Monster(string name, int hp, int power, int defence);
 
+	virtual EItemID getDropItemID() = 0;
+
 	// Getters
-	Item* getDropItem();
 	EMosnterType getMonsterType();
 
 	// Setters
-	void setDropItem(Item* dropItem);
 	void setMonsterType(EMosnterType monsterType);
 };

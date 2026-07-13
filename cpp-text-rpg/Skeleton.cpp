@@ -3,5 +3,10 @@
 Skeleton::Skeleton(string name, int hp, int power, int defence) : Monster(name, hp, power, defence)
 {
 	setMonsterType(EMosnterType::Skeleton);
-	setDropItem(new Item("스켈레톤의 고운 뼛가루", 12));
+}
+
+EItemID Skeleton::getDropItemID()
+{
+	vector<EItemID> itemIDs = {EItemID::SKELETON_BONE, EItemID::MANA_DUST};
+	return RandomSystem::getRandom(itemIDs, {3, 2});
 }

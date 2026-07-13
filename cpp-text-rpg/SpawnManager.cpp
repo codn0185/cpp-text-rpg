@@ -2,7 +2,7 @@
 
 #include "Monsters.h"
 
-SpawnManager::SpawnManager() : gen_(std::random_device{}())
+SpawnManager::SpawnManager()
 {
 }
 
@@ -49,8 +49,7 @@ Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
 Monster* SpawnManager::getRandomMonsterFromPool()
 {
 	vector<EMosnterType> mosnterTypes = {EMosnterType::Slime, EMosnterType::Goblin, EMosnterType::Skeleton};
-	uniform_int_distribution<size_t> dist_(0, mosnterTypes.size() - 1);
-	EMosnterType mosnterType = mosnterTypes[dist_(gen_)];
+	EMosnterType mosnterType = RandomSystem::getRandom<EMosnterType>(mosnterTypes, {1, 1, 1});
 
 	return getMonsterFromPool(mosnterType);
 }
