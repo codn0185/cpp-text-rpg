@@ -4,15 +4,27 @@
 
 #include "Item.h"
 
+enum class EMosnterType
+{
+	Slime,
+	Goblin,
+	Skeleton,
+};
+
 class Monster : public Character
 {
 protected:
-	Item dropItem;
+	EMosnterType monsterType;
+	Item* dropItem;
 
 public:
+	Monster(string name, int hp, int power, int defence);
+
 	// Getters
-	virtual Item getDropItem() = 0;
+	Item* getDropItem();
+	EMosnterType getMonsterType();
 
 	// Setters
-	virtual void setDropItem(Item dropItem) = 0;
+	void setDropItem(Item* dropItem);
+	void setMonsterType(EMosnterType monsterType);
 };
