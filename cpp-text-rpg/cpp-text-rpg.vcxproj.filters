@@ -13,18 +13,138 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Characters">
+      <UniqueIdentifier>{23b8b9ad-cf3c-42a3-a92e-020606c9d3e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Players">
+      <UniqueIdentifier>{923593e5-189b-4465-9b95-0e03e666c845}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Characters\Monsters">
+      <UniqueIdentifier>{41e52292-db7c-45b9-86ab-beb104f2b708}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Items">
+      <UniqueIdentifier>{5e4527ec-26b6-4d7e-9f8f-6239edd74142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems">
+      <UniqueIdentifier>{957ce698-38de-4f34-9ea3-331b87d98c21}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Character.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Characters\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="CombatSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="Warrior.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Mage.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Archer.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Rogue.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionSystem.cpp">
+      <Filter>Systems</Filter>
+    </ClCompile>
+    <ClCompile Include="NoJob.cpp">
+      <Filter>Characters\Players</Filter>
+    </ClCompile>
+    <ClCompile Include="Slime.cpp">
+      <Filter>Characters\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Goblin.cpp">
+      <Filter>Characters\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="Skeleton.cpp">
+      <Filter>Characters\Monsters</Filter>
+    </ClCompile>
+    <ClCompile Include="UISystem.cpp">
+      <Filter>Systems</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
+      <Filter>Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Characters\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Warrior.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Mage.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Archer.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Rogue.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionSystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="NoJob.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Players.h">
+      <Filter>Characters\Players</Filter>
+    </ClInclude>
+    <ClInclude Include="Slime.h">
+      <Filter>Characters\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Goblin.h">
+      <Filter>Characters\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="Skeleton.h">
+      <Filter>Characters\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="UISystem.h">
+      <Filter>Systems</Filter>
+    </ClInclude>
+    <ClInclude Include="Monsters.h">
+      <Filter>Characters\Monsters</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
