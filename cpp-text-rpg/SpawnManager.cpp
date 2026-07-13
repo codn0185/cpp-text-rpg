@@ -17,11 +17,6 @@ SpawnManager::~SpawnManager()
 			q.pop();
 		}
 	}
-
-	for (Monster* monster : activeMonsters)
-	{
-		delete monster;
-	}
 }
 
 Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
