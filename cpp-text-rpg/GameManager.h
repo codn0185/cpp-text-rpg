@@ -9,6 +9,7 @@
 
 #include "UISystem.h"
 #include "PotionSystem.h"
+#include "InventorySystem.h"
 
 using namespace std;
 
@@ -32,18 +33,15 @@ enum class EGameState
 	// 메뉴 선택 화면
 	MAIN_MENU, // 메인 메뉴
 
-	// 1. 던전
+	// 던전
 	DUNGEON_ENTER, // 던전 입장
 	DUNGEON_COMBAT, // 몬스터 전투
 
-	// 2. 인벤토리 확인
-	INVENTORY_VIEW, // 인벤토리 확인
-
-	// 3. 포션 제작소
+	// 포션 제작소
 	POTION_SHOP_ENTER, // 포션 제작소 입장
 	POTION_SHOP_SEARCH, // 포션 검색 (전체 레시피 / 이름 검색 / 재료 검색)
 
-	// 0. 게임 종료
+	// 게임 종료
 	GAME_EXIT,
 };
 
@@ -54,8 +52,10 @@ private:
 	bool isRunning;
 
 	CombatManager* combatManager; // 전투 매니저
-	PotionSystem* potionSystem; // 포션 시스템
 	SpawnManager* spawnManager; // 스폰 매니저
+
+	PotionSystem* potionSystem; // 포션 시스템
+	InventorySystem* inventorySystem; // 포션 시스템
 
 	Player* player; // 플레이어
 
@@ -82,8 +82,6 @@ public:
 
 	void onDungeonEnter(); // 던전 입장
 	void onDungeonCombat(); // 몬스터와 전투
-
-	void onInventoryView(); // 인벤토리 확인
 
 	void onPotionShopEnter(); // 포션 제작소 입장
 	void onPotionShopSearch(); // 포션 검색

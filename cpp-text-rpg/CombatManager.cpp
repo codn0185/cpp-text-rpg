@@ -135,7 +135,7 @@ void CombatManager::onCheckDefeat()
 
 void CombatManager::onPlayerVictory()
 {
-	cout << monster->getName() << "와의 전투에서 승리하였다!" << "\n";
+	cout << monster->getName() << "와/과의 전투에서 승리하였다!" << "\n";
 	isCombatRunning = false;
 }
 

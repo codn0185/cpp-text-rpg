@@ -43,6 +43,9 @@
     <Filter Include="Systems\UISystem">
       <UniqueIdentifier>{c3380df3-3c2e-44f6-a28f-852aa95c191a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\InventorySystem">
+      <UniqueIdentifier>{829cfc02-9f02-4d15-9342-268590176d43}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -98,6 +101,12 @@
     </ClCompile>
     <ClCompile Include="UISystem.cpp">
       <Filter>Systems\UISystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InventorySystem.cpp">
+      <Filter>Systems\InventorySystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ItemSorter.cpp">
+      <Filter>Systems\InventorySystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="SpawnManager.h">
       <Filter>Systems\SpawnManager</Filter>
+    </ClInclude>
+    <ClInclude Include="InventorySystem.h">
+      <Filter>Systems\InventorySystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ItemSorter.h">
+      <Filter>Systems\InventorySystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

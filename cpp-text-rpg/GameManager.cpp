@@ -9,6 +9,7 @@ GameManager::GameManager() :isRunning(true)
 	potionSystem = new PotionSystem();
 	spawnManager = new SpawnManager();
 	combatManager = new CombatManager();
+	inventorySystem = new InventorySystem();
 }
 
 GameManager::~GameManager()
@@ -43,9 +44,6 @@ void GameManager::update()
 		break;
 	case EGameState::DUNGEON_COMBAT:
 		onDungeonCombat();
-		break;
-	case EGameState::INVENTORY_VIEW:
-		onInventoryView();
 		break;
 	case EGameState::POTION_SHOP_ENTER:
 		onPotionShopEnter();
@@ -238,7 +236,7 @@ void GameManager::onMainMenu()
 		switchGameState(EGameState::DUNGEON_ENTER);
 		break;
 	case 2:
-		switchGameState(EGameState::INVENTORY_VIEW);
+		inventorySystem->displayInventory();
 		break;
 	case 3:
 		switchGameState(EGameState::POTION_SHOP_ENTER);
@@ -274,7 +272,7 @@ void GameManager::onDungeonEnter()
 		UISystem::PrintPlayerStat(player);
 		break;
 	case 3:
-		// 인벤토리 확인
+		inventorySystem->displayInventory();
 		break;
 	case 0:
 		switchGameState(EGameState::MAIN_MENU);
@@ -294,10 +292,46 @@ void GameManager::onDungeonCombat()
 		combatManager->update();
 	}
 
-
 	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory)
 	{
-		// TODO: 아이템 획득 로직 추가
+		Item* dropItem = monster->getDropItem();
+		cout << monster->getName() << "이/가 \"" << dropItem->name << "\"를/을 드랍했습니다." << "\n";
+
+		if (inventorySystem->isFull())
+		{
+			bool isCollectingItem = true;
+			while (isCollectingItem)
+			{
+				cout << "인벤토리에 공간이 부족하므로 버릴 아이템을 선택하세요." << "\n";
+				inventorySystem->displayInventory();
+
+				cout << "> 버릴 아이템 번호 선택 (0: 드랍 아이템 포기): ";
+				int slot;
+				cin >> slot;
+
+				if (slot == 0)
+				{
+					cout << "\"" << dropItem->name << "\"를/을 포기합니다." << "\n";
+					isCollectingItem = false;
+				}
+				else if (0 <= slot && slot <= inventorySystem->getSize())
+				{
+					Item* prevItem = inventorySystem->removeItem(slot);
+					inventorySystem->addItem(dropItem);
+					cout << "\"" << prevItem->name << "\"를/을 버리고 \"" << dropItem->name << "\"를/을 획득합니다." << "\n";
+					isCollectingItem = false;
+				}
+				else
+				{
+					cout << "다시 입력하세요." << "\n";
+				}
+			}
+		}
+		else
+		{
+			cout << "\"" << dropItem->name << "\"를/을 인벤토리에 보관하였다." << "\n";
+			inventorySystem->addItem(dropItem);
+		}
 		switchGameState(EGameState::DUNGEON_ENTER);
 	}
 	else if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat)
@@ -308,10 +342,6 @@ void GameManager::onDungeonCombat()
 	}
 
 	spawnManager->returnMonsterToPool(monster);
-}
-
-void GameManager::onInventoryView()
-{
 }
 
 void GameManager::onPotionShopEnter()
