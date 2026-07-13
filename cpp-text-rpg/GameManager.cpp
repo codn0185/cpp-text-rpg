@@ -1,10 +1,14 @@
 #include "GameManager.h"
 
+#include "CombatManager.h"
+
 #include <iostream>
 
 GameManager::GameManager() :isRunning(true)
 {
 	potionSystem = new PotionSystem();
+	spawnManager = new SpawnManager();
+	combatManager = new CombatManager();
 }
 
 GameManager::~GameManager()
@@ -39,9 +43,6 @@ void GameManager::update()
 		break;
 	case EGameState::DUNGEON_COMBAT:
 		onDungeonCombat();
-		break;
-	case EGameState::DUNGEON_REWARD:
-		onDungeonReward();
 		break;
 	case EGameState::INVENTORY_VIEW:
 		onInventoryView();
@@ -220,8 +221,7 @@ void GameManager::onPlayerResitration()
 void GameManager::onMainMenu()
 {
 	cout << "" << "\n";
-	cout << "============================================" << "\n";
-	cout << "< 메인 메뉴 >" << "\n";
+	cout << "=============== < 메인 메뉴 > ===============" << "\n";
 	cout << "1. 던전 입장" << "\n";
 	cout << "2. 인벤토리 확인" << "\n";
 	cout << "3. 포션 제작소" << "\n";
@@ -253,22 +253,61 @@ void GameManager::onMainMenu()
 
 void GameManager::onDungeonEnter()
 {
-	/*
-	* 1. 던전 입장 메시지 출력
-	* 2. 스폰 매니저가 무작위 몬스터 1마리 소환
-	* 3. 몬스터 마주침 메시지 출력
-	* 4. 몬스터 전투 상태로 전환 (switch
-	*/
+	cout << "\n\n";
+	cout << "================= < 던전 > =================" << "\n";
+	cout << "1. 들어가기" << "\n";
+	cout << "2. 스탯 확인" << "\n";
+	cout << "3. 인벤토리 확인" << "\n";
+	cout << "0. 던전 나가기" << "\n";
+	cout << "============================================" << "\n";
 
-	switchGameState(EGameState::DUNGEON_COMBAT);
+	int option;
+	cout << "선택: ";
+	cin >> option;
+
+	switch (option)
+	{
+	case 1:
+		switchGameState(EGameState::DUNGEON_COMBAT);
+		break;
+	case 2:
+		UISystem::PrintPlayerStat(player);
+		break;
+	case 3:
+		// 인벤토리 확인
+		break;
+	case 0:
+		switchGameState(EGameState::MAIN_MENU);
+		break;
+	default:
+		break;
+	}
 }
 
 void GameManager::onDungeonCombat()
 {
-}
+	Monster* monster = spawnManager->getRandomMonsterFromPool();
 
-void GameManager::onDungeonReward()
-{
+	combatManager->start(player, monster);
+	while (combatManager->isCombatRunning)
+	{
+		combatManager->update();
+	}
+
+
+	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory)
+	{
+		// TODO: 아이템 획득 로직 추가
+		switchGameState(EGameState::DUNGEON_ENTER);
+	}
+	else if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat)
+	{
+		// TODO: GameOver 상태 추가해서 전환
+		player->setCurrentHP(1);
+		switchGameState(EGameState::MAIN_MENU);
+	}
+
+	spawnManager->returnMonsterToPool(monster);
 }
 
 void GameManager::onInventoryView()

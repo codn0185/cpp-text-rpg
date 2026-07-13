@@ -1,0 +1,163 @@
+#include "CombatManager.h"
+
+CombatManager::CombatManager()
+{
+}
+
+void CombatManager::start(Player* player, Monster* monster)
+{
+	this->player = player;
+	this->monster = monster;
+	isCombatRunning = true;
+	switchCombatState(ECombatState::InitBattle);
+}
+
+ECombatState CombatManager::getCurrentCombatState()
+{
+	return currentCombatState;
+}
+
+void CombatManager::run()
+{
+	while (isCombatRunning)
+	{
+		update();
+	}
+}
+
+void CombatManager::update()
+{
+	switch (currentCombatState)
+	{
+	case ECombatState::InitBattle:
+		onBattleInit();
+		break;
+	case ECombatState::PlayerTurn:
+		onPlayerTurn();
+		break;
+	case ECombatState::CheckVictory:
+		onCheckVictory();
+		break;
+	case ECombatState::MonsterTurn:
+		onMonsterTurn();
+		break;
+	case ECombatState::CheckDefeat:
+		onCheckDefeat();
+		break;
+	case ECombatState::PlayerVictory:
+		onPlayerVictory();
+		break;
+	case ECombatState::PlayerDefeat:
+		onPlayerDefeat();
+		break;
+	default:
+		break;
+	}
+}
+
+void CombatManager::switchCombatState(ECombatState newCombatState)
+{
+	currentCombatState = newCombatState;
+}
+
+void CombatManager::onBattleInit()
+{
+	cout << monster->getName() << "이/가 나타났다!" << "\n";
+
+	switchCombatState(ECombatState::PlayerTurn);
+}
+
+void CombatManager::onPlayerTurn()
+{
+	cout << "\n\n";
+	cout << "================= < 전투 > =================" << "\n";
+	cout << "[" << player->getName() << " vs " << monster->getName() << "]" << "\n";
+	cout << "어떻게 할까?" << "\n";
+	cout << "1. 공격하기" << "\n";
+	cout << "2. 스탯 확인" << "\n";
+	cout << "3. 아이템 사용" << "\n";
+	cout << "============================================" << "\n";
+
+	int option;
+	cout << "선택: ";
+	cin >> option;
+
+	switch (option)
+	{
+	case 1:
+		player->showAttackMessage();
+		cout << player->getName() << "이/가 " << monster->getName() << "에게 " << CalculateDamage(player, monster) << "만큼의 데미지를 주었습니다." << "\n";
+		ProcessDamage(player, monster);
+		switchCombatState(ECombatState::CheckVictory);
+		break;
+	case 2:
+		UISystem::PrintPlayerStat(player);
+		break;
+	case 3:
+		// 아이템 사용
+		break;
+	default:
+		break;
+	}
+}
+
+void CombatManager::onCheckVictory()
+{
+	if (monster->isDead())
+	{
+		cout << monster->getName() << "를/을 처치했습니다!" << "\n";
+		switchCombatState(ECombatState::PlayerVictory);
+	}
+	else
+	{
+		switchCombatState(ECombatState::MonsterTurn);
+	}
+}
+
+void CombatManager::onMonsterTurn()
+{
+	cout << monster->getName() << "이/가 " << player->getName() << "에게 " << CalculateDamage(monster, player) << "만큼의 데미지를 주었습니다." << "\n";
+	ProcessDamage(monster, player);
+	switchCombatState(ECombatState::CheckDefeat);
+}
+
+void CombatManager::onCheckDefeat()
+{
+	if (player->isDead())
+	{
+		switchCombatState(ECombatState::PlayerDefeat);
+	}
+	else
+	{
+		switchCombatState(ECombatState::PlayerTurn);
+	}
+}
+
+void CombatManager::onPlayerVictory()
+{
+	cout << monster->getName() << "와의 전투에서 승리하였다!" << "\n";
+	isCombatRunning = false;
+}
+
+void CombatManager::onPlayerDefeat()
+{
+	cout << monster->getName() << "에게 패배했습니다..." << "\n";
+	isCombatRunning = false;
+}
+
+
+
+// 최종 데미지 계산 - max(1, 공격력 - 방어력)
+int CombatManager::CalculateDamage(Character* attacker, Character* defender)
+{
+	int finalDamage = attacker->getPower() - defender->getDefence();
+	if (finalDamage <= 0) finalDamage = 1;
+	return finalDamage;
+}
+
+// 데미지 적용
+void CombatManager::ProcessDamage(Character* attacker, Character* defender)
+{
+	int finalDamage = CalculateDamage(attacker, defender);
+	defender->takeDamage(finalDamage);
+}

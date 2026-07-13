@@ -26,13 +26,13 @@ Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
 		switch (mosnterType)
 		{
 		case EMosnterType::Slime:
-			mosnterPoolMap[mosnterType].push(new Slime("슬라임", 120, 25, 60));
+			mosnterPoolMap[mosnterType].push(new Slime("슬라임", 250, 80, 45));
 			break;
 		case EMosnterType::Goblin:
-			mosnterPoolMap[mosnterType].push(new Goblin("고블린", 100, 35, 40));
+			mosnterPoolMap[mosnterType].push(new Goblin("고블린", 300, 115, 40));
 			break;
 		case EMosnterType::Skeleton:
-			mosnterPoolMap[mosnterType].push(new Skeleton("스켈레톤", 75, 50, 30));
+			mosnterPoolMap[mosnterType].push(new Skeleton("스켈레톤", 270, 130, 30));
 			break;
 		default:
 			break;

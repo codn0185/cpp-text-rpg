@@ -3,6 +3,10 @@
 #include "Singleton.h"
 
 #include "Players.h"
+
+#include "SpawnManager.h"
+#include "CombatManager.h"
+
 #include "UISystem.h"
 #include "PotionSystem.h"
 
@@ -31,7 +35,6 @@ enum class EGameState
 	// 1. 던전
 	DUNGEON_ENTER, // 던전 입장
 	DUNGEON_COMBAT, // 몬스터 전투
-	DUNGEON_REWARD, // 아이템 획득
 
 	// 2. 인벤토리 확인
 	INVENTORY_VIEW, // 인벤토리 확인
@@ -50,7 +53,9 @@ private:
 	EGameState currentGameState = EGameState::GAME_START; // 현재 게임 상태
 	bool isRunning;
 
+	CombatManager* combatManager; // 전투 매니저
 	PotionSystem* potionSystem; // 포션 시스템
+	SpawnManager* spawnManager; // 스폰 매니저
 
 	Player* player; // 플레이어
 
@@ -77,7 +82,6 @@ public:
 
 	void onDungeonEnter(); // 던전 입장
 	void onDungeonCombat(); // 몬스터와 전투
-	void onDungeonReward(); // 전투 보상
 
 	void onInventoryView(); // 인벤토리 확인
 

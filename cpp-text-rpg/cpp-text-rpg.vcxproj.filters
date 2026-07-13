@@ -28,6 +28,21 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{957ce698-38de-4f34-9ea3-331b87d98c21}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\CombatSystem">
+      <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\GameManager">
+      <UniqueIdentifier>{c832470c-0036-4f6a-85d7-db53a43ac8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\PotionSystem">
+      <UniqueIdentifier>{2a1c7701-af99-4d80-860a-d4d87474b7dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\SpawnManager">
+      <UniqueIdentifier>{3b660045-3222-47f0-9a9b-f99583fc3345}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\UISystem">
+      <UniqueIdentifier>{c3380df3-3c2e-44f6-a28f-852aa95c191a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -45,9 +60,6 @@
     <ClCompile Include="Item.cpp">
       <Filter>Items</Filter>
     </ClCompile>
-    <ClCompile Include="CombatSystem.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
     <ClCompile Include="Warrior.cpp">
       <Filter>Characters\Players</Filter>
     </ClCompile>
@@ -59,15 +71,6 @@
     </ClCompile>
     <ClCompile Include="Rogue.cpp">
       <Filter>Characters\Players</Filter>
-    </ClCompile>
-    <ClCompile Include="GameManager.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnManager.cpp">
-      <Filter>Systems</Filter>
-    </ClCompile>
-    <ClCompile Include="PotionSystem.cpp">
-      <Filter>Systems</Filter>
     </ClCompile>
     <ClCompile Include="NoJob.cpp">
       <Filter>Characters\Players</Filter>
@@ -81,8 +84,20 @@
     <ClCompile Include="Skeleton.cpp">
       <Filter>Characters\Monsters</Filter>
     </ClCompile>
+    <ClCompile Include="CombatManager.cpp">
+      <Filter>Systems\CombatSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Systems\GameManager</Filter>
+    </ClCompile>
+    <ClCompile Include="PotionSystem.cpp">
+      <Filter>Systems\PotionSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnManager.cpp">
+      <Filter>Systems\SpawnManager</Filter>
+    </ClCompile>
     <ClCompile Include="UISystem.cpp">
-      <Filter>Systems</Filter>
+      <Filter>Systems\UISystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -94,9 +109,6 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Characters\Players</Filter>
-    </ClInclude>
-    <ClInclude Include="CombatSystem.h">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="Warrior.h">
       <Filter>Characters\Players</Filter>
@@ -113,17 +125,8 @@
     <ClInclude Include="Item.h">
       <Filter>Items</Filter>
     </ClInclude>
-    <ClInclude Include="GameManager.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnManager.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="PotionSystem.h">
-      <Filter>Systems</Filter>
     </ClInclude>
     <ClInclude Include="NoJob.h">
       <Filter>Characters\Players</Filter>
@@ -140,11 +143,23 @@
     <ClInclude Include="Skeleton.h">
       <Filter>Characters\Monsters</Filter>
     </ClInclude>
-    <ClInclude Include="UISystem.h">
-      <Filter>Systems</Filter>
-    </ClInclude>
     <ClInclude Include="Monsters.h">
       <Filter>Characters\Monsters</Filter>
+    </ClInclude>
+    <ClInclude Include="CombatManager.h">
+      <Filter>Systems\CombatSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Systems\GameManager</Filter>
+    </ClInclude>
+    <ClInclude Include="PotionSystem.h">
+      <Filter>Systems\PotionSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="UISystem.h">
+      <Filter>Systems\UISystem</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnManager.h">
+      <Filter>Systems\SpawnManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
