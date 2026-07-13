@@ -12,8 +12,7 @@ bool PotionSystem::useHPPotion(Player* player)
 	}
 
 	hpPotionCount--;
-	int currentHP = player->getHP();
-	player->setHP(currentHP + hpPotionIncreasedAmount);
+	player->increaseMaxHP(hpPotionIncreasedAmount, true);
 
 	return true;
 }
@@ -26,8 +25,7 @@ bool PotionSystem::useMPPotion(Player* player)
 	}
 
 	mpPotionCount--;
-	int currentMP = player->getMP();
-	player->setMP(currentMP + mpPotionIncreasedAmount);
+	player->increaseMaxMP(mpPotionIncreasedAmount, true);
 
 	return true;
 }

@@ -25,11 +25,15 @@ void UISystem::PrintPlayerStat(Player* player)
 	default:
 		break;
 	}
+	string hpText = "HP: " + to_string(player->getCurrentHP()) + "/" + to_string(player->getMaxHP());
+	string mpText = "HP: " + to_string(player->getCurrentMP()) + "/" + to_string(player->getMaxMP());
+	string powerText = "공격력: " + to_string(player->getPower());
+	string defenceText = "방어력: " + to_string(player->getDefence());
 
-	cout << "=====================================================" << "\n";
+	cout << "===============================================================" << "\n";
 	cout << "닉네임: " << player->getName() << " | 직업: " << jobName << " | 레벨: " << player->getLevel() << "\n";
-	cout << "-----------------------------------------------------" << "\n";
-	cout << "HP: " << player->getHP() << " | MP: " << player->getMP() << "| 공격력: " << player->getPower() << " | 방어력: " << player->getDefence() << "\n";
-	cout << "=====================================================" << "\n";
+	cout << "---------------------------------------------------------------" << "\n";
+	cout << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
+	cout << "===============================================================" << "\n";
 }
 

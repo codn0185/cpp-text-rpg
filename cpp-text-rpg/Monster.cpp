@@ -3,9 +3,11 @@
 Monster::Monster(string name, int hp, int power, int defence)
 {
 	setName(name);
-	setHP(hp);
+	setMaxHP(hp);
 	setPower(power);
 	setDefence(defence);
+
+	reset();
 }
 
 Item* Monster::getDropItem()

@@ -253,6 +253,14 @@ void GameManager::onMainMenu()
 
 void GameManager::onDungeonEnter()
 {
+	/*
+	* 1. 던전 입장 메시지 출력
+	* 2. 스폰 매니저가 무작위 몬스터 1마리 소환
+	* 3. 몬스터 마주침 메시지 출력
+	* 4. 몬스터 전투 상태로 전환 (switch
+	*/
+
+	switchGameState(EGameState::DUNGEON_COMBAT);
 }
 
 void GameManager::onDungeonCombat()

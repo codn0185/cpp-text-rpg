@@ -10,22 +10,13 @@ class Character
 protected:
 	string name;
 
-	// 	int defaultHP;
-	// 	int maxHP;
-	// 	int currentHP;
-	int hp;
+	int maxHP;
+	int currentHP;
 
-	// 	int defalutMP;
-	// 	int maxMP;
-	// 	int currentMP;
-	int mp;
+	int maxMP;
+	int currentMP;
 
-	// 	int defaultPower;
-	// 	int currentPower;
 	int power;
-
-	// 	int defaultDefence;
-	// 	int currentDefence;
 	int defence;
 
 public:
@@ -40,15 +31,26 @@ public:
 
 	// Getters
 	string getName();
-	int getHP();
-	int getMP();
+	int getMaxHP();
+	int getCurrentHP();
+	int getMaxMP();
+	int getCurrentMP();
 	int getPower();
 	int getDefence();
 
 	// Setters
 	void setName(string name);
-	void setHP(int hp);
-	void setMP(int mp);
+	void setMaxHP(int hp);
+	void setCurrentHP(int hp);
+	void setMaxMP(int mp);
+	void setCurrentMP(int mp);
 	void setPower(int power);
 	void setDefence(int defence);
+
+	// Utilities
+	void fullHP();
+	void fullMP();
+	void reset();
+	void increaseMaxHP(int amount, bool addToCurrrent = false);
+	void increaseMaxMP(int amount, bool addToCurrrent = false);
 };

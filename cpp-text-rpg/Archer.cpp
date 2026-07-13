@@ -14,10 +14,12 @@ void Archer::showAttackMessage() const
 
 void Archer::applyBonusStat()
 {
-	setHP(getHP() + 30);
+	setCurrentHP(getCurrentHP() + 30);
+	setMaxHP(getMaxHP() + 30);
 }
 
 void Archer::removeBonusStat()
 {
-	setHP(getHP() - 30);
+	setCurrentHP(getCurrentHP() - 30);
+	setMaxMP(getMaxMP() - 30);
 }

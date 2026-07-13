@@ -14,10 +14,12 @@ void Mage::showAttackMessage() const
 
 void Mage::applyBonusStat()
 {
-	setMP(getMP() + 30);
+	setCurrentMP(getCurrentMP() + 30);
+	setMaxMP(getMaxMP() + 30);
 }
 
 void Mage::removeBonusStat()
 {
-	setMP(getMP() - 30);
+	setCurrentMP(getCurrentMP() - 30);
+	setMaxMP(getMaxMP() - 30);
 }

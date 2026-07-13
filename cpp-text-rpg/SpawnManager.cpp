@@ -41,6 +41,8 @@ Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
 
 	Monster* monster = mosnterPoolMap[mosnterType].front();
 	mosnterPoolMap[mosnterType].pop();
+
+	monster->reset();
 	return monster;
 }
 
