@@ -39,7 +39,6 @@ enum class EGameState
 
 	// 포션 제작소
 	POTION_SHOP_ENTER, // 포션 제작소 입장
-	POTION_SHOP_SEARCH, // 포션 검색 (전체 레시피 / 이름 검색 / 재료 검색)
 
 	// 게임 종료
 	GAME_EXIT,
@@ -84,7 +83,6 @@ public:
 	void onDungeonCombat(); // 몬스터와 전투
 
 	void onPotionShopEnter(); // 포션 제작소 입장
-	void onPotionShopSearch(); // 포션 검색
 
 	void onGameExit(); // 게임 종료
 };

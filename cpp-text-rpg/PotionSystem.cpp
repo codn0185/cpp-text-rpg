@@ -1,51 +1,134 @@
 #include "PotionSystem.h"
 
-PotionSystem::PotionSystem() : hpPotionCount(5), hpPotionIncreasedAmount(20), mpPotionCount(5), mpPotionIncreasedAmount(20)
+map<EPotionID, PotionDataRow> POTION_TABLE = {
+	{EPotionID::HP_POTION_20, PotionDataRow(EPotionID::HP_POTION_20, EPotionType::HP_POTION, "HP 포션 (소형)", "HP를 20만큼 회복한다.", {{EItemID::WATER, 1}, {EItemID::HEALING_HERB, 2}})},
+	{EPotionID::MP_POTION_20, PotionDataRow(EPotionID::MP_POTION_20, EPotionType::MP_POTION, "MP 포션 (소형)", "MP를 20만큼 회복한다.", {{EItemID::WATER, 1}, {EItemID::MANA_DUST, 2}})},
+};
+
+string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
 {
+	string ingredientsStr;
+	for (const auto& [itemID, count] : ingredients)
+	{
+		ingredientsStr += ITEM_TABLE[itemID]->name + " x" + to_string(count) + ", ";
+	}
+	ingredientsStr.erase(ingredientsStr.length() - 2);
+	return ingredientsStr;
+}
+
+PotionSystem::PotionSystem()
+{
+	setPotionCount(EPotionID::HP_POTION_20, 5);
+	setPotionCount(EPotionID::MP_POTION_20, 5);
+}
+
+bool PotionSystem::usePotion(Player* player, EPotionID potionID)
+{
+	if (potionInventory[potionID] == 0)
+	{
+		return false;
+	}
+
+	switch (potionID)
+	{
+	case EPotionID::HP_POTION_20:
+		player->increaseMaxHP(20, true);
+		break;
+	case EPotionID::MP_POTION_20:
+		player->increaseMaxMP(20, true);
+		break;
+	default:
+		break;
+	}
+
+	potionInventory[potionID]--;
+	return true;
 }
 
 bool PotionSystem::useHPPotion(Player* player)
 {
-	if (hpPotionCount == 0)
-	{
-		return false;
-	}
-
-	hpPotionCount--;
-	player->increaseMaxHP(hpPotionIncreasedAmount, true);
-
-	return true;
+	return usePotion(player, EPotionID::HP_POTION_20);
 }
 
 bool PotionSystem::useMPPotion(Player* player)
 {
-	if (mpPotionCount == 0)
+	return usePotion(player, EPotionID::MP_POTION_20);
+}
+
+void PotionSystem::showAllRecipes()
+{
+	cout << "< 전체 포션 레시피 >" << "\n";
+	int row = 1;
+	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
 	{
-		return false;
+		cout << row++ << ". " << iter->second.name << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
 	}
+}
 
-	mpPotionCount--;
-	player->increaseMaxMP(mpPotionIncreasedAmount, true);
+void PotionSystem::searchByPotionName(string target)
+{
+	int row = 1;
+	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
+	{
+		string potionName = iter->second.name;
+		if (potionName.find(target) != string::npos)
+		{
+			cout << row++ << ". " << potionName << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
+		}
+	}
+}
 
-	return true;
+void PotionSystem::searchByIngredient(string target)
+{
+	int row = 1;
+	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
+	{
+		bool find = false;
+		for (const auto& [itemID, count] : iter->second.ingredients)
+		{
+			if (ITEM_TABLE[itemID]->name.find(target) != string::npos)
+			{
+				find = true;
+				break;
+			}
+		}
+		if (find)
+		{
+			cout << row++ << ". " << iter->second.name << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
+		}
+	}
+}
+
+int PotionSystem::getPotionCount(EPotionID potionID)
+{
+	if (potionInventory.find(potionID) == potionInventory.end())
+	{
+		potionInventory[potionID] = 0;
+	}
+	return potionInventory[potionID];
 }
 
 int PotionSystem::getHPPotionCount()
 {
-	return hpPotionCount;
+	return getPotionCount(EPotionID::HP_POTION_20);
 }
 
 int PotionSystem::getMPPotionCount()
 {
-	return mpPotionCount;
+	return getPotionCount(EPotionID::MP_POTION_20);
 }
 
-void PotionSystem::setHPPotionCount(int hpPotionCount)
+void PotionSystem::setPotionCount(EPotionID potionID, int count)
 {
-	this->hpPotionCount = hpPotionCount;
+	potionInventory[potionID] = count;
 }
 
-void PotionSystem::setMPPotionCount(int mpPotionCount)
+void PotionSystem::setHPPotionCount(int count)
 {
-	this->mpPotionCount = mpPotionCount;
+	setPotionCount(EPotionID::HP_POTION_20, count);
+}
+
+void PotionSystem::setMPPotionCount(int count)
+{
+	setPotionCount(EPotionID::MP_POTION_20, count);
 }

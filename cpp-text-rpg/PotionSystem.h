@@ -3,36 +3,72 @@
 #include "Player.h"
 #include "Item.h"
 
+#include <iostream>
 #include <vector>
 #include <map>
-#include <algorithm>
+
+// 포션 ID
+enum class EPotionID
+{
+	HP_POTION_20,
+	MP_POTION_20,
+};
+
+// 포션 타입
+enum class EPotionType
+{
+	HP_POTION,
+	MP_POTION,
+};
+
+// 포션 데이터
+struct PotionDataRow
+{
+	EPotionID potionID; // 포션 ID
+	EPotionType potionType; // 포션 타입
+	string name; // 포션 이름
+	string description; // 포션 설명
+	vector<pair<EItemID, int>> ingredients; // 재료 (아이템, 개수)
+
+	PotionDataRow(EPotionID potionID, EPotionType potionType, string name, string description = "", vector<pair<EItemID, int>> ingredients = {}) :
+		potionID(potionID), potionType(potionType), name(name), description(description), ingredients(ingredients)
+	{
+	}
+};
+
+// 포션 테이블
+extern map<EPotionID, PotionDataRow> POTION_TABLE;
 
 class PotionSystem
 {
 private:
-	int hpPotionCount;
-	int hpPotionIncreasedAmount;
+	map<EPotionID, int> potionInventory;
 
-	int mpPotionCount;
-	int mpPotionIncreasedAmount;
-
-	// 포션 레시피
-// 	vector < vector < string>> 
-
+	string formatIngredients(vector<pair<EItemID, int>> ingredients);
 public:
 	PotionSystem();
 	~PotionSystem() = default;
 
+	// Show
+	void showAllRecipes();
+
+	// Search
+	void searchByPotionName(string potionName);
+	void searchByIngredient(string ingredientName);
+
 	// Use Potion
+	bool usePotion(Player* player, EPotionID potionID);
 	bool useHPPotion(Player* player);
 	bool useMPPotion(Player* player);
 
 	// Getters
+	int getPotionCount(EPotionID potionID);
 	int getHPPotionCount();
 	int getMPPotionCount();
 
 	// Setters
-	void setHPPotionCount(int hpPotionCount);
-	void setMPPotionCount(int mpPotionCount);
+	void setPotionCount(EPotionID potionID, int count);
+	void setHPPotionCount(int count);
+	void setMPPotionCount(int count);
 };
 

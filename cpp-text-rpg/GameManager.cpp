@@ -48,9 +48,6 @@ void GameManager::update()
 	case EGameState::POTION_SHOP_ENTER:
 		onPotionShopEnter();
 		break;
-	case EGameState::POTION_SHOP_SEARCH:
-		onPotionShopSearch();
-		break;
 	case EGameState::GAME_EXIT:
 		onGameExit();
 		break;
@@ -346,10 +343,48 @@ void GameManager::onDungeonCombat()
 
 void GameManager::onPotionShopEnter()
 {
-}
+	cout << "\n\n";
+	cout << "============== < 포션 제작소 > ==============" << "\n";
+	cout << "1. 전체 레시피 보기" << "\n";
+	cout << "2. 검색 - 포션 이름" << "\n";
+	cout << "3. 검색 - 재료 이름" << "\n";
+	cout << "4. 인벤토리 확인" << "\n";
+	cout << "0. 돌아가기" << "\n";
+	cout << "============================================" << "\n";
 
-void GameManager::onPotionShopSearch()
-{
+	int option;
+	cout << "선택: ";
+	cin >> option;
+
+	cin.ignore(INT_MAX, '\n');
+	string target;
+	switch (option)
+	{
+	case 1:
+		// 전체 레시피 보기
+		potionSystem->showAllRecipes();
+		break;
+	case 2:
+		// 포션 이름 검색
+		cout << "검색할 포션 이름: ";
+		cin >> target;
+		potionSystem->searchByPotionName(target);
+		break;
+	case 3:
+		// 포션 재료 검색
+		cout << "검색할 재료 이름: ";
+		cin >> target;
+		potionSystem->searchByIngredient(target);
+		break;
+	case 4:
+		inventorySystem->displayInventory();
+		break;
+	case 0:
+		switchGameState(EGameState::MAIN_MENU);
+		break;
+	default:
+		break;
+	}
 }
 
 void GameManager::onGameExit()
