@@ -11,3 +11,13 @@ void Rogue::showAttackMessage() const
 {
 	cout << "단검 찌르기!" << "\n";
 }
+
+void Rogue::applyBonusStat()
+{
+	setPower(getPower() + 30);
+}
+
+void Rogue::removeBonusStat()
+{
+	setPower(getPower() - 30);
+}

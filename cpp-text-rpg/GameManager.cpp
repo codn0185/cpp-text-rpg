@@ -193,23 +193,19 @@ void GameManager::onPlayerResitration()
 	switch (jobNumber)
 	{
 	case 1:
-		player->setDefence(player->getDefence() + 30);
-		player = new Warrior(player->getName(), player->getHP(), player->getMP(), player->getPower(), player->getDefence());
+		player = Player::ChangeJob(player, EPlayerJob::Warrior);
 		cout << "* 전사로 전직하였습니다. (방어력 +30)" << "\n";
 		break;
 	case 2:
-		player->setMP(player->getMP() + 30);
-		player = new Mage(player->getName(), player->getHP(), player->getMP(), player->getPower(), player->getDefence());
+		player = Player::ChangeJob(player, EPlayerJob::Mage);
 		cout << "* 마법사로 전직하였습니다. (MP +30)" << "\n";
 		break;
 	case 3:
-		player->setPower(player->getPower() + 30);
-		player = new Rogue(player->getName(), player->getHP(), player->getMP(), player->getPower(), player->getDefence());
+		player = Player::ChangeJob(player, EPlayerJob::Rogue);
 		cout << "* 도적으로 전직하였습니다. (공격력 +30)" << "\n";
 		break;
 	case 4:
-		player->setHP(player->getHP() + 30);
-		player = new Archer(player->getName(), player->getHP(), player->getMP(), player->getPower(), player->getDefence());
+		player = Player::ChangeJob(player, EPlayerJob::Archer);
 		cout << "* 궁수로 전직하였습니다. (HP +30)" << "\n";
 		break;
 	}
@@ -228,7 +224,6 @@ void GameManager::onMainMenu()
 	cout << "3. 포션 제작소" << "\n";
 	cout << "0. 게임 종료" << "\n";
 	cout << "============================================" << "\n";
-
 
 	int option;
 	cout << "선택: ";

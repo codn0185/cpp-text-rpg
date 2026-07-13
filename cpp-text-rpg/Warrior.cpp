@@ -12,3 +12,13 @@ void Warrior::showAttackMessage() const
 {
 	cout << "대검 휘두르기!" << "\n";
 }
+
+void Warrior::applyBonusStat()
+{
+	setDefence(getDefence() + 30);
+}
+
+void Warrior::removeBonusStat()
+{
+	setDefence(getDefence() - 30);
+}

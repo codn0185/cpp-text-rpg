@@ -11,3 +11,13 @@ void Archer::showAttackMessage() const
 {
 	cout << "화살 쏘기!" << "\n";
 }
+
+void Archer::applyBonusStat()
+{
+	setHP(getHP() + 30);
+}
+
+void Archer::removeBonusStat()
+{
+	setHP(getHP() - 30);
+}

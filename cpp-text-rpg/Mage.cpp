@@ -11,3 +11,13 @@ void Mage::showAttackMessage() const
 {
 	cout << "화염구 발사!" << "\n";
 }
+
+void Mage::applyBonusStat()
+{
+	setMP(getMP() + 30);
+}
+
+void Mage::removeBonusStat()
+{
+	setMP(getMP() - 30);
+}

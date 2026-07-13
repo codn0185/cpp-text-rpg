@@ -24,8 +24,11 @@ protected:
 public:
 	Player(string name, int hp, int mp, int power, int defence);
 
-	// 공격 메시지
-	virtual void showAttackMessage() const = 0;
+	static Player* ChangeJob(Player* player, EPlayerJob newJob); // 직업 전환
+	virtual void applyBonusStat() = 0; // 보너스 스탯 적용
+	virtual void removeBonusStat() = 0; // 보너스 스탯 제거
+
+	virtual void showAttackMessage() const = 0; // 공격 메시지
 
 	// Getters
 	EPlayerJob getJob();

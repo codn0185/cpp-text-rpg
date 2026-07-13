@@ -11,3 +11,11 @@ void NoJob::showAttackMessage() const
 {
 	cout << "펀치 날리기!" << "\n";
 }
+
+void NoJob::applyBonusStat()
+{
+}
+
+void NoJob::removeBonusStat()
+{
+}
