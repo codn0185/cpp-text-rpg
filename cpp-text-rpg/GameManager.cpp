@@ -116,6 +116,7 @@ void GameManager::onPlayerResitration()
 
 	// 플레이어 등록
 	player = new NoJob(name, stat[0], stat[1], stat[2], stat[3]);
+	cout << "\n\n";
 	UISystem::PrintPlayerStat(player);
 
 	// === 스탯 업그레이드 (w/ 포션) ===
@@ -174,6 +175,7 @@ void GameManager::onPlayerResitration()
 			cout << "* 방어력이 2배 증가했습니다. (현재 방어력: " << player->getDefence() << ")" << "\n";
 			break;
 		case 5:
+			cout << "\n\n";
 			UISystem::PrintPlayerStat(player);
 			break;
 		}
@@ -209,6 +211,7 @@ void GameManager::onPlayerResitration()
 		cout << "* 궁수로 전직하였습니다. (HP +30)" << "\n";
 		break;
 	}
+	UISystem::PrintPlayerStat(player);
 	cout << "\n\n";
 
 	switchGameState(EGameState::MAIN_MENU);
