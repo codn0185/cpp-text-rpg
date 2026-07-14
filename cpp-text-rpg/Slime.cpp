@@ -1,8 +1,7 @@
 #include "Slime.h"
 
-Slime::Slime(string name, int hp, int power, int defence) : Monster(name, hp, power, defence)
+Slime::Slime() : Monster(EMosnterType::Slime)
 {
-	setMonsterType(EMosnterType::Slime);
 }
 
 EItemID Slime::getDropItemID()

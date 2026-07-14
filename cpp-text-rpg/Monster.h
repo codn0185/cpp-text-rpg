@@ -4,6 +4,10 @@
 #include "Item.h"
 #include "RandomSystem.h"
 
+#include <map>
+
+using namespace std;
+
 enum class EMosnterType
 {
 	Slime,
@@ -11,19 +15,41 @@ enum class EMosnterType
 	Skeleton,
 };
 
+struct MonsterDataRow
+{
+	EMosnterType monsterType;
+	string name;
+	string description;
+	int maxHP;
+	int maxMP;
+	int power;
+	int defence;
+
+	MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence) :
+		monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
+	{
+	}
+};
+
+extern const map<EMosnterType, MonsterDataRow> MONSTER_TABLE;
+
 class Monster : public Character
 {
 protected:
 	EMosnterType monsterType;
+	int rewardExp;
 
 public:
-	Monster(string name, int hp, int power, int defence);
+	Monster(EMosnterType monsterType);
+	Monster(string name, int maxHP, int maxMP, int power, int defence);
 
 	virtual EItemID getDropItemID() = 0;
 
 	// Getters
 	EMosnterType getMonsterType();
+	int getRewardExp();
 
 	// Setters
 	void setMonsterType(EMosnterType monsterType);
+	void setRewardExp(int rewardExp);
 };

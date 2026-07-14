@@ -1,8 +1,7 @@
 #include "Goblin.h"
 
-Goblin::Goblin(string name, int hp, int power, int defence) : Monster(name, hp, power, defence)
+Goblin::Goblin() : Monster(EMosnterType::Goblin)
 {
-	setMonsterType(EMosnterType::Goblin);
 }
 
 EItemID Goblin::getDropItemID()

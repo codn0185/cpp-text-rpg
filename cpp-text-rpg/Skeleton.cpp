@@ -1,8 +1,7 @@
 #include "Skeleton.h"
 
-Skeleton::Skeleton(string name, int hp, int power, int defence) : Monster(name, hp, power, defence)
+Skeleton::Skeleton() : Monster(EMosnterType::Skeleton)
 {
-	setMonsterType(EMosnterType::Skeleton);
 }
 
 EItemID Skeleton::getDropItemID()

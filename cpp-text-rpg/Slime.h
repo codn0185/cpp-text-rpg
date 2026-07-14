@@ -5,7 +5,7 @@
 class Slime : public Monster
 {
 public:
-	Slime(string name, int hp, int power, int defence);
+	Slime();
 
 	EItemID getDropItemID() override;
 };

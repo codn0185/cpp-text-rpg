@@ -5,7 +5,7 @@
 class Goblin : public Monster
 {
 public:
-	Goblin(string name, int hp, int power, int defence);
+	Goblin();
 
 	EItemID getDropItemID() override;
 };
