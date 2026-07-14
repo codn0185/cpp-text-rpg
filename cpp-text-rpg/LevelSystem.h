@@ -1,6 +1,5 @@
 #pragma once
 
-#include "Singleton.h"
 #include "Player.h"
 
 #include <iostream>
@@ -25,7 +24,6 @@ extern const map<int, LevelDataRow> LEVEL_TABLE;
 class LevelSystem
 {
 private:
-
 	static void CheckLevelUp(Player* player);
 
 public:
