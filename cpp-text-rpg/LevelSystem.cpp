@@ -43,7 +43,7 @@ int LevelSystem::getRequiredExp()
 	{
 		return 0;
 	}
-	return LEVEL_TABLE[currentLevel].requiredExp;
+	return LEVEL_TABLE.at(currentLevel).requiredExp;
 }
 
 int LevelSystem::getMaxLevel()
