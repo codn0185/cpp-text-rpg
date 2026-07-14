@@ -1,5 +1,7 @@
 #include "NoJob.h"
 
+#include "UISystem.h"
+
 #include <iostream>
 
 NoJob::NoJob(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence)
@@ -15,6 +17,7 @@ void NoJob::attack(Character* target)
 		damage = 1;
 	}
 	target->takeDamage(damage);
+	UISystem::PrintBattleLog(this, target, damage);
 }
 
 void NoJob::showAttackMessage() const

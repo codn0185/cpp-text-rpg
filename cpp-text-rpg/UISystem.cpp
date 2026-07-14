@@ -1,5 +1,7 @@
 #include "UISystem.h"
 
+#include "LevelSystem.h"
+
 #include <iostream>
 
 const map<EPlayerJob, string> UISystem::jobNames = {
@@ -31,3 +33,8 @@ void UISystem::PrintPlayerStat(Player* player)
 	cout << "===============================================================" << "\n";
 }
 
+void UISystem::PrintBattleLog(Character* attacker, Character* defender, int damage)
+{
+	cout << "\"" << attacker->getName() << "\"이(가) \"" << defender->getName() << "\"에게 " << damage << "만큼의 데미지를 주었습니다!";
+	cout << " (" << defender->getCurrentHP() << "/" << defender->getMaxHP() << ")" << "\n";
+}

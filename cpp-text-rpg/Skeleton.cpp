@@ -1,5 +1,7 @@
 #include "Skeleton.h"
 
+#include "UISystem.h"
+
 Skeleton::Skeleton() : Monster(EMosnterType::Skeleton)
 {
 }
@@ -12,6 +14,7 @@ void Skeleton::attack(Character* target)
 		damage = 1;
 	}
 	target->takeDamage(damage);
+	UISystem::PrintBattleLog(this, target, damage);
 }
 
 EItemID Skeleton::getDropItemID()

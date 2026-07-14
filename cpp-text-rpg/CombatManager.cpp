@@ -86,8 +86,6 @@ void CombatManager::onPlayerTurn()
 	{
 	case 1:
 		player->showAttackMessage();
-		cout << player->getName() << "이/가 " << monster->getName() << "에게 " << CalculateDamage(player, monster) << "만큼의 데미지를 주었습니다." << "\n";
-		// ProcessDamage(player, monster);
 		player->attack(monster);
 		switchCombatState(ECombatState::CheckVictory);
 		break;
@@ -117,8 +115,8 @@ void CombatManager::onCheckVictory()
 
 void CombatManager::onMonsterTurn()
 {
-	cout << monster->getName() << "이/가 " << player->getName() << "에게 " << CalculateDamage(monster, player) << "만큼의 데미지를 주었습니다." << "\n";
-	ProcessDamage(monster, player);
+	cout << " > " << monster->getName() << "의 턴!" << "\n";
+	monster->attack(player);
 	switchCombatState(ECombatState::CheckDefeat);
 }
 
@@ -136,29 +134,14 @@ void CombatManager::onCheckDefeat()
 
 void CombatManager::onPlayerVictory()
 {
+	cout << "\n" << "========== 전투 승리 ==========" << "\n";
 	cout << monster->getName() << "와/과의 전투에서 승리하였다!" << "\n";
 	isCombatRunning = false;
 }
 
 void CombatManager::onPlayerDefeat()
 {
+	cout << "\n" << "========== 전투 패배 ==========" << "\n";
 	cout << monster->getName() << "에게 패배했습니다..." << "\n";
 	isCombatRunning = false;
-}
-
-
-
-// 최종 데미지 계산 - max(1, 공격력 - 방어력)
-int CombatManager::CalculateDamage(Character* attacker, Character* defender)
-{
-	int finalDamage = attacker->getPower() - defender->getDefence();
-	if (finalDamage <= 0) finalDamage = 1;
-	return finalDamage;
-}
-
-// 데미지 적용
-void CombatManager::ProcessDamage(Character* attacker, Character* defender)
-{
-	int finalDamage = CalculateDamage(attacker, defender);
-	defender->takeDamage(finalDamage);
 }

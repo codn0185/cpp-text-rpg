@@ -1,5 +1,7 @@
 #include "Goblin.h"
 
+#include "UISystem.h"
+
 Goblin::Goblin() : Monster(EMosnterType::Goblin)
 {
 }
@@ -12,6 +14,7 @@ void Goblin::attack(Character* target)
 		damage = 1;
 	}
 	target->takeDamage(damage);
+	UISystem::PrintBattleLog(this, target, damage);
 }
 
 EItemID Goblin::getDropItemID()

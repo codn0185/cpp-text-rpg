@@ -1,5 +1,7 @@
 #include "Archer.h"
 
+#include "UISystem.h"
+
 #include <iostream>
 
 Archer::Archer(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence), attackCount(3)
@@ -11,12 +13,17 @@ void Archer::attack(Character* target)
 {
 	for (int i = 0; i < attackCount; i++)
 	{
-		int damage = power - target->getDefence();
+		int damage = power / attackCount - target->getDefence();
 		if (damage <= 0)
 		{
 			damage = 1;
 		}
 		target->takeDamage(damage);
+		UISystem::PrintBattleLog(this, target, damage);
+		if (target->isDead())
+		{
+			return;
+		}
 	}
 }
 
