@@ -11,7 +11,6 @@ GameManager::GameManager() :isRunning(true)
 
 	potionSystem = new PotionSystem();
 	inventorySystem = new InventorySystem();
-	levelSystem = new LevelSystem();
 }
 
 GameManager::~GameManager()
@@ -304,9 +303,9 @@ void GameManager::onDungeonCombat()
 		int prevLevel = player->getLevel();
 		int prevExp = player->getExp();
 		int rewardExp = monster->getRewardExp();
-		cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->getRequiredExp(player) << ")" << "\n";
+		cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->GetRequiredExp(player) << ")" << "\n";
 
-		levelSystem->addExp(player, rewardExp);
+		LevelSystem::AddExp(player, rewardExp);
 
 		// 드랍 아이템 획득
 		cout << "\n";

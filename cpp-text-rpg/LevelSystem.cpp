@@ -1,6 +1,6 @@
 #include "LevelSystem.h"
 
-const map<int, LevelDataRow> LevelSystem::LEVEL_TABLE = {
+const map<int, LevelDataRow> LEVEL_TABLE = {
 	{0, LevelDataRow(1, 100, Stat(10, 7, 5, 3))},
 	{1, LevelDataRow(2, 120, Stat(10, 7, 5, 3))},
 	{2, LevelDataRow(3, 150, Stat(10, 7, 5, 3))},
@@ -12,17 +12,17 @@ LevelSystem::LevelSystem()
 {
 }
 
-void LevelSystem::checkLevelUp(Player* player)
+void LevelSystem::CheckLevelUp(Player* player)
 {
 	int currentLevel = player->getLevel();
 	int currentExp = player->getExp();
 
 
 	// 레벨 업
-	while (player->getExp() >= getRequiredExp(player))
+	while (player->getExp() >= GetRequiredExp(player))
 	{
 		// 최대 레벨 확인
-		if (player->getLevel() == getMaxLevel())
+		if (player->getLevel() == GetMaxLevel())
 		{
 			return;
 		}
@@ -32,7 +32,7 @@ void LevelSystem::checkLevelUp(Player* player)
 		int prevExp = player->getExp();
 
 		int nextLevel = prevLevel + 1;
-		int nextExp = prevExp - getRequiredExp(player);
+		int nextExp = prevExp - GetRequiredExp(player);
 		Stat stat = LEVEL_TABLE.at(prevLevel).increaseStat;
 
 		string levelUpStr = "Lv. " + to_string(prevLevel) + " -> Lv. " + to_string(nextLevel);
@@ -66,13 +66,13 @@ void LevelSystem::checkLevelUp(Player* player)
 	}
 }
 
-void LevelSystem::addExp(Player* player, int amount)
+void LevelSystem::AddExp(Player* player, int amount)
 {
 	player->setExp(player->getExp() + amount);
-	checkLevelUp(player);
+	CheckLevelUp(player);
 }
 
-int LevelSystem::getRequiredExp(Player* player)
+int LevelSystem::GetRequiredExp(Player* player)
 {
 	if (LEVEL_TABLE.find(player->getLevel()) == LEVEL_TABLE.end())
 	{
@@ -81,7 +81,7 @@ int LevelSystem::getRequiredExp(Player* player)
 	return LEVEL_TABLE.at(player->getLevel()).requiredExp;
 }
 
-int LevelSystem::getMaxLevel()
+int LevelSystem::GetMaxLevel()
 {
 	return LEVEL_TABLE.rbegin()->second.targetLevel;
 }

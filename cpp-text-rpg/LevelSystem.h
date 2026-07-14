@@ -20,20 +20,21 @@ struct LevelDataRow
 	}
 };
 
+extern const map<int, LevelDataRow> LEVEL_TABLE;
+
 class LevelSystem
 {
 private:
-	static const map<int, LevelDataRow> LEVEL_TABLE;
 
-	void checkLevelUp(Player* player);
+	static void CheckLevelUp(Player* player);
 
 public:
 	LevelSystem();
 	~LevelSystem() = default;
 
-	int getMaxLevel();
-	int getRequiredExp(Player* player);
+	static int GetMaxLevel();
+	static int GetRequiredExp(Player* player);
 
-	void addExp(Player* player, int amount);
+	static void AddExp(Player* player, int amount);
 };
 
