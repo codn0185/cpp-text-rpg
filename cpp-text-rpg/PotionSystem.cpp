@@ -2,12 +2,12 @@
 
 #include <iostream>
 
-string PotionSystem::formatIngredients(vector<pair<EIngredientID, int>> ingredients)
+string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
 {
 	string ingredientsStr;
 	for (const auto& [itemID, count] : ingredients)
 	{
-		ingredientsStr += INGREDIENT_TABLE.at(itemID).name + " x" + to_string(count) + ", ";
+		ingredientsStr += ITEM_TABLE.at(itemID)->name + " x" + to_string(count) + ", ";
 	}
 	ingredientsStr.erase(ingredientsStr.length() - 2);
 	return ingredientsStr;
@@ -15,11 +15,11 @@ string PotionSystem::formatIngredients(vector<pair<EIngredientID, int>> ingredie
 
 PotionSystem::PotionSystem()
 {
-	setPotionCount(EPotionID::HP_POTION_20, 5);
-	setPotionCount(EPotionID::MP_POTION_20, 5);
+	setPotionCount(EItemID::HP_POTION_20, 5);
+	setPotionCount(EItemID::MP_POTION_20, 5);
 }
 
-bool PotionSystem::usePotion(Player* player, EPotionID potionID)
+bool PotionSystem::usePotion(Player* player, EItemID potionID)
 {
 	if (potionInventory[potionID] == 0)
 	{
@@ -28,10 +28,10 @@ bool PotionSystem::usePotion(Player* player, EPotionID potionID)
 
 	switch (potionID)
 	{
-	case EPotionID::HP_POTION_20:
+	case EItemID::HP_POTION_20:
 		player->increaseMaxHP(20, true);
 		break;
-	case EPotionID::MP_POTION_20:
+	case EItemID::MP_POTION_20:
 		player->increaseMaxMP(20, true);
 		break;
 	default:
@@ -44,33 +44,41 @@ bool PotionSystem::usePotion(Player* player, EPotionID potionID)
 
 bool PotionSystem::useHPPotion(Player* player)
 {
-	return usePotion(player, EPotionID::HP_POTION_20);
+	return usePotion(player, EItemID::HP_POTION_20);
 }
 
 bool PotionSystem::useMPPotion(Player* player)
 {
-	return usePotion(player, EPotionID::MP_POTION_20);
+	return usePotion(player, EItemID::MP_POTION_20);
 }
 
 void PotionSystem::showAllRecipes()
 {
 	cout << "< 전체 포션 레시피 >" << "\n";
 	int row = 1;
-	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
+	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
 	{
-		cout << row++ << ". " << iter->second.name << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
+		const Potion* potion = static_cast<const Potion*>(iter->second);
+		if (potion != nullptr)
+		{
+			cout << row++ << ". " << potion->name << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+		}
 	}
 }
 
 void PotionSystem::searchByPotionName(string target)
 {
 	int row = 1;
-	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
+	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
 	{
-		string potionName = iter->second.name;
-		if (potionName.find(target) != string::npos)
+		const Potion* potion = static_cast<const Potion*>(iter->second);
+		if (potion != nullptr)
 		{
-			cout << row++ << ". " << potionName << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
+			string potionName = potion->name;
+			if (potionName.find(target) != string::npos)
+			{
+				cout << row++ << ". " << potionName << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+			}
 		}
 	}
 }
@@ -78,25 +86,29 @@ void PotionSystem::searchByPotionName(string target)
 void PotionSystem::searchByIngredient(string target)
 {
 	int row = 1;
-	for (auto iter = POTION_TABLE.begin(); iter != POTION_TABLE.end(); iter++)
+	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
 	{
-		bool find = false;
-		for (const auto& [itemID, count] : iter->second.ingredients)
+		const Potion* potion = static_cast<const Potion*>(iter->second);
+		if (potion != nullptr)
 		{
-			if (INGREDIENT_TABLE.at(itemID).name.find(target) != string::npos)
+			bool find = false;
+			for (const auto& [itemID, count] : potion->ingredients)
 			{
-				find = true;
-				break;
+				if (ITEM_TABLE.at(itemID)->name.find(target) != string::npos)
+				{
+					find = true;
+					break;
+				}
 			}
-		}
-		if (find)
-		{
-			cout << row++ << ". " << iter->second.name << " (" << formatIngredients(iter->second.ingredients) << ")" << "\n";
+			if (find)
+			{
+				cout << row++ << ". " << potion->name << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+			}
 		}
 	}
 }
 
-int PotionSystem::getPotionCount(EPotionID potionID)
+int PotionSystem::getPotionCount(EItemID potionID)
 {
 	if (potionInventory.find(potionID) == potionInventory.end())
 	{
@@ -107,25 +119,25 @@ int PotionSystem::getPotionCount(EPotionID potionID)
 
 int PotionSystem::getHPPotionCount()
 {
-	return getPotionCount(EPotionID::HP_POTION_20);
+	return getPotionCount(EItemID::HP_POTION_20);
 }
 
 int PotionSystem::getMPPotionCount()
 {
-	return getPotionCount(EPotionID::MP_POTION_20);
+	return getPotionCount(EItemID::MP_POTION_20);
 }
 
-void PotionSystem::setPotionCount(EPotionID potionID, int count)
+void PotionSystem::setPotionCount(EItemID potionID, int count)
 {
 	potionInventory[potionID] = count;
 }
 
 void PotionSystem::setHPPotionCount(int count)
 {
-	setPotionCount(EPotionID::HP_POTION_20, count);
+	setPotionCount(EItemID::HP_POTION_20, count);
 }
 
 void PotionSystem::setMPPotionCount(int count)
 {
-	setPotionCount(EPotionID::MP_POTION_20, count);
+	setPotionCount(EItemID::MP_POTION_20, count);
 }

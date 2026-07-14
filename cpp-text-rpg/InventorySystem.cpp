@@ -2,48 +2,59 @@
 
 #include <iostream>
 
-InventorySystem::InventorySystem() : maxSlots(10)
+InventorySystem::InventorySystem()
+	: backpackInventory(new Inventory(3, 1)), stockInventory(new Inventory(20, 30))
 {
 }
 
-bool InventorySystem::isFull()
+int InventorySystem::addToBackpack(EItemID itemID, int amount)
 {
-	return inventory.size() == maxSlots;
+	return backpackInventory->addItem(itemID, amount);
 }
 
-int InventorySystem::getSize()
+bool InventorySystem::removeFromBackpack(EItemID itemID, int amount)
 {
-	return (int) inventory.size();
+	return backpackInventory->removeItem(itemID, amount);;
 }
 
-void InventorySystem::addItem(EIngredientID itemID)
+void InventorySystem::displayBackpackInventory()
 {
-	if (!isFull())
+	int usedSlots = backpackInventory->getUsedSlotCount();
+	int maxSlots = backpackInventory->getMaxSlotCount();
+	int maxStackSize = backpackInventory->getMaxStackSize();
+
+	cout << "\n\n";
+	cout << "======== < 배낭 인벤토리 (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
+	vector<pair<EItemID, int>> slots = backpackInventory->getSlots();
+	for (int i = 0; i < slots.size(); i++)
 	{
-		inventory.push_back(itemID);
+		EItemID itemID = slots[i].first;
+		int count = slots[i].second;
+		string name = ITEM_TABLE.at(itemID)->name;
+		int price = ITEM_TABLE.at(itemID)->price;
+
+		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << count << "/" << maxStackSize << "]" << "\n";
 	}
+	cout << "\n\n";
 }
 
-EIngredientID InventorySystem::removeItem(int slot)
+void InventorySystem::displayStockInventory()
 {
-	slot--;
-	if (slot < 0 || inventory.size() <= slot)
-	{
-		return EIngredientID::NONE;
-	}
+	int usedSlots = stockInventory->getUsedSlotCount();
+	int maxSlots = stockInventory->getMaxSlotCount();
+	int maxStackSize = stockInventory->getMaxStackSize();
 
-	EIngredientID itemID = inventory[slot];
-	inventory.erase(inventory.begin() + slot);
-	return itemID;
-}
-
-void InventorySystem::displayInventory()
-{
-	cout << "========== < 인벤토리 (" << inventory.size() << "/" << maxSlots << ") > ==========" << "\n";
-	for (int i = 0; i < inventory.size(); i++)
+	cout << "\n\n";
+	cout << "======== < 배낭 인벤토리 (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
+	vector<pair<EItemID, int>> slots = stockInventory->getSlots();
+	for (int i = 0; i < slots.size(); i++)
 	{
-		EIngredientID itemID = inventory[i];
-		cout << i + 1 << ". " << INGREDIENT_TABLE.at(itemID).name << " (" << INGREDIENT_TABLE.at(itemID).price << "g)" << "\n";
+		EItemID itemID = slots[i].first;
+		int count = slots[i].second;
+		string name = ITEM_TABLE.at(itemID)->name;
+		int price = ITEM_TABLE.at(itemID)->price;
+
+		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << count << "/" << maxStackSize << "]" << "\n";
 	}
 	cout << "\n\n";
 }

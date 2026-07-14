@@ -1,13 +1,11 @@
 #include "Inventory.h"
 
-template<typename ItemID_T>
-Inventory<ItemID_T>::Inventory(int maxSlotCount, int maxStackSize)
+Inventory::Inventory(int maxSlotCount, int maxStackSize)
 	: maxSlotCount(maxSlotCount), maxStackSize(maxStackSize)
 {
 }
 
-template<typename ItemID_T>
-int Inventory<ItemID_T>::getUsedSlotCount()
+int Inventory::getUsedSlotCount()
 {
 	int slots = 0;
 	for (const auto& [itemID, count] : inventory)
@@ -21,14 +19,12 @@ int Inventory<ItemID_T>::getUsedSlotCount()
 	return slots;
 }
 
-template<typename ItemID_T>
-bool Inventory<ItemID_T>::isFullSlot()
+bool Inventory::isFullSlot()
 {
 	return getUsedSlotCount() == maxSlotCount;
 }
 
-template<typename ItemID_T>
-int Inventory<ItemID_T>::addItem(ItemID_T itemID, int amount)
+int Inventory::addItem(EItemID itemID, int amount)
 {
 	// 추가 가능한 아이템 개수
 	int roomAmount = maxStackSize * (maxSlotCount - getUsedSlotCount()); // 빈 슬롯
@@ -51,37 +47,52 @@ int Inventory<ItemID_T>::addItem(ItemID_T itemID, int amount)
 
 }
 
-template<typename ItemID_T>
-bool Inventory<ItemID_T>::removeItem(ItemID_T itemID, int amount)
+bool Inventory::removeItem(EItemID itemID, int amount)
 {
 	if (inventory[itemID] >= amount)
 	{
-		inventory[itemID] - amount;
+		inventory[itemID] -= amount;
 		return true;
 	}
 	return false;
 }
 
-template<typename ItemID_T>
-int Inventory<ItemID_T>::getMaxSlotCount()
+vector<pair<EItemID, int>> Inventory::getSlots() const
+{
+	vector<pair<EItemID, int>> slots;
+	for (const auto& [itemID, count] : inventory)
+	{
+		int fullSlots = count / maxStackSize;
+		int leftCounts = count % maxStackSize;
+
+		while (fullSlots--)
+		{
+			slots.push_back(pair(itemID, maxStackSize));
+		}
+		if (leftCounts)
+		{
+			slots.push_back(pair(itemID, leftCounts));
+		}
+	}
+	return slots;
+}
+
+int Inventory::getMaxSlotCount()
 {
 	return maxSlotCount;
 }
 
-template<typename ItemID_T>
-int Inventory<ItemID_T>::getMaxStackSize()
+int Inventory::getMaxStackSize()
 {
 	return maxStackSize;
 }
 
-template<typename ItemID_T>
-void Inventory<ItemID_T>::setMaxSlotCount(int maxSlotCount)
+void Inventory::setMaxSlotCount(int maxSlotCount)
 {
 	this->maxSlotCount = maxSlotCount;
 }
 
-template<typename ItemID_T>
-void Inventory<ItemID_T>::setMaxStackSize(int maxStackSize)
+void Inventory::setMaxStackSize(int maxStackSize)
 {
 	this->maxStackSize = maxStackSize;
 }

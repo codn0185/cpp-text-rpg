@@ -10,9 +10,9 @@
 class PotionSystem
 {
 private:
-	map<EPotionID, int> potionInventory;
+	map<EItemID, int> potionInventory;
 
-	string formatIngredients(vector<pair<EIngredientID, int>> ingredients);
+	string formatIngredients(vector<pair<EItemID, int>> ingredients);
 public:
 	PotionSystem();
 	~PotionSystem() = default;
@@ -25,17 +25,17 @@ public:
 	void searchByIngredient(string ingredientName);
 
 	// Use Potion
-	bool usePotion(Player* player, EPotionID potionID);
+	bool usePotion(Player* player, EItemID potionID);
 	bool useHPPotion(Player* player);
 	bool useMPPotion(Player* player);
 
 	// Getters
-	int getPotionCount(EPotionID potionID);
+	int getPotionCount(EItemID potionID);
 	int getHPPotionCount();
 	int getMPPotionCount();
 
 	// Setters
-	void setPotionCount(EPotionID potionID, int count);
+	void setPotionCount(EItemID potionID, int count);
 	void setHPPotionCount(int count);
 	void setMPPotionCount(int count);
 };

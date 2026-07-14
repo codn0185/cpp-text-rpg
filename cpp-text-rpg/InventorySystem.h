@@ -1,26 +1,27 @@
 #pragma once
 
+#include "Inventory.h"
 #include "Ingredient.h"
+#include "Potion.h"
 
 #include <vector>
 
 class InventorySystem
 {
 private:
-	int maxSlots;
-	vector<EIngredientID> inventory;
+	// int maxSlots;
+	// vector<EIngredientID> inventory;
 
 public:
+	Inventory* backpackInventory; // 배낭 인벤토리
+	Inventory* stockInventory; // 창고 인벤토리
+
 	InventorySystem();
 	~InventorySystem() = default;
 
-	bool isFull();
-	int getSize();
+	int addToBackpack(EItemID itemID, int amount = 1);
+	bool removeFromBackpack(EItemID itemID, int amount = 1);
 
-	void addItem(EIngredientID itemID);
-	EIngredientID removeItem(int slot);
-
-	void displayInventory();
+	void displayBackpackInventory();
+	void displayStockInventory();
 };
-
-//  포션 인벤토리 & 재료 인벤토리 분류

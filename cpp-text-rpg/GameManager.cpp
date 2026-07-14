@@ -240,7 +240,7 @@ void GameManager::onMainMenu()
 		switchGameState(EGameState::DUNGEON_ENTER);
 		break;
 	case 2:
-		inventorySystem->displayInventory();
+		inventorySystem->displayBackpackInventory();
 		break;
 	case 3:
 		switchGameState(EGameState::POTION_SHOP_ENTER);
@@ -276,7 +276,7 @@ void GameManager::onDungeonEnter()
 		UISystem::PrintPlayerStat(player);
 		break;
 	case 3:
-		inventorySystem->displayInventory();
+		inventorySystem->displayBackpackInventory();
 		break;
 	case 0:
 		switchGameState(EGameState::MAIN_MENU);
@@ -309,42 +309,46 @@ void GameManager::onDungeonCombat()
 
 		// 드랍 아이템 획득
 		cout << "\n";
-		EIngredientID dropItemID = monster->getDropItemID();
-		cout << " > " << monster->getName() << "이(가) \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 드랍했습니다." << "\n";
-		if (inventorySystem->isFull())
+		EItemID dropItemID = monster->getDropItemID();
+		int dropCount = 1;
+		string itemName = ITEM_TABLE.at(dropItemID)->name;
+		cout << " > " << monster->getName() << "이(가) \"" << itemName << "\"을(를) " << dropCount << "개 드랍했습니다." << "\n";
+
+		int leftAmount = inventorySystem->addToBackpack(dropItemID, dropCount);
+		if (leftAmount > 0)
 		{
-			bool isCollectingItem = true;
-			while (isCollectingItem)
+			cout << "배낭 공간이 부족하여 " << itemName << " " << leftAmount << "개를 더 이상 담을 수 없습니다." << "\n";
+
+			while (true)
 			{
-				cout << "인벤토리에 공간이 부족하므로 버릴 아이템을 선택하세요." << "\n";
-				inventorySystem->displayInventory();
+				inventorySystem->displayBackpackInventory();
+				cout << " > 버릴 아이템 슬롯 선택 (0: 드랍 아이템 포기): ";
+				int slotNum;
+				cin >> slotNum;
 
-				cout << " > 버릴 아이템 번호 선택 (0: 드랍 아이템 포기): ";
-				int slot;
-				cin >> slot;
+				if (slotNum == 0)
+				{
+					cout << "    -> \"" << itemName << "\"을(를) 포기합니다." << "\n";
+					break;
+				}
+				if (0 < slotNum && slotNum <= inventorySystem->backpackInventory->getMaxSlotCount())
+				{
+					auto slots = inventorySystem->backpackInventory->getSlots();
+					EItemID abandonedItemID = slots[slotNum - 1].first;
+					int abandonedAmount = slots[slotNum - 1].second;
 
-				if (slot == 0)
-				{
-					cout << "    -> \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 포기합니다." << "\n";
-					isCollectingItem = false;
+					inventorySystem->removeFromBackpack(abandonedItemID, abandonedAmount);
+					inventorySystem->addToBackpack(dropItemID, leftAmount);
+
+					cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << itemName << "\" " << leftAmount << "개를 획득합니다." << "\n";
+					break;
 				}
-				else if (0 <= slot && slot <= inventorySystem->getSize())
-				{
-					EIngredientID replacedItemID = inventorySystem->removeItem(slot);
-					inventorySystem->addItem(dropItemID);
-					cout << "    -> \"" << INGREDIENT_TABLE.at(replacedItemID).name << "\"을(를) 버리고 \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 획득합니다." << "\n";
-					isCollectingItem = false;
-				}
-				else
-				{
-					cout << "다시 입력하세요." << "\n";
-				}
+				cout << "다시 입력하세요." << "\n";
 			}
 		}
 		else
 		{
-			cout << "    -> \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 인벤토리에 보관하였다." << "\n";
-			inventorySystem->addItem(dropItemID);
+			cout << "    -> \"" << itemName << "\"을(를) " << dropCount << "개를 배낭에 보관했습니다." << "\n";
 		}
 
 		// 전투 종료 후 던전 입구로 귀환
@@ -396,7 +400,7 @@ void GameManager::onPotionShopEnter()
 		potionSystem->searchByIngredient(target);
 		break;
 	case 4:
-		inventorySystem->displayInventory();
+		inventorySystem->displayBackpackInventory();
 		break;
 	case 0:
 		switchGameState(EGameState::MAIN_MENU);
