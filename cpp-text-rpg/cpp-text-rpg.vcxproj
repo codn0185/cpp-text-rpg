@@ -130,7 +130,9 @@
     <ClCompile Include="cpp-text-rpg.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="Goblin.cpp" />
+    <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventorySystem.cpp" />
+    <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="ItemSorter.cpp" />
     <ClCompile Include="LevelSystem.cpp" />
@@ -153,7 +155,9 @@
     <ClInclude Include="CombatManager.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySystem.h" />
+    <ClInclude Include="Ingredient.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="ItemSorter.h" />
     <ClInclude Include="LevelSystem.h" />

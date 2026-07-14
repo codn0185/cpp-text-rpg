@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Character.h"
-#include "Item.h"
+#include "Ingredient.h"
 #include "RandomSystem.h"
 
 #include <map>
@@ -44,7 +44,7 @@ public:
 	Monster(EMosnterType monsterType);
 	Monster(string name, int maxHP, int maxMP, int power, int defence);
 
-	virtual EItemID getDropItemID() = 0;
+	virtual EIngredientID getDropItemID() = 0;
 
 	// Getters
 	EMosnterType getMonsterType();

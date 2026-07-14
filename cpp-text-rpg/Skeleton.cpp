@@ -17,8 +17,8 @@ void Skeleton::attack(Character* target)
 	UISystem::PrintBattleLog(this, target, damage);
 }
 
-EItemID Skeleton::getDropItemID()
+EIngredientID Skeleton::getDropItemID()
 {
-	vector<EItemID> itemIDs = {EItemID::SKELETON_BONE, EItemID::MANA_DUST};
+	vector<EIngredientID> itemIDs = {EIngredientID::SKELETON_BONE, EIngredientID::MANA_DUST};
 	return RandomSystem::getRandom(itemIDs, {3, 2});
 }

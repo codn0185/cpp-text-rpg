@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Player.h"
-#include "Item.h"
+#include "Ingredient.h"
 
 #include <iostream>
 #include <vector>
@@ -28,9 +28,9 @@ struct PotionDataRow
 	EPotionType potionType; // 포션 타입
 	string name; // 포션 이름
 	string description; // 포션 설명
-	vector<pair<EItemID, int>> ingredients; // 재료 (아이템, 개수)
+	vector<pair<EIngredientID, int>> ingredients; // 재료 (아이템, 개수)
 
-	PotionDataRow(EPotionID potionID, EPotionType potionType, string name, string description = "", vector<pair<EItemID, int>> ingredients = {}) :
+	PotionDataRow(EPotionID potionID, EPotionType potionType, string name, string description = "", vector<pair<EIngredientID, int>> ingredients = {}) :
 		potionID(potionID), potionType(potionType), name(name), description(description), ingredients(ingredients)
 	{
 	}
@@ -44,7 +44,7 @@ class PotionSystem
 private:
 	map<EPotionID, int> potionInventory;
 
-	string formatIngredients(vector<pair<EItemID, int>> ingredients);
+	string formatIngredients(vector<pair<EIngredientID, int>> ingredients);
 public:
 	PotionSystem();
 	~PotionSystem() = default;

@@ -17,8 +17,8 @@ void Goblin::attack(Character* target)
 	UISystem::PrintBattleLog(this, target, damage);
 }
 
-EItemID Goblin::getDropItemID()
+EIngredientID Goblin::getDropItemID()
 {
-	vector<EItemID> itemIDs = {EItemID::GOBLIN_BLOOD, EItemID::HEALING_HERB};
+	vector<EIngredientID> itemIDs = {EIngredientID::GOBLIN_BLOOD, EIngredientID::HEALING_HERB};
 	return RandomSystem::getRandom(itemIDs, {3, 2});
 }

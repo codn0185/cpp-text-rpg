@@ -1,29 +1,23 @@
 #pragma once
 
 #include <string>
-#include <map>
 
 using namespace std;
 
-enum class EItemID
+enum EItemType
 {
-	NONE,
-	SLIME_JELLY,
-	GOBLIN_BLOOD,
-	SKELETON_BONE,
-	WATER,
-	HEALING_HERB,
-	MANA_DUST,
+	INGREDIENT,
+	POTION,
 };
 
 struct Item
 {
-	EItemID itemID;
+	EItemType itemType;
 	string name;
 	int price;
 
-	Item(EItemID itemID, string name, int price);
+	Item(EItemType itemType, string name, int price);
+
+	virtual bool canUse() = 0;
 };
 
-// 아이템 테이블
-extern map<EItemID, Item*> ITEM_TABLE;

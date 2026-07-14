@@ -1,5 +1,7 @@
 #include "InventorySystem.h"
 
+#include <iostream>
+
 InventorySystem::InventorySystem() : maxSlots(10)
 {
 }
@@ -14,7 +16,7 @@ int InventorySystem::getSize()
 	return inventory.size();
 }
 
-void InventorySystem::addItem(EItemID itemID)
+void InventorySystem::addItem(EIngredientID itemID)
 {
 	if (!isFull())
 	{
@@ -22,15 +24,15 @@ void InventorySystem::addItem(EItemID itemID)
 	}
 }
 
-EItemID InventorySystem::removeItem(int slot)
+EIngredientID InventorySystem::removeItem(int slot)
 {
 	slot--;
 	if (slot < 0 || inventory.size() <= slot)
 	{
-		return EItemID::NONE;
+		return EIngredientID::NONE;
 	}
 
-	EItemID itemID = inventory[slot];
+	EIngredientID itemID = inventory[slot];
 	inventory.erase(inventory.begin() + slot);
 	return itemID;
 }
@@ -40,8 +42,8 @@ void InventorySystem::displayInventory()
 	cout << "========== < 인벤토리 (" << inventory.size() << "/" << maxSlots << ") > ==========" << "\n";
 	for (int i = 0; i < inventory.size(); i++)
 	{
-		EItemID itemID = inventory[i];
-		cout << i + 1 << ". " << ITEM_TABLE[itemID]->name << " (" << ITEM_TABLE[itemID]->price << "g)" << "\n";
+		EIngredientID itemID = inventory[i];
+		cout << i + 1 << ". " << INGREDIENT_TABLE[itemID]->name << " (" << INGREDIENT_TABLE[itemID]->price << "g)" << "\n";
 	}
 	cout << "\n\n";
 }

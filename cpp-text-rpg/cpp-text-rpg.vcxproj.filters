@@ -52,6 +52,9 @@
     <Filter Include="Systems\CombatManager">
       <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Inventory">
+      <UniqueIdentifier>{b5c11597-8a23-42fe-979d-515f36e272ed}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -66,7 +69,7 @@
     <ClCompile Include="Player.cpp">
       <Filter>Characters\Players</Filter>
     </ClCompile>
-    <ClCompile Include="Item.cpp">
+    <ClCompile Include="Ingredient.cpp">
       <Filter>Items</Filter>
     </ClCompile>
     <ClCompile Include="Warrior.cpp">
@@ -120,6 +123,12 @@
     <ClCompile Include="LevelSystem.cpp">
       <Filter>Systems\LevelSystem</Filter>
     </ClCompile>
+    <ClCompile Include="Inventory.cpp">
+      <Filter>Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="Item.cpp">
+      <Filter>Items</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -143,7 +152,7 @@
     <ClInclude Include="Rogue.h">
       <Filter>Characters\Players</Filter>
     </ClInclude>
-    <ClInclude Include="Item.h">
+    <ClInclude Include="Ingredient.h">
       <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="NoJob.h">
@@ -193,6 +202,12 @@
     </ClInclude>
     <ClInclude Include="LevelSystem.h">
       <Filter>Systems\LevelSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

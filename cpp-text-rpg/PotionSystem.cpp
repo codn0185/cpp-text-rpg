@@ -1,16 +1,16 @@
 #include "PotionSystem.h"
 
 map<EPotionID, PotionDataRow> POTION_TABLE = {
-	{EPotionID::HP_POTION_20, PotionDataRow(EPotionID::HP_POTION_20, EPotionType::HP_POTION, "HP 포션 (소형)", "HP를 20만큼 회복한다.", {{EItemID::WATER, 1}, {EItemID::HEALING_HERB, 2}})},
-	{EPotionID::MP_POTION_20, PotionDataRow(EPotionID::MP_POTION_20, EPotionType::MP_POTION, "MP 포션 (소형)", "MP를 20만큼 회복한다.", {{EItemID::WATER, 1}, {EItemID::MANA_DUST, 2}})},
+	{EPotionID::HP_POTION_20, PotionDataRow(EPotionID::HP_POTION_20, EPotionType::HP_POTION, "HP 포션 (소형)", "HP를 20만큼 회복한다.", {{EIngredientID::WATER, 1}, {EIngredientID::HEALING_HERB, 2}})},
+	{EPotionID::MP_POTION_20, PotionDataRow(EPotionID::MP_POTION_20, EPotionType::MP_POTION, "MP 포션 (소형)", "MP를 20만큼 회복한다.", {{EIngredientID::WATER, 1}, {EIngredientID::MANA_DUST, 2}})},
 };
 
-string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
+string PotionSystem::formatIngredients(vector<pair<EIngredientID, int>> ingredients)
 {
 	string ingredientsStr;
 	for (const auto& [itemID, count] : ingredients)
 	{
-		ingredientsStr += ITEM_TABLE[itemID]->name + " x" + to_string(count) + ", ";
+		ingredientsStr += INGREDIENT_TABLE[itemID]->name + " x" + to_string(count) + ", ";
 	}
 	ingredientsStr.erase(ingredientsStr.length() - 2);
 	return ingredientsStr;
@@ -86,7 +86,7 @@ void PotionSystem::searchByIngredient(string target)
 		bool find = false;
 		for (const auto& [itemID, count] : iter->second.ingredients)
 		{
-			if (ITEM_TABLE[itemID]->name.find(target) != string::npos)
+			if (INGREDIENT_TABLE[itemID]->name.find(target) != string::npos)
 			{
 				find = true;
 				break;

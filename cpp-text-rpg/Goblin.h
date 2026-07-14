@@ -9,6 +9,6 @@ public:
 
 	void attack(Character* target) override;
 
-	EItemID getDropItemID() override;
+	EIngredientID getDropItemID() override;
 };
 
