@@ -2,36 +2,30 @@
 
 #include <iostream>
 
+const map<EPlayerJob, string> UISystem::jobNames = {
+	{EPlayerJob::None, "무직"},
+	{EPlayerJob::Archer, "궁수"},
+	{EPlayerJob::Mage, "마법사"},
+	{EPlayerJob::Rogue, "도적"},
+	{EPlayerJob::Warrior, "전사"},
+};
+
 void UISystem::PrintPlayerStat(Player* player)
 {
-	string jobName;
-	switch (player->getJob())
-	{
-	case EPlayerJob::None:
-		jobName = "무직";
-		break;
-	case EPlayerJob::Archer:
-		jobName = "궁수";
-		break;
-	case EPlayerJob::Mage:
-		jobName = "마법사";
-		break;
-	case EPlayerJob::Rogue:
-		jobName = "도적";
-		break;
-	case EPlayerJob::Warrior:
-		jobName = "전사";
-		break;
-	default:
-		break;
-	}
+	string nameText = "닉네임: " + player->getName();
+	string jobText = "직업: " + jobNames.at(player->getJob());
+	int level = player->getLevel();
+	int exp = player->getExp();
+	int requiredExp = LevelSystem::GetRequiredExp(player);
+	string levelText = "레벨: " + to_string(level) + " (" + to_string(exp) + "/" + to_string(requiredExp) + ")";
+
 	string hpText = "HP: " + to_string(player->getCurrentHP()) + "/" + to_string(player->getMaxHP());
 	string mpText = "HP: " + to_string(player->getCurrentMP()) + "/" + to_string(player->getMaxMP());
 	string powerText = "공격력: " + to_string(player->getPower());
 	string defenceText = "방어력: " + to_string(player->getDefence());
 
 	cout << "===============================================================" << "\n";
-	cout << "닉네임: " << player->getName() << " | 직업: " << jobName << " | 레벨: " << player->getLevel() << "\n";
+	cout << nameText << " | " << jobText << " | " << levelText << "\n";
 	cout << "---------------------------------------------------------------" << "\n";
 	cout << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
 	cout << "===============================================================" << "\n";
