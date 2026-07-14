@@ -49,6 +49,9 @@
     <Filter Include="Systems\RandomSystem">
       <UniqueIdentifier>{2c603394-d111-4944-8cbb-9c36325668dd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\LevelSystem">
+      <UniqueIdentifier>{3c457d97-635d-4002-8d9b-c3cfe10093d6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -113,6 +116,9 @@
     </ClCompile>
     <ClCompile Include="RandomSystem.cpp">
       <Filter>Systems\RandomSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelSystem.cpp">
+      <Filter>Systems\LevelSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -184,6 +190,9 @@
     </ClInclude>
     <ClInclude Include="Singleton.h">
       <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSystem.h">
+      <Filter>Systems\LevelSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
