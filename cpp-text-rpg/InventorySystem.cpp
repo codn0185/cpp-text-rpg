@@ -13,7 +13,7 @@ bool InventorySystem::isFull()
 
 int InventorySystem::getSize()
 {
-	return inventory.size();
+	return (int) inventory.size();
 }
 
 void InventorySystem::addItem(EIngredientID itemID)
