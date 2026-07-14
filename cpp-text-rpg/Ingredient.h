@@ -23,10 +23,8 @@ enum class EIngredientID
 struct Ingredient : public Item
 {
 	EIngredientID ingredientID;
-	string name;
-	int price;
 
-	Ingredient(EIngredientID ingredientID, string name, int price);
+	Ingredient(EIngredientID ingredientID, string name, string description = "", int price = 0);
 
 	bool canUse() override;
 };

@@ -14,9 +14,10 @@ struct Item
 {
 	EItemType itemType;
 	string name;
+	string description;
 	int price;
 
-	Item(EItemType itemType, string name, int price);
+	Item(EItemType itemType, string name, string description = "", int price = 0);
 
 	virtual bool canUse() = 0;
 };

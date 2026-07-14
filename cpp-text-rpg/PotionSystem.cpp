@@ -1,9 +1,6 @@
 #include "PotionSystem.h"
 
-map<EPotionID, PotionDataRow> POTION_TABLE = {
-	{EPotionID::HP_POTION_20, PotionDataRow(EPotionID::HP_POTION_20, EPotionType::HP_POTION, "HP 포션 (소형)", "HP를 20만큼 회복한다.", {{EIngredientID::WATER, 1}, {EIngredientID::HEALING_HERB, 2}})},
-	{EPotionID::MP_POTION_20, PotionDataRow(EPotionID::MP_POTION_20, EPotionType::MP_POTION, "MP 포션 (소형)", "MP를 20만큼 회복한다.", {{EIngredientID::WATER, 1}, {EIngredientID::MANA_DUST, 2}})},
-};
+#include <iostream>
 
 string PotionSystem::formatIngredients(vector<pair<EIngredientID, int>> ingredients)
 {
