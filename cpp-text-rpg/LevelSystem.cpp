@@ -8,6 +8,10 @@ const map<int, LevelDataRow> LevelSystem::LEVEL_TABLE = {
 	{4, LevelDataRow(5, 100)},
 };
 
+LevelSystem::LevelSystem() : currentLevel(0), currentExp(0)
+{
+}
+
 void LevelSystem::checkLevelUp()
 {
 	if (currentLevel == getMaxLevel())

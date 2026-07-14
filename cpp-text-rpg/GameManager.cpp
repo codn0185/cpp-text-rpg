@@ -6,16 +6,24 @@
 
 GameManager::GameManager() :isRunning(true)
 {
-	potionSystem = new PotionSystem();
 	spawnManager = new SpawnManager();
 	combatManager = new CombatManager();
+
+	potionSystem = new PotionSystem();
 	inventorySystem = new InventorySystem();
+	levelSystem = new LevelSystem();
 }
 
 GameManager::~GameManager()
 {
-	delete potionSystem;
 	delete player;
+
+	delete spawnManager;
+	delete combatManager;
+
+	delete potionSystem;
+	delete inventorySystem;
+	delete levelSystem;
 }
 
 void GameManager::run()

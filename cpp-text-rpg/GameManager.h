@@ -10,6 +10,7 @@
 #include "UISystem.h"
 #include "PotionSystem.h"
 #include "InventorySystem.h"
+#include "LevelSystem.h"
 
 using namespace std;
 
@@ -55,6 +56,7 @@ private:
 
 	PotionSystem* potionSystem; // 포션 시스템
 	InventorySystem* inventorySystem; // 포션 시스템
+	LevelSystem* levelSystem; // 레벨 시스템
 
 	Player* player; // 플레이어
 

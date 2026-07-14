@@ -17,17 +17,20 @@ struct LevelDataRow
 };
 
 
-class LevelSystem : public Singleton<LevelSystem>
+class LevelSystem
 {
 private:
 	static const map<int, LevelDataRow> LEVEL_TABLE;
 
-	int currentLevel = 0;
-	int currentExp = 0;
+	int currentLevel;
+	int currentExp;
 
 	void checkLevelUp();
 
 public:
+	LevelSystem();
+	~LevelSystem() = default;
+
 	void addExp(int amount);
 	int getCurrentLevel();
 	int getCurrentExp();
