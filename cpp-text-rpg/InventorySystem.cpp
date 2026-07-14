@@ -43,7 +43,7 @@ void InventorySystem::displayInventory()
 	for (int i = 0; i < inventory.size(); i++)
 	{
 		EIngredientID itemID = inventory[i];
-		cout << i + 1 << ". " << INGREDIENT_TABLE[itemID]->name << " (" << INGREDIENT_TABLE[itemID]->price << "g)" << "\n";
+		cout << i + 1 << ". " << INGREDIENT_TABLE.at(itemID).name << " (" << INGREDIENT_TABLE.at(itemID).price << "g)" << "\n";
 	}
 	cout << "\n\n";
 }

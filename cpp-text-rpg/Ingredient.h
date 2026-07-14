@@ -32,4 +32,4 @@ struct Ingredient : public Item
 };
 
 // 재료 테이블
-extern map<EIngredientID, Ingredient*> INGREDIENT_TABLE;
+extern const map<EIngredientID, Ingredient> INGREDIENT_TABLE;

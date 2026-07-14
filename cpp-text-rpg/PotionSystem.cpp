@@ -10,7 +10,7 @@ string PotionSystem::formatIngredients(vector<pair<EIngredientID, int>> ingredie
 	string ingredientsStr;
 	for (const auto& [itemID, count] : ingredients)
 	{
-		ingredientsStr += INGREDIENT_TABLE[itemID]->name + " x" + to_string(count) + ", ";
+		ingredientsStr += INGREDIENT_TABLE.at(itemID).name + " x" + to_string(count) + ", ";
 	}
 	ingredientsStr.erase(ingredientsStr.length() - 2);
 	return ingredientsStr;
@@ -86,7 +86,7 @@ void PotionSystem::searchByIngredient(string target)
 		bool find = false;
 		for (const auto& [itemID, count] : iter->second.ingredients)
 		{
-			if (INGREDIENT_TABLE[itemID]->name.find(target) != string::npos)
+			if (INGREDIENT_TABLE.at(itemID).name.find(target) != string::npos)
 			{
 				find = true;
 				break;

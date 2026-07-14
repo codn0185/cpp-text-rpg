@@ -310,7 +310,7 @@ void GameManager::onDungeonCombat()
 		// 드랍 아이템 획득
 		cout << "\n";
 		EIngredientID dropItemID = monster->getDropItemID();
-		cout << " > " << monster->getName() << "이(가) \"" << INGREDIENT_TABLE[dropItemID]->name << "\"을(를) 드랍했습니다." << "\n";
+		cout << " > " << monster->getName() << "이(가) \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 드랍했습니다." << "\n";
 		if (inventorySystem->isFull())
 		{
 			bool isCollectingItem = true;
@@ -325,14 +325,14 @@ void GameManager::onDungeonCombat()
 
 				if (slot == 0)
 				{
-					cout << "    -> \"" << INGREDIENT_TABLE[dropItemID]->name << "\"을(를) 포기합니다." << "\n";
+					cout << "    -> \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 포기합니다." << "\n";
 					isCollectingItem = false;
 				}
 				else if (0 <= slot && slot <= inventorySystem->getSize())
 				{
 					EIngredientID replacedItemID = inventorySystem->removeItem(slot);
 					inventorySystem->addItem(dropItemID);
-					cout << "    -> \"" << INGREDIENT_TABLE[replacedItemID]->name << "\"을(를) 버리고 \"" << INGREDIENT_TABLE[dropItemID]->name << "\"을(를) 획득합니다." << "\n";
+					cout << "    -> \"" << INGREDIENT_TABLE.at(replacedItemID).name << "\"을(를) 버리고 \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 획득합니다." << "\n";
 					isCollectingItem = false;
 				}
 				else
@@ -343,7 +343,7 @@ void GameManager::onDungeonCombat()
 		}
 		else
 		{
-			cout << "    -> \"" << INGREDIENT_TABLE[dropItemID]->name << "\"을(를) 인벤토리에 보관하였다." << "\n";
+			cout << "    -> \"" << INGREDIENT_TABLE.at(dropItemID).name << "\"을(를) 인벤토리에 보관하였다." << "\n";
 			inventorySystem->addItem(dropItemID);
 		}
 
