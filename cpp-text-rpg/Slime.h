@@ -7,6 +7,8 @@ class Slime : public Monster
 public:
 	Slime();
 
+	void attack(Character* target) override;
+
 	EItemID getDropItemID() override;
 };
 

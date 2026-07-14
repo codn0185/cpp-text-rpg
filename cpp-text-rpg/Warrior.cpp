@@ -7,6 +7,15 @@ Warrior::Warrior(string name, int hp, int mp, int power, int defence) : Player(n
 	setJob(EPlayerJob::Warrior);
 }
 
+void Warrior::attack(Character* target)
+{
+	int damage = power - target->getDefence();
+	if (damage <= 0)
+	{
+		damage = 1;
+	}
+	target->takeDamage(damage);
+}
 
 void Warrior::showAttackMessage() const
 {

@@ -28,9 +28,6 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{957ce698-38de-4f34-9ea3-331b87d98c21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\CombatSystem">
-      <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems\GameManager">
       <UniqueIdentifier>{c832470c-0036-4f6a-85d7-db53a43ac8fd}</UniqueIdentifier>
     </Filter>
@@ -51,6 +48,9 @@
     </Filter>
     <Filter Include="Systems\LevelSystem">
       <UniqueIdentifier>{3c457d97-635d-4002-8d9b-c3cfe10093d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\CombatManager">
+      <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -94,7 +94,7 @@
       <Filter>Characters\Monsters</Filter>
     </ClCompile>
     <ClCompile Include="CombatManager.cpp">
-      <Filter>Systems\CombatSystem</Filter>
+      <Filter>Systems\CombatManager</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
       <Filter>Systems\GameManager</Filter>
@@ -165,7 +165,7 @@
       <Filter>Characters\Monsters</Filter>
     </ClInclude>
     <ClInclude Include="CombatManager.h">
-      <Filter>Systems\CombatSystem</Filter>
+      <Filter>Systems\CombatManager</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
       <Filter>Systems\GameManager</Filter>

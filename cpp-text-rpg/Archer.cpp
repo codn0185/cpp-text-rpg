@@ -2,9 +2,22 @@
 
 #include <iostream>
 
-Archer::Archer(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence)
+Archer::Archer(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence), attackCount(3)
 {
 	setJob(EPlayerJob::Archer);
+}
+
+void Archer::attack(Character* target)
+{
+	for (int i = 0; i < attackCount; i++)
+	{
+		int damage = power - target->getDefence();
+		if (damage <= 0)
+		{
+			damage = 1;
+		}
+		target->takeDamage(damage);
+	}
 }
 
 void Archer::showAttackMessage() const

@@ -35,6 +35,7 @@ protected:
 public:
 	virtual ~Character() = default;
 
+	virtual void attack(Character* target) = 0;
 	void takeDamage(int damage);
 	bool isDead();
 

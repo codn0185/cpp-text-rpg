@@ -7,6 +7,16 @@ NoJob::NoJob(string name, int hp, int mp, int power, int defence) : Player(name,
 	setJob(EPlayerJob::None);
 }
 
+void NoJob::attack(Character* target)
+{
+	int damage = power - target->getDefence();
+	if (damage <= 0)
+	{
+		damage = 1;
+	}
+	target->takeDamage(damage);
+}
+
 void NoJob::showAttackMessage() const
 {
 	cout << "펀치 날리기!" << "\n";

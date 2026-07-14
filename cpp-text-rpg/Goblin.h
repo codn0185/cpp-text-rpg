@@ -7,6 +7,8 @@ class Goblin : public Monster
 public:
 	Goblin();
 
+	void attack(Character* target) override;
+
 	EItemID getDropItemID() override;
 };
 

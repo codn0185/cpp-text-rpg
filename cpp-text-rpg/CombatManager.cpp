@@ -87,7 +87,8 @@ void CombatManager::onPlayerTurn()
 	case 1:
 		player->showAttackMessage();
 		cout << player->getName() << "이/가 " << monster->getName() << "에게 " << CalculateDamage(player, monster) << "만큼의 데미지를 주었습니다." << "\n";
-		ProcessDamage(player, monster);
+		// ProcessDamage(player, monster);
+		player->attack(monster);
 		switchCombatState(ECombatState::CheckVictory);
 		break;
 	case 2:
