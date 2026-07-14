@@ -24,9 +24,10 @@ struct MonsterDataRow
 	int maxMP;
 	int power;
 	int defence;
+	int rewardExp;
 
-	MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence) :
-		monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
+	MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence, int rewardExp) :
+		monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence), rewardExp(rewardExp)
 	{
 	}
 };

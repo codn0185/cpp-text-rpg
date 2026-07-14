@@ -1,9 +1,9 @@
 #include "Monster.h"
 
 const map<EMosnterType, MonsterDataRow> MONSTER_TABLE = {
-	{EMosnterType::Slime, MonsterDataRow(EMosnterType::Slime, "슬라임", "", 250, 0, 80, 45)},
-	{EMosnterType::Goblin, MonsterDataRow(EMosnterType::Goblin, "고블린", "", 300, 0, 115, 40)},
-	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30)},
+	{EMosnterType::Slime, MonsterDataRow(EMosnterType::Slime, "슬라임", "", 250, 0, 80, 45, 30)},
+	{EMosnterType::Goblin, MonsterDataRow(EMosnterType::Goblin, "고블린", "", 300, 0, 115, 40, 32)},
+	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30, 35)},
 };
 
 Monster::Monster(EMosnterType monsterType) : monsterType(monsterType)
@@ -14,6 +14,7 @@ Monster::Monster(EMosnterType monsterType) : monsterType(monsterType)
 	setMaxMP(row.maxMP);
 	setPower(row.power);
 	setDefence(row.defence);
+	setRewardExp(row.rewardExp);
 
 	reset();
 }
