@@ -292,7 +292,7 @@ void GameManager::onDungeonCombat()
 	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory)
 	{
 		EItemID dropItemID = monster->getDropItemID();
-		cout << monster->getName() << "이/가 \"" << ITEM_TABLE[dropItemID]->name << "\"를/을 드랍했습니다." << "\n";
+		cout << monster->getName() << "이(가) \"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 드랍했습니다." << "\n";
 
 		if (inventorySystem->isFull())
 		{
@@ -308,14 +308,14 @@ void GameManager::onDungeonCombat()
 
 				if (slot == 0)
 				{
-					cout << "\"" << ITEM_TABLE[dropItemID]->name << "\"를/을 포기합니다." << "\n";
+					cout << "\"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 포기합니다." << "\n";
 					isCollectingItem = false;
 				}
 				else if (0 <= slot && slot <= inventorySystem->getSize())
 				{
 					EItemID replacedItemID = inventorySystem->removeItem(slot);
 					inventorySystem->addItem(dropItemID);
-					cout << "\"" << ITEM_TABLE[replacedItemID]->name << "\"를/을 버리고 \"" << ITEM_TABLE[dropItemID]->name << "\"를/을 획득합니다." << "\n";
+					cout << "\"" << ITEM_TABLE[replacedItemID]->name << "\"을(를) 버리고 \"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 획득합니다." << "\n";
 					isCollectingItem = false;
 				}
 				else
@@ -326,7 +326,7 @@ void GameManager::onDungeonCombat()
 		}
 		else
 		{
-			cout << "\"" << ITEM_TABLE[dropItemID]->name << "\"를/을 인벤토리에 보관하였다." << "\n";
+			cout << "\"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 인벤토리에 보관하였다." << "\n";
 			inventorySystem->addItem(dropItemID);
 		}
 		switchGameState(EGameState::DUNGEON_ENTER);
