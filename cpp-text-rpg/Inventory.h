@@ -19,17 +19,19 @@ public:
 	Inventory(int maxSlotCount, int maxStackSize = 1);
 	~Inventory() = default;
 
-	int getMaxSlotCount();
-	int getMaxStackSize();
-
-	void setMaxSlotCount(int maxSlotCount);
-	void setMaxStackSize(int maxStackSize);
-
 	int getUsedSlotCount(); // 사용 중인 슬롯 개수
 	bool isFullSlot(); // 슬롯 가득 찼는지 여부
 	int addItem(ItemID_T itemID, int amount = 1); // 아이템 추가 (추가 못하고 남은 수 반환)
+	bool removeItem(ItemID_T itemID, int amount = 1); // 아이템 제거 (제거 가능 여부 반환)
 
-	virtual void displayInventroy() = 0; // 인벤토리 출력
+	// Getters
+	int getMaxSlotCount();
+	int getMaxStackSize();
+
+	// Setters
+	void setMaxSlotCount(int maxSlotCount);
+	void setMaxStackSize(int maxStackSize);
+
 };
 
 
