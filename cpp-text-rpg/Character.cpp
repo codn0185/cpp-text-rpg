@@ -116,3 +116,11 @@ void Character::increaseMaxMP(int amount, bool addToCurrrent)
 		currentMP += amount;
 	}
 }
+
+void Character::increaseStat(Stat stat)
+{
+	maxHP += stat.hp;
+	maxMP += stat.mp;
+	power += stat.power;
+	defence += stat.defence;
+}

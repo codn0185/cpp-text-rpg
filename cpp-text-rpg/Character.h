@@ -4,6 +4,19 @@
 
 using namespace std;
 
+struct Stat
+{
+	int hp;
+	int mp;
+	int power;
+	int defence;
+
+	Stat(int hp, int mp, int power, int defence)
+		: hp(hp), mp(mp), power(power), defence(defence)
+	{
+	}
+};
+
 // 플레이어 및 몬스터의 기본이 되는 추상 클래스
 class Character
 {
@@ -53,4 +66,5 @@ public:
 	void reset();
 	void increaseMaxHP(int amount, bool addToCurrrent = false);
 	void increaseMaxMP(int amount, bool addToCurrrent = false);
+	void increaseStat(Stat stat);
 };
