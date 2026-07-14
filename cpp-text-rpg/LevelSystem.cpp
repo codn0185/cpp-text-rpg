@@ -1,53 +1,46 @@
 #include "LevelSystem.h"
 
 const map<int, LevelDataRow> LevelSystem::LEVEL_TABLE = {
-	{0, LevelDataRow(1, 100)},
-	{1, LevelDataRow(2, 100)},
-	{2, LevelDataRow(3, 100)},
-	{3, LevelDataRow(4, 100)},
-	{4, LevelDataRow(5, 100)},
+	{0, LevelDataRow(1, 100, Stat(10, 7, 5, 3))},
+	{1, LevelDataRow(2, 120, Stat(10, 7, 5, 3))},
+	{2, LevelDataRow(3, 150, Stat(10, 7, 5, 3))},
+	{3, LevelDataRow(4, 200, Stat(10, 7, 5, 3))},
+	{4, LevelDataRow(5, 270, Stat(10, 7, 5, 3))},
 };
 
-LevelSystem::LevelSystem() : currentLevel(0), currentExp(0)
+LevelSystem::LevelSystem()
 {
 }
 
-void LevelSystem::checkLevelUp()
+void LevelSystem::checkLevelUp(Player* player)
 {
-	if (currentLevel == getMaxLevel())
+	int currentLevel = player->getLevel();
+	int currentExp = player->getExp();
+
+	if (player->getLevel() == getMaxLevel())
 	{
 		return;
 	}
-	while (currentExp >= getRequiredExp())
+	while (player->getExp() >= getRequiredExp(player))
 	{
-		currentExp -= getRequiredExp();
-		currentLevel++;
+		player->setExp(player->getExp() - getRequiredExp(player));
+		player->setLevel(player->getLevel() + 1);
 	}
 }
 
-void LevelSystem::addExp(int amount)
+void LevelSystem::addExp(Player* player, int amount)
 {
-	currentExp += amount;
-	checkLevelUp();
+	player->setExp(player->getExp() + amount);
+	checkLevelUp(player);
 }
 
-int LevelSystem::getCurrentLevel()
+int LevelSystem::getRequiredExp(Player* player)
 {
-	return currentLevel;
-}
-
-int LevelSystem::getCurrentExp()
-{
-	return currentExp;
-}
-
-int LevelSystem::getRequiredExp()
-{
-	if (LEVEL_TABLE.find(currentLevel) == LEVEL_TABLE.end())
+	if (LEVEL_TABLE.find(player->getLevel()) == LEVEL_TABLE.end())
 	{
 		return 0;
 	}
-	return LEVEL_TABLE.at(currentLevel).requiredExp;
+	return LEVEL_TABLE.at(player->getLevel()).requiredExp;
 }
 
 int LevelSystem::getMaxLevel()

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Singleton.h"
+#include "Player.h"
 
 #include <map>
 
@@ -10,31 +11,28 @@ struct LevelDataRow
 {
 	int targetLevel;
 	int requiredExp;
+	Stat increaseStat;
 
-	LevelDataRow(int targetLevel, int requiredExp) :targetLevel(targetLevel), requiredExp(requiredExp)
+	LevelDataRow(int targetLevel, int requiredExp, Stat increaseStat)
+		: targetLevel(targetLevel), requiredExp(requiredExp), increaseStat(increaseStat)
 	{
 	}
 };
-
 
 class LevelSystem
 {
 private:
 	static const map<int, LevelDataRow> LEVEL_TABLE;
 
-	int currentLevel;
-	int currentExp;
-
-	void checkLevelUp();
+	void checkLevelUp(Player* player);
 
 public:
 	LevelSystem();
 	~LevelSystem() = default;
 
-	void addExp(int amount);
-	int getCurrentLevel();
-	int getCurrentExp();
-	int getRequiredExp();
 	int getMaxLevel();
+	int getRequiredExp(Player* player);
+
+	void addExp(Player* player, int amount);
 };
 
