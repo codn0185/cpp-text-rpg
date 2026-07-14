@@ -1,6 +1,6 @@
 #include "Players.h"
 
-Player::Player(string name, int hp, int mp, int power, int defence) : job(EPlayerJob::None), level(0)
+Player::Player(string name, int hp, int mp, int power, int defence) : job(EPlayerJob::None), level(0), exp(0)
 {
 	setName(name);
 	setMaxHP(hp);
@@ -57,6 +57,11 @@ int Player::getLevel()
 	return level;
 }
 
+int Player::getExp()
+{
+	return exp;
+}
+
 // Setters
 void Player::setJob(EPlayerJob job)
 {
@@ -66,4 +71,9 @@ void Player::setJob(EPlayerJob job)
 void Player::setLevel(int level)
 {
 	this->level = level;
+}
+
+void Player::setExp(int exp)
+{
+	this->exp = exp;
 }

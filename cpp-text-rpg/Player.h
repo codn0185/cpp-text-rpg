@@ -20,6 +20,7 @@ class Player : public Character
 protected:
 	EPlayerJob job;
 	int level;
+	int exp;
 
 public:
 	Player(string name, int hp, int mp, int power, int defence);
@@ -33,8 +34,10 @@ public:
 	// Getters
 	EPlayerJob getJob();
 	int getLevel();
+	int getExp();
 
 	// Setters
 	void setJob(EPlayerJob job);
 	void setLevel(int level);
+	void setExp(int exp);
 };
