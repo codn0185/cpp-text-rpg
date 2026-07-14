@@ -17,14 +17,52 @@ void LevelSystem::checkLevelUp(Player* player)
 	int currentLevel = player->getLevel();
 	int currentExp = player->getExp();
 
-	if (player->getLevel() == getMaxLevel())
-	{
-		return;
-	}
+
+	// 레벨 업
 	while (player->getExp() >= getRequiredExp(player))
 	{
-		player->setExp(player->getExp() - getRequiredExp(player));
-		player->setLevel(player->getLevel() + 1);
+		// 최대 레벨 확인
+		if (player->getLevel() == getMaxLevel())
+		{
+			return;
+		}
+
+		// 관련 정보 변수로 저징
+		int prevLevel = player->getLevel();
+		int prevExp = player->getExp();
+
+		int nextLevel = prevLevel + 1;
+		int nextExp = prevExp - getRequiredExp(player);
+		Stat stat = LEVEL_TABLE.at(prevLevel).increaseStat;
+
+		string levelUpStr = "Lv. " + to_string(prevLevel) + " -> Lv. " + to_string(nextLevel);
+		string statIncreaseStr;
+		if (stat.hp)
+		{
+			statIncreaseStr += "HP +" + to_string(stat.hp) + ", ";
+		}
+		if (stat.mp)
+		{
+			statIncreaseStr += "MP +" + to_string(stat.mp) + ", ";
+		}
+		if (stat.power)
+		{
+			statIncreaseStr += "공격력 +" + to_string(stat.power) + ", ";
+		}
+		if (stat.defence)
+		{
+			statIncreaseStr += "방어력 +" + to_string(stat.defence) + ", ";
+		}
+		statIncreaseStr.erase(statIncreaseStr.length() - 2);
+
+		cout << " > Level Up!" << "\n";
+		cout << "    -> " << levelUpStr << "\n";
+		cout << "    -> " << statIncreaseStr << "\n";
+
+		player->increaseStat(stat);
+		player->setLevel(nextLevel);
+		player->setExp(nextExp);
+		player->reset();
 	}
 }
 

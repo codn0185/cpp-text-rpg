@@ -3,6 +3,7 @@
 #include "Singleton.h"
 #include "Player.h"
 
+#include <iostream>
 #include <map>
 
 using namespace std;
