@@ -297,11 +297,26 @@ void GameManager::onDungeonCombat()
 		combatManager->update();
 	}
 
-	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory)
+	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory) // 전투 승리
 	{
+		// 보상 경험치 획득
+		int prevLevel = levelSystem->getCurrentLevel();
+		int prevExp = levelSystem->getCurrentExp();
+		int rewardExp = monster->getRewardExp();
+		cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->getRequiredExp() << ")" << "\n";
+
+		levelSystem->addExp(rewardExp);
+		if (prevLevel != levelSystem->getCurrentLevel())
+		{
+			cout << "Level Up !" << "\n";
+			cout << " > Lv. " << prevLevel << " -> Lv. " << levelSystem->getCurrentLevel() << "\n";
+			cout << " > " << "(스탯 증가)" << "\n";
+		}
+
+
+		// 드랍 아이템 획득
 		EItemID dropItemID = monster->getDropItemID();
 		cout << monster->getName() << "이(가) \"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 드랍했습니다." << "\n";
-
 		if (inventorySystem->isFull())
 		{
 			bool isCollectingItem = true;
@@ -337,9 +352,11 @@ void GameManager::onDungeonCombat()
 			cout << "\"" << ITEM_TABLE[dropItemID]->name << "\"을(를) 인벤토리에 보관하였다." << "\n";
 			inventorySystem->addItem(dropItemID);
 		}
+
+		// 전투 종료 후 던전 입구로 귀환
 		switchGameState(EGameState::DUNGEON_ENTER);
 	}
-	else if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat)
+	else if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat) // 전투 패배
 	{
 		// TODO: GameOver 상태 추가해서 전환
 		player->setCurrentHP(1);
