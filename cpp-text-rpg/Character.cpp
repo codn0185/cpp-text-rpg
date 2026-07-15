@@ -1,5 +1,10 @@
 #include "Character.h"
 
+Character::Character(string name, int maxHP, int maxMP, int power, int defence)
+	: name(name), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
+{
+}
+
 void Character::takeDamage(int damage)
 {
 	currentHP = currentHP < damage ? 0 : currentHP - damage;

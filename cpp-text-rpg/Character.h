@@ -33,6 +33,7 @@ protected:
 	int defence;
 
 public:
+	Character(string name, int maxHP, int maxMP, int power, int defence);
 	virtual ~Character() = default;
 
 	virtual void attack(Character* target) = 0;
