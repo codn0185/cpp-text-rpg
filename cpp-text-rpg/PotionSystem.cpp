@@ -56,9 +56,9 @@ void PotionSystem::showAllRecipes()
 {
 	cout << "< 전체 포션 레시피 >" << "\n";
 	int row = 1;
-	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
+	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(iter->second);
+		const Potion* potion = static_cast<const Potion*>(item.get());
 		if (potion != nullptr)
 		{
 			cout << row++ << ". " << potion->name << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
@@ -69,9 +69,9 @@ void PotionSystem::showAllRecipes()
 void PotionSystem::searchByPotionName(string target)
 {
 	int row = 1;
-	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
+	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(iter->second);
+		const Potion* potion = static_cast<const Potion*>(item.get());
 		if (potion != nullptr)
 		{
 			string potionName = potion->name;
@@ -86,9 +86,9 @@ void PotionSystem::searchByPotionName(string target)
 void PotionSystem::searchByIngredient(string target)
 {
 	int row = 1;
-	for (auto iter = ITEM_TABLE.begin(); iter != ITEM_TABLE.end(); iter++)
+	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(iter->second);
+		const Potion* potion = static_cast<const Potion*>(item.get());
 		if (potion != nullptr)
 		{
 			bool find = false;

@@ -2,6 +2,7 @@
 
 #include <string>
 #include <map>
+#include <memory>
 
 using namespace std;
 
@@ -38,4 +39,4 @@ struct Item
 	Item(EItemID itemID, EItemType itemType, string name, string description = "", int price = 0);
 };
 
-extern const map<EItemID, Item*> ITEM_TABLE;
+extern const map<EItemID, shared_ptr<Item>> ITEM_TABLE;
