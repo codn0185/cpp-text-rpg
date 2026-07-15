@@ -1,6 +1,6 @@
 #include "RandomSystem.h"
 
-int RandomSystem::getRandomInt(int min, int max)
+int RandomSystem::GetRandomInt(int min, int max)
 {
 	random_device rd;
 	mt19937 gen(rd());

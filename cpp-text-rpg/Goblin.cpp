@@ -20,5 +20,5 @@ void Goblin::attack(Character* target)
 EItemID Goblin::getDropItemID()
 {
 	vector<EItemID> itemIDs = {EItemID::GOBLIN_BLOOD, EItemID::HEALING_HERB};
-	return RandomSystem::getRandom<EItemID>(itemIDs, {3, 2});
+	return RandomSystem::GetRandomByWeight<EItemID>(itemIDs, {3, 2});
 }

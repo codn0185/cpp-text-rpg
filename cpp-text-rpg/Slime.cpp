@@ -20,5 +20,5 @@ void Slime::attack(Character* target)
 EItemID Slime::getDropItemID()
 {
 	vector<EItemID> itemIDs = {EItemID::SLIME_JELLY, EItemID::WATER};
-	return RandomSystem::getRandom<EItemID>(itemIDs, {2, 3});
+	return RandomSystem::GetRandomByWeight<EItemID>(itemIDs, {2, 3});
 }

@@ -49,7 +49,7 @@ Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
 Monster* SpawnManager::getRandomMonsterFromPool()
 {
 	vector<EMosnterType> mosnterTypes = {EMosnterType::Slime, EMosnterType::Goblin, EMosnterType::Skeleton};
-	EMosnterType mosnterType = RandomSystem::getRandom<EMosnterType>(mosnterTypes, {1, 1, 1});
+	EMosnterType mosnterType = RandomSystem::GetRandomByWeight<EMosnterType>(mosnterTypes, {1, 1, 1});
 
 	return getMonsterFromPool(mosnterType);
 }

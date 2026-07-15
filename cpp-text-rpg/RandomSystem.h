@@ -8,14 +8,14 @@ using namespace std;
 class RandomSystem
 {
 public:
-	static int getRandomInt(int min, int max);
+	static int GetRandomInt(int min, int max);
 
 	template <typename T>
-	static T getRandom(vector<T> array, vector<float> weights);
+	static T GetRandomByWeight(vector<T> array, vector<float> weights);
 };
 
 template<typename T>
-inline T RandomSystem::getRandom(vector<T> array, vector<float> weights)
+inline T RandomSystem::GetRandomByWeight(vector<T> array, vector<float> weights)
 {
 	random_device rd;
 	mt19937 gen(rd());

@@ -20,5 +20,5 @@ void Skeleton::attack(Character* target)
 EItemID Skeleton::getDropItemID()
 {
 	vector<EItemID> itemIDs = {EItemID::SKELETON_BONE, EItemID::MANA_DUST};
-	return RandomSystem::getRandom<EItemID>(itemIDs, {3, 2});
+	return RandomSystem::GetRandomByWeight<EItemID>(itemIDs, {3, 2});
 }
