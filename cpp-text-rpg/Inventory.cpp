@@ -59,7 +59,12 @@ bool Inventory::removeItem(EItemID itemID, int amount)
 	return false;
 }
 
-vector<pair<EItemID, int>> Inventory::getSlots() const
+const std::map<EItemID, int> Inventory::getInventory() const
+{
+	return inventory;
+}
+
+const vector<pair<EItemID, int>> Inventory::getSlots() const
 {
 	vector<pair<EItemID, int>> slots;
 	for (const auto& [itemID, count] : inventory)
