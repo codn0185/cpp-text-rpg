@@ -2,6 +2,7 @@
 
 #include "Players.h"
 #include "Monsters.h"
+#include "Inventory.h"
 
 enum class ECombatState
 {
@@ -12,6 +13,8 @@ enum class ECombatState
 	CheckDefeat,
 	PlayerVictory,
 	PlayerDefeat,
+
+	PlayerUsingItem,
 };
 
 class CombatManager
@@ -20,6 +23,7 @@ private:
 	ECombatState currentCombatState;
 
 	Player* player;
+	Inventory* inventory;
 	Monster* monster;
 
 public:
@@ -27,7 +31,7 @@ public:
 
 	CombatManager();
 
-	void start(Player* player, Monster* monster);
+	void start(Player* player, Inventory* inventory, Monster* monster);
 	ECombatState getCurrentCombatState();
 
 	// === State Machines ===
@@ -42,4 +46,6 @@ public:
 	void onCheckDefeat();
 	void onPlayerVictory();
 	void onPlayerDefeat();
+
+	void onPlayerUsingItem();
 };

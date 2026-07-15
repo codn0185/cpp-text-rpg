@@ -113,8 +113,6 @@ void GameManager::onPlayerResitration()
 	// 플레이어 등록
 	player = new NoJob(name, stat[0], stat[1], stat[2], stat[3]);
 	std::cout << "\n\n";
-	player->setCurrentHP(player->getMaxHP() - 40); // 현재 HP : 최대 HP - 40
-	player->setCurrentMP(player->getMaxMP() - 40); // 현재 MP : 최대 MP - 40
 	UISystem::PrintPlayerStat(player);
 
 	// === 스탯 업그레이드 (w/ 포션) ===
@@ -275,7 +273,7 @@ void GameManager::onDungeonCombat()
 {
 	Monster* monster = spawnManager->getRandomMonsterFromPool();
 
-	combatManager->start(player, monster);
+	combatManager->start(player, backpackInventory, monster);
 	while (combatManager->isCombatRunning)
 	{
 		combatManager->update();

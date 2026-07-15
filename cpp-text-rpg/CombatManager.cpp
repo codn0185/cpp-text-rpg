@@ -1,6 +1,9 @@
 #include "CombatManager.h"
 
 #include "UISystem.h"
+#include "InputSystem.h"
+#include "InventorySystem.h"
+#include "PotionSystem.h"
 
 #include <iostream>
 
@@ -10,9 +13,10 @@ CombatManager::CombatManager()
 {
 }
 
-void CombatManager::start(Player* player, Monster* monster)
+void CombatManager::start(Player* player, Inventory* inventory, Monster* monster)
 {
 	this->player = player;
+	this->inventory = inventory;
 	this->monster = monster;
 	isCombatRunning = true;
 	switchCombatState(ECombatState::InitBattle);
@@ -56,6 +60,9 @@ void CombatManager::update()
 	case ECombatState::PlayerDefeat:
 		onPlayerDefeat();
 		break;
+	case ECombatState::PlayerUsingItem:
+		onPlayerUsingItem();
+		break;
 	default:
 		break;
 	}
@@ -86,7 +93,11 @@ void CombatManager::onPlayerTurn()
 
 	int option;
 	cout << "선택: ";
-	cin >> option;
+	if (!InputSystem::InputInt(option, 1, 3))
+	{
+		cout << "다시 입력하세요." << "\n";
+		return;
+	}
 
 	switch (option)
 	{
@@ -99,7 +110,7 @@ void CombatManager::onPlayerTurn()
 		UISystem::PrintPlayerStat(player);
 		break;
 	case 3:
-		// 아이템 사용
+		switchCombatState(ECombatState::PlayerUsingItem);
 		break;
 	default:
 		break;
@@ -150,4 +161,32 @@ void CombatManager::onPlayerDefeat()
 	cout << "\n" << "========== 전투 패배 ==========" << "\n";
 	cout << monster->getName() << "에게 패배했습니다..." << "\n";
 	isCombatRunning = false;
+}
+
+void CombatManager::onPlayerUsingItem()
+{
+	const auto items = inventory->getInventory({}, {EItemType::POTION});
+	InventorySystem::DisplayItems(items);
+
+	// 선택 및 사용 로직 추가
+	cout << "사용할 아이템 선택 (0: 뒤로가기): ";
+	int option;
+	if (!InputSystem::InputInt(option, 0, (int) items.size())) // 잘못된 입력
+	{
+		cout << "다시 입력하세요." << "\n";
+		return;
+	}
+
+	if (option == 0) // 뒤로가기
+	{
+		switchCombatState(ECombatState::PlayerTurn);
+	}
+	else // 아이템 사용
+	{
+		EItemID potionID = next(items.begin(), option - 1)->first;
+		if (PotionSystem::UsePotion(player, inventory, potionID)) // 아이템 사용 성공 시 상태 전환
+		{
+			switchCombatState(ECombatState::CheckVictory);
+		}
+	}
 }
