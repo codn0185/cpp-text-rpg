@@ -25,8 +25,7 @@ public:
 	bool removeItem(EItemID itemID, int amount = 1); // 아이템 제거 (제거 가능 여부 반환)
 
 	int getItemCount(EItemID itemID) const; // 아이템 개수 반환
-	const std::map<EItemID, int> getInventory(std::vector<EItemID> itemIDFilters = {}) const; // 인벤토리 가져오기 (필터 EItemID)
-	const std::map<EItemID, int> getInventory(std::vector<EItemType> itemTypeFilters) const; // 인벤토리 가져오기 (필터 EItemType)
+	const std::map<EItemID, int> getInventory(std::vector<EItemID> itemIDFilters = {}, std::vector<EItemType> itemTypeFilters = {}) const; // 인벤토리 가져오기 (필터 EItemID / EItemType)
 
 	const std::vector<std::pair<EItemID, int>> getSlots() const; // 슬롯 가져오기
 
