@@ -51,6 +51,9 @@ void GameManager::update()
 	case EGameState::DUNGEON_COMBAT:
 		onDungeonCombat();
 		break;
+	case EGameState::INVENTORY_OPEN:
+		onInventoryOpen();
+		break;
 	case EGameState::POTION_SHOP_ENTER:
 		onPotionShopEnter();
 		break;
@@ -221,7 +224,8 @@ void GameManager::onMainMenu()
 		switchGameState(EGameState::DUNGEON_ENTER);
 		break;
 	case 2:
-		InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
+		// InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
+		switchGameState(EGameState::INVENTORY_OPEN);
 		break;
 	case 3:
 		switchGameState(EGameState::POTION_SHOP_ENTER);
@@ -373,6 +377,12 @@ void GameManager::onDungeonCombat()
 	}
 
 	spawnManager->returnMonsterToPool(monster);
+}
+
+void GameManager::onInventoryOpen()
+{
+	// 창고 또는 배낭 선택하여 열기
+	// 정렬 기능 추가
 }
 
 void GameManager::onPotionShopEnter()

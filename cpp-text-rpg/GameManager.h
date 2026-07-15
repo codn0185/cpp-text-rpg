@@ -36,6 +36,9 @@ enum class EGameState
 	DUNGEON_ENTER, // 던전 입장
 	DUNGEON_COMBAT, // 몬스터 전투
 
+	// 인벤토리
+	INVENTORY_OPEN, // 인벤토리 확인 (창고, 배낭)
+
 	// 포션 제작소
 	POTION_SHOP_ENTER, // 포션 제작소 입장
 
@@ -80,6 +83,8 @@ public:
 
 	void onDungeonEnter(); // 던전 입장
 	void onDungeonCombat(); // 몬스터와 전투
+
+	void onInventoryOpen();
 
 	void onPotionShopEnter(); // 포션 제작소 입장
 
