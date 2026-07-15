@@ -26,6 +26,9 @@ private:
 	int maxStackSize; // 슬롯 당 스택 개수
 
 	std::map<EItemID, int> inventory; // 인벤토리
+	std::vector<Slot> inventorySlots; // 인벤토리 슬롯
+
+	void clearEmptySlots();
 
 public:
 	Inventory(int maxSlotCount, int maxStackSize = 1);

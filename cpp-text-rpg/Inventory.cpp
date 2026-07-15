@@ -34,18 +34,25 @@ Inventory::Inventory(int maxSlotCount, int maxStackSize)
 {
 }
 
+void Inventory::clearEmptySlots()
+{
+	for (auto iter = inventorySlots.begin(); iter != inventorySlots.end(); )
+	{
+		if (iter->count == 0)
+		{
+			iter = inventorySlots.erase(iter);
+		}
+		else
+		{
+			++iter;
+		}
+	}
+}
+
 int Inventory::getUsedSlotCount()
 {
-	int slots = 0;
-	for (const auto& [itemID, count] : inventory)
-	{
-		if (count % maxStackSize)
-		{
-			slots++;
-		}
-		slots += count / maxStackSize;
-	}
-	return slots;
+	clearEmptySlots();
+	return (int) inventorySlots.size();
 }
 
 bool Inventory::isFullSlot()
