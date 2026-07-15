@@ -34,6 +34,8 @@ public:
 	Inventory(int maxSlotCount, int maxStackSize = 1);
 	~Inventory() = default;
 
+	void compact(); // 아이템 압축
+
 	int getUsedSlotCount(); // 사용 중인 슬롯 개수
 	bool isFullSlot(); // 슬롯 가득 찼는지 여부
 

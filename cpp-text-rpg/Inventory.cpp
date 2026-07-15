@@ -49,6 +49,35 @@ void Inventory::clearEmptySlots()
 	}
 }
 
+void Inventory::compact()
+{
+	clearEmptySlots(); // 빈 슬롯 제거
+
+	// 아이템 순서 및 개수 확인
+	map<EItemID, int> counts; // 각 아이템 개수
+	vector<EItemID> itemIDs; // 아이템 등장 순서
+	for (const Slot& slot : inventorySlots)
+	{
+		if (counts.find(slot.itemID) == counts.end()) // 아이템 첫 등장 시
+		{
+			itemIDs.push_back(slot.itemID);
+		}
+		counts[slot.itemID] += slot.count;
+	}
+
+	// 순서대로 아이템 배치
+	inventorySlots.clear();
+	for (const EItemID& itemID : itemIDs)
+	{
+		while (counts[itemID])
+		{
+			int count = min(maxStackSize, counts[itemID]);
+			inventorySlots.push_back(Slot(itemID, count));
+			counts[itemID] -= count;
+		}
+	}
+}
+
 int Inventory::getUsedSlotCount()
 {
 	clearEmptySlots();
