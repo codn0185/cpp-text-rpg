@@ -11,27 +11,20 @@ const map<EMosnterType, MonsterDataRow> MONSTER_TABLE = {
 	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30)},
 };
 
-Monster::Monster(EMosnterType monsterType) : monsterType(monsterType)
+Monster::Monster(EMosnterType monsterType)
+	: monsterType(monsterType), Character(
+		MONSTER_TABLE.at(monsterType).name,
+		MONSTER_TABLE.at(monsterType).maxHP,
+		MONSTER_TABLE.at(monsterType).maxMP,
+		MONSTER_TABLE.at(monsterType).power,
+		MONSTER_TABLE.at(monsterType).defence
+	)
 {
-	const MonsterDataRow& row = MONSTER_TABLE.at(monsterType);
-	setName(row.name);
-	setMaxHP(row.maxHP);
-	setMaxMP(row.maxMP);
-	setPower(row.power);
-	setDefence(row.defence);
-
-	reset();
 }
 
 Monster::Monster(string name, int maxHP, int maxMP, int power, int defence)
+	: Character(name, maxHP, maxMP, power, defence)
 {
-	setName(name);
-	setMaxHP(maxHP);
-	setMaxMP(maxMP);
-	setPower(power);
-	setDefence(defence);
-
-	reset();
 }
 
 EMosnterType Monster::getMonsterType()

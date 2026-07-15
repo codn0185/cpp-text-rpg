@@ -34,7 +34,6 @@ class Monster : public Character
 {
 protected:
 	EMosnterType monsterType;
-	int rewardExp;
 
 public:
 	Monster(EMosnterType monsterType);
