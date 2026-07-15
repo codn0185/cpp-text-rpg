@@ -308,6 +308,23 @@ void GameManager::onDungeonCombat()
 			std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
 		}
 
+		// 가방 가득차면 자동으로 용량 늘린 후 추가하기 (임시)
+		if (!droppedItems.empty())
+		{
+			int currentSlotSize = backpackInventory->getMaxSlotCount();
+			backpackInventory->setMaxSlotCount(2 * currentSlotSize);
+
+			cout << "가방이 가득 찼습니다!" << "\n";
+			cout << " > 인벤토리 자동 확장! (" << currentSlotSize << " -> " << backpackInventory->getMaxSlotCount() << ")" << "\n";
+
+			map<EItemID, int> addedItems = InventorySystem::AddItemsToInventroy(backpackInventory, droppedItems);
+			for (const auto& [addedItemID, addedCount] : addedItems)
+			{
+				std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
+			}
+
+		} // 아래 아이템 교체 로직 실행 X
+
 		// 남은 아이템 확인
 		for (const auto& [remainedItemID, renmainedCount] : droppedItems)
 		{
