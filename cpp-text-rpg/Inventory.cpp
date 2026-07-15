@@ -150,14 +150,8 @@ bool Inventory::removeItem(EItemID itemID, int amount)
 	return true; // 제거 완료
 }
 
-const vector<Slot> Inventory::getInventorySlots(vector<EItemID> itemIDFilters, vector<EItemType> itemTypeFilters)
+const vector<Slot> Inventory::getInventorySlots(vector<EItemID> itemIDFilters, vector<EItemType> itemTypeFilters) const
 {
-	clearEmptySlots();
-	if (itemIDFilters.empty() && itemTypeFilters.empty())
-	{
-		return inventorySlots;
-	}
-
 	vector<Slot> filteredInventorySlots;
 	for (const Slot& slot : inventorySlots)
 	{
@@ -171,8 +165,25 @@ const vector<Slot> Inventory::getInventorySlots(vector<EItemID> itemIDFilters, v
 			filteredInventorySlots.push_back(slot);
 		}
 	}
-
 	return filteredInventorySlots;
+}
+
+const map<EItemID, int> Inventory::getItemCounts(vector<EItemID> itemIDFilters, vector<EItemType> itemTypeFilters) const
+{
+	map<EItemID, int> filteredItemCounts;
+	for (const auto& [itemID, count] : itemCounts)
+	{
+		EItemType itemType = ITEM_TABLE.at(itemID)->itemType;
+		if (
+			(itemIDFilters.empty() || find(itemIDFilters.begin(), itemIDFilters.end(), itemID) != itemIDFilters.end()) &&
+			(itemTypeFilters.empty() || find(itemTypeFilters.begin(), itemTypeFilters.end(), itemType) != itemTypeFilters.end()) &&
+			count != 0
+			)
+		{
+			filteredItemCounts[itemID] = count;
+		}
+	}
+	return filteredItemCounts;
 }
 
 const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> itemIDFilters, std::vector<EItemType> itemTypeFilters) const
