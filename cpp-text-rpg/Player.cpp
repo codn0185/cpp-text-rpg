@@ -1,14 +1,8 @@
 #include "Players.h"
 
-Player::Player(string name, int hp, int mp, int power, int defence) : job(EPlayerJob::None), level(0), exp(0)
+Player::Player(string name, int maxHP, int maxMP, int power, int defence)
+	: Character(name, maxHP, maxMP, power, defence), job(EPlayerJob::None), level(0), exp(0)
 {
-	setName(name);
-	setMaxHP(hp);
-	setMaxMP(mp);
-	setPower(power);
-	setDefence(defence);
-
-	reset();
 }
 
 // 직업 전환
