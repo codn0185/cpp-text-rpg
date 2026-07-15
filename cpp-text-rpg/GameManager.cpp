@@ -281,7 +281,7 @@ void GameManager::onDungeonCombat()
 	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory) // 전투 승리
 	{
 		// 보상 확인
-		Reward reward = RewardSystem::GetReward(monster->getMonsterType());
+		const Reward& reward = RewardSystem::GetReward(monster->getMonsterType());
 		int rewardExp = reward.rewardExp;
 		EItemID dropItemID = reward.itemID;
 		int dropCount = reward.itemCount;
