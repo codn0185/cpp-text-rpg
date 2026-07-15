@@ -22,7 +22,6 @@ GameManager::~GameManager()
 
 	delete potionSystem;
 	delete inventorySystem;
-	delete levelSystem;
 }
 
 void GameManager::run()
@@ -88,12 +87,14 @@ void GameManager::onPlayerResitration()
 	// 이름 입력
 	cout << "용사의 이름을 입력해주세요: ";
 	cin >> name;
+	cin.ignore(INT_MAX, '\n');
 
 	// HP, MP 입력
 	while (true)
 	{
 		cout << "HP와 MP를 입력해주세요: ";
 		cin >> stat[0] >> stat[1];
+		cin.ignore(INT_MAX, '\n');
 
 		if (stat[0] > 50 && stat[1] > 50)
 		{
@@ -108,6 +109,7 @@ void GameManager::onPlayerResitration()
 	{
 		cout << "공격력과 방어력을 입력해주세요: ";
 		cin >> stat[2] >> stat[3];
+		cin.ignore(INT_MAX, '\n');
 
 		if (stat[2] > 50 && stat[3] > 50)
 		{
@@ -142,6 +144,7 @@ void GameManager::onPlayerResitration()
 		cout << "번호를 선택해주세요: ";
 		int option;
 		cin >> option;
+		cin.ignore(INT_MAX, '\n');
 
 		switch (option)
 		{
@@ -194,6 +197,7 @@ void GameManager::onPlayerResitration()
 	cout << "선택: ";
 	int jobNumber;
 	cin >> jobNumber;
+	cin.ignore(INT_MAX, '\n');
 
 	switch (jobNumber)
 	{
@@ -233,6 +237,7 @@ void GameManager::onMainMenu()
 	int option;
 	cout << "선택: ";
 	cin >> option;
+	cin.ignore(INT_MAX, '\n');
 
 	switch (option)
 	{
@@ -266,6 +271,7 @@ void GameManager::onDungeonEnter()
 	int option;
 	cout << "선택: ";
 	cin >> option;
+	cin.ignore(INT_MAX, '\n');
 
 	switch (option)
 	{
@@ -327,6 +333,7 @@ void GameManager::onDungeonCombat()
 				cout << " > 버릴 아이템 슬롯 선택 (0: 드랍 아이템 포기): ";
 				int slotNum;
 				cin >> slotNum;
+				cin.ignore(INT_MAX, '\n');
 
 				if (slotNum == 0)
 				{
@@ -380,8 +387,8 @@ void GameManager::onPotionShopEnter()
 	int option;
 	cout << "선택: ";
 	cin >> option;
-
 	cin.ignore(INT_MAX, '\n');
+
 	string target;
 	switch (option)
 	{
