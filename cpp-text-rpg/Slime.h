@@ -8,7 +8,5 @@ public:
 	Slime();
 
 	void attack(Character* target) override;
-
-	EItemID getDropItemID() override;
 };
 

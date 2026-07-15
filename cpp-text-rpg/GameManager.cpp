@@ -298,19 +298,21 @@ void GameManager::onDungeonCombat()
 
 	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory) // 전투 승리
 	{
-		// 보상 경험치 획득
+		// 보상 확인
+		Reward reward = RewardSystem::GetReward(monster->getMonsterType());
+		int rewardExp = reward.rewardExp;
+		EItemID dropItemID = reward.itemID;
+		int dropCount = reward.itemCount;
+
+		// 경험치 획득
 		cout << "\n";
 		int prevLevel = player->getLevel();
 		int prevExp = player->getExp();
-		int rewardExp = monster->getRewardExp();
 		cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->GetRequiredExp(player) << ")" << "\n";
-
 		LevelSystem::AddExp(player, rewardExp);
 
 		// 드랍 아이템 획득
 		cout << "\n";
-		EItemID dropItemID = monster->getDropItemID();
-		int dropCount = 1;
 		string itemName = ITEM_TABLE.at(dropItemID)->name;
 		cout << " > " << monster->getName() << "이(가) \"" << itemName << "\"을(를) " << dropCount << "개 드랍했습니다." << "\n";
 

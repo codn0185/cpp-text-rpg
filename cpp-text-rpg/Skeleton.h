@@ -8,6 +8,4 @@ public:
 	Skeleton();
 
 	void attack(Character* target) override;
-
-	EItemID getDropItemID() override;
 };

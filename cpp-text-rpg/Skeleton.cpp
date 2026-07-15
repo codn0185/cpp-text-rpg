@@ -16,9 +16,3 @@ void Skeleton::attack(Character* target)
 	target->takeDamage(damage);
 	UISystem::PrintBattleLog(this, target, damage);
 }
-
-EItemID Skeleton::getDropItemID()
-{
-	vector<EItemID> itemIDs = {EItemID::SKELETON_BONE, EItemID::MANA_DUST};
-	return RandomSystem::GetRandomByWeight<EItemID>(itemIDs, {3, 2});
-}

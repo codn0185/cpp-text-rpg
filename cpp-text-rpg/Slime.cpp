@@ -16,9 +16,3 @@ void Slime::attack(Character* target)
 	target->takeDamage(damage);
 	UISystem::PrintBattleLog(this, target, damage);
 }
-
-EItemID Slime::getDropItemID()
-{
-	vector<EItemID> itemIDs = {EItemID::SLIME_JELLY, EItemID::WATER};
-	return RandomSystem::GetRandomByWeight<EItemID>(itemIDs, {2, 3});
-}

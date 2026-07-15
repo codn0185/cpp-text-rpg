@@ -11,6 +11,7 @@
 #include "PotionSystem.h"
 #include "InventorySystem.h"
 #include "LevelSystem.h"
+#include "RewardSystem.h"
 
 using namespace std;
 

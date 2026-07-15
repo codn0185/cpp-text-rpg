@@ -1,9 +1,14 @@
 #include "Monster.h"
 
+MonsterDataRow::MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence)
+	: monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
+{
+}
+
 const map<EMosnterType, MonsterDataRow> MONSTER_TABLE = {
-	{EMosnterType::Slime, MonsterDataRow(EMosnterType::Slime, "슬라임", "", 250, 0, 80, 45, 30)},
-	{EMosnterType::Goblin, MonsterDataRow(EMosnterType::Goblin, "고블린", "", 300, 0, 115, 40, 32)},
-	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30, 35)},
+	{EMosnterType::Slime, MonsterDataRow(EMosnterType::Slime, "슬라임", "", 250, 0, 80, 45)},
+	{EMosnterType::Goblin, MonsterDataRow(EMosnterType::Goblin, "고블린", "", 300, 0, 115, 40)},
+	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30)},
 };
 
 Monster::Monster(EMosnterType monsterType) : monsterType(monsterType)
@@ -14,7 +19,6 @@ Monster::Monster(EMosnterType monsterType) : monsterType(monsterType)
 	setMaxMP(row.maxMP);
 	setPower(row.power);
 	setDefence(row.defence);
-	setRewardExp(row.rewardExp);
 
 	reset();
 }
@@ -35,17 +39,7 @@ EMosnterType Monster::getMonsterType()
 	return monsterType;
 }
 
-int Monster::getRewardExp()
-{
-	return rewardExp;
-}
-
 void Monster::setMonsterType(EMosnterType monsterType)
 {
 	this->monsterType = monsterType;
-}
-
-void Monster::setRewardExp(int rewardExp)
-{
-	this->rewardExp = rewardExp;
 }
