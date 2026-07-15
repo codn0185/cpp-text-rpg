@@ -68,9 +68,9 @@ int Inventory::getItemCount(EItemID itemID) const
 	return 0;
 }
 
-const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> filters) const
+const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> itemIDFilters) const
 {
-	if (filters.empty())
+	if (itemIDFilters.empty())
 	{
 		return inventory;
 	}
@@ -78,7 +78,27 @@ const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> filters) co
 	map<EItemID, int> filteredInventory;
 	for (const auto& [itemID, count] : inventory)
 	{
-		if (find(filters.begin(), filters.end(), itemID) != filters.end() && count != 0)
+		if (find(itemIDFilters.begin(), itemIDFilters.end(), itemID) != itemIDFilters.end() && count != 0)
+		{
+			filteredInventory[itemID] = count;
+		}
+	}
+
+	return filteredInventory;
+}
+
+const map<EItemID, int> Inventory::getInventory(std::vector<EItemType> itemTypeFilters) const
+{
+	if (itemTypeFilters.empty())
+	{
+		return inventory;
+	}
+
+	map<EItemID, int> filteredInventory;
+	for (const auto& [itemID, count] : inventory)
+	{
+		EItemType itemType = ITEM_TABLE.at(itemID)->itemType;
+		if (find(itemTypeFilters.begin(), itemTypeFilters.end(), itemType) != itemTypeFilters.end() && count != 0)
 		{
 			filteredInventory[itemID] = count;
 		}
