@@ -40,6 +40,6 @@ class RewardSystem
 private:
 
 public:
-	static Reward getReward(EMosnterType mosnterType); // 보상 반환
+	static Reward GetReward(EMosnterType mosnterType); // 보상 반환
 };
 

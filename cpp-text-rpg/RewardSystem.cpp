@@ -33,7 +33,7 @@ Reward::Reward(int rewardExp, EItemID itemID, int itemCount)
 {
 }
 
-Reward RewardSystem::getReward(EMosnterType mosnterType)
+Reward RewardSystem::GetReward(EMosnterType mosnterType)
 {
 	vector<float> weights;
 	for (DropItemCandidate dropItemCandidate : REWARD_TABLE.at(mosnterType).dropItemCandidates)
