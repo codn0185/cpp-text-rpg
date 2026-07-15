@@ -55,6 +55,9 @@
     <Filter Include="Inventory">
       <UniqueIdentifier>{b5c11597-8a23-42fe-979d-515f36e272ed}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\RewardSystem">
+      <UniqueIdentifier>{ab6494f0-36e2-4914-be77-49c254e061d8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -131,6 +134,9 @@
     </ClCompile>
     <ClCompile Include="Potion.cpp">
       <Filter>Items</Filter>
+    </ClCompile>
+    <ClCompile Include="RewardSystem.cpp">
+      <Filter>Systems\RewardSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,6 +219,12 @@
       <Filter>Items</Filter>
     </ClInclude>
     <ClInclude Include="Potion.h">
+      <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="RewardSystem.h">
+      <Filter>Systems\RewardSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="Items.h">
       <Filter>Items</Filter>
     </ClInclude>
   </ItemGroup>

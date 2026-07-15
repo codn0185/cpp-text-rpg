@@ -143,6 +143,7 @@
     <ClCompile Include="Potion.cpp" />
     <ClCompile Include="PotionSystem.cpp" />
     <ClCompile Include="RandomSystem.cpp" />
+    <ClCompile Include="RewardSystem.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Slime.cpp" />
@@ -160,6 +161,7 @@
     <ClInclude Include="InventorySystem.h" />
     <ClInclude Include="Ingredient.h" />
     <ClInclude Include="Item.h" />
+    <ClInclude Include="Items.h" />
     <ClInclude Include="ItemSorter.h" />
     <ClInclude Include="LevelSystem.h" />
     <ClInclude Include="Mage.h" />
@@ -170,6 +172,7 @@
     <ClInclude Include="Potion.h" />
     <ClInclude Include="PotionSystem.h" />
     <ClInclude Include="RandomSystem.h" />
+    <ClInclude Include="RewardSystem.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />

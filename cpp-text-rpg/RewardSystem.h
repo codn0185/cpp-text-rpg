@@ -1,0 +1,45 @@
+#pragma once
+
+#include "Items.h"
+#include "Monsters.h"
+
+#include <vector>
+#include <map>
+
+struct DropItemCandidate
+{
+	EItemID itemID;
+	float dropWeight;
+	int minCount;
+	int maxCount;
+
+	DropItemCandidate(EItemID itemID, float dropWeight, int minCount, int maxCount);
+};
+
+struct RewardDataRow
+{
+	int rewardExp;
+	vector<DropItemCandidate> dropItemCandidates;
+
+	RewardDataRow(int rewardExp, vector<DropItemCandidate> dropItemCandidates);
+};
+
+extern const map<EMosnterType, RewardDataRow> REWARD_TABLE;
+
+struct Reward
+{
+	int rewardExp;
+	EItemID itemID;
+	int itemCount;
+
+	Reward(int rewardExp, EItemID itemID, int itemCount);
+};
+
+class RewardSystem
+{
+private:
+
+public:
+	Reward getReward(EMosnterType mosnterType); // 보상 반환
+};
+
