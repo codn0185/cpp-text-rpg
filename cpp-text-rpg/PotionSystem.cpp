@@ -28,24 +28,26 @@ bool PotionSystem::UsePotion(Player* player, Inventory* inventory, EItemID potio
 	switch (potionID)
 	{
 	case EItemID::HP_POTION_20:
-		if (player->getCurrentHP() < player->getMaxHP()) // HP 포션 사용 성공
+		if (player->getCurrentHP() < player->getMaxHP()) // HP 포션 사용 가능
 		{
-			player->setCurrentHP(min(player->getCurrentHP() + 20, player->getMaxHP()));
+			int prevHP = player->getCurrentHP();
+			player->setCurrentHP(min(prevHP + 20, player->getMaxHP()));
 			inventory->removeItem(EItemID::HP_POTION_20);
-			std::cout << "* HP가 20 회복했습니다. (남은 HP 포션: " << inventory->getItemCount(EItemID::HP_POTION_20) << "개)" << "\n";
+			std::cout << "* HP를 20 회복했습니다. (" << prevHP << "/" << player->getMaxHP() << " -> " << player->getCurrentHP() << "/" << player->getMaxHP() << ") ── [남은 HP 포션: " << inventory->getItemCount(EItemID::HP_POTION_20) << "개]" << "\n";
 			return true;
 		}
-		std::cout << "HP가 가득 차서 사용할 수 없습니다." << "\n"; // HP 포션 사용 실패
+		std::cout << "HP가 가득 차서 사용할 수 없습니다." << "\n"; // HP 포션 사용 불가능
 		break;
 	case EItemID::MP_POTION_20:
-		if (player->getCurrentMP() < player->getMaxMP()) // MP 포션 사용 성공
+		if (player->getCurrentMP() < player->getMaxMP()) // MP 포션 사용 가능
 		{
-			player->setCurrentMP(min(player->getCurrentMP() + 20, player->getMaxMP()));
+			int prevMP = player->getCurrentMP();
+			player->setCurrentMP(min(prevMP + 20, player->getMaxMP()));
 			inventory->removeItem(EItemID::MP_POTION_20);
-			std::cout << "* MP가 20 회복했습니다. (남은 MP 포션: " << inventory->getItemCount(EItemID::MP_POTION_20) << "개)" << "\n";
+			std::cout << "* MP를 20 회복했습니다. (" << prevMP << "/" << player->getMaxMP() << " -> " << player->getCurrentMP() << "/" << player->getMaxMP() << ") ── [남은 MP 포션: " << inventory->getItemCount(EItemID::MP_POTION_20) << "개]" << "\n";
 			return true;
 		}
-		std::cout << "MP가 가득 차서 사용할 수 없습니다." << "\n"; // MP 포션 사용 실패
+		std::cout << "MP가 가득 차서 사용할 수 없습니다." << "\n"; // MP 포션 사용 불가능
 		break;
 	default:
 		break;
