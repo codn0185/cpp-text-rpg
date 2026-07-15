@@ -119,12 +119,41 @@ int Inventory::addItem(EItemID itemID, int amount)
 
 bool Inventory::removeItem(EItemID itemID, int amount)
 {
-	if (inventory[itemID] >= amount)
+	// 제거할 양이 충분한지 확인
+	clearEmptySlots();
+	int totalCount = 0;
+	for (const Slot& slot : inventorySlots)
 	{
-		inventory[itemID] -= amount;
-		return true;
+		if (itemID == slot.itemID)
+		{
+			totalCount += slot.count;
+			if (totalCount >= amount)
+			{
+				break;
+			}
+		}
 	}
-	return false;
+	if (totalCount < amount) // 제거할 개수 부족
+	{
+		return false;
+	}
+
+	// 아이템 제거
+	for (Slot& slot : inventorySlots)
+	{
+		if (itemID == slot.itemID)
+		{
+			int temp = min(amount, slot.count);
+			slot.count -= temp;
+			amount -= temp;
+			if (amount == 0)
+			{
+				break;
+			}
+		}
+	}
+	clearEmptySlots(); // 빈 슬롯 제거
+	return true;
 }
 
 int Inventory::getItemCount(EItemID itemID) const
