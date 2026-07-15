@@ -2,6 +2,33 @@
 
 using namespace std;
 
+Slot::Slot(EItemID itemID, int count)
+	: itemID(itemID), count(count)
+{
+}
+
+bool Slot::CompareByPrice(const Slot& slot1, const Slot& slot2)
+{
+	int price1 = ITEM_TABLE.at(slot1.itemID)->price;
+	int price2 = ITEM_TABLE.at(slot2.itemID)->price;
+	return price1 < price2; // price 오름차순
+}
+
+bool Slot::CompareByName(const Slot& slot1, const Slot& slot2)
+{
+	string name1 = ITEM_TABLE.at(slot1.itemID)->name;
+	string name2 = ITEM_TABLE.at(slot2.itemID)->name;
+	return name1 < name2; // name 오름차순
+}
+
+bool Slot::CompareByCount(const Slot& slot1, const Slot& slot2)
+{
+	int count1 = slot1.count;
+	int count2 = slot2.count;
+	return count1 < count2; // count 오름차순
+}
+
+
 Inventory::Inventory(int maxSlotCount, int maxStackSize)
 	: maxSlotCount(maxSlotCount), maxStackSize(maxStackSize)
 {

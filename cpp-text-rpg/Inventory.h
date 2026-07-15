@@ -6,6 +6,19 @@
 #include <map>
 #include <algorithm>
 
+struct Slot
+{
+	EItemID itemID;
+	int count;
+
+	Slot(EItemID itemID, int count);
+
+	// 오름차순 정렬
+	static bool CompareByPrice(const Slot& slot1, const Slot& slot2);
+	static bool CompareByName(const Slot& slot1, const Slot& slot2);
+	static bool CompareByCount(const Slot& slot1, const Slot& slot2);
+};
+
 class Inventory
 {
 private:
