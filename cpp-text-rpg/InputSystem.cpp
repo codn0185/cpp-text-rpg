@@ -25,7 +25,6 @@ bool InputSystem::InputInt(int& out)
 		return false;
 	}
 
-	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	return true;
 }
 
