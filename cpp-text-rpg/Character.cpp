@@ -1,7 +1,7 @@
 #include "Character.h"
 
 Character::Character(string name, int maxHP, int maxMP, int power, int defence)
-	: name(name), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
+	: name(name), maxHP(maxHP), currentHP(maxHP), maxMP(maxMP), currentMP(maxMP), power(power), defence(defence)
 {
 }
 
