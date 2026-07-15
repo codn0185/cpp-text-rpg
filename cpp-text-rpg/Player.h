@@ -2,8 +2,6 @@
 
 #include "Character.h"
 
-using namespace std;
-
 // 플레이어 직업 enum
 enum class EPlayerJob
 {
@@ -23,7 +21,7 @@ protected:
 	int exp;
 
 public:
-	Player(string name, int maxHP, int maxMP, int power, int defence);
+	Player(std::string name, int maxHP, int maxMP, int power, int defence);
 
 	static Player* ChangeJob(Player* player, EPlayerJob newJob); // 직업 전환
 	virtual void applyBonusStat() = 0; // 보너스 스탯 적용

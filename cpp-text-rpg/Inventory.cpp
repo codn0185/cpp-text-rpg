@@ -1,5 +1,7 @@
 #include "Inventory.h"
 
+using namespace std;
+
 Inventory::Inventory(int maxSlotCount, int maxStackSize)
 	: maxSlotCount(maxSlotCount), maxStackSize(maxStackSize)
 {

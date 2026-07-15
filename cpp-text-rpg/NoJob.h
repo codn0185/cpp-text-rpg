@@ -5,7 +5,7 @@
 class NoJob : public Player
 {
 public:
-	NoJob(string name, int hp, int mp, int power, int defence);
+	NoJob(std::string name, int hp, int mp, int power, int defence);
 
 	void attack(Character* target) override;
 	void showAttackMessage() const override;

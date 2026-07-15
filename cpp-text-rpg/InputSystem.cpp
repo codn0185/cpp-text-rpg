@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 bool InputSystem::InputString(string& out)
 {
 	if (!getline(cin, out))

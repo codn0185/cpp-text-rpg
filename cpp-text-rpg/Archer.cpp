@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 Archer::Archer(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence), attackCount(3)
 {
 	setJob(EPlayerJob::Archer);

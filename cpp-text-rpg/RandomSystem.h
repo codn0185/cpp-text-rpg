@@ -3,22 +3,20 @@
 #include <vector>
 #include <random>
 
-using namespace std;
-
 class RandomSystem
 {
 public:
 	static int GetRandomInt(int min, int max);
 
 	template <typename T>
-	static T GetRandomByWeight(vector<T> array, vector<float> weights);
+	static T GetRandomByWeight(std::vector<T> array, std::vector<float> weights);
 };
 
 template<typename T>
-inline T RandomSystem::GetRandomByWeight(vector<T> array, vector<float> weights)
+inline T RandomSystem::GetRandomByWeight(std::vector<T> array, std::vector<float> weights)
 {
-	random_device rd;
-	mt19937 gen(rd());
+	std::random_device rd;
+	std::mt19937 gen(rd());
 
 	std::discrete_distribution<int> Distribution(weights.begin(), weights.end());
 	return array[Distribution(gen)];

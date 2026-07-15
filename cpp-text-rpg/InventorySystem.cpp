@@ -1,6 +1,9 @@
 #include "InventorySystem.h"
 
 #include <iostream>
+#include <vector>
+
+using namespace std;
 
 InventorySystem::InventorySystem()
 	: backpackInventory(new Inventory(3, 1)), stockInventory(new Inventory(20, 30))

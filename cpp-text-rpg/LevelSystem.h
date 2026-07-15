@@ -2,10 +2,7 @@
 
 #include "Player.h"
 
-#include <iostream>
 #include <map>
-
-using namespace std;
 
 struct LevelDataRow
 {
@@ -19,7 +16,7 @@ struct LevelDataRow
 	}
 };
 
-extern const map<int, LevelDataRow> LEVEL_TABLE;
+extern const std::map<int, LevelDataRow> LEVEL_TABLE;
 
 class LevelSystem
 {

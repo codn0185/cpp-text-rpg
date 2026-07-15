@@ -1,8 +1,8 @@
 #include "GameManager.h"
 
-#include "CombatManager.h"
-
 #include <iostream>
+
+using namespace std;
 
 GameManager::GameManager() :isRunning(true)
 {
@@ -86,21 +86,16 @@ void GameManager::onPlayerResitration()
 
 	// 이름 입력
 	cout << "용사의 이름을 입력해주세요: ";
-	cin >> name;
-	cin.ignore(INT_MAX, '\n');
+	InputSystem::InputString(name);
 
 	// HP, MP 입력
 	while (true)
 	{
 		cout << "HP와 MP를 입력해주세요: ";
-		cin >> stat[0] >> stat[1];
-		cin.ignore(INT_MAX, '\n');
-
-		if (stat[0] > 50 && stat[1] > 50)
+		if (InputSystem::InputInt(stat[0], 51, INT_MAX) && InputSystem::InputInt(stat[1], 51, INT_MAX))
 		{
 			break;
 		}
-
 		cout << "HP나 MP의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
 	}
 
@@ -108,14 +103,10 @@ void GameManager::onPlayerResitration()
 	while (true)
 	{
 		cout << "공격력과 방어력을 입력해주세요: ";
-		cin >> stat[2] >> stat[3];
-		cin.ignore(INT_MAX, '\n');
-
-		if (stat[2] > 50 && stat[3] > 50)
+		if (InputSystem::InputInt(stat[2], 51, INT_MAX) && InputSystem::InputInt(stat[3], 51, INT_MAX))
 		{
 			break;
 		}
-
 		cout << "공격력이나 방어력의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
 	}
 
@@ -132,7 +123,6 @@ void GameManager::onPlayerResitration()
 	bool isGameStart = false;
 	while (!isGameStart)
 	{
-
 		// 강화 메뉴 출력
 		cout << "============================================" << "\n";
 		cout << "< 캐릭터 강화 >" << "\n";
@@ -143,8 +133,7 @@ void GameManager::onPlayerResitration()
 		// 번호 선택
 		cout << "번호를 선택해주세요: ";
 		int option;
-		cin >> option;
-		cin.ignore(INT_MAX, '\n');
+		InputSystem::InputInt(option, 0, 5);
 
 		switch (option)
 		{

@@ -19,12 +19,12 @@ struct DropItemCandidate
 struct RewardDataRow
 {
 	int rewardExp;
-	vector<DropItemCandidate> dropItemCandidates;
+	std::vector<DropItemCandidate> dropItemCandidates;
 
-	RewardDataRow(int rewardExp, vector<DropItemCandidate> dropItemCandidates);
+	RewardDataRow(int rewardExp, std::vector<DropItemCandidate> dropItemCandidates);
 };
 
-extern const map<EMosnterType, RewardDataRow> REWARD_TABLE;
+extern const std::map<EMosnterType, RewardDataRow> REWARD_TABLE;
 
 struct Reward
 {

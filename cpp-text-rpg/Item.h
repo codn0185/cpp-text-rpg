@@ -4,8 +4,6 @@
 #include <map>
 #include <memory>
 
-using namespace std;
-
 enum EItemID
 {
 	// 포션
@@ -32,11 +30,11 @@ struct Item
 {
 	EItemID itemID;
 	EItemType itemType;
-	string name;
-	string description;
+	std::string name;
+	std::string description;
 	int price;
 
-	Item(EItemID itemID, EItemType itemType, string name, string description = "", int price = 0);
+	Item(EItemID itemID, EItemType itemType, std::string name, std::string description = "", int price = 0);
 };
 
-extern const map<EItemID, shared_ptr<Item>> ITEM_TABLE;
+extern const std::map<EItemID, std::shared_ptr<Item>> ITEM_TABLE;

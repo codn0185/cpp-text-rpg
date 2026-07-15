@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 Mage::Mage(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence)
 {
 	setJob(EPlayerJob::Mage);

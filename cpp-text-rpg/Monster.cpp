@@ -1,5 +1,7 @@
 #include "Monster.h"
 
+using namespace std;
+
 MonsterDataRow::MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence)
 	: monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
 {

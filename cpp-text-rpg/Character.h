@@ -2,8 +2,6 @@
 
 #include <string>
 
-using namespace std;
-
 struct Stat
 {
 	int hp;
@@ -21,7 +19,7 @@ struct Stat
 class Character
 {
 protected:
-	string name;
+	std::string name;
 
 	int maxHP;
 	int currentHP;
@@ -33,7 +31,7 @@ protected:
 	int defence;
 
 public:
-	Character(string name, int maxHP, int maxMP, int power, int defence);
+	Character(std::string name, int maxHP, int maxMP, int power, int defence);
 	virtual ~Character() = default;
 
 	virtual void attack(Character* target) = 0;
@@ -45,7 +43,7 @@ public:
 	//  virtual void onDisable() = 0;
 
 	// Getters
-	string getName();
+	std::string getName();
 	int getMaxHP();
 	int getCurrentHP();
 	int getMaxMP();
@@ -54,7 +52,7 @@ public:
 	int getDefence();
 
 	// Setters
-	void setName(string name);
+	void setName(std::string name);
 	void setMaxHP(int hp);
 	void setCurrentHP(int hp);
 	void setMaxMP(int mp);

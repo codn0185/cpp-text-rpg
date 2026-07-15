@@ -1,11 +1,9 @@
 #pragma once
 
-#include "Item.h"
+#include "Items.h"
 
 #include <vector>
 #include <map>
-
-using namespace std;
 
 class Inventory
 {
@@ -13,7 +11,7 @@ private:
 	int maxSlotCount; // 인벤토리 슬롯 수
 	int maxStackSize; // 슬롯 당 스택 개수
 
-	map<EItemID, int> inventory; // 인벤토리
+	std::map<EItemID, int> inventory; // 인벤토리
 
 public:
 	Inventory(int maxSlotCount, int maxStackSize = 1);
@@ -25,7 +23,7 @@ public:
 	int addItem(EItemID itemID, int amount = 1); // 아이템 추가 (추가 못하고 남은 수 반환)
 	bool removeItem(EItemID itemID, int amount = 1); // 아이템 제거 (제거 가능 여부 반환)
 
-	vector<pair<EItemID, int>> getSlots() const; // 슬롯 가져오기
+	std::vector<std::pair<EItemID, int>> getSlots() const; // 슬롯 가져오기
 
 	// Getters
 	int getMaxSlotCount();

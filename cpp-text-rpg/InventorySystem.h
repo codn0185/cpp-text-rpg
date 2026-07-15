@@ -1,10 +1,6 @@
 #pragma once
 
 #include "Inventory.h"
-#include "Ingredient.h"
-#include "Potion.h"
-
-#include <vector>
 
 class InventorySystem
 {

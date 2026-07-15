@@ -2,9 +2,6 @@
 
 #include "Players.h"
 #include "Monsters.h"
-#include "UISystem.h"
-
-#include <iostream>
 
 enum class ECombatState
 {

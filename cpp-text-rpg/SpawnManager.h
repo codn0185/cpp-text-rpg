@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Monster.h"
-#include "RandomSystem.h"
 
 #include <map>
 #include <queue>
@@ -9,7 +8,7 @@
 class SpawnManager
 {
 private:
-	map<EMosnterType, queue<Monster*>> mosnterPoolMap;
+	std::map<EMosnterType, std::queue<Monster*>> mosnterPoolMap;
 
 public:
 	SpawnManager();

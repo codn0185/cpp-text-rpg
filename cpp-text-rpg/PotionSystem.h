@@ -1,8 +1,7 @@
 #pragma once
 
 #include "Player.h"
-#include "Potion.h"
-#include "Ingredient.h"
+#include "Items.h"
 
 #include <vector>
 #include <map>
@@ -10,9 +9,9 @@
 class PotionSystem
 {
 private:
-	map<EItemID, int> potionInventory;
+	std::map<EItemID, int> potionInventory;
 
-	string formatIngredients(vector<pair<EItemID, int>> ingredients);
+	std::string formatIngredients(std::vector<std::pair<EItemID, int>> ingredients);
 public:
 	PotionSystem();
 	~PotionSystem() = default;
@@ -21,8 +20,8 @@ public:
 	void showAllRecipes();
 
 	// Search
-	void searchByPotionName(string potionName);
-	void searchByIngredient(string ingredientName);
+	void searchByPotionName(std::string potionName);
+	void searchByIngredient(std::string ingredientName);
 
 	// Use Potion
 	bool usePotion(Player* player, EItemID potionID);

@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
 {
 	string ingredientsStr;

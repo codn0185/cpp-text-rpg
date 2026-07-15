@@ -1,12 +1,8 @@
 #pragma once
 
 #include "Character.h"
-#include "Item.h"
-#include "RandomSystem.h"
 
 #include <map>
-
-using namespace std;
 
 enum class EMosnterType
 {
@@ -18,17 +14,17 @@ enum class EMosnterType
 struct MonsterDataRow
 {
 	EMosnterType monsterType;
-	string name;
-	string description;
+	std::string name;
+	std::string description;
 	int maxHP;
 	int maxMP;
 	int power;
 	int defence;
 
-	MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence);
+	MonsterDataRow(EMosnterType monsterType, std::string name, std::string description, int maxHP, int maxMP, int power, int defence);
 };
 
-extern const map<EMosnterType, MonsterDataRow> MONSTER_TABLE;
+extern const std::map<EMosnterType, MonsterDataRow> MONSTER_TABLE;
 
 class Monster : public Character
 {
@@ -37,7 +33,7 @@ protected:
 
 public:
 	Monster(EMosnterType monsterType);
-	Monster(string name, int maxHP, int maxMP, int power, int defence);
+	Monster(std::string name, int maxHP, int maxMP, int power, int defence);
 
 	// Getters
 	EMosnterType getMonsterType();

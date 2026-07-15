@@ -4,6 +4,8 @@
 
 #include <iostream>
 
+using namespace std;
+
 const map<EPlayerJob, string> UISystem::jobNames = {
 	{EPlayerJob::None, "무직"},
 	{EPlayerJob::Archer, "궁수"},

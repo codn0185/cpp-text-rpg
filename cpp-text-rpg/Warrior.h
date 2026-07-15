@@ -5,7 +5,7 @@
 class Warrior : public Player
 {
 public:
-	Warrior(string name, int hp, int mp, int power, int defence);
+	Warrior(std::string name, int hp, int mp, int power, int defence);
 
 	void attack(Character* target) override;
 	void showAttackMessage() const override;

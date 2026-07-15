@@ -1,6 +1,9 @@
 #include "SpawnManager.h"
 
+#include "RandomSystem.h"
 #include "Monsters.h"
+
+using namespace std;
 
 SpawnManager::SpawnManager()
 {

@@ -1,5 +1,9 @@
 #include "LevelSystem.h"
 
+#include <iostream>
+
+using namespace std;
+
 const map<int, LevelDataRow> LEVEL_TABLE = {
 	{0, LevelDataRow(1, 100, Stat(10, 7, 5, 3))},
 	{1, LevelDataRow(2, 120, Stat(10, 7, 5, 3))},

@@ -2,6 +2,7 @@
 
 #include "RandomSystem.h"
 
+using namespace std;
 
 DropItemCandidate::DropItemCandidate(EItemID itemID, float dropWeight, int minCount, int maxCount)
 	: itemID(itemID), dropWeight(dropWeight), minCount(minCount), maxCount(maxCount)

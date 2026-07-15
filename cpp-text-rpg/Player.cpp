@@ -1,5 +1,7 @@
 #include "Players.h"
 
+using namespace std;
+
 Player::Player(string name, int maxHP, int maxMP, int power, int defence)
 	: Character(name, maxHP, maxMP, power, defence), job(EPlayerJob::None), level(0), exp(0)
 {

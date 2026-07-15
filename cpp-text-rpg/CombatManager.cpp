@@ -1,5 +1,11 @@
 #include "CombatManager.h"
 
+#include "UISystem.h"
+
+#include <iostream>
+
+using namespace std;
+
 CombatManager::CombatManager()
 {
 }

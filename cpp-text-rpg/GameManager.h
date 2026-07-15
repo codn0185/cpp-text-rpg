@@ -2,18 +2,15 @@
 
 #include "Singleton.h"
 
-#include "Players.h"
-
 #include "SpawnManager.h"
 #include "CombatManager.h"
 
+#include "InputSystem.h"
 #include "UISystem.h"
 #include "PotionSystem.h"
 #include "InventorySystem.h"
 #include "LevelSystem.h"
 #include "RewardSystem.h"
-
-using namespace std;
 
 enum class EGameState
 {
