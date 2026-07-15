@@ -59,9 +59,32 @@ bool Inventory::removeItem(EItemID itemID, int amount)
 	return false;
 }
 
-const std::map<EItemID, int> Inventory::getInventory() const
+int Inventory::getItemCount(EItemID itemID) const
 {
-	return inventory;
+	if (inventory.find(itemID) != inventory.end())
+	{
+		return inventory.at(itemID);
+	}
+	return 0;
+}
+
+const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> filters) const
+{
+	if (filters.empty())
+	{
+		return inventory;
+	}
+
+	map<EItemID, int> filteredInventory;
+	for (const auto& [itemID, count] : inventory)
+	{
+		if (find(filters.begin(), filters.end(), itemID) != filters.end() && count != 0)
+		{
+			filteredInventory[itemID] = count;
+		}
+	}
+
+	return filteredInventory;
 }
 
 const vector<pair<EItemID, int>> Inventory::getSlots() const

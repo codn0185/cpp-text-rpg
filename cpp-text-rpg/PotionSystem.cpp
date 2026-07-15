@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
+string PotionSystem::FormatIngredients(vector<pair<EItemID, int>> ingredients)
 {
 	string ingredientsStr;
 	for (const auto& [itemID, count] : ingredients)
@@ -15,46 +15,45 @@ string PotionSystem::formatIngredients(vector<pair<EItemID, int>> ingredients)
 	return ingredientsStr;
 }
 
-PotionSystem::PotionSystem()
+bool PotionSystem::UsePotion(Player* player, Inventory* inventory, EItemID potionID)
 {
-	setPotionCount(EItemID::HP_POTION_20, 5);
-	setPotionCount(EItemID::MP_POTION_20, 5);
-}
-
-bool PotionSystem::usePotion(Player* player, EItemID potionID)
-{
-	if (potionInventory[potionID] == 0)
+	// 포션 없음
+	if (inventory->getItemCount(potionID) == 0)
 	{
+		cout << ITEM_TABLE.at(potionID)->name << "이(가) 없습니다." << "\n";
 		return false;
 	}
 
+	// 포션 사용
 	switch (potionID)
 	{
 	case EItemID::HP_POTION_20:
-		player->increaseMaxHP(20, true);
+		if (player->getCurrentHP() < player->getMaxHP()) // HP 포션 사용 성공
+		{
+			player->setCurrentHP(min(player->getCurrentHP() + 20, player->getMaxHP()));
+			inventory->removeItem(EItemID::HP_POTION_20);
+			std::cout << "* HP가 20 회복했습니다. (남은 HP 포션: " << inventory->getItemCount(EItemID::HP_POTION_20) << "개)" << "\n";
+			return true;
+		}
+		std::cout << "HP가 가득 차서 사용할 수 없습니다." << "\n"; // HP 포션 사용 실패
 		break;
 	case EItemID::MP_POTION_20:
-		player->increaseMaxMP(20, true);
+		if (player->getCurrentMP() < player->getMaxMP()) // MP 포션 사용 성공
+		{
+			player->setCurrentMP(min(player->getCurrentMP() + 20, player->getMaxMP()));
+			inventory->removeItem(EItemID::MP_POTION_20);
+			std::cout << "* MP가 20 회복했습니다. (남은 MP 포션: " << inventory->getItemCount(EItemID::MP_POTION_20) << "개)" << "\n";
+			return true;
+		}
+		std::cout << "MP가 가득 차서 사용할 수 없습니다." << "\n"; // MP 포션 사용 실패
 		break;
 	default:
 		break;
 	}
-
-	potionInventory[potionID]--;
-	return true;
+	return false;
 }
 
-bool PotionSystem::useHPPotion(Player* player)
-{
-	return usePotion(player, EItemID::HP_POTION_20);
-}
-
-bool PotionSystem::useMPPotion(Player* player)
-{
-	return usePotion(player, EItemID::MP_POTION_20);
-}
-
-void PotionSystem::showAllRecipes()
+void PotionSystem::ShowAllRecipes()
 {
 	cout << "< 전체 포션 레시피 >" << "\n";
 	int row = 1;
@@ -63,12 +62,12 @@ void PotionSystem::showAllRecipes()
 		const Potion* potion = static_cast<const Potion*>(item.get());
 		if (potion != nullptr)
 		{
-			cout << row++ << ". " << potion->name << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+			cout << row++ << ". " << potion->name << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
 		}
 	}
 }
 
-void PotionSystem::searchByPotionName(string target)
+void PotionSystem::SearchByPotionName(string target)
 {
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
@@ -79,13 +78,13 @@ void PotionSystem::searchByPotionName(string target)
 			string potionName = potion->name;
 			if (potionName.find(target) != string::npos)
 			{
-				cout << row++ << ". " << potionName << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+				cout << row++ << ". " << potionName << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
 			}
 		}
 	}
 }
 
-void PotionSystem::searchByIngredient(string target)
+void PotionSystem::SearchByIngredient(string target)
 {
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
@@ -104,42 +103,8 @@ void PotionSystem::searchByIngredient(string target)
 			}
 			if (find)
 			{
-				cout << row++ << ". " << potion->name << " (" << formatIngredients(potion->ingredients) << ")" << "\n";
+				cout << row++ << ". " << potion->name << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
 			}
 		}
 	}
-}
-
-int PotionSystem::getPotionCount(EItemID potionID)
-{
-	if (potionInventory.find(potionID) == potionInventory.end())
-	{
-		potionInventory[potionID] = 0;
-	}
-	return potionInventory[potionID];
-}
-
-int PotionSystem::getHPPotionCount()
-{
-	return getPotionCount(EItemID::HP_POTION_20);
-}
-
-int PotionSystem::getMPPotionCount()
-{
-	return getPotionCount(EItemID::MP_POTION_20);
-}
-
-void PotionSystem::setPotionCount(EItemID potionID, int count)
-{
-	potionInventory[potionID] = count;
-}
-
-void PotionSystem::setHPPotionCount(int count)
-{
-	setPotionCount(EItemID::HP_POTION_20, count);
-}
-
-void PotionSystem::setMPPotionCount(int count)
-{
-	setPotionCount(EItemID::MP_POTION_20, count);
 }

@@ -1,41 +1,24 @@
 #pragma once
 
 #include "Player.h"
-#include "Items.h"
+#include "Inventory.h"
 
 #include <vector>
 #include <map>
+#include <algorithm>
 
 class PotionSystem
 {
 private:
-	std::map<EItemID, int> potionInventory;
-
-	std::string formatIngredients(std::vector<std::pair<EItemID, int>> ingredients);
+	static std::string FormatIngredients(std::vector<std::pair<EItemID, int>> ingredients);
 public:
-	PotionSystem();
-	~PotionSystem() = default;
-
-	// Show
-	void showAllRecipes();
-
-	// Search
-	void searchByPotionName(std::string potionName);
-	void searchByIngredient(std::string ingredientName);
-
 	// Use Potion
-	bool usePotion(Player* player, EItemID potionID);
-	bool useHPPotion(Player* player);
-	bool useMPPotion(Player* player);
+	static bool UsePotion(Player* player, Inventory* inventory, EItemID potionID); // 포션 사용 (성공 시 true, 실패 시 false 반환)
 
-	// Getters
-	int getPotionCount(EItemID potionID);
-	int getHPPotionCount();
-	int getMPPotionCount();
+	// Show & Search
+	static void ShowAllRecipes();
+	static void SearchByPotionName(std::string potionName);
+	static void SearchByIngredient(std::string ingredientName);
 
-	// Setters
-	void setPotionCount(EItemID potionID, int count);
-	void setHPPotionCount(int count);
-	void setMPPotionCount(int count);
 };
 

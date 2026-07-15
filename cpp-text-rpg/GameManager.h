@@ -52,9 +52,6 @@ private:
 	CombatManager* combatManager; // 전투 매니저
 	SpawnManager* spawnManager; // 스폰 매니저
 
-	PotionSystem* potionSystem; // 포션 시스템
-	LevelSystem* levelSystem; // 레벨 시스템
-
 	Player* player; // 플레이어
 
 	Inventory* backpackInventory; // 배낭 인벤토리

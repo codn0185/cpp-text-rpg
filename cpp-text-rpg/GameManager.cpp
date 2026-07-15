@@ -9,9 +9,7 @@ GameManager::GameManager() :isRunning(true)
 	spawnManager = new SpawnManager();
 	combatManager = new CombatManager();
 
-	potionSystem = new PotionSystem();
-
-	backpackInventory = new Inventory(10, 3); // 배낭
+	backpackInventory = new Inventory(10, 5); // 배낭
 	stockInventory = new Inventory(30, 20); // 창고
 }
 
@@ -21,8 +19,6 @@ GameManager::~GameManager()
 
 	delete spawnManager;
 	delete combatManager;
-
-	delete potionSystem;
 
 	delete backpackInventory;
 	delete stockInventory;
@@ -117,12 +113,16 @@ void GameManager::onPlayerResitration()
 	// 플레이어 등록
 	player = new NoJob(name, stat[0], stat[1], stat[2], stat[3]);
 	std::cout << "\n\n";
+	player->setCurrentHP(player->getMaxHP() - 40); // 현재 HP : 최대 HP - 40
+	player->setCurrentMP(player->getMaxMP() - 40); // 현재 MP : 최대 MP - 40
 	UISystem::PrintPlayerStat(player);
 
 	// === 스탯 업그레이드 (w/ 포션) ===
 
+	backpackInventory->addItem(EItemID::HP_POTION_20, 5);
+	backpackInventory->addItem(EItemID::MP_POTION_20, 5);
 	std::cout << "\n\n";
-	std::cout << "HP 포션 " << potionSystem->getHPPotionCount() << "개, MP 포션 " << potionSystem->getMPPotionCount() << "개가 기본 지급되었습니다." << "\n";
+	std::cout << "HP 포션 " << backpackInventory->getItemCount(EItemID::HP_POTION_20) << "개, MP 포션 " << backpackInventory->getItemCount(EItemID::MP_POTION_20) << "개가 기본 지급되었습니다." << "\n";
 
 	bool isGameStart = false;
 	while (!isGameStart)
@@ -146,24 +146,10 @@ void GameManager::onPlayerResitration()
 			isGameStart = true;
 			break;
 		case 1:
-			if (potionSystem->useHPPotion(player))
-			{
-				std::cout << "* HP가 20 증가했습니다. (HP 포션 차감: 남은 포션 " << potionSystem->getHPPotionCount() << "개)" << "\n";
-			}
-			else
-			{
-				std::cout << "* 포션 부족" << "\n";
-			}
+			PotionSystem::UsePotion(player, backpackInventory, EItemID::HP_POTION_20);
 			break;
 		case 2:
-			if (potionSystem->useMPPotion(player))
-			{
-				std::cout << "* MP가 20 증가했습니다. (MP 포션 차감: 남은 포션 " << potionSystem->getMPPotionCount() << "개)" << "\n";
-			}
-			else
-			{
-				std::cout << "* 포션 부족" << "\n";
-			}
+			PotionSystem::UsePotion(player, backpackInventory, EItemID::MP_POTION_20);
 			break;
 		case 3:
 			player->setPower(2 * player->getPower());
@@ -308,7 +294,7 @@ void GameManager::onDungeonCombat()
 		std::cout << "\n";
 		int prevLevel = player->getLevel();
 		int prevExp = player->getExp();
-		std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->GetRequiredExp(player) << ")" << "\n";
+		std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << LevelSystem::GetRequiredExp(player) << ")" << "\n";
 		LevelSystem::AddExp(player, rewardExp);
 
 		// 드랍 아이템 확인
@@ -395,19 +381,19 @@ void GameManager::onPotionShopEnter()
 	{
 	case 1:
 		// 전체 레시피 보기
-		potionSystem->showAllRecipes();
+		PotionSystem::ShowAllRecipes();
 		break;
 	case 2:
 		// 포션 이름 검색
 		std::cout << "검색할 포션 이름: ";
 		std::cin >> target;
-		potionSystem->searchByPotionName(target);
+		PotionSystem::SearchByPotionName(target);
 		break;
 	case 3:
 		// 포션 재료 검색
 		std::cout << "검색할 재료 이름: ";
 		std::cin >> target;
-		potionSystem->searchByIngredient(target);
+		PotionSystem::SearchByIngredient(target);
 		break;
 	case 4:
 		InventorySystem::DisplayInventory(backpackInventory);
