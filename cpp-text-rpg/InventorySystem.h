@@ -4,6 +4,14 @@
 
 #include <map>
 
+enum class EInventorySortKey
+{
+	Name,
+	Count,
+	Price,
+	Type,
+};
+
 class InventorySystem
 {
 public:
@@ -11,4 +19,6 @@ public:
 
 	static void DisplayInventory(Inventory* inventory, std::string name = "인벤토리");
 	static void DisplayItemCounts(std::map<EItemID, int> items, std::string name = "아이템 리스트");
+
+	static void SortInventorySlots(Inventory* inventory, EInventorySortKey sortKey, bool reverse = false);
 };

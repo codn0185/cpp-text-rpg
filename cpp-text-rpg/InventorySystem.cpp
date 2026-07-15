@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <algorithm>
 
 using namespace std;
 
@@ -72,4 +73,25 @@ void InventorySystem::DisplayItemCounts(map<EItemID, int> items, string name)
 		cout << " > " << num++ << ". " << name << " (" << price << "g) ── [" << count << "개" << "]" << "\n";
 	}
 	cout << "\n\n";
+}
+
+void InventorySystem::SortInventorySlots(Inventory* inventory, EInventorySortKey sortKey, bool reverse)
+{
+	switch (sortKey)
+	{
+	case EInventorySortKey::Name:
+		inventory->sortSlots(Slot::CompareByPrice, reverse);
+		break;
+	case EInventorySortKey::Count:
+		inventory->sortSlots(Slot::CompareByCount, reverse);
+		break;
+	case EInventorySortKey::Price:
+		inventory->sortSlots(Slot::CompareByPrice, reverse);
+		break;
+	case EInventorySortKey::Type:
+		inventory->sortSlots(Slot::CompareByType, reverse);
+		break;
+	default:
+		break;
+	}
 }
