@@ -47,20 +47,19 @@ void InventorySystem::DisplayInventory(Inventory* inventory, string name)
 
 	cout << "\n\n";
 	cout << "======== < " << name << " (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
-	vector<pair<EItemID, int>> slots = inventory->getSlots();
-	for (int i = 0; i < slots.size(); i++)
+	const vector<Slot> inventorySlots = inventory->getInventorySlots();
+	for (int i = 0; i < inventorySlots.size(); i++)
 	{
-		EItemID itemID = slots[i].first;
-		int count = slots[i].second;
-		string name = ITEM_TABLE.at(itemID)->name;
-		int price = ITEM_TABLE.at(itemID)->price;
+		const Slot& slot = inventorySlots[i];
+		string name = ITEM_TABLE.at(slot.itemID)->name;
+		int price = ITEM_TABLE.at(slot.itemID)->price;
 
-		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << count << "/" << maxStackSize << "]" << "\n";
+		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << slot.count << "/" << maxStackSize << "]" << "\n";
 	}
 	cout << "\n\n";
 }
 
-void InventorySystem::DisplayItems(map<EItemID, int> items, string name)
+void InventorySystem::DisplayItemCounts(map<EItemID, int> items, string name)
 {
 	cout << "\n\n";
 	cout << "============= < " << name << " > =============" << "\n";

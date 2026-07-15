@@ -116,7 +116,6 @@ void GameManager::onPlayerResitration()
 	UISystem::PrintPlayerStat(player);
 
 	// === 스탯 업그레이드 (w/ 포션) ===
-
 	backpackInventory->addItem(EItemID::HP_POTION_20, 5);
 	backpackInventory->addItem(EItemID::MP_POTION_20, 5);
 	std::cout << "\n\n";
@@ -327,9 +326,10 @@ void GameManager::onDungeonCombat()
 					}
 					else
 					{
-						const auto& slots = backpackInventory->getSlots();
-						EItemID abandonedItemID = slots[slotNumber - 1].first;
-						int abandonedAmount = slots[slotNumber - 1].second;
+						const vector<Slot>& inventorySlots = backpackInventory->getInventorySlots();
+						const Slot& slot = inventorySlots[slotNumber - 1];
+						EItemID abandonedItemID = slot.itemID;
+						int abandonedAmount = slot.count;
 
 						backpackInventory->removeItem(abandonedItemID, abandonedAmount);
 						backpackInventory->addItem(remainedItemID, renmainedCount);
