@@ -26,7 +26,9 @@ private:
 	int maxStackSize; // 슬롯 당 스택 개수
 
 	std::map<EItemID, int> inventory; // 인벤토리
-	std::vector<Slot> inventorySlots; // 인벤토리 슬롯
+
+	std::vector<Slot> inventorySlots; // 인벤토리 슬롯 (실제로 보여지는 영역)
+	std::map<EItemID, int> itemCounts; // 아이템 개수 (숨겨진 영역)
 
 	void clearEmptySlots();
 
@@ -42,7 +44,7 @@ public:
 	int addItem(EItemID itemID, int amount = 1); // 아이템 추가 (추가 못하고 남은 수 반환)
 	bool removeItem(EItemID itemID, int amount = 1); // 아이템 제거 (제거 가능 여부 반환)
 
-	int getItemCount(EItemID itemID) const; // 아이템 개수 반환
+	int getItemCount(EItemID itemID); // 아이템 개수 반환
 	const std::map<EItemID, int> getInventory(std::vector<EItemID> itemIDFilters = {}, std::vector<EItemType> itemTypeFilters = {}) const; // 인벤토리 가져오기 (필터 EItemID / EItemType)
 
 	const std::vector<std::pair<EItemID, int>> getSlots() const; // 슬롯 가져오기

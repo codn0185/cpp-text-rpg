@@ -53,27 +53,26 @@ void Inventory::compact()
 {
 	clearEmptySlots(); // 빈 슬롯 제거
 
-	// 아이템 순서 및 개수 확인
-	map<EItemID, int> counts; // 각 아이템 개수
+	// 아이템 순서 확인
 	vector<EItemID> itemIDs; // 아이템 등장 순서
 	for (const Slot& slot : inventorySlots)
 	{
-		if (counts.find(slot.itemID) == counts.end()) // 아이템 첫 등장 시
+		if (find(itemIDs.begin(), itemIDs.end(), slot.itemID) == itemIDs.end()) // 동일 종류 아이템 중 첫 등장
 		{
 			itemIDs.push_back(slot.itemID);
 		}
-		counts[slot.itemID] += slot.count;
 	}
 
 	// 순서대로 아이템 배치
 	inventorySlots.clear();
 	for (const EItemID& itemID : itemIDs)
 	{
-		while (counts[itemID])
+		int count = itemCounts[itemID];
+		while (count)
 		{
-			int count = min(maxStackSize, counts[itemID]);
-			inventorySlots.push_back(Slot(itemID, count));
-			counts[itemID] -= count;
+			int temp = min(maxStackSize, count);
+			inventorySlots.push_back(Slot(itemID, temp));
+			count -= temp;
 		}
 	}
 }
@@ -99,6 +98,7 @@ int Inventory::addItem(EItemID itemID, int amount)
 			int temp = min(amount, maxStackSize - slot.count); // 해당 슬롯에 추가 가능한 개수
 			slot.count += temp;
 			amount -= temp;
+			itemCounts[itemID] += temp;
 			if (amount == 0)
 			{
 				return 0;
@@ -112,6 +112,7 @@ int Inventory::addItem(EItemID itemID, int amount)
 		Slot slot(itemID, min(amount, maxStackSize));
 		inventorySlots.push_back(slot);
 		amount -= slot.count;
+		itemCounts[itemID] += slot.count;
 	}
 
 	return amount;  // 남은 개수 반환
@@ -119,26 +120,14 @@ int Inventory::addItem(EItemID itemID, int amount)
 
 bool Inventory::removeItem(EItemID itemID, int amount)
 {
-	// 제거할 양이 충분한지 확인
-	clearEmptySlots();
-	int totalCount = 0;
-	for (const Slot& slot : inventorySlots)
+	// 제거할 개수가 충분한지 확인
+	if (itemCounts[itemID] < amount)
 	{
-		if (itemID == slot.itemID)
-		{
-			totalCount += slot.count;
-			if (totalCount >= amount)
-			{
-				break;
-			}
-		}
-	}
-	if (totalCount < amount) // 제거할 개수 부족
-	{
-		return false;
+		return false; // 개수 부족하여 제거 불가
 	}
 
 	// 아이템 제거
+	itemCounts[itemID] -= amount; // 개수 업데이트
 	for (Slot& slot : inventorySlots)
 	{
 		if (itemID == slot.itemID)
@@ -153,16 +142,12 @@ bool Inventory::removeItem(EItemID itemID, int amount)
 		}
 	}
 	clearEmptySlots(); // 빈 슬롯 제거
-	return true;
+	return true; // 제거 완료
 }
 
-int Inventory::getItemCount(EItemID itemID) const
+int Inventory::getItemCount(EItemID itemID)
 {
-	if (inventory.find(itemID) != inventory.end())
-	{
-		return inventory.at(itemID);
-	}
-	return 0;
+	return itemCounts[itemID];
 }
 
 const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> itemIDFilters, std::vector<EItemType> itemTypeFilters) const
