@@ -16,6 +16,13 @@ bool Slot::CompareByPrice(const Slot& slot1, const Slot& slot2)
 	return price1 < price2; // price 오름차순
 }
 
+bool Slot::CompareByType(const Slot& slot1, const Slot& slot2)
+{
+	EItemType type1 = ITEM_TABLE.at(slot1.itemID)->itemType;
+	EItemType type2 = ITEM_TABLE.at(slot2.itemID)->itemType;
+	return type1 < type2; // EItemType 오름차순
+}
+
 bool Slot::CompareByName(const Slot& slot1, const Slot& slot2)
 {
 	string name1 = ITEM_TABLE.at(slot1.itemID)->name;

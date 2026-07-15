@@ -14,9 +14,10 @@ struct Slot
 	Slot(EItemID itemID, int count);
 
 	// 오름차순 정렬
-	static bool CompareByPrice(const Slot& slot1, const Slot& slot2);
-	static bool CompareByName(const Slot& slot1, const Slot& slot2);
-	static bool CompareByCount(const Slot& slot1, const Slot& slot2);
+	static bool CompareByName(const Slot& slot1, const Slot& slot2); // 이름
+	static bool CompareByCount(const Slot& slot1, const Slot& slot2); // 개수
+	static bool CompareByPrice(const Slot& slot1, const Slot& slot2); // 가격
+	static bool CompareByType(const Slot& slot1, const Slot& slot2); // 타입
 };
 
 class Inventory
