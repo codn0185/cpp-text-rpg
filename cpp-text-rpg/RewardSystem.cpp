@@ -30,7 +30,7 @@ const map<EMosnterType, RewardDataRow> REWARD_TABLE = {
 };
 
 Reward::Reward(int rewardExp, EItemID itemID, int itemCount)
-	: rewardExp(), itemID(itemID), itemCount(itemCount)
+	: rewardExp(rewardExp), itemID(itemID), itemCount(itemCount)
 {
 }
 
