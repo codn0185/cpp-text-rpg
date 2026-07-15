@@ -58,6 +58,9 @@
     <Filter Include="Systems\RewardSystem">
       <UniqueIdentifier>{ab6494f0-36e2-4914-be77-49c254e061d8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\InputSystem">
+      <UniqueIdentifier>{7d2302ad-0b07-4700-a605-5a233b92990f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -137,6 +140,9 @@
     </ClCompile>
     <ClCompile Include="RewardSystem.cpp">
       <Filter>Systems\RewardSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="InputSystem.cpp">
+      <Filter>Systems\InputSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -226,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="Items.h">
       <Filter>Items</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Systems\InputSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
