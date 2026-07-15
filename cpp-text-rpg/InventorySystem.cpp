@@ -59,3 +59,18 @@ void InventorySystem::DisplayInventory(Inventory* inventory, string name)
 	}
 	cout << "\n\n";
 }
+
+void InventorySystem::DisplayItems(map<EItemID, int> items, string name)
+{
+	cout << "\n\n";
+	cout << "============= < " << name << " > =============" << "\n";
+	int num = 1;
+	for (const auto& [itemID, count] : items)
+	{
+		string name = ITEM_TABLE.at(itemID)->name;
+		int price = ITEM_TABLE.at(itemID)->price;
+
+		cout << " > " << num++ << ". " << name << " (" << price << "g) ── [" << count << "개" << "]" << "\n";
+	}
+	cout << "\n\n";
+}
