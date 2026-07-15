@@ -91,25 +91,30 @@ bool Inventory::isFullSlot()
 
 int Inventory::addItem(EItemID itemID, int amount)
 {
-	// 추가 가능한 아이템 개수
-	int roomAmount = maxStackSize * (maxSlotCount - getUsedSlotCount()); // 빈 슬롯
-	int reminder = inventory[itemID] % maxStackSize; // 최대치가 아닌 슬롯을 차지하는 아이템 크기
-	if (reminder != 0)
+	// 동일한 종류 아이템 슬롯 우선 채우기
+	for (Slot& slot : inventorySlots)
 	{
-		roomAmount += maxStackSize - (reminder); // 최대치가 아닌 슬롯
-	}
-	// 아이템 추가 및 반환
-	if (roomAmount >= amount) // 모두 획득
-	{
-		inventory[itemID] += amount;
-		return 0;
-	}
-	else // 일부 획득 (나머지 반환)
-	{
-		inventory[itemID] += roomAmount;
-		return amount - roomAmount;
+		if (itemID == slot.itemID)
+		{
+			int temp = min(amount, maxStackSize - slot.count); // 해당 슬롯에 추가 가능한 개수
+			slot.count += temp;
+			amount -= temp;
+			if (amount == 0)
+			{
+				return 0;
+			}
+		}
 	}
 
+	// 빈 슬롯에 아이템 채우기
+	while (!isFullSlot())
+	{
+		Slot slot(itemID, min(amount, maxStackSize));
+		inventorySlots.push_back(slot);
+		amount -= slot.count;
+	}
+
+	return amount;  // 남은 개수 반환
 }
 
 bool Inventory::removeItem(EItemID itemID, int amount)
