@@ -145,6 +145,31 @@ bool Inventory::removeItem(EItemID itemID, int amount)
 	return true; // 제거 완료
 }
 
+const vector<Slot> Inventory::getInventorySlots(vector<EItemID> itemIDFilters, vector<EItemType> itemTypeFilters)
+{
+	clearEmptySlots();
+	if (itemIDFilters.empty() && itemTypeFilters.empty())
+	{
+		return inventorySlots;
+	}
+
+	vector<Slot> filteredInventorySlots;
+	for (const Slot& slot : inventorySlots)
+	{
+		EItemType itemType = ITEM_TABLE.at(slot.itemID)->itemType;
+		if (
+			(itemIDFilters.empty() || find(itemIDFilters.begin(), itemIDFilters.end(), slot.itemID) != itemIDFilters.end()) &&
+			(itemTypeFilters.empty() || find(itemTypeFilters.begin(), itemTypeFilters.end(), itemType) != itemTypeFilters.end()) &&
+			slot.count != 0
+			)
+		{
+			filteredInventorySlots.push_back(slot);
+		}
+	}
+
+	return filteredInventorySlots;
+}
+
 int Inventory::getItemCount(EItemID itemID)
 {
 	return itemCounts[itemID];
