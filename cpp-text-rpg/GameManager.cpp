@@ -381,8 +381,157 @@ void GameManager::onDungeonCombat()
 
 void GameManager::onInventoryOpen()
 {
-	// 창고 또는 배낭 선택하여 열기
-	// 정렬 기능 추가
+	std::cout << "\n\n";
+	std::cout << "========== < 인벤토리 열기 > ==========" << "\n";
+	std::cout << "1: 창고 열기" << "\n";
+	std::cout << "2: 배낭 열기" << "\n";
+	std::cout << "0: 메인 메뉴" << "\n";
+
+	std::cout << "입력: ";
+	int option;
+	if (!InputSystem::InputInt(option, 0, 2))
+	{
+		cout << "다시 입력하세요." << "\n";
+		return;
+	}
+
+	int sortNum;
+	string sortStr;
+
+	bool onInventoryOpen = true;
+	while (onInventoryOpen)
+	{
+		switch (option)
+		{
+		case 0:
+			switchGameState(EGameState::MAIN_MENU);
+			break;
+		case 1: // 창고 - stockInventory
+			InventorySystem::DisplayInventory(stockInventory, "창고");
+			std::cout << " > 정렬 방식 선택" << "\n";
+			std::cout << "  1. 이름 (오름차순)    2. 이름 (내림차순)" << "\n";
+			std::cout << "  3. 개수 (오름차순)    4. 개수 (내림차순)" << "\n";
+			std::cout << "  5. 가격 (오름차순)    6. 가격 (내림차순)" << "\n";
+			std::cout << "  7. 종류 (오름차순)    8. 종류 (내림차순)" << "\n";
+
+			while (true)
+			{
+				cout << "입력 (0: 뒤로가기): ";
+				if (InputSystem::InputInt(sortNum, 0, 8))
+				{
+					break;
+				}
+				cout << "다시 입력하세요." << "\n";
+			}
+
+			switch (sortNum)
+			{
+			case 0:
+				onInventoryOpen = false;
+				break;
+			case 1: // 이름 (오름차순)
+				sortStr = "이름 (오름차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Name, false);
+				break;
+			case 2: // 이름 (내림차순)
+				sortStr = "이름 (내림차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Name, true);
+				break;
+			case 3: // 개수 (오름차순)
+				sortStr = "개수 (오름차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Count, false);
+				break;
+			case 4: // 개수 (내림차순)
+				sortStr = "개수 (내림차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Count, true);
+				break;
+			case 5: // 가격 (오름차순)
+				sortStr = "가격 (오름차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Price, false);
+				break;
+			case 6: // 가격 (내림차순)
+				sortStr = "가격 (내림차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Price, true);
+				break;
+			case 7: // 종류 (오름차순)
+				sortStr = "종류 (오름차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Type, false);
+				break;
+			case 8: // 종류 (내림차순)
+				sortStr = "종류 (내림차순)";
+				InventorySystem::SortInventorySlots(stockInventory, EInventorySortKey::Type, true);
+				break;
+			default:
+				break;
+			}
+
+			InventorySystem::DisplayInventory(stockInventory, "창고 [" + sortStr + "]");
+			break;
+		case 2: // 배낭 - backpackInventory
+			InventorySystem::DisplayInventory(backpackInventory, "배낭");
+			std::cout << " > 정렬 방식 선택" << "\n";
+			std::cout << "  1. 이름 (오름차순)    2. 이름 (내림차순)" << "\n";
+			std::cout << "  3. 개수 (오름차순)    4. 개수 (내림차순)" << "\n";
+			std::cout << "  5. 가격 (오름차순)    6. 가격 (내림차순)" << "\n";
+			std::cout << "  7. 종류 (오름차순)    8. 종류 (내림차순)" << "\n";
+
+			while (true)
+			{
+				cout << "입력 (0: 뒤로가기): ";
+				if (InputSystem::InputInt(sortNum, 0, 8))
+				{
+					break;
+				}
+				cout << "다시 입력하세요." << "\n";
+			}
+
+			switch (sortNum)
+			{
+			case 0:
+				onInventoryOpen = false;
+				break;
+			case 1: // 이름 (오름차순)
+				sortStr = "이름 (오름차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Name, false);
+				break;
+			case 2: // 이름 (내림차순)
+				sortStr = "이름 (내림차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Name, true);
+				break;
+			case 3: // 개수 (오름차순)
+				sortStr = "개수 (오름차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Count, false);
+				break;
+			case 4: // 개수 (내림차순)
+				sortStr = "개수 (내림차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Count, true);
+				break;
+			case 5: // 가격 (오름차순)
+				sortStr = "가격 (오름차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Price, false);
+				break;
+			case 6: // 가격 (내림차순)
+				sortStr = "가격 (내림차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Price, true);
+				break;
+			case 7: // 종류 (오름차순)
+				sortStr = "종류 (오름차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Type, false);
+				break;
+			case 8: // 종류 (내림차순)
+				sortStr = "종류 (내림차순)";
+				InventorySystem::SortInventorySlots(backpackInventory, EInventorySortKey::Type, true);
+				break;
+			default:
+				break;
+			}
+
+			InventorySystem::DisplayInventory(backpackInventory, "배낭 [" + sortStr + "]");
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 void GameManager::onPotionShopEnter()
