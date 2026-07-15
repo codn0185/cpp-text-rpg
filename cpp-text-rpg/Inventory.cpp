@@ -88,6 +88,11 @@ bool Inventory::isFullSlot()
 	return getUsedSlotCount() == maxSlotCount;
 }
 
+int Inventory::getItemCount(EItemID itemID)
+{
+	return itemCounts[itemID];
+}
+
 int Inventory::addItem(EItemID itemID, int amount)
 {
 	// 동일한 종류 아이템 슬롯 우선 채우기
@@ -168,11 +173,6 @@ const vector<Slot> Inventory::getInventorySlots(vector<EItemID> itemIDFilters, v
 	}
 
 	return filteredInventorySlots;
-}
-
-int Inventory::getItemCount(EItemID itemID)
-{
-	return itemCounts[itemID];
 }
 
 const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> itemIDFilters, std::vector<EItemType> itemTypeFilters) const
