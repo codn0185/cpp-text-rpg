@@ -4,7 +4,7 @@
 
 #include <vector>
 #include <map>
-#include <algorithm>
+#include <functional>
 
 struct Slot
 {
@@ -45,6 +45,9 @@ public:
 
 	const std::vector<Slot> getInventorySlots(std::vector<EItemID> itemIDFilters = {}, std::vector<EItemType> itemTypeFilters = {}) const; // 슬롯들 가져오기 (필터 적용)
 	const std::map<EItemID, int> getItemCounts(std::vector<EItemID> itemIDFilters = {}, std::vector<EItemType> itemTypeFilters = {}) const; // 각 아이템 개수 가져오기 (필터 적용)
+
+	// Sort
+	void sortSlots(std::function<bool(const Slot&, const Slot&)> compare, bool reverse = false);
 
 	// Getters
 	int getMaxSlotCount();

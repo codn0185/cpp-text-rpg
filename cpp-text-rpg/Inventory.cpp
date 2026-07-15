@@ -1,5 +1,7 @@
 #include "Inventory.h"
 
+#include <algorithm>
+
 using namespace std;
 
 Slot::Slot(EItemID itemID, int count)
@@ -188,6 +190,18 @@ const map<EItemID, int> Inventory::getItemCounts(vector<EItemID> itemIDFilters, 
 		}
 	}
 	return filteredItemCounts;
+}
+
+void Inventory::sortSlots(function<bool(const Slot&, const Slot&)> compare, bool reverse)
+{
+	if (!reverse)
+	{
+		sort(inventorySlots.begin(), inventorySlots.end(), compare);
+	}
+	else
+	{
+		sort(inventorySlots.rbegin(), inventorySlots.rend(), compare);
+	}
 }
 
 int Inventory::getMaxSlotCount()
