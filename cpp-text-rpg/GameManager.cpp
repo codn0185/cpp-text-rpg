@@ -73,9 +73,9 @@ void GameManager::switchGameState(EGameState newGameState)
 
 void GameManager::onGameStart()
 {
-	cout << "===========================================" << "\n";
-	cout << "          [ 던전 탈출 텍스트 RPG ]          " << "\n";
-	cout << "===========================================" << "\n";
+	std::cout << "===========================================" << "\n";
+	std::cout << "          [ 던전 탈출 텍스트 RPG ]          " << "\n";
+	std::cout << "===========================================" << "\n";
 
 	switchGameState(EGameState::PLAYER_REGISTRATION);
 }
@@ -89,148 +89,148 @@ void GameManager::onPlayerResitration()
 	int stat[SIZE] = {0}; // HP, MP, 공격력, 방어력
 
 	// 이름 입력
-	cout << "용사의 이름을 입력해주세요: ";
+	std::cout << "용사의 이름을 입력해주세요: ";
 	InputSystem::InputString(name);
 
 	// HP, MP 입력
 	while (true)
 	{
-		cout << "HP와 MP를 입력해주세요: ";
+		std::cout << "HP와 MP를 입력해주세요: ";
 		if (InputSystem::InputInt(stat[0], 51, INT_MAX) && InputSystem::InputInt(stat[1], 51, INT_MAX))
 		{
 			break;
 		}
-		cout << "HP나 MP의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
+		std::cout << "HP나 MP의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
 	}
 
 	// 공격력, 방어력 입력
 	while (true)
 	{
-		cout << "공격력과 방어력을 입력해주세요: ";
+		std::cout << "공격력과 방어력을 입력해주세요: ";
 		if (InputSystem::InputInt(stat[2], 51, INT_MAX) && InputSystem::InputInt(stat[3], 51, INT_MAX))
 		{
 			break;
 		}
-		cout << "공격력이나 방어력의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
+		std::cout << "공격력이나 방어력의 값이 너무 작습니다. 다시 입력해주세요." << "\n";
 	}
 
 	// 플레이어 등록
 	player = new NoJob(name, stat[0], stat[1], stat[2], stat[3]);
-	cout << "\n\n";
+	std::cout << "\n\n";
 	UISystem::PrintPlayerStat(player);
 
 	// === 스탯 업그레이드 (w/ 포션) ===
 
-	cout << "\n\n";
-	cout << "HP 포션 " << potionSystem->getHPPotionCount() << "개, MP 포션 " << potionSystem->getMPPotionCount() << "개가 기본 지급되었습니다." << "\n";
+	std::cout << "\n\n";
+	std::cout << "HP 포션 " << potionSystem->getHPPotionCount() << "개, MP 포션 " << potionSystem->getMPPotionCount() << "개가 기본 지급되었습니다." << "\n";
 
 	bool isGameStart = false;
 	while (!isGameStart)
 	{
 		// 강화 메뉴 출력
-		cout << "============================================" << "\n";
-		cout << "< 캐릭터 강화 >" << "\n";
-		cout << "1. HP UP    2. MP UP    3. 공격력 2배" << "\n";
-		cout << "4. 방어력 2배  5. 현재 능력치  0. 게임 시작" << "\n";
-		cout << "============================================" << "\n";
+		std::cout << "============================================" << "\n";
+		std::cout << "< 캐릭터 강화 >" << "\n";
+		std::cout << "1. HP UP    2. MP UP    3. 공격력 2배" << "\n";
+		std::cout << "4. 방어력 2배  5. 현재 능력치  0. 게임 시작" << "\n";
+		std::cout << "============================================" << "\n";
 
 		// 번호 선택
-		cout << "번호를 선택해주세요: ";
+		std::cout << "번호를 선택해주세요: ";
 		int option;
 		InputSystem::InputInt(option, 0, 5);
 
 		switch (option)
 		{
 		case 0:
-			cout << "게임을 시작합니다!" << "\n";
+			std::cout << "게임을 시작합니다!" << "\n";
 			isGameStart = true;
 			break;
 		case 1:
 			if (potionSystem->useHPPotion(player))
 			{
-				cout << "* HP가 20 증가했습니다. (HP 포션 차감: 남은 포션 " << potionSystem->getHPPotionCount() << "개)" << "\n";
+				std::cout << "* HP가 20 증가했습니다. (HP 포션 차감: 남은 포션 " << potionSystem->getHPPotionCount() << "개)" << "\n";
 			}
 			else
 			{
-				cout << "* 포션 부족" << "\n";
+				std::cout << "* 포션 부족" << "\n";
 			}
 			break;
 		case 2:
 			if (potionSystem->useMPPotion(player))
 			{
-				cout << "* MP가 20 증가했습니다. (MP 포션 차감: 남은 포션 " << potionSystem->getMPPotionCount() << "개)" << "\n";
+				std::cout << "* MP가 20 증가했습니다. (MP 포션 차감: 남은 포션 " << potionSystem->getMPPotionCount() << "개)" << "\n";
 			}
 			else
 			{
-				cout << "* 포션 부족" << "\n";
+				std::cout << "* 포션 부족" << "\n";
 			}
 			break;
 		case 3:
 			player->setPower(2 * player->getPower());
-			cout << "* 공격력이 2배 증가했습니다. (현재 공격력: " << player->getPower() << ")" << "\n";
+			std::cout << "* 공격력이 2배 증가했습니다. (현재 공격력: " << player->getPower() << ")" << "\n";
 			break;
 		case 4:
 			player->setDefence(2 * player->getDefence());
-			cout << "* 방어력이 2배 증가했습니다. (현재 방어력: " << player->getDefence() << ")" << "\n";
+			std::cout << "* 방어력이 2배 증가했습니다. (현재 방어력: " << player->getDefence() << ")" << "\n";
 			break;
 		case 5:
-			cout << "\n\n";
+			std::cout << "\n\n";
 			UISystem::PrintPlayerStat(player);
 			break;
 		}
-		cout << "\n\n";
+		std::cout << "\n\n";
 	}
 
 	// === 플레이어 직업 선택 ===
 
-	cout << "\n\n";
-	cout << name + "님, 직업을 선택해주세요!" << "\n";
-	cout << "1. 전사   2. 마법사   3. 도적   4. 궁수" << "\n";
+	std::cout << "\n\n";
+	std::cout << name + "님, 직업을 선택해주세요!" << "\n";
+	std::cout << "1. 전사   2. 마법사   3. 도적   4. 궁수" << "\n";
 
-	cout << "선택: ";
+	std::cout << "선택: ";
 	int jobNumber;
-	cin >> jobNumber;
-	cin.ignore(INT_MAX, '\n');
+	std::cin >> jobNumber;
+	std::cin.ignore(INT_MAX, '\n');
 
 	switch (jobNumber)
 	{
 	case 1:
 		player = Player::ChangeJob(player, EPlayerJob::Warrior);
-		cout << "* 전사로 전직하였습니다. (방어력 +30)" << "\n";
+		std::cout << "* 전사로 전직하였습니다. (방어력 +30)" << "\n";
 		break;
 	case 2:
 		player = Player::ChangeJob(player, EPlayerJob::Mage);
-		cout << "* 마법사로 전직하였습니다. (MP +30)" << "\n";
+		std::cout << "* 마법사로 전직하였습니다. (MP +30)" << "\n";
 		break;
 	case 3:
 		player = Player::ChangeJob(player, EPlayerJob::Rogue);
-		cout << "* 도적으로 전직하였습니다. (공격력 +30)" << "\n";
+		std::cout << "* 도적으로 전직하였습니다. (공격력 +30)" << "\n";
 		break;
 	case 4:
 		player = Player::ChangeJob(player, EPlayerJob::Archer);
-		cout << "* 궁수로 전직하였습니다. (HP +30)" << "\n";
+		std::cout << "* 궁수로 전직하였습니다. (HP +30)" << "\n";
 		break;
 	}
 	UISystem::PrintPlayerStat(player);
-	cout << "\n\n";
+	std::cout << "\n\n";
 
 	switchGameState(EGameState::MAIN_MENU);
 }
 
 void GameManager::onMainMenu()
 {
-	cout << "" << "\n";
-	cout << "=============== < 메인 메뉴 > ===============" << "\n";
-	cout << "1. 던전 입장" << "\n";
-	cout << "2. 인벤토리 확인" << "\n";
-	cout << "3. 포션 제작소" << "\n";
-	cout << "0. 게임 종료" << "\n";
-	cout << "============================================" << "\n";
+	std::cout << "" << "\n";
+	std::cout << "=============== < 메인 메뉴 > ===============" << "\n";
+	std::cout << "1. 던전 입장" << "\n";
+	std::cout << "2. 인벤토리 확인" << "\n";
+	std::cout << "3. 포션 제작소" << "\n";
+	std::cout << "0. 게임 종료" << "\n";
+	std::cout << "============================================" << "\n";
 
 	int option;
-	cout << "선택: ";
-	cin >> option;
-	cin.ignore(INT_MAX, '\n');
+	std::cout << "선택: ";
+	std::cin >> option;
+	std::cin.ignore(INT_MAX, '\n');
 
 	switch (option)
 	{
@@ -253,18 +253,18 @@ void GameManager::onMainMenu()
 
 void GameManager::onDungeonEnter()
 {
-	cout << "\n\n";
-	cout << "================= < 던전 > =================" << "\n";
-	cout << "1. 들어가기" << "\n";
-	cout << "2. 스탯 확인" << "\n";
-	cout << "3. 인벤토리 확인" << "\n";
-	cout << "0. 던전 나가기" << "\n";
-	cout << "============================================" << "\n";
+	std::cout << "\n\n";
+	std::cout << "================= < 던전 > =================" << "\n";
+	std::cout << "1. 들어가기" << "\n";
+	std::cout << "2. 스탯 확인" << "\n";
+	std::cout << "3. 인벤토리 확인" << "\n";
+	std::cout << "0. 던전 나가기" << "\n";
+	std::cout << "============================================" << "\n";
 
 	int option;
-	cout << "선택: ";
-	cin >> option;
-	cin.ignore(INT_MAX, '\n');
+	std::cout << "선택: ";
+	std::cin >> option;
+	std::cin.ignore(INT_MAX, '\n');
 
 	switch (option)
 	{
@@ -305,33 +305,33 @@ void GameManager::onDungeonCombat()
 		map<EItemID, int> droppedItems = {{dropItemID, dropCount}}; // TODO 이후 몬스터가 여러 종류의 아이템을 드랍하는 경우 수정
 
 		// 경험치 획득
-		cout << "\n";
+		std::cout << "\n";
 		int prevLevel = player->getLevel();
 		int prevExp = player->getExp();
-		cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->GetRequiredExp(player) << ")" << "\n";
+		std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << levelSystem->GetRequiredExp(player) << ")" << "\n";
 		LevelSystem::AddExp(player, rewardExp);
 
 		// 드랍 아이템 확인
-		cout << "\n";
+		std::cout << "\n";
 		for (const auto& [itemID, count] : droppedItems)
 		{
-			cout << " > " << monster->getName() << "이(가) \"" << ITEM_TABLE.at(itemID)->name << "\"을(를) " << count << "개 드랍했습니다." << "\n";
+			std::cout << " > " << monster->getName() << "이(가) \"" << ITEM_TABLE.at(itemID)->name << "\"을(를) " << count << "개 드랍했습니다." << "\n";
 		}
 
 		// 아이템 획득 및 남는 아이템 구하기
 		map<EItemID, int> addedItems = InventorySystem::AddItemsToInventroy(backpackInventory, droppedItems);
 		for (const auto& [addedItemID, addedCount] : addedItems)
 		{
-			cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
+			std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
 		}
 
 		// 남은 아이템 확인
 		for (const auto& [remainedItemID, renmainedCount] : droppedItems)
 		{
 			string remainedItemName = ITEM_TABLE.at(remainedItemID)->name;
-			cout << "배낭 공간이 부족합니다!" << " \"" << remainedItemName << "\" " << renmainedCount << "개와 교체할 슬롯을 선택하세요." << "\n";
+			std::cout << "배낭 공간이 부족합니다!" << " \"" << remainedItemName << "\" " << renmainedCount << "개와 교체할 슬롯을 선택하세요." << "\n";
 			InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
-			cout << "교체할 슬롯 번호 (0: 아이템 포기): ";
+			std::cout << "교체할 슬롯 번호 (0: 아이템 포기): ";
 			int slotNumber;
 			while (true)
 			{
@@ -339,7 +339,7 @@ void GameManager::onDungeonCombat()
 				{
 					if (slotNumber == 0)
 					{
-						cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
+						std::cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
 					}
 					else
 					{
@@ -350,14 +350,14 @@ void GameManager::onDungeonCombat()
 						backpackInventory->removeItem(abandonedItemID, abandonedAmount);
 						backpackInventory->addItem(remainedItemID, renmainedCount);
 
-						cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
+						std::cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
 						break;
 					}
 
 					break;
 				}
 
-				cout << "다시 입력하세요." << "\n";
+				std::cout << "다시 입력하세요." << "\n";
 			}
 		}
 
@@ -376,19 +376,19 @@ void GameManager::onDungeonCombat()
 
 void GameManager::onPotionShopEnter()
 {
-	cout << "\n\n";
-	cout << "============== < 포션 제작소 > ==============" << "\n";
-	cout << "1. 전체 레시피 보기" << "\n";
-	cout << "2. 검색 - 포션 이름" << "\n";
-	cout << "3. 검색 - 재료 이름" << "\n";
-	cout << "4. 인벤토리 확인" << "\n";
-	cout << "0. 돌아가기" << "\n";
-	cout << "============================================" << "\n";
+	std::cout << "\n\n";
+	std::cout << "============== < 포션 제작소 > ==============" << "\n";
+	std::cout << "1. 전체 레시피 보기" << "\n";
+	std::cout << "2. 검색 - 포션 이름" << "\n";
+	std::cout << "3. 검색 - 재료 이름" << "\n";
+	std::cout << "4. 인벤토리 확인" << "\n";
+	std::cout << "0. 돌아가기" << "\n";
+	std::cout << "============================================" << "\n";
 
 	int option;
-	cout << "선택: ";
-	cin >> option;
-	cin.ignore(INT_MAX, '\n');
+	std::cout << "선택: ";
+	std::cin >> option;
+	std::cin.ignore(INT_MAX, '\n');
 
 	string target;
 	switch (option)
@@ -399,14 +399,14 @@ void GameManager::onPotionShopEnter()
 		break;
 	case 2:
 		// 포션 이름 검색
-		cout << "검색할 포션 이름: ";
-		cin >> target;
+		std::cout << "검색할 포션 이름: ";
+		std::cin >> target;
 		potionSystem->searchByPotionName(target);
 		break;
 	case 3:
 		// 포션 재료 검색
-		cout << "검색할 재료 이름: ";
-		cin >> target;
+		std::cout << "검색할 재료 이름: ";
+		std::cin >> target;
 		potionSystem->searchByIngredient(target);
 		break;
 	case 4:
@@ -422,8 +422,8 @@ void GameManager::onPotionShopEnter()
 
 void GameManager::onGameExit()
 {
-	cout << "============================================" << "\n";
-	cout << "게임 종료" << "\n";
-	cout << "============================================" << "\n";
+	std::cout << "============================================" << "\n";
+	std::cout << "게임 종료" << "\n";
+	std::cout << "============================================" << "\n";
 	isRunning = false;
 }
