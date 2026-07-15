@@ -118,6 +118,10 @@ int Inventory::addItem(EItemID itemID, int amount)
 		inventorySlots.push_back(slot);
 		amount -= slot.count;
 		itemCounts[itemID] += slot.count;
+		if (amount == 0)
+		{
+			break;
+		}
 	}
 
 	return amount;  // 남은 개수 반환
@@ -184,45 +188,6 @@ const map<EItemID, int> Inventory::getItemCounts(vector<EItemID> itemIDFilters, 
 		}
 	}
 	return filteredItemCounts;
-}
-
-const map<EItemID, int> Inventory::getInventory(std::vector<EItemID> itemIDFilters, std::vector<EItemType> itemTypeFilters) const
-{
-	map<EItemID, int> filteredInventory;
-	for (const auto& [itemID, count] : inventory)
-	{
-		EItemType itemType = ITEM_TABLE.at(itemID)->itemType;
-		if (
-			(itemIDFilters.empty() || find(itemIDFilters.begin(), itemIDFilters.end(), itemID) != itemIDFilters.end()) &&
-			(itemTypeFilters.empty() || find(itemTypeFilters.begin(), itemTypeFilters.end(), itemType) != itemTypeFilters.end()) &&
-			count != 0
-			)
-		{
-			filteredInventory[itemID] = count;
-		}
-	}
-
-	return filteredInventory;
-}
-
-const vector<pair<EItemID, int>> Inventory::getSlots() const
-{
-	vector<pair<EItemID, int>> slots;
-	for (const auto& [itemID, count] : inventory)
-	{
-		int fullSlots = count / maxStackSize;
-		int leftCounts = count % maxStackSize;
-
-		while (fullSlots--)
-		{
-			slots.push_back(pair(itemID, maxStackSize));
-		}
-		if (leftCounts)
-		{
-			slots.push_back(pair(itemID, leftCounts));
-		}
-	}
-	return slots;
 }
 
 int Inventory::getMaxSlotCount()

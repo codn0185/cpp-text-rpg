@@ -165,13 +165,13 @@ void CombatManager::onPlayerDefeat()
 
 void CombatManager::onPlayerUsingItem()
 {
-	const auto items = inventory->getInventory({}, {EItemType::POTION});
-	InventorySystem::DisplayItems(items);
+	const map<EItemID, int> itemCounts = inventory->getItemCounts({}, {EItemType::POTION});
+	InventorySystem::DisplayItemCounts(itemCounts);
 
 	// 선택 및 사용 로직 추가
 	cout << "사용할 아이템 선택 (0: 뒤로가기): ";
 	int option;
-	if (!InputSystem::InputInt(option, 0, (int) items.size())) // 잘못된 입력
+	if (!InputSystem::InputInt(option, 0, (int) itemCounts.size())) // 잘못된 입력
 	{
 		cout << "다시 입력하세요." << "\n";
 		return;
@@ -183,7 +183,7 @@ void CombatManager::onPlayerUsingItem()
 	}
 	else // 아이템 사용
 	{
-		EItemID potionID = next(items.begin(), option - 1)->first;
+		EItemID potionID = next(itemCounts.begin(), option - 1)->first;
 		if (PotionSystem::UsePotion(player, inventory, potionID)) // 아이템 사용 성공 시 상태 전환
 		{
 			switchCombatState(ECombatState::CheckVictory);
