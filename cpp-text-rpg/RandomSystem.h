@@ -8,6 +8,8 @@ using namespace std;
 class RandomSystem
 {
 public:
+	static int getRandomInt(int min, int max);
+
 	template <typename T>
 	static T getRandom(vector<T> array, vector<float> weights);
 };
