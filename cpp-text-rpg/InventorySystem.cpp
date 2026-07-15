@@ -5,51 +5,49 @@
 
 using namespace std;
 
-InventorySystem::InventorySystem()
-	: backpackInventory(new Inventory(3, 1)), stockInventory(new Inventory(20, 30))
+map<EItemID, int> InventorySystem::AddItemsToInventroy(Inventory* inventory, map<EItemID, int>& items)
 {
-}
+	map<EItemID, int> addedItems; // 추가된 아이템들
 
-int InventorySystem::addToBackpack(EItemID itemID, int amount)
-{
-	return backpackInventory->addItem(itemID, amount);
-}
-
-bool InventorySystem::removeFromBackpack(EItemID itemID, int amount)
-{
-	return backpackInventory->removeItem(itemID, amount);;
-}
-
-void InventorySystem::displayBackpackInventory()
-{
-	int usedSlots = backpackInventory->getUsedSlotCount();
-	int maxSlots = backpackInventory->getMaxSlotCount();
-	int maxStackSize = backpackInventory->getMaxStackSize();
-
-	cout << "\n\n";
-	cout << "======== < 배낭 인벤토리 (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
-	vector<pair<EItemID, int>> slots = backpackInventory->getSlots();
-	for (int i = 0; i < slots.size(); i++)
+	// 아이템 추가
+	for (auto& [itemID, count] : items)
 	{
-		EItemID itemID = slots[i].first;
-		int count = slots[i].second;
-		string name = ITEM_TABLE.at(itemID)->name;
-		int price = ITEM_TABLE.at(itemID)->price;
+		int leftCount = inventory->addItem(itemID, count);
+		int addedCount = count - leftCount;
 
-		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << count << "/" << maxStackSize << "]" << "\n";
+		count = leftCount;
+
+		if (addedCount > 0)
+		{
+			addedItems[itemID] += addedCount;
+		}
 	}
-	cout << "\n\n";
+
+	// 개수 0인 아이템 제거
+	for (auto it = items.begin(); it != items.end(); )
+	{
+		if (it->second == 0)
+		{
+			it = items.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
+	return addedItems;
 }
 
-void InventorySystem::displayStockInventory()
+void InventorySystem::DisplayInventory(Inventory* inventory, string name)
 {
-	int usedSlots = stockInventory->getUsedSlotCount();
-	int maxSlots = stockInventory->getMaxSlotCount();
-	int maxStackSize = stockInventory->getMaxStackSize();
+	int usedSlots = inventory->getUsedSlotCount();
+	int maxSlots = inventory->getMaxSlotCount();
+	int maxStackSize = inventory->getMaxStackSize();
 
 	cout << "\n\n";
-	cout << "======== < 배낭 인벤토리 (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
-	vector<pair<EItemID, int>> slots = stockInventory->getSlots();
+	cout << "======== < " << name << " (" << usedSlots << "/" << maxSlots << ") > ========" << "\n";
+	vector<pair<EItemID, int>> slots = inventory->getSlots();
 	for (int i = 0; i < slots.size(); i++)
 	{
 		EItemID itemID = slots[i].first;

@@ -2,22 +2,12 @@
 
 #include "Inventory.h"
 
+#include <map>
+
 class InventorySystem
 {
-private:
-	// int maxSlots;
-	// vector<EIngredientID> inventory;
-
 public:
-	Inventory* backpackInventory; // 배낭 인벤토리
-	Inventory* stockInventory; // 창고 인벤토리
+	static std::map<EItemID, int> AddItemsToInventroy(Inventory* inventory, std::map<EItemID, int>& items); // 인벤토리에 아이템을 추가하고 남는 아이템 적용
 
-	InventorySystem();
-	~InventorySystem() = default;
-
-	int addToBackpack(EItemID itemID, int amount = 1);
-	bool removeFromBackpack(EItemID itemID, int amount = 1);
-
-	void displayBackpackInventory();
-	void displayStockInventory();
+	static void DisplayInventory(Inventory* inventory, std::string name = "인벤토리");
 };

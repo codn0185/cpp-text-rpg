@@ -53,10 +53,12 @@ private:
 	SpawnManager* spawnManager; // 스폰 매니저
 
 	PotionSystem* potionSystem; // 포션 시스템
-	InventorySystem* inventorySystem; // 포션 시스템
 	LevelSystem* levelSystem; // 레벨 시스템
 
 	Player* player; // 플레이어
+
+	Inventory* backpackInventory; // 배낭 인벤토리
+	Inventory* stockInventory; // 창고 인벤토리
 
 public:
 	GameManager();
