@@ -515,8 +515,6 @@ void GameManager::onPotionShopEnter()
 	std::cout << "0. 돌아가기" << "\n";
 	std::cout << "============================================" << "\n";
 
-
-
 	string target;
 	int option = InputSystem::InputIntUnitlValid(0, 5, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (option)

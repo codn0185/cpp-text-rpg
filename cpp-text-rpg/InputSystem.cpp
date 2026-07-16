@@ -37,12 +37,13 @@ bool InputSystem::InputInt(int& out, const int min, const int max)
 
 int InputSystem::InputIntUnitlValid(const int min, const int max, string inputMessage, string errorMessage)
 {
-	int result;
+	int result = 0;
 	while (true)
 	{
 		cout << inputMessage;
 		if (InputInt(result, min, max))
 		{
+			cin.ignore(numeric_limits<streamsize>::max(), '\n');
 			break;
 		}
 		cout << errorMessage;
