@@ -4,7 +4,7 @@
 
 using namespace std;
 
-string PotionSystem::FormatIngredients(vector<pair<EItemID, int>> ingredients)
+string PotionSystem::FormatIngredients(map<EItemID, int> ingredients)
 {
 	string ingredientsStr;
 	for (const auto& [itemID, count] : ingredients)

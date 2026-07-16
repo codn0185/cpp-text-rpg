@@ -10,7 +10,7 @@
 class PotionSystem
 {
 private:
-	static std::string FormatIngredients(std::vector<std::pair<EItemID, int>> ingredients);
+	static std::string FormatIngredients(std::map<EItemID, int> ingredients);
 public:
 	// Use Potion
 	static bool UsePotion(Player* player, Inventory* inventory, EItemID potionID); // 포션 사용 (성공 시 true, 실패 시 false 반환)
