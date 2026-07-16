@@ -35,11 +35,12 @@ bool InputSystem::InputInt(int& out, const int min, const int max)
 	return true;
 }
 
-int InputSystem::InputIntUnitlValid(const int min, const int max, std::string errorMessage)
+int InputSystem::InputIntUnitlValid(const int min, const int max, string inputMessage, string errorMessage)
 {
 	int result;
 	while (true)
 	{
+		cout << inputMessage;
 		if (InputInt(result, min, max))
 		{
 			break;
