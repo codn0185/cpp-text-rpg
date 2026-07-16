@@ -21,18 +21,18 @@ struct RewardDataRow
 	int exp;
 	std::vector<DropItemCandidate> dropItemCandidates;
 
-	RewardDataRow(int rewardExp, std::vector<DropItemCandidate> dropItemCandidates);
+	RewardDataRow(int exp, std::vector<DropItemCandidate> dropItemCandidates);
 };
 
 extern const std::map<EMosnterType, RewardDataRow> REWARD_TABLE;
 
 struct Reward
 {
-	int rewardExp;
+	int exp;
 	EItemID itemID;
 	int itemCount;
 
-	Reward(int rewardExp, EItemID itemID, int itemCount);
+	Reward(int exp, EItemID itemID, int itemCount);
 };
 
 class RewardSystem

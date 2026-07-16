@@ -9,8 +9,8 @@ DropItemCandidate::DropItemCandidate(EItemID itemID, float dropWeight, int minCo
 {
 }
 
-RewardDataRow::RewardDataRow(int rewardExp, vector<DropItemCandidate> dropItemCandidates)
-	: exp(rewardExp), dropItemCandidates(dropItemCandidates)
+RewardDataRow::RewardDataRow(int exp, vector<DropItemCandidate> dropItemCandidates)
+	: exp(exp), dropItemCandidates(dropItemCandidates)
 {
 }
 
@@ -29,8 +29,8 @@ const map<EMosnterType, RewardDataRow> REWARD_TABLE = {
 	})},
 };
 
-Reward::Reward(int rewardExp, EItemID itemID, int itemCount)
-	: rewardExp(rewardExp), itemID(itemID), itemCount(itemCount)
+Reward::Reward(int exp, EItemID itemID, int itemCount)
+	: exp(exp), itemID(itemID), itemCount(itemCount)
 {
 }
 

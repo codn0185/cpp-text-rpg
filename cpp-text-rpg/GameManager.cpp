@@ -269,7 +269,7 @@ void GameManager::onDungeonCombat()
 	{
 		// 보상 확인
 		const Reward& reward = RewardSystem::GetReward(monster->getMonsterType());
-		int rewardExp = reward.rewardExp;
+		int rewardExp = reward.exp;
 		EItemID dropItemID = reward.itemID;
 		int dropCount = reward.itemCount;
 		map<EItemID, int> droppedItems = {{dropItemID, dropCount}}; // TODO 이후 몬스터가 여러 종류의 아이템을 드랍하는 경우 수정
