@@ -22,6 +22,7 @@ void UISystem::PrintPlayerStat(Player* player)
 	int exp = player->getExp();
 	int requiredExp = LevelSystem::GetRequiredExp(player);
 	string levelText = "레벨: " + to_string(level) + " (" + to_string(exp) + "/" + to_string(requiredExp) + ")";
+	string goldText = "골드: " + to_string(player->getGold()) + "G";
 
 	string hpText = "HP: " + to_string(player->getCurrentHP()) + "/" + to_string(player->getMaxHP());
 	string mpText = "HP: " + to_string(player->getCurrentMP()) + "/" + to_string(player->getMaxMP());
@@ -29,7 +30,7 @@ void UISystem::PrintPlayerStat(Player* player)
 	string defenceText = "방어력: " + to_string(player->getDefence());
 
 	cout << "===============================================================" << "\n";
-	cout << nameText << " | " << jobText << " | " << levelText << "\n";
+	cout << nameText << " | " << jobText << " | " << levelText << " | " << goldText << "\n";
 	cout << "---------------------------------------------------------------" << "\n";
 	cout << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
 	cout << "===============================================================" << "\n";
