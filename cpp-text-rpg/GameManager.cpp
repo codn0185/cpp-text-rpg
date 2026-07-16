@@ -366,9 +366,9 @@ void GameManager::onInventoryOpen()
 	int sortNum;
 	string sortStr;
 	bool onInventoryOpen = true;
+	int option = InputSystem::InputIntUnitlValid(0, 2, "선택: ", "* 잘못된 입력입니다.\n");
 	while (onInventoryOpen)
 	{
-		int option = InputSystem::InputIntUnitlValid(0, 2, "선택: ", "* 잘못된 입력입니다.\n");
 		switch (option)
 		{
 		case 0:
