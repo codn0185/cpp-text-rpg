@@ -41,6 +41,7 @@ public:
 	bool isFullSlot(); // 슬롯 가득 찼는지 여부
 
 	int getItemCount(EItemID itemID); // 아이템 개수 반환
+	bool hasItem(EItemID itemID, int count = 1); // 아이템 가지고 있는지 여부
 	int addItem(EItemID itemID, int amount = 1); // 아이템 추가 (추가 못하고 남은 수 반환)
 	bool removeItem(EItemID itemID, int amount = 1); // 아이템 제거 (제거 가능 여부 반환)
 

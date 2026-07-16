@@ -102,6 +102,11 @@ int Inventory::getItemCount(EItemID itemID)
 	return itemCounts[itemID];
 }
 
+bool Inventory::hasItem(EItemID itemID, int count)
+{
+	return itemCounts[itemID] >= count;
+}
+
 int Inventory::addItem(EItemID itemID, int amount)
 {
 	// 동일한 종류 아이템 슬롯 우선 채우기
