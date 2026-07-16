@@ -17,7 +17,7 @@ bool InputSystem::InputString(string& out)
 	return true;
 }
 
-bool InputSystem::InputInt(int& out)
+bool InputSystem::InputInt(int& out, const int min, const int max)
 {
 	if (!(cin >> out))
 	{
@@ -27,20 +27,24 @@ bool InputSystem::InputInt(int& out)
 		return false;
 	}
 
-	return true;
-}
-
-bool InputSystem::InputInt(int& out, const int min, const int max)
-{
-	if (!InputInt(out))
-	{
-		return false;
-	}
-
 	if (out < min || out > max)
 	{
 		return false;
 	}
 
 	return true;
+}
+
+int InputSystem::InputIntUnitlValid(const int min, const int max, std::string errorMessage)
+{
+	int result;
+	while (true)
+	{
+		if (InputInt(result, min, max))
+		{
+			break;
+		}
+		cout << errorMessage;
+	}
+	return result
 }
