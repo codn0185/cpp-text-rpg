@@ -134,11 +134,7 @@ void GameManager::onPlayerResitration()
 		std::cout << "4. 방어력 2배  5. 현재 능력치  0. 게임 시작" << "\n";
 		std::cout << "============================================" << "\n";
 
-		// 번호 선택
-		std::cout << "번호를 선택해주세요: ";
-		int option;
-		InputSystem::InputInt(option, 0, 5);
-
+		int option = InputSystem::InputIntUnitlValid(0, 5, "번호를 선택해주세요: ", "* 잘못된 입력입니다.\n");
 		switch (option)
 		{
 		case 0:
@@ -173,11 +169,7 @@ void GameManager::onPlayerResitration()
 	std::cout << name + "님, 직업을 선택해주세요!" << "\n";
 	std::cout << "1. 전사   2. 마법사   3. 도적   4. 궁수" << "\n";
 
-	std::cout << "선택: ";
-	int jobNumber;
-	std::cin >> jobNumber;
-	std::cin.ignore(INT_MAX, '\n');
-
+	int jobNumber = InputSystem::InputIntUnitlValid(1, 4, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (jobNumber)
 	{
 	case 1:
@@ -213,18 +205,13 @@ void GameManager::onMainMenu()
 	std::cout << "0. 게임 종료" << "\n";
 	std::cout << "============================================" << "\n";
 
-	int option;
-	std::cout << "선택: ";
-	std::cin >> option;
-	std::cin.ignore(INT_MAX, '\n');
-
+	int option = InputSystem::InputIntUnitlValid(1, 3, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (option)
 	{
 	case 1:
 		switchGameState(EGameState::DUNGEON_ENTER);
 		break;
 	case 2:
-		// InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
 		switchGameState(EGameState::INVENTORY_OPEN);
 		break;
 	case 3:
@@ -248,11 +235,7 @@ void GameManager::onDungeonEnter()
 	std::cout << "0. 던전 나가기" << "\n";
 	std::cout << "============================================" << "\n";
 
-	int option;
-	std::cout << "선택: ";
-	std::cin >> option;
-	std::cin.ignore(INT_MAX, '\n');
-
+	int option = InputSystem::InputIntUnitlValid(0, 3, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (option)
 	{
 	case 1:
@@ -335,34 +318,27 @@ void GameManager::onDungeonCombat()
 			string remainedItemName = ITEM_TABLE.at(remainedItemID)->name;
 			std::cout << "배낭 공간이 부족합니다!" << " \"" << remainedItemName << "\" " << renmainedCount << "개와 교체할 슬롯을 선택하세요." << "\n";
 			InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
-			std::cout << "교체할 슬롯 번호 (0: 아이템 포기): ";
-			int slotNumber;
+			std::cout << "교체할 슬롯 번호를 선택하세요. (0: 아이템 포기)" << "\n";
 			while (true)
 			{
-				if (InputSystem::InputInt(slotNumber, 0, backpackInventory->getUsedSlotCount()))
+				int slotNumber = InputSystem::InputIntUnitlValid(0, backpackInventory->getUsedSlotCount(), "선택: ", "* 잘못된 입력입니다.\n");
+				if (slotNumber == 0)
 				{
-					if (slotNumber == 0)
-					{
-						std::cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
-					}
-					else
-					{
-						const vector<Slot>& inventorySlots = backpackInventory->getInventorySlots();
-						const Slot& slot = inventorySlots[slotNumber - 1];
-						EItemID abandonedItemID = slot.itemID;
-						int abandonedAmount = slot.count;
+					std::cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
+				}
+				else
+				{
+					const vector<Slot>& inventorySlots = backpackInventory->getInventorySlots();
+					const Slot& slot = inventorySlots[slotNumber - 1];
+					EItemID abandonedItemID = slot.itemID;
+					int abandonedAmount = slot.count;
 
-						backpackInventory->removeItem(abandonedItemID, abandonedAmount);
-						backpackInventory->addItem(remainedItemID, renmainedCount);
+					backpackInventory->removeItem(abandonedItemID, abandonedAmount);
+					backpackInventory->addItem(remainedItemID, renmainedCount);
 
-						std::cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
-						break;
-					}
-
+					std::cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
 					break;
 				}
-
-				std::cout << "다시 입력하세요." << "\n";
 			}
 		}
 
@@ -387,20 +363,12 @@ void GameManager::onInventoryOpen()
 	std::cout << "2: 배낭 열기" << "\n";
 	std::cout << "0: 메인 메뉴" << "\n";
 
-	std::cout << "입력: ";
-	int option;
-	if (!InputSystem::InputInt(option, 0, 2))
-	{
-		cout << "다시 입력하세요." << "\n";
-		return;
-	}
-
 	int sortNum;
 	string sortStr;
-
 	bool onInventoryOpen = true;
 	while (onInventoryOpen)
 	{
+		int option = InputSystem::InputIntUnitlValid(0, 2, "선택: ", "* 잘못된 입력입니다.\n");
 		switch (option)
 		{
 		case 0:
@@ -547,15 +515,10 @@ void GameManager::onPotionShopEnter()
 	std::cout << "0. 돌아가기" << "\n";
 	std::cout << "============================================" << "\n";
 
-	std::cout << "입력: ";
-	int option;
-	if (!InputSystem::InputInt(option, 0, 5))
-	{
-		cout << "다시 입력하세요." << "\n";
-		return;
-	}
+
 
 	string target;
+	int option = InputSystem::InputIntUnitlValid(0, 5, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (option)
 	{
 	case 1:
@@ -565,13 +528,13 @@ void GameManager::onPotionShopEnter()
 	case 2:
 		// 포션 이름 검색
 		std::cout << "검색할 포션 이름: ";
-		std::cin >> target;
+		InputSystem::InputString(target);
 		PotionSystem::SearchByPotionName(target);
 		break;
 	case 3:
 		// 포션 재료 검색
 		std::cout << "검색할 재료 이름: ";
-		std::cin >> target;
+		InputSystem::InputString(target);
 		PotionSystem::SearchByIngredient(target);
 		break;
 	case 4:
@@ -581,16 +544,9 @@ void GameManager::onPotionShopEnter()
 	{
 		PotionSystem::ShowAllRecipes();
 		vector<EItemID> potionIDs = PotionSystem::GetPotionIDs();
-		cout << "제작할 포션을 선택: ";
 
-		int targetNum;
-		bool valid = InputSystem::InputInt(targetNum, 0, (int) potionIDs.size());
-
-		if (!valid || targetNum == 0)
-		{
-			//
-		}
-		else
+		int targetNum = InputSystem::InputIntUnitlValid(0, (int) potionIDs.size(), "제작할 포션 선택: ", "* 잘못된 입력입니다.\n");
+		if (targetNum != 0)
 		{
 			EItemID potionID = potionIDs[targetNum - 1];
 			if (CrafterSystem::CraftItem(potionID, backpackInventory))
@@ -615,7 +571,7 @@ void GameManager::onPotionShopEnter()
 void GameManager::onGameExit()
 {
 	std::cout << "============================================" << "\n";
-	std::cout << "게임 종료" << "\n";
+	std::cout << "                  게임 종료                  " << "\n";
 	std::cout << "============================================" << "\n";
 	isRunning = false;
 }
