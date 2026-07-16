@@ -77,6 +77,7 @@ void InventorySystem::DisplayItemCounts(map<EItemID, int> items, string name)
 
 void InventorySystem::SortInventorySlots(Inventory* inventory, EInventorySortKey sortKey, bool reverse)
 {
+	inventory->compact();
 	switch (sortKey)
 	{
 	case EInventorySortKey::Name:
