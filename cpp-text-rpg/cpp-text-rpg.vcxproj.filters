@@ -25,9 +25,6 @@
     <Filter Include="Systems">
       <UniqueIdentifier>{957ce698-38de-4f34-9ea3-331b87d98c21}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\GameManager">
-      <UniqueIdentifier>{c832470c-0036-4f6a-85d7-db53a43ac8fd}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems\PotionSystem">
       <UniqueIdentifier>{2a1c7701-af99-4d80-860a-d4d87474b7dc}</UniqueIdentifier>
     </Filter>
@@ -46,9 +43,6 @@
     <Filter Include="Systems\LevelSystem">
       <UniqueIdentifier>{3c457d97-635d-4002-8d9b-c3cfe10093d6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\CombatManager">
-      <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Inventory">
       <UniqueIdentifier>{b5c11597-8a23-42fe-979d-515f36e272ed}</UniqueIdentifier>
     </Filter>
@@ -63,6 +57,18 @@
     </Filter>
     <Filter Include="Item">
       <UniqueIdentifier>{5e4527ec-26b6-4d7e-9f8f-6239edd74142}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{7c8ab127-ed02-4124-9b06-dded06c0671d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\CombatManager">
+      <UniqueIdentifier>{10b65acb-bd5d-4cc2-b6b6-c75f1917742e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\GameManager">
+      <UniqueIdentifier>{c832470c-0036-4f6a-85d7-db53a43ac8fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\ShopManager">
+      <UniqueIdentifier>{cc733699-87e8-4149-9a5f-a7ac8a7b58fc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +109,10 @@
       <Filter>Characters\Monsters</Filter>
     </ClCompile>
     <ClCompile Include="CombatManager.cpp">
-      <Filter>Systems\CombatManager</Filter>
+      <Filter>Managers\CombatManager</Filter>
     </ClCompile>
     <ClCompile Include="GameManager.cpp">
-      <Filter>Systems\GameManager</Filter>
+      <Filter>Managers\GameManager</Filter>
     </ClCompile>
     <ClCompile Include="PotionSystem.cpp">
       <Filter>Systems\PotionSystem</Filter>
@@ -140,6 +146,9 @@
     </ClCompile>
     <ClCompile Include="CrafterSystem.cpp">
       <Filter>Systems\CrafterSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopManager.cpp">
+      <Filter>Managers\ShopManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -183,10 +192,10 @@
       <Filter>Characters\Monsters</Filter>
     </ClInclude>
     <ClInclude Include="CombatManager.h">
-      <Filter>Systems\CombatManager</Filter>
+      <Filter>Managers\CombatManager</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Systems\GameManager</Filter>
+      <Filter>Managers\GameManager</Filter>
     </ClInclude>
     <ClInclude Include="PotionSystem.h">
       <Filter>Systems\PotionSystem</Filter>
@@ -223,6 +232,9 @@
     </ClInclude>
     <ClInclude Include="CrafterSystem.h">
       <Filter>Systems\CrafterSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopManager.h">
+      <Filter>Managers\ShopManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
