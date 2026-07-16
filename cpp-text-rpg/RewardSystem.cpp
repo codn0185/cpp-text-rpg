@@ -9,28 +9,28 @@ DropItemCandidate::DropItemCandidate(EItemID itemID, float dropWeight, int minCo
 {
 }
 
-RewardDataRow::RewardDataRow(int exp, vector<DropItemCandidate> dropItemCandidates)
-	: exp(exp), dropItemCandidates(dropItemCandidates)
+RewardDataRow::RewardDataRow(int exp, int gold, vector<DropItemCandidate> dropItemCandidates)
+	: exp(exp), gold(gold), dropItemCandidates(dropItemCandidates)
 {
 }
 
 const map<EMosnterType, RewardDataRow> REWARD_TABLE = {
-	{EMosnterType::Slime, RewardDataRow(30, {
+	{EMosnterType::Slime, RewardDataRow(30, 12, {
 		DropItemCandidate(EItemID::SLIME_JELLY, 40., 1, 3),
 		DropItemCandidate(EItemID::WATER, 30., 1, 3),
 	})},
-	{EMosnterType::Goblin, RewardDataRow(32, {
+	{EMosnterType::Goblin, RewardDataRow(32, 14, {
 		DropItemCandidate(EItemID::GOBLIN_BLOOD, 40., 1, 3),
 		DropItemCandidate(EItemID::HEALING_HERB, 30., 1, 2),
 	})},
-	{EMosnterType::Skeleton, RewardDataRow(35, {
+	{EMosnterType::Skeleton, RewardDataRow(35, 14, {
 		DropItemCandidate(EItemID::SKELETON_BONE, 40., 1, 3),
 		DropItemCandidate(EItemID::MANA_DUST, 30., 1, 2),
 	})},
 };
 
-Reward::Reward(int exp, EItemID itemID, int itemCount)
-	: exp(exp), itemID(itemID), itemCount(itemCount)
+Reward::Reward(int exp, int gold, EItemID itemID, int itemCount)
+	: exp(exp), gold(gold), itemID(itemID), itemCount(itemCount)
 {
 }
 

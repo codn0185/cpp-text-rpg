@@ -19,9 +19,10 @@ struct DropItemCandidate
 struct RewardDataRow
 {
 	int exp;
+	int gold;
 	std::vector<DropItemCandidate> dropItemCandidates;
 
-	RewardDataRow(int exp, std::vector<DropItemCandidate> dropItemCandidates);
+	RewardDataRow(int exp, int gold, std::vector<DropItemCandidate> dropItemCandidates);
 };
 
 extern const std::map<EMosnterType, RewardDataRow> REWARD_TABLE;
@@ -29,10 +30,11 @@ extern const std::map<EMosnterType, RewardDataRow> REWARD_TABLE;
 struct Reward
 {
 	int exp;
+	int gold;
 	EItemID itemID;
 	int itemCount;
 
-	Reward(int exp, EItemID itemID, int itemCount);
+	Reward(int exp, int gold, EItemID itemID, int itemCount);
 };
 
 class RewardSystem
