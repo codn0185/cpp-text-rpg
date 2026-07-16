@@ -43,8 +43,9 @@ Reward RewardSystem::GetReward(EMosnterType mosnterType)
 	}
 
 	int rewardExp = REWARD_TABLE.at(mosnterType).exp;
+	int rewardGold = REWARD_TABLE.at(mosnterType).gold;
 	DropItemCandidate dropItem = RandomSystem::GetRandomByWeight<DropItemCandidate>(REWARD_TABLE.at(mosnterType).dropItemCandidates, weights);
 	int dropItemCount = RandomSystem::GetRandomInt(dropItem.minCount, dropItem.maxCount);
 
-	return Reward(rewardExp, dropItem.itemID, dropItemCount);
+	return Reward(rewardExp, rewardGold, dropItem.itemID, dropItemCount);
 }
