@@ -9,6 +9,7 @@
 class PotionSystem
 {
 private:
+	static std::string GetLowerString(std::string str);
 	static std::string FormatIngredients(std::map<EItemID, int> ingredients);
 public:
 	// Use Potion

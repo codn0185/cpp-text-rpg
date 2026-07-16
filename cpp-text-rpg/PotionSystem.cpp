@@ -2,8 +2,15 @@
 
 #include <iostream>
 #include <algorithm>
+#include <cctype>
 
 using namespace std;
+
+string PotionSystem::GetLowerString(string str)
+{
+	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {return tolower(c); });
+	return str;
+}
 
 string PotionSystem::FormatIngredients(map<EItemID, int> ingredients)
 {
@@ -74,6 +81,7 @@ void PotionSystem::ShowAllRecipes()
 
 void PotionSystem::SearchByPotionName(string target)
 {
+	target = GetLowerString(target);
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
@@ -81,7 +89,7 @@ void PotionSystem::SearchByPotionName(string target)
 		if (item->isCraftable)
 		{
 			string potionName = potion->name;
-			if (potionName.find(target) != string::npos)
+			if (GetLowerString(potionName).find(target) != string::npos)
 			{
 				cout << row++ << ". " << potionName << " —— [" << FormatIngredients(potion->ingredients) << "]" << "\n";
 			}
@@ -91,6 +99,7 @@ void PotionSystem::SearchByPotionName(string target)
 
 void PotionSystem::SearchByIngredient(string target)
 {
+	target = GetLowerString(target);
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
@@ -100,7 +109,8 @@ void PotionSystem::SearchByIngredient(string target)
 			bool find = false;
 			for (const auto& [itemID, count] : potion->ingredients)
 			{
-				if (ITEM_TABLE.at(itemID)->name.find(target) != string::npos)
+				string ingredientnName = ITEM_TABLE.at(itemID)->name;
+				if (GetLowerString(ingredientnName).find(target) != string::npos)
 				{
 					find = true;
 					break;
