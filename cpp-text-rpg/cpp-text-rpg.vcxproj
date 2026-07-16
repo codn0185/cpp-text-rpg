@@ -145,6 +145,7 @@
     <ClCompile Include="RewardSystem.cpp" />
     <ClCompile Include="Rogue.cpp" />
     <ClCompile Include="ShopManager.cpp" />
+    <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
@@ -173,6 +174,7 @@
     <ClInclude Include="RewardSystem.h" />
     <ClInclude Include="Rogue.h" />
     <ClInclude Include="ShopManager.h" />
+    <ClInclude Include="ShopSystem.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Slime.h" />

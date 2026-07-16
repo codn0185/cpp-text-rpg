@@ -70,6 +70,9 @@
     <Filter Include="Managers\ShopManager">
       <UniqueIdentifier>{cc733699-87e8-4149-9a5f-a7ac8a7b58fc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\ShopSystem">
+      <UniqueIdentifier>{38adc304-4e0c-4be2-99bb-7f4928bbb1e2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -149,6 +152,9 @@
     </ClCompile>
     <ClCompile Include="ShopManager.cpp">
       <Filter>Managers\ShopManager</Filter>
+    </ClCompile>
+    <ClCompile Include="ShopSystem.cpp">
+      <Filter>Systems\ShopSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -235,6 +241,9 @@
     </ClInclude>
     <ClInclude Include="ShopManager.h">
       <Filter>Managers\ShopManager</Filter>
+    </ClInclude>
+    <ClInclude Include="ShopSystem.h">
+      <Filter>Systems\ShopSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
