@@ -17,8 +17,10 @@ class Player : public Character
 {
 protected:
 	EPlayerJob job;
+
 	int level;
 	int exp;
+	int gold;
 
 public:
 	Player(std::string name, int maxHP, int maxMP, int power, int defence);
@@ -33,9 +35,11 @@ public:
 	EPlayerJob getJob();
 	int getLevel();
 	int getExp();
+	int getGold();
 
 	// Setters
 	void setJob(EPlayerJob job);
 	void setLevel(int level);
 	void setExp(int exp);
+	void setGold(int gold);
 };

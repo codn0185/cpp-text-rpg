@@ -3,7 +3,7 @@
 using namespace std;
 
 Player::Player(string name, int maxHP, int maxMP, int power, int defence)
-	: Character(name, maxHP, maxMP, power, defence), job(EPlayerJob::None), level(0), exp(0)
+	: Character(name, maxHP, maxMP, power, defence), job(EPlayerJob::None), level(0), exp(0), gold(0)
 {
 }
 
@@ -58,6 +58,11 @@ int Player::getExp()
 	return exp;
 }
 
+int Player::getGold()
+{
+	return gold;
+}
+
 // Setters
 void Player::setJob(EPlayerJob job)
 {
@@ -72,4 +77,9 @@ void Player::setLevel(int level)
 void Player::setExp(int exp)
 {
 	this->exp = exp;
+}
+
+void Player::setGold(int gold)
+{
+	this->gold = gold;
 }
