@@ -270,6 +270,7 @@ void GameManager::onDungeonCombat()
 		// 보상 확인
 		const Reward& reward = RewardSystem::GetReward(monster->getMonsterType());
 		int rewardExp = reward.exp;
+		int rewardGold = reward.gold;
 		EItemID dropItemID = reward.itemID;
 		int dropCount = reward.itemCount;
 		map<EItemID, int> droppedItems = {{dropItemID, dropCount}}; // TODO 이후 몬스터가 여러 종류의 아이템을 드랍하는 경우 수정
@@ -280,6 +281,11 @@ void GameManager::onDungeonCombat()
 		int prevExp = player->getExp();
 		std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << LevelSystem::GetRequiredExp(player) << ")" << "\n";
 		LevelSystem::AddExp(player, rewardExp);
+
+		// 골드 획득
+		std::cout << "\n";
+		cout << " > +" << rewardGold << "G 획득" << "\n";
+		player->setGold(player->getGold() + rewardGold);
 
 		// 드랍 아이템 확인
 		std::cout << "\n";
