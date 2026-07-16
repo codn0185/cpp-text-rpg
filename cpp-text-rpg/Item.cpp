@@ -10,6 +10,7 @@ const map<EItemID, shared_ptr<Item>> ITEM_TABLE = {
 	{EItemID::HP_POTION_20, make_shared<Item>(Potion(EItemID::HP_POTION_20, EPotionType::HP_POTION, "HP 포션 (소형)", "HP를 20만큼 회복한다.", 30, 20, {{EItemID::WATER, 1}, {EItemID::HEALING_HERB, 2}}))},
 	{EItemID::MP_POTION_20, make_shared<Item>(Potion(EItemID::MP_POTION_20, EPotionType::MP_POTION, "MP 포션 (소형)", "MP를 20만큼 회복한다.", 30, 20, {{EItemID::WATER, 1}, {EItemID::MANA_DUST, 2}}))},
 	// 재료
+	{EItemID::BOTTLE, make_shared<Item>(Ingredient(EItemID::BOTTLE, "공병", "", 3))},
 	{EItemID::WATER, make_shared<Item>(Ingredient(EItemID::WATER, "물", "", 5))},
 	{EItemID::HEALING_HERB, make_shared<Item>(Ingredient(EItemID::HEALING_HERB, "치료 허브", "", 25))},
 	{EItemID::MANA_DUST, make_shared<Item>(Ingredient(EItemID::MANA_DUST, "마나 가루", "", 20))},

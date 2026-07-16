@@ -10,6 +10,7 @@ enum EItemID
 	HP_POTION_20,
 	MP_POTION_20,
 	// 재료
+	BOTTLE, // 공병 (포션 재료 및 포션 사용 시 자동 반환)
 	WATER,
 	HEALING_HERB,
 	MANA_DUST,
