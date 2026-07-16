@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Inventory.h"
-#include "Items.h"
 
 class CrafterSystem
 {

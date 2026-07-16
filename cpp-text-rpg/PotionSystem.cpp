@@ -1,6 +1,7 @@
 #include "PotionSystem.h"
 
 #include <iostream>
+#include <algorithm>
 
 using namespace std;
 
@@ -63,8 +64,8 @@ void PotionSystem::ShowAllRecipes()
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(item.get());
-		if (potion != nullptr)
+		const auto& potion = item.get();
+		if (item->isCraftable)
 		{
 			cout << row++ << ". " << potion->name << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
 		}
@@ -76,8 +77,8 @@ void PotionSystem::SearchByPotionName(string target)
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(item.get());
-		if (potion != nullptr)
+		const auto& potion = item.get();
+		if (item->isCraftable)
 		{
 			string potionName = potion->name;
 			if (potionName.find(target) != string::npos)
@@ -93,8 +94,8 @@ void PotionSystem::SearchByIngredient(string target)
 	int row = 1;
 	for (const auto& [itemID, item] : ITEM_TABLE)
 	{
-		const Potion* potion = static_cast<const Potion*>(item.get());
-		if (potion != nullptr)
+		const auto& potion = item.get();
+		if (item->isCraftable)
 		{
 			bool find = false;
 			for (const auto& [itemID, count] : potion->ingredients)

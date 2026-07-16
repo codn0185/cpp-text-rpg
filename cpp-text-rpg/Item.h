@@ -35,7 +35,18 @@ struct Item
 	std::string description;
 	int price;
 
-	Item(EItemID itemID, EItemType itemType, std::string name, std::string description = "", int price = 0);
+	bool isCraftable; // 제작 가능 여부
+	std::map<EItemID, int> ingredients; // 제작 재료
+
+	Item(
+		EItemID itemID,
+		EItemType itemType,
+		std::string name,
+		std::string description = "",
+		int price = 0,
+		bool isCraftable = false,
+		std::map<EItemID, int> ingredients = {}
+	);
 };
 
 extern const std::map<EItemID, std::shared_ptr<Item>> ITEM_TABLE;
