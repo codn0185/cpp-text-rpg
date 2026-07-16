@@ -91,13 +91,7 @@ void CombatManager::onPlayerTurn()
 	cout << "3. 아이템 사용" << "\n";
 	cout << "============================================" << "\n";
 
-	int option;
-	cout << "선택: ";
-	if (!InputSystem::InputInt(option, 1, 3))
-	{
-		cout << "다시 입력하세요." << "\n";
-		return;
-	}
+	int option = InputSystem::InputIntUnitlValid(1, 3, "입력: ", "* 잘못된 입력입니다.\n");
 
 	switch (option)
 	{
@@ -168,15 +162,7 @@ void CombatManager::onPlayerUsingItem()
 	const map<EItemID, int> itemCounts = inventory->getItemCounts({}, {EItemType::POTION});
 	InventorySystem::DisplayItemCounts(itemCounts);
 
-	// 선택 및 사용 로직 추가
-	cout << "사용할 아이템 선택 (0: 뒤로가기): ";
-	int option;
-	if (!InputSystem::InputInt(option, 0, (int) itemCounts.size())) // 잘못된 입력
-	{
-		cout << "다시 입력하세요." << "\n";
-		return;
-	}
-
+	int option = InputSystem::InputIntUnitlValid(0, (int) itemCounts.size(), "사용할 아이템 선택 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
 	if (option == 0) // 뒤로가기
 	{
 		switchCombatState(ECombatState::PlayerTurn);
