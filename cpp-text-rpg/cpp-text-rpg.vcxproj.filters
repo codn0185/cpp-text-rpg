@@ -120,9 +120,6 @@
     <ClCompile Include="InventorySystem.cpp">
       <Filter>Systems\InventorySystem</Filter>
     </ClCompile>
-    <ClCompile Include="ItemSorter.cpp">
-      <Filter>Systems\InventorySystem</Filter>
-    </ClCompile>
     <ClCompile Include="RandomSystem.cpp">
       <Filter>Systems\RandomSystem</Filter>
     </ClCompile>
@@ -204,9 +201,6 @@
       <Filter>Systems\SpawnManager</Filter>
     </ClInclude>
     <ClInclude Include="InventorySystem.h">
-      <Filter>Systems\InventorySystem</Filter>
-    </ClInclude>
-    <ClInclude Include="ItemSorter.h">
       <Filter>Systems\InventorySystem</Filter>
     </ClInclude>
     <ClInclude Include="RandomSystem.h">

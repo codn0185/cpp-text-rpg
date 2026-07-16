@@ -135,7 +135,6 @@
     <ClCompile Include="InventorySystem.cpp" />
     <ClCompile Include="Ingredient.cpp" />
     <ClCompile Include="Item.cpp" />
-    <ClCompile Include="ItemSorter.cpp" />
     <ClCompile Include="LevelSystem.cpp" />
     <ClCompile Include="Mage.cpp" />
     <ClCompile Include="Monster.cpp" />
@@ -164,7 +163,6 @@
     <ClInclude Include="Ingredient.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="Items.h" />
-    <ClInclude Include="ItemSorter.h" />
     <ClInclude Include="LevelSystem.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Monster.h" />
