@@ -543,13 +543,17 @@ void GameManager::onPotionShopEnter()
 	std::cout << "2. 검색 - 포션 이름" << "\n";
 	std::cout << "3. 검색 - 재료 이름" << "\n";
 	std::cout << "4. 인벤토리 확인" << "\n";
+	std::cout << "5. 포션 제작" << "\n";
 	std::cout << "0. 돌아가기" << "\n";
 	std::cout << "============================================" << "\n";
 
+	std::cout << "입력: ";
 	int option;
-	std::cout << "선택: ";
-	std::cin >> option;
-	std::cin.ignore(INT_MAX, '\n');
+	if (!InputSystem::InputInt(option, 0, 5))
+	{
+		cout << "다시 입력하세요." << "\n";
+		return;
+	}
 
 	string target;
 	switch (option)
@@ -573,6 +577,33 @@ void GameManager::onPotionShopEnter()
 	case 4:
 		InventorySystem::DisplayInventory(backpackInventory);
 		break;
+	case 5:
+	{
+		PotionSystem::ShowAllRecipes();
+		vector<EItemID> potionIDs = PotionSystem::GetPotionIDs();
+		cout << "제작할 포션을 선택: ";
+
+		int targetNum;
+		bool valid = InputSystem::InputInt(targetNum, 0, (int) potionIDs.size());
+
+		if (!valid || targetNum == 0)
+		{
+			//
+		}
+		else
+		{
+			EItemID potionID = potionIDs[targetNum - 1];
+			if (CrafterSystem::CraftItem(potionID, backpackInventory))
+			{
+				cout << " > \"" << ITEM_TABLE.at(potionID)->name << "\" 제작 성공!" << "\n";
+			}
+			else
+			{
+				cout << " > 재료가 부족하여 제작할 수 없습니다." << "\n";
+			}
+		}
+		break;
+	}
 	case 0:
 		switchGameState(EGameState::MAIN_MENU);
 		break;

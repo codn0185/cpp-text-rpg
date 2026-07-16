@@ -11,6 +11,7 @@
 #include "InventorySystem.h"
 #include "LevelSystem.h"
 #include "RewardSystem.h"
+#include "CrafterSystem.h"
 
 enum class EGameState
 {
