@@ -405,6 +405,7 @@ void GameManager::onInventoryOpen()
 		{
 		case 0:
 			switchGameState(EGameState::MAIN_MENU);
+			onInventoryOpen = false;
 			break;
 		case 1: // 창고 - stockInventory
 			InventorySystem::DisplayInventory(stockInventory, "창고");
