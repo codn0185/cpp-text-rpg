@@ -34,6 +34,7 @@ bool PotionSystem::UsePotion(Player* player, Inventory* inventory, EItemID potio
 			player->setCurrentHP(min(prevHP + 20, player->getMaxHP()));
 			inventory->removeItem(EItemID::HP_POTION_20);
 			std::cout << "* HP를 20 회복했습니다. (" << prevHP << "/" << player->getMaxHP() << " -> " << player->getCurrentHP() << "/" << player->getMaxHP() << ") ── [남은 HP 포션: " << inventory->getItemCount(EItemID::HP_POTION_20) << "개]" << "\n";
+			inventory->addItem(EItemID::BOTTLE); // 공병 반환
 			return true;
 		}
 		std::cout << "HP가 가득 차서 사용할 수 없습니다." << "\n"; // HP 포션 사용 불가능
@@ -45,6 +46,7 @@ bool PotionSystem::UsePotion(Player* player, Inventory* inventory, EItemID potio
 			player->setCurrentMP(min(prevMP + 20, player->getMaxMP()));
 			inventory->removeItem(EItemID::MP_POTION_20);
 			std::cout << "* MP를 20 회복했습니다. (" << prevMP << "/" << player->getMaxMP() << " -> " << player->getCurrentMP() << "/" << player->getMaxMP() << ") ── [남은 MP 포션: " << inventory->getItemCount(EItemID::MP_POTION_20) << "개]" << "\n";
+			inventory->addItem(EItemID::BOTTLE); // 공병 반환
 			return true;
 		}
 		std::cout << "MP가 가득 차서 사용할 수 없습니다." << "\n"; // MP 포션 사용 불가능
