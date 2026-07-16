@@ -10,7 +10,7 @@ DropItemCandidate::DropItemCandidate(EItemID itemID, float dropWeight, int minCo
 }
 
 RewardDataRow::RewardDataRow(int rewardExp, vector<DropItemCandidate> dropItemCandidates)
-	: rewardExp(rewardExp), dropItemCandidates(dropItemCandidates)
+	: exp(rewardExp), dropItemCandidates(dropItemCandidates)
 {
 }
 
@@ -42,7 +42,7 @@ Reward RewardSystem::GetReward(EMosnterType mosnterType)
 		weights.push_back(dropItemCandidate.dropWeight);
 	}
 
-	int rewardExp = REWARD_TABLE.at(mosnterType).rewardExp;
+	int rewardExp = REWARD_TABLE.at(mosnterType).exp;
 	DropItemCandidate dropItem = RandomSystem::GetRandomByWeight<DropItemCandidate>(REWARD_TABLE.at(mosnterType).dropItemCandidates, weights);
 	int dropItemCount = RandomSystem::GetRandomInt(dropItem.minCount, dropItem.maxCount);
 

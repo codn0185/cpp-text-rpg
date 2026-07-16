@@ -18,7 +18,7 @@ struct DropItemCandidate
 
 struct RewardDataRow
 {
-	int rewardExp;
+	int exp;
 	std::vector<DropItemCandidate> dropItemCandidates;
 
 	RewardDataRow(int rewardExp, std::vector<DropItemCandidate> dropItemCandidates);
