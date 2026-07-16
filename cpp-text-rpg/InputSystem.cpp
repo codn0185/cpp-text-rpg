@@ -47,5 +47,5 @@ int InputSystem::InputIntUnitlValid(const int min, const int max, string inputMe
 		}
 		cout << errorMessage;
 	}
-	return result
+	return result;
 }
