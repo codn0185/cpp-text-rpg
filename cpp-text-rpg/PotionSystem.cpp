@@ -112,3 +112,16 @@ void PotionSystem::SearchByIngredient(string target)
 		}
 	}
 }
+
+vector<EItemID> PotionSystem::GetPotionIDs()
+{
+	vector<EItemID> potions;
+	for (const auto& [itemID, item] : ITEM_TABLE)
+	{
+		if (item->itemType == EItemType::POTION)
+		{
+			potions.push_back(item->itemID);
+		}
+	}
+	return potions;
+}

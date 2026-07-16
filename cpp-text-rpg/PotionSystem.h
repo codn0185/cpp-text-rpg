@@ -20,5 +20,7 @@ public:
 	static void SearchByPotionName(std::string potionName);
 	static void SearchByIngredient(std::string ingredientName);
 
+	// get
+	static std::vector<EItemID> GetPotionIDs();
 };
 
