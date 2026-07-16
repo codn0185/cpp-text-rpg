@@ -75,7 +75,7 @@ void CombatManager::switchCombatState(ECombatState newCombatState)
 
 void CombatManager::onBattleInit()
 {
-	cout << monster->getName() << "이/가 나타났다!" << "\n";
+	cout << monster->getName() << "이(가) 나타났다!" << "\n";
 
 	switchCombatState(ECombatState::PlayerTurn);
 }
@@ -121,7 +121,7 @@ void CombatManager::onCheckVictory()
 {
 	if (monster->isDead())
 	{
-		cout << monster->getName() << "를/을 처치했습니다!" << "\n";
+		cout << monster->getName() << "을(를) 처치했습니다!" << "\n";
 		switchCombatState(ECombatState::PlayerVictory);
 	}
 	else
@@ -152,7 +152,7 @@ void CombatManager::onCheckDefeat()
 void CombatManager::onPlayerVictory()
 {
 	cout << "\n" << "========== 전투 승리 ==========" << "\n";
-	cout << monster->getName() << "와/과의 전투에서 승리하였다!" << "\n";
+	cout << monster->getName() << "와(과)의 전투에서 승리하였다!" << "\n";
 	isCombatRunning = false;
 }
 
