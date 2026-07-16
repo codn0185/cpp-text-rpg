@@ -67,7 +67,7 @@ void PotionSystem::ShowAllRecipes()
 		const auto& potion = item.get();
 		if (item->isCraftable)
 		{
-			cout << row++ << ". " << potion->name << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
+			cout << row++ << ". " << potion->name << " —— [" << FormatIngredients(potion->ingredients) << "]" << "\n";
 		}
 	}
 }
@@ -83,7 +83,7 @@ void PotionSystem::SearchByPotionName(string target)
 			string potionName = potion->name;
 			if (potionName.find(target) != string::npos)
 			{
-				cout << row++ << ". " << potionName << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
+				cout << row++ << ". " << potionName << " —— [" << FormatIngredients(potion->ingredients) << "]" << "\n";
 			}
 		}
 	}
@@ -108,7 +108,7 @@ void PotionSystem::SearchByIngredient(string target)
 			}
 			if (find)
 			{
-				cout << row++ << ". " << potion->name << " (" << FormatIngredients(potion->ingredients) << ")" << "\n";
+				cout << row++ << ". " << potion->name << " —— [" << FormatIngredients(potion->ingredients) << "]" << "\n";
 			}
 		}
 	}
