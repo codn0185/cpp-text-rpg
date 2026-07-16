@@ -61,6 +61,9 @@
     <Filter Include="Systems\InputSystem">
       <UniqueIdentifier>{7d2302ad-0b07-4700-a605-5a233b92990f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\CrafterSystem">
+      <UniqueIdentifier>{205c40b5-4504-4561-83dc-eb0365bbe39b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -140,6 +143,9 @@
     </ClCompile>
     <ClCompile Include="InputSystem.cpp">
       <Filter>Systems\InputSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="CrafterSystem.cpp">
+      <Filter>Systems\CrafterSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -229,6 +235,9 @@
     </ClInclude>
     <ClInclude Include="InputSystem.h">
       <Filter>Systems\InputSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="CrafterSystem.h">
+      <Filter>Systems\CrafterSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
