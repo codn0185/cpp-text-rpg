@@ -167,7 +167,7 @@ void ShopManager::onShopSale()
 	}
 
 	// 판매 시도 - 이후 판매 목록 다시 보여주기
-	bool success = ShopSystem::PruchaseItem(player, backpackInventory, saleItemID, saleCount);
+	bool success = ShopSystem::SaleItem(player, backpackInventory, saleItemID, saleCount);
 	if (!success) // 판매 실패
 	{
 		cout << " > \"" << saleItemName << "\" " << saleCount << "개 판매에 실패하였습니다." << "\n";
