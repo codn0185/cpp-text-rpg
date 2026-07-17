@@ -69,8 +69,8 @@ void ShopManager::onShopEnter()
 		switchShopState(EShopState::SHOP_SALE);
 		break;
 	case 3:
-		InventorySystem::DisplayInventory(backpackInventory, "창고");
 		InventorySystem::DisplayInventory(stockInventory, "배낭");
+		InventorySystem::DisplayInventory(backpackInventory, "창고");
 		break;
 	default:
 		break;
@@ -94,7 +94,9 @@ void ShopManager::onShopPurchase()
 		cout << i + 1 << ". " << itemName << " ── (" << purchasePrice << "g)" << "\n";
 	}
 	cout << "============================================" << "\n";
-	cout << "[" << player->getName() << "이(가) 소유한 골드: " << player->getGold() << "G]" << "\n";
+
+	int gold = player->getGold();
+	cout << "[" << player->getName() << "이(가) 소유한 골드: " << gold << "G]" << "\n";
 
 	// 구매할 아이템 선택
 	int itemNum = InputSystem::InputIntUnitlValid(0, itemIDs.size(), "아이템 구매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
@@ -122,6 +124,7 @@ void ShopManager::onShopPurchase()
 	else // 구매 성공
 	{
 		cout << " > \"" << purchaseItemName << "\" " << purchaseCount << "개 구매 성공!" << "\n";
+		cout << "[" << gold << "G -> " << player->getGold() << "G]" << "\n";
 	}
 }
 
@@ -143,7 +146,9 @@ void ShopManager::onShopSale()
 		cout << i + 1 << ". " << itemName << " ── (" << salePrice << "g) [재고: " << stockCount << "개]" << "\n";
 	}
 	cout << "============================================" << "\n";
-	cout << "[" << player->getName() << "이(가) 소유한 골드: " << player->getGold() << "G]" << "\n";
+
+	int gold = player->getGold();
+	cout << "[" << player->getName() << "이(가) 소유한 골드: " << gold << "G]" << "\n";
 
 	// 판매할 아이템 선택
 	int itemNum = InputSystem::InputIntUnitlValid(0, itemIDs.size(), "아이템 판매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
@@ -177,6 +182,7 @@ void ShopManager::onShopSale()
 	else // 판매 성공
 	{
 		cout << " > \"" << saleItemName << "\" " << saleCount << "개 판매 성공!" << "\n";
+		cout << "[" << gold << "G -> " << player->getGold() << "G]" << "\n";
 	}
 }
 
