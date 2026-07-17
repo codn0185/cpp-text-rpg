@@ -1,8 +1,9 @@
 #include "InventorySystem.h"
 
+#include "ShopSystem.h"
+
 #include <iostream>
 #include <vector>
-#include <algorithm>
 
 using namespace std;
 
@@ -52,8 +53,8 @@ void InventorySystem::DisplayInventory(Inventory* inventory, string name)
 	for (int i = 0; i < inventorySlots.size(); i++)
 	{
 		const Slot& slot = inventorySlots[i];
-		string name = ITEM_TABLE.at(slot.itemID)->name;
-		int price = ITEM_TABLE.at(slot.itemID)->price;
+		const string& name = ITEM_TABLE.at(slot.itemID)->name;
+		const int& price = SHOP_TABLE.at(slot.itemID).salePrice;
 
 		cout << " > " << i + 1 << ". " << name << " (" << price << "g) ── [" << slot.count << "/" << maxStackSize << "]" << "\n";
 	}
@@ -67,8 +68,8 @@ void InventorySystem::DisplayItemCounts(map<EItemID, int> items, string name)
 	int num = 1;
 	for (const auto& [itemID, count] : items)
 	{
-		string name = ITEM_TABLE.at(itemID)->name;
-		int price = ITEM_TABLE.at(itemID)->price;
+		const string& name = ITEM_TABLE.at(itemID)->name;
+		const int& price = SHOP_TABLE.at(itemID).salePrice;
 
 		cout << " > " << num++ << ". " << name << " (" << price << "g) ── [" << count << "개" << "]" << "\n";
 	}

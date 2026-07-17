@@ -1,5 +1,7 @@
 #include "Inventory.h"
 
+#include "ShopSystem.h"
+
 #include <algorithm>
 
 using namespace std;
@@ -11,8 +13,8 @@ Slot::Slot(EItemID itemID, int count)
 
 bool Slot::CompareByPrice(const Slot& slot1, const Slot& slot2)
 {
-	int price1 = ITEM_TABLE.at(slot1.itemID)->price;
-	int price2 = ITEM_TABLE.at(slot2.itemID)->price;
+	int price1 = SHOP_TABLE.at(slot1.itemID).salePrice;
+	int price2 = SHOP_TABLE.at(slot2.itemID).salePrice;
 	return price1 < price2; // price 오름차순
 }
 

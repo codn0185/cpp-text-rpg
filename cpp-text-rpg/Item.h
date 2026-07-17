@@ -33,7 +33,6 @@ struct Item
 	EItemType itemType;
 	std::string name;
 	std::string description;
-	int price;
 
 	bool isCraftable; // 제작 가능 여부
 	std::map<EItemID, int> ingredients; // 제작 재료
@@ -43,7 +42,6 @@ struct Item
 		EItemType itemType,
 		std::string name,
 		std::string description = "",
-		int price = 0,
 		bool isCraftable = false,
 		std::map<EItemID, int> ingredients = {}
 	);
