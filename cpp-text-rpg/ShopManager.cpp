@@ -126,6 +126,56 @@ void ShopManager::onShopPurchase()
 
 void ShopManager::onShopSale()
 {
+	vector<EItemID> itemIDs;
+	for (const auto& [itemID, shopDataRow] : SHOP_TABLE)
+	{
+		itemIDs.push_back(itemID);
+	}
+
+	cout << "=============== < 판매 상점 > ===============" << "\n";
+	for (int i = 0; i < itemIDs.size(); i++)
+	{
+		EItemID itemID = itemIDs[i];
+		string itemName = ITEM_TABLE.at(itemID)->name;
+		int salePrice = SHOP_TABLE.at(itemID).salePrice;
+		int stockCount = backpackInventory->getItemCount(itemID);
+		cout << i + 1 << ". " << itemName << " ── (" << salePrice << "g) [재고: " << stockCount << "개]" << "\n";
+	}
+	cout << "============================================" << "\n";
+
+	// 판매할 아이템 선택
+	int itemNum = InputSystem::InputIntUnitlValid(0, itemIDs.size(), "아이템 판매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
+	if (itemNum == 0) // 뒤로가기
+	{
+		switchShopState(EShopState::SHOP_ENTER);
+		return;
+	}
+
+	// 판매할 개수 선택
+	const EItemID saleItemID = itemIDs[itemNum - 1]; // 판매할 아이템 ID
+	const string saleItemName = ITEM_TABLE.at(saleItemID)->name; // 판매할 아이템 이름
+	const int stockItemCount = backpackInventory->getItemCount(saleItemID); // 아이템 재고 개수
+	if (stockItemCount == 0) // 재고 없음
+	{
+		cout << " > \"" << saleItemName << "\"의 재고가 부족합니다!" << "\n";
+		return;
+	}
+	int saleCount = InputSystem::InputIntUnitlValid(0, INT_MAX, "판매 개수: ", "* 잘못된 입력입니다.\n"); // 구매할 아이템 개수
+	if (saleCount == 0) // 0개 판매 - 판매 목록 다시 보여주기
+	{
+		return;
+	}
+
+	// 판매 시도 - 이후 판매 목록 다시 보여주기
+	bool success = ShopSystem::PruchaseItem(player, backpackInventory, saleItemID, saleCount);
+	if (!success) // 판매 실패
+	{
+		cout << " > \"" << saleItemName << "\" " << saleCount << "개 판매에 실패하였습니다." << "\n";
+	}
+	else // 판매 성공
+	{
+		cout << " > \"" << saleItemName << "\" " << saleCount << "개 판매 성공!" << "\n";
+	}
 }
 
 void ShopManager::onShopExit()
