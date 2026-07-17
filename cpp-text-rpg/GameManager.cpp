@@ -54,6 +54,9 @@ void GameManager::update()
 	case EGameState::INVENTORY_OPEN:
 		onInventoryOpen();
 		break;
+	case EGameState::SHOP_ENTER:
+		onShopEnter();
+		break;
 	case EGameState::POTION_SHOP_ENTER:
 		onPotionShopEnter();
 		break;
@@ -201,11 +204,12 @@ void GameManager::onMainMenu()
 	std::cout << "=============== < 메인 메뉴 > ===============" << "\n";
 	std::cout << "1. 던전 입장" << "\n";
 	std::cout << "2. 인벤토리 확인" << "\n";
-	std::cout << "3. 포션 제작소" << "\n";
+	std::cout << "3. 상점" << "\n";
+	std::cout << "4. 포션 제작소" << "\n";
 	std::cout << "0. 게임 종료" << "\n";
 	std::cout << "============================================" << "\n";
 
-	int option = InputSystem::InputIntUnitlValid(1, 3, "선택: ", "* 잘못된 입력입니다.\n");
+	int option = InputSystem::InputIntUnitlValid(0, 4, "선택: ", "* 잘못된 입력입니다.\n");
 	switch (option)
 	{
 	case 1:
@@ -215,6 +219,9 @@ void GameManager::onMainMenu()
 		switchGameState(EGameState::INVENTORY_OPEN);
 		break;
 	case 3:
+		switchGameState(EGameState::SHOP_ENTER);
+		break;
+	case 4:
 		switchGameState(EGameState::POTION_SHOP_ENTER);
 		break;
 	case 0:
@@ -507,6 +514,15 @@ void GameManager::onInventoryOpen()
 			break;
 		}
 	}
+}
+
+void GameManager::onShopEnter()
+{
+	ShopManager shop(player, backpackInventory, stockInventory);
+
+	shop.run();
+
+	switchGameState(EGameState::MAIN_MENU);
 }
 
 void GameManager::onPotionShopEnter()

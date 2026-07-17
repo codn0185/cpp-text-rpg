@@ -2,6 +2,7 @@
 
 #include "Singleton.h"
 
+#include "ShopManager.h"
 #include "SpawnManager.h"
 #include "CombatManager.h"
 
@@ -39,6 +40,9 @@ enum class EGameState
 
 	// 인벤토리
 	INVENTORY_OPEN, // 인벤토리 확인 (창고, 배낭)
+
+	// 상점
+	SHOP_ENTER, // 상점 입장
 
 	// 포션 제작소
 	POTION_SHOP_ENTER, // 포션 제작소 입장
@@ -86,6 +90,8 @@ public:
 	void onDungeonCombat(); // 몬스터와 전투
 
 	void onInventoryOpen();
+
+	void onShopEnter(); // 상점 입장
 
 	void onPotionShopEnter(); // 포션 제작소 입장
 
