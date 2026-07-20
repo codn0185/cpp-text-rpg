@@ -12,6 +12,7 @@ public:
 	IState(Context_T* context);
 	virtual ~IState() = 0;
 
+	virtual bool needInput();
 	virtual void handleInput(std::istream& in) = 0;
 	virtual void onEnter() = 0;
 	virtual void onExit() = 0;

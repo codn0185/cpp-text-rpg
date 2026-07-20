@@ -14,16 +14,16 @@ void StateMachine::run()
 
 void StateMachine::update()
 {
-	currentState->handleInput(std::cin);
+	if (currentState->needInput())
+	{
+		currentState->handleInput(std::cin);
+	}
 }
 
 void StateMachine::changeState(IState<StateMachine>* newState)
 {
-	if (currentState != nullptr)
-	{
-		currentState->onExit();
-		delete currentState;
-	}
+	currentState->onExit();
+	delete currentState;
 	currentState = newState;
 	currentState->onEnter();
 }
