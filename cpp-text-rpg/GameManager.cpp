@@ -590,8 +590,22 @@ void GameManager::onPotionShopEnter()
 
 void GameManager::onGameExit()
 {
-	std::cout << "============================================" << "\n";
-	std::cout << "                  게임 종료                  " << "\n";
-	std::cout << "============================================" << "\n";
-	isRunning = false;
+	// 게임 종료 확인
+	std::cout << "게임을 종료하시겠습니까? (Y/N)";
+	string check;
+	InputSystem::InputString(check);
+	if (check == "Y" || check == "y")
+	{
+		std::cout << "============================================" << "\n";
+		std::cout << "                  게임 종료                  " << "\n";
+		std::cout << "============================================" << "\n";
+		isRunning = false;
+	}
+	else if (check == "N" || check == "n")
+	{
+		switchGameState(EGameState::MAIN_MENU);
+		return;
+	}
+
+	cout << "* 잘못된 입력입니다." << "\n";
 }
