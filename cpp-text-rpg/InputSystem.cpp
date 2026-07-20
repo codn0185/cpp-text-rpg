@@ -16,6 +16,7 @@ bool InputSystem::InputString(string& out, string inputMessage, string errorMess
 		return false;
 	}
 
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	return true;
 }
 
@@ -31,6 +32,7 @@ bool InputSystem::InputInt(int& out, const int min, const int max, string inputM
 		return false;
 	}
 
+	cin.ignore(numeric_limits<streamsize>::max(), '\n');
 	if (out < min || out > max)
 	{
 		return false;
@@ -42,15 +44,8 @@ bool InputSystem::InputInt(int& out, const int min, const int max, string inputM
 int InputSystem::InputIntUnitlValid(const int min, const int max, string inputMessage, string errorMessage)
 {
 	int result = 0;
-	while (true)
+	while (!InputInt(result, min, max, inputMessage, errorMessage))
 	{
-		cout << inputMessage;
-		if (InputInt(result, min, max))
-		{
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			break;
-		}
-		cout << errorMessage;
 	}
 	return result;
 }
