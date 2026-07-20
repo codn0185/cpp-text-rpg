@@ -4,6 +4,11 @@ StateMachine::StateMachine(IState<StateMachine>* initState) : currentState(initS
 {
 }
 
+StateMachine::~StateMachine()
+{
+	delete currentState;
+}
+
 void StateMachine::run()
 {
 	while (isRunning)

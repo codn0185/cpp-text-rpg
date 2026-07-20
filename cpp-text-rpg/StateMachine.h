@@ -10,7 +10,7 @@ protected:
 
 public:
 	StateMachine(IState<StateMachine>* initState);
-	virtual ~StateMachine() = 0;
+	virtual ~StateMachine();
 
 	void run();
 	void update();
