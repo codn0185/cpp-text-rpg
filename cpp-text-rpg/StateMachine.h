@@ -1,15 +1,19 @@
 #pragma once
 
+#include "IState.h"
+
 class StateMachine
 {
 protected:
-	bool _isRunning;
+	IState<StateMachine>* currentState;
+	bool isRunning;
 
 public:
-	StateMachine();
-	virtual ~StateMachine();
+	StateMachine(IState<StateMachine>* initState);
+	virtual ~StateMachine() = 0;
 
-	virtual void run();
-	virtual void update();
+	void run();
+	void update();
+	void changeState(IState<StateMachine>* newState);
 };
 

@@ -1,1 +1,29 @@
 #include "StateMachine.h"
+
+StateMachine::StateMachine(IState<StateMachine>* initState) : currentState(initState), isRunning(true)
+{
+}
+
+void StateMachine::run()
+{
+	while (isRunning)
+	{
+		update();
+	}
+}
+
+void StateMachine::update()
+{
+	currentState->handleInput(std::cin);
+}
+
+void StateMachine::changeState(IState<StateMachine>* newState)
+{
+	if (currentState != nullptr)
+	{
+		currentState->onExit();
+		delete currentState;
+	}
+	currentState = newState;
+	currentState->onEnter();
+}

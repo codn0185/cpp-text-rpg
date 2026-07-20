@@ -73,6 +73,12 @@
     <Filter Include="Systems\ShopSystem">
       <UniqueIdentifier>{38adc304-4e0c-4be2-99bb-7f4928bbb1e2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="StateMachines">
+      <UniqueIdentifier>{175caf53-6e96-4eb3-9737-93e175ea2b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="StateMachines\GameStateMachine">
+      <UniqueIdentifier>{e8513c23-2b56-406f-8fc3-1944f030acf0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -155,6 +161,12 @@
     </ClCompile>
     <ClCompile Include="ShopSystem.cpp">
       <Filter>Systems\ShopSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="IState.cpp">
+      <Filter>StateMachines</Filter>
+    </ClCompile>
+    <ClCompile Include="StateMachine.cpp">
+      <Filter>StateMachines</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -244,6 +256,12 @@
     </ClInclude>
     <ClInclude Include="ShopSystem.h">
       <Filter>Systems\ShopSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="IState.h">
+      <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="StateMachine.h">
+      <Filter>StateMachines</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
