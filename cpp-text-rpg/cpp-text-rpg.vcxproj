@@ -130,11 +130,12 @@
     <ClCompile Include="cpp-text-rpg.cpp" />
     <ClCompile Include="CrafterSystem.cpp" />
     <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameStartState.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Goblin.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventorySystem.cpp" />
-    <ClCompile Include="IState.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="LevelSystem.cpp" />
     <ClCompile Include="Mage.cpp" />
@@ -150,7 +151,6 @@
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
-    <ClCompile Include="StateMachine.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
@@ -160,7 +160,10 @@
     <ClInclude Include="CombatManager.h" />
     <ClInclude Include="CrafterSystem.h" />
     <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameStartState.h" />
+    <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Goblin.h" />
+    <ClInclude Include="IGameState.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySystem.h" />
@@ -182,7 +185,7 @@
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SpawnManager.h" />
-    <ClInclude Include="StateMachine.h" />
+    <ClInclude Include="IStateMachine.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="Warrior.h" />
     <ClInclude Include="Monsters.h" />

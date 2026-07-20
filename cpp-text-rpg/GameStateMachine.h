@@ -1,8 +1,10 @@
 #pragma once
 
-#include "StateMachine.h"
+#include "IStateMachine.h"
 
-class GameStateMachine : public StateMachine
+class GameStateMachine : public IStateMachine<GameStateMachine>
 {
+public:
+	GameStateMachine();
 };
 

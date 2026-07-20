@@ -1,6 +1,11 @@
 ﻿#include "GameManager.h"
+#include "GameStateMachine.h"
 
-int main() {
-  GameManager& gm = GameManager::GetInstance();
-  gm.run();
+int main()
+{
+	GameStateMachine game;
+	game.run();
+
+	// 	GameManager& gm = GameManager::GetInstance();
+	// 	gm.run();
 }

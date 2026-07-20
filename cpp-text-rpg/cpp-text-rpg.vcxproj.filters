@@ -162,11 +162,11 @@
     <ClCompile Include="ShopSystem.cpp">
       <Filter>Systems\ShopSystem</Filter>
     </ClCompile>
-    <ClCompile Include="IState.cpp">
-      <Filter>StateMachines</Filter>
+    <ClCompile Include="GameStartState.cpp">
+      <Filter>StateMachines\GameStateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="StateMachine.cpp">
-      <Filter>StateMachines</Filter>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>StateMachines\GameStateMachine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -260,8 +260,17 @@
     <ClInclude Include="IState.h">
       <Filter>StateMachines</Filter>
     </ClInclude>
-    <ClInclude Include="StateMachine.h">
+    <ClInclude Include="IStateMachine.h">
       <Filter>StateMachines</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateMachine.h">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="IGameState.h">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStartState.h">
+      <Filter>StateMachines\GameStateMachine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
