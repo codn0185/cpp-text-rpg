@@ -1,15 +1,18 @@
 #include "StateMachine.h"
 
-StateMachine::StateMachine(IState<StateMachine>* initState) : currentState(initState), isRunning(true)
+template <typename Context_T>
+StateMachine<Context_T>::StateMachine(IState<Context_T>* initState) : currentState(initState), isRunning(true)
 {
 }
 
-StateMachine::~StateMachine()
+template <typename Context_T>
+StateMachine<Context_T>::~StateMachine()
 {
 	delete currentState;
 }
 
-void StateMachine::run()
+template <typename Context_T>
+void StateMachine<Context_T>::run()
 {
 	while (isRunning)
 	{
@@ -17,7 +20,8 @@ void StateMachine::run()
 	}
 }
 
-void StateMachine::update()
+template <typename Context_T>
+void StateMachine<Context_T>::update()
 {
 	if (currentState->needInput())
 	{
@@ -25,7 +29,8 @@ void StateMachine::update()
 	}
 }
 
-void StateMachine::changeState(IState<StateMachine>* newState)
+template <typename Context_T>
+void StateMachine<Context_T>::changeState(IState<Context_T>* newState)
 {
 	currentState->onExit();
 	delete currentState;

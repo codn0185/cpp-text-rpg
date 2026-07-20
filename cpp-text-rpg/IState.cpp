@@ -11,3 +11,8 @@ bool IState<Context_T>::needInput()
 {
 	return true;
 }
+
+template <typename Context_T>
+void IState<Context_T>::handleInput(std::istream& in)
+{
+}

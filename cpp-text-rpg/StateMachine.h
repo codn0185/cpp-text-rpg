@@ -2,18 +2,19 @@
 
 #include "IState.h"
 
+template <typename Context_T>
 class StateMachine
 {
 protected:
-	IState<StateMachine>* currentState;
+	IState<Context_T>* currentState;
 	bool isRunning;
 
 public:
-	StateMachine(IState<StateMachine>* initState);
+	StateMachine(IState<Context_T>* initState);
 	virtual ~StateMachine();
 
 	void run();
 	void update();
-	void changeState(IState<StateMachine>* newState);
+	void changeState(IState<Context_T>* newState);
 };
 

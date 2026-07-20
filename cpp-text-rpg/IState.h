@@ -10,10 +10,10 @@ protected:
 
 public:
 	IState(Context_T* context);
-	virtual ~IState() = 0;
+	virtual ~IState() = default;
 
 	virtual bool needInput();
-	virtual void handleInput(std::istream& in) = 0;
+	virtual void handleInput(std::istream& in);
 	virtual void onEnter() = 0;
 	virtual void onExit() = 0;
 };
