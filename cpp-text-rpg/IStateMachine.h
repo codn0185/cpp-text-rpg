@@ -13,6 +13,7 @@ public:
 	IStateMachine(IState<Context_T>* initState)
 		: currentState(initState), isRunning(true)
 	{
+		currentState->onEnter();
 	}
 
 	virtual ~IStateMachine()
