@@ -28,7 +28,7 @@ protected:
 	int exp;
 	int gold;
 
-	std::vector<Skill*> skills;
+	std::vector<const Skill*> skills;
 
 public:
 	Player(std::string name, int maxHP, int maxMP, int power, int defence, int level = 0, int exp = 0, int gold = 0, EPlayerJob job = EPlayerJob::None);
@@ -38,6 +38,9 @@ public:
 	virtual void removeBonusStat() = 0; // 보너스 스탯 제거
 
 	virtual void showAttackMessage() const = 0; // 공격 메시지
+
+	void resetSkills(); // 스킬 초기화
+	void addSkill(const Skill* skill); // 스킬 추가
 
 	// Getters
 	EPlayerJob getJob();

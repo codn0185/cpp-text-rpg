@@ -1,10 +1,13 @@
 #include "Players.h"
 
+#include "SkillSystem.h"
+
 using namespace std;
 
 Player::Player(string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold, EPlayerJob job)
 	: Character(name, maxHP, maxMP, power, defence), level(level), exp(exp), gold(gold), job(job)
 {
+	SkillSystem::InitializePlayerSkills(this);
 }
 
 // 직업 전환
@@ -40,6 +43,16 @@ Player* Player::ChangeJob(Player* player, EPlayerJob newJob)
 		newPlayer->applyBonusStat();
 	}
 	return newPlayer;
+}
+
+void Player::resetSkills()
+{
+	skills.clear();
+}
+
+void Player::addSkill(const Skill* skill)
+{
+	skills.push_back(skill);
 }
 
 // Getters
