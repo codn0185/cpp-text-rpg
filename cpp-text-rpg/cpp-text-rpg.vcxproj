@@ -129,6 +129,7 @@
     <ClCompile Include="CombatManager.cpp" />
     <ClCompile Include="cpp-text-rpg.cpp" />
     <ClCompile Include="CrafterSystem.cpp" />
+    <ClCompile Include="GameExitState.cpp" />
     <ClCompile Include="GameManager.cpp" />
     <ClCompile Include="GameStartState.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
@@ -142,6 +143,7 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="NoJob.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerRegistrationState.cpp" />
     <ClCompile Include="PotionSystem.cpp" />
     <ClCompile Include="RandomSystem.cpp" />
     <ClCompile Include="RewardSystem.cpp" />
@@ -159,6 +161,7 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CombatManager.h" />
     <ClInclude Include="CrafterSystem.h" />
+    <ClInclude Include="GameExitState.h" />
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="GameStartState.h" />
     <ClInclude Include="GameStateMachine.h" />
@@ -174,6 +177,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="NoJob.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerRegistrationState.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="PotionSystem.h" />
     <ClInclude Include="RandomSystem.h" />

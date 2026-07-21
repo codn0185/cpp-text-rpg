@@ -3,9 +3,9 @@
 
 int main()
 {
-	GameStateMachine game;
-	game.run();
+	GameManager& gm = GameManager::GetInstance();
+	gm.run();
 
-	// 	GameManager& gm = GameManager::GetInstance();
-	// 	gm.run();
+	// 	GameStateMachine game;
+	// 	game.run();
 }

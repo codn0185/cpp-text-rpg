@@ -168,6 +168,12 @@
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>StateMachines\GameStateMachine</Filter>
     </ClCompile>
+    <ClCompile Include="PlayerRegistrationState.cpp">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameExitState.cpp">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Character.h">
@@ -270,6 +276,12 @@
       <Filter>StateMachines\GameStateMachine</Filter>
     </ClInclude>
     <ClInclude Include="GameStartState.h">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerRegistrationState.h">
+      <Filter>StateMachines\GameStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="GameExitState.h">
       <Filter>StateMachines\GameStateMachine</Filter>
     </ClInclude>
   </ItemGroup>
