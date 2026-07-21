@@ -85,6 +85,9 @@
     <Filter Include="Skill">
       <UniqueIdentifier>{632e2861-f107-4b69-bc78-a91defd05629}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Systems\SkillSystem">
+      <UniqueIdentifier>{b8d16026-968b-40ae-9234-61c941fa583f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -185,6 +188,9 @@
     </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Skill</Filter>
+    </ClCompile>
+    <ClCompile Include="SkillSystem.cpp">
+      <Filter>Systems\SkillSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +307,9 @@
     </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>Skill</Filter>
+    </ClInclude>
+    <ClInclude Include="SkillSystem.h">
+      <Filter>Systems\SkillSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

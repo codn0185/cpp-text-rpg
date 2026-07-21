@@ -153,6 +153,7 @@
     <ClCompile Include="ShopSystem.cpp" />
     <ClCompile Include="Skeleton.cpp" />
     <ClCompile Include="Skill.cpp" />
+    <ClCompile Include="SkillSystem.cpp" />
     <ClCompile Include="Slime.cpp" />
     <ClCompile Include="SpawnManager.cpp" />
     <ClCompile Include="UISystem.cpp" />
@@ -191,6 +192,7 @@
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Skeleton.h" />
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="SkillSystem.h" />
     <ClInclude Include="Slime.h" />
     <ClInclude Include="SpawnManager.h" />
     <ClInclude Include="IStateMachine.h" />
