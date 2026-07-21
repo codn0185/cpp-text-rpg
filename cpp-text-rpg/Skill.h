@@ -15,7 +15,8 @@ protected:
 	int currentCooldownTurn; // 남은 대기 턴 수 (0일 때 사용 가능)
 
 public:
-	virtual ~Skill() = default;
+	Skill(std::string skillName, float damageMultiplier = 1, int attackCount = 1, int mpCost = 0, int cooldownTurn = 0);
+	~Skill() = default;
 
 	bool canUse(Player* player) const; // 스킬 사용 가능한지 여부 반환 (마나, 대기 턴 확인)
 	void use(Player* player); // 스킬 사용 (마나 소모 및 대기 턴 수 초기화)

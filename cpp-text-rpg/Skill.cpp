@@ -4,6 +4,11 @@
 
 using namespace std;
 
+Skill::Skill(string skillName, float damageMultiplier, int attackCount, int mpCost, int cooldownTurn)
+	: skillName(skillName), damageMultiplier(damageMultiplier), attackCount(attackCount), mpCost(mpCost), cooldownTurn(cooldownTurn), currentCooldownTurn(0)
+{
+}
+
 bool Skill::canUse(Player* player) const
 {
 	if (!isReady()						   // 쿨다운
