@@ -99,7 +99,7 @@ void ShopManager::onShopPurchase()
 	cout << "[" << player->getName() << "이(가) 소유한 골드: " << gold << "G]" << "\n";
 
 	// 구매할 아이템 선택
-	int itemNum = InputSystem::InputIntUnitlValid(0, itemIDs.size(), "아이템 구매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
+	int itemNum = InputSystem::InputIntUnitlValid(0, (int) itemIDs.size(), "아이템 구매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
 	if (itemNum == 0) // 뒤로가기
 	{
 		switchShopState(EShopState::SHOP_ENTER);
@@ -151,7 +151,7 @@ void ShopManager::onShopSale()
 	cout << "[" << player->getName() << "이(가) 소유한 골드: " << gold << "G]" << "\n";
 
 	// 판매할 아이템 선택
-	int itemNum = InputSystem::InputIntUnitlValid(0, itemIDs.size(), "아이템 판매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
+	int itemNum = InputSystem::InputIntUnitlValid(0, (int) itemIDs.size(), "아이템 판매 (0: 뒤로가기): ", "* 잘못된 입력입니다.\n");
 	if (itemNum == 0) // 뒤로가기
 	{
 		switchShopState(EShopState::SHOP_ENTER);
