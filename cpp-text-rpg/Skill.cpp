@@ -55,13 +55,13 @@ void Skill::startCooldown()
 void Skill::displayInfo() const
 {
 	cout
-		<< "──────────────────────────────────────────" << "\n"
+		<< "──────────────────────────────" << "\n"
 		<< "  📜 [" + skillName + "]" << "\n"
-		<< "──────────────────────────────────────────" << "\n"
-		<< "  • 마나 소모	: " << mpCost << " MP" << "\n"
-		<< "  • 데미지		: " << int(damageMultiplier * 100) << "% x " << attackCount << "\n"
-		<< "  • 재사용 턴	: " << cooldownTurn << "턴\n"
-		<< "──────────────────────────────────────────" << "\n";
+		<< "──────────────────────────────" << "\n"
+		<< "  • 마나 소모 : " << mpCost << " MP" << "\n"
+		<< "  • 데미지    : " << int(damageMultiplier * 100) << "% x " << attackCount << "\n"
+		<< "  • 재사용 턴 : " << cooldownTurn << "턴\n"
+		<< "──────────────────────────────" << "\n";
 }
 
 string Skill::getSummary() const
