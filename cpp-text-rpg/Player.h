@@ -2,6 +2,12 @@
 
 #include "Character.h"
 
+#include "Skill.h"
+
+#include <vector>
+
+class Skill;
+
 // 플레이어 직업 enum
 enum class EPlayerJob
 {
@@ -22,8 +28,10 @@ protected:
 	int exp;
 	int gold;
 
+	std::vector<Skill*> skills;
+
 public:
-	Player(std::string name, int maxHP, int maxMP, int power, int defence);
+	Player(std::string name, int maxHP, int maxMP, int power, int defence, int level = 0, int exp = 0, int gold = 0, EPlayerJob job = EPlayerJob::None);
 
 	static Player* ChangeJob(Player* player, EPlayerJob newJob); // 직업 전환
 	virtual void applyBonusStat() = 0; // 보너스 스탯 적용

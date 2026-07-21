@@ -6,9 +6,9 @@
 
 using namespace std;
 
-NoJob::NoJob(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence)
+NoJob::NoJob(std::string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold)
+	: Player(name, maxHP, maxMP, power, defence, level, exp, gold, EPlayerJob::None)
 {
-	setJob(EPlayerJob::None);
 }
 
 void NoJob::attack(Character* target)

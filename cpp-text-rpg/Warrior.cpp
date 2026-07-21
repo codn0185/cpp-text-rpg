@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Warrior::Warrior(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence)
+Warrior::Warrior(std::string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold)
+	: Player(name, maxHP, maxMP, power, defence, level, exp, gold, EPlayerJob::Warrior)
 {
-	setJob(EPlayerJob::Warrior);
 }
 
 void Warrior::attack(Character* target)

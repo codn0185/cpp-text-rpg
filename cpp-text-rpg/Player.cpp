@@ -2,8 +2,8 @@
 
 using namespace std;
 
-Player::Player(string name, int maxHP, int maxMP, int power, int defence)
-	: Character(name, maxHP, maxMP, power, defence), job(EPlayerJob::None), level(0), exp(0), gold(0)
+Player::Player(string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold, EPlayerJob job)
+	: Character(name, maxHP, maxMP, power, defence), level(level), exp(exp), gold(gold), job(job)
 {
 }
 
@@ -16,7 +16,7 @@ Player* Player::ChangeJob(Player* player, EPlayerJob newJob)
 	switch (newJob)
 	{
 	case EPlayerJob::None:
-		newPlayer = new NoJob(player->getName(), player->getCurrentHP(), player->getCurrentMP(), player->getPower(), player->getDefence());
+		newPlayer = new NoJob(player->getName(), player->getCurrentHP(), player->getCurrentMP(), player->getPower(), player->getDefence(), player->getLevel(), player->getExp(), player->getGold());
 		break;
 	case EPlayerJob::Warrior:
 		newPlayer = new Warrior(player->getName(), player->getCurrentHP(), player->getCurrentMP(), player->getPower(), player->getDefence());

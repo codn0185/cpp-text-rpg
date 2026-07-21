@@ -7,7 +7,7 @@ class Archer : public Player
 private:
 	int attackCount;
 public:
-	Archer(std::string name, int hp, int mp, int power, int defence);
+	Archer(std::string name, int maxHP, int maxMP, int power, int defence, int level = 0, int exp = 0, int gold = 0);
 
 	void attack(Character* target) override;
 	void showAttackMessage() const override;

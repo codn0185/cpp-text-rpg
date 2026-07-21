@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Archer::Archer(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence), attackCount(3)
+Archer::Archer(std::string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold)
+	: Player(name, maxHP, maxMP, power, defence, level, exp, gold, EPlayerJob::Archer)
 {
-	setJob(EPlayerJob::Archer);
 }
 
 void Archer::attack(Character* target)

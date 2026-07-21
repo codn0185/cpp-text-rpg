@@ -6,9 +6,9 @@
 
 using namespace std;
 
-Rogue::Rogue(string name, int hp, int mp, int power, int defence) : Player(name, hp, mp, power, defence), attackCount(5)
+Rogue::Rogue(std::string name, int maxHP, int maxMP, int power, int defence, int level, int exp, int gold)
+	: Player(name, maxHP, maxMP, power, defence, level, exp, gold, EPlayerJob::Rogue)
 {
-	setJob(EPlayerJob::Rogue);
 }
 
 void Rogue::attack(Character* target)
