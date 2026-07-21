@@ -18,10 +18,7 @@ void UISystem::PrintPlayerStat(Player* player)
 {
 	string nameText = "닉네임: " + player->getName();
 	string jobText = "직업: " + jobNames.at(player->getJob());
-	int level = player->getLevel();
-	int exp = player->getExp();
-	int requiredExp = LevelSystem::GetRequiredExp(player);
-	string levelText = "레벨: " + to_string(level) + " (" + to_string(exp) + "/" + to_string(requiredExp) + ")";
+	string levelText = "레벨: " + to_string(player->getLevel()) + " (" + to_string(player->getExp()) + "/" + to_string(LevelSystem::GetRequiredExp(player)) + ")";
 	string goldText = "골드: " + to_string(player->getGold()) + "G";
 
 	string hpText = "HP: " + to_string(player->getCurrentHP()) + "/" + to_string(player->getMaxHP());
@@ -29,11 +26,17 @@ void UISystem::PrintPlayerStat(Player* player)
 	string powerText = "공격력: " + to_string(player->getPower());
 	string defenceText = "방어력: " + to_string(player->getDefence());
 
-	cout << "===============================================================" << "\n";
-	cout << nameText << " | " << jobText << " | " << levelText << " | " << goldText << "\n";
-	cout << "---------------------------------------------------------------" << "\n";
-	cout << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
-	cout << "===============================================================" << "\n";
+	cout << "============================================================" << "\n";
+	cout << " " << nameText << " | " << jobText << " | " << levelText << " | " << goldText << "\n";
+	cout << "────────────────────────────────────────────────────────────" << "\n";
+	cout << " " << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
+	cout << "────────────────────────────────────────────────────────────" << "\n";
+	cout << " > 스킬 리스트" << "\n";
+	for (const Skill* skill : player->getSkills())
+	{
+		cout << "   - " << skill->getSkillName() << "\n";
+	}
+	cout << "============================================================" << "\n";
 }
 
 void UISystem::PrintBattleLog(Character* attacker, Character* defender, int damage)
