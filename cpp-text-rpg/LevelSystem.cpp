@@ -1,5 +1,7 @@
 #include "LevelSystem.h"
 
+#include "SkillSystem.h"
+
 #include <iostream>
 
 using namespace std;
@@ -63,10 +65,12 @@ void LevelSystem::CheckLevelUp(Player* player)
 		cout << "    -> " << levelUpStr << "\n";
 		cout << "    -> " << statIncreaseStr << "\n";
 
+		// 플레이어 정보 업데이트
 		player->increaseStat(stat);
 		player->setLevel(nextLevel);
 		player->setExp(nextExp);
 		player->reset();
+		SkillSystem::UnlockSkillsForCurrentLevel(player);
 	}
 }
 
