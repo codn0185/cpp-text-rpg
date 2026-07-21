@@ -36,3 +36,47 @@ const std::map<EPlayerJob, SkillDataRow> SKILL_TABLE = {
 		{10, {Skill("필살의 사격", 2.4f, 1, 50, 5)}},
 	})},
 };
+
+void SkillSystem::InitializePlayerSkills(Player* player)
+{
+	player->resetSkills(); // 스킬 초기화
+
+	if (SKILL_TABLE.find(player->getJob()) == SKILL_TABLE.end()) // 플레이어의 직업 스킬 확인
+	{
+		return;
+	}
+
+	for (const auto& [requiredLevel, AcquiredSkills] : SKILL_TABLE.at(player->getJob()).skillsByLevel)
+	{
+		if (player->getLevel() >= requiredLevel) // 현재 레벨 이하
+		{
+			for (const Skill& skill : AcquiredSkills)
+			{
+				player->addSkill(&skill);
+			}
+		}
+	}
+}
+
+const vector<const Skill*> SkillSystem::UnlockSkillsForCurrentLevel(Player* player)
+{
+	if (SKILL_TABLE.find(player->getJob()) == SKILL_TABLE.end()) // 플레이어의 직업 스킬 확인
+	{
+		return;
+	}
+
+	vector<const Skill*> unlockedSkills; // 해금된 스킬들
+	for (const auto& [requiredLevel, AcquiredSkills] : SKILL_TABLE.at(player->getJob()).skillsByLevel)
+	{
+		if (player->getLevel() == requiredLevel) // 현재 레벨과 일치
+		{
+			for (const Skill& skill : AcquiredSkills)
+			{
+				player->addSkill(&skill);
+				unlockedSkills.push_back(&skill);
+			}
+		}
+	}
+
+	return unlockedSkills;
+}
