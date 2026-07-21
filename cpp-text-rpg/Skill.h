@@ -1,8 +1,10 @@
 #pragma once
 
-#include "Player.h";
+#include "Player.h"
 
 #include <string>
+
+class Player;
 
 class Skill
 {
