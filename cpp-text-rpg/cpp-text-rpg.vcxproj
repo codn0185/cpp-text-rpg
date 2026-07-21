@@ -145,6 +145,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerRegistrationState.cpp" />
     <ClCompile Include="PotionSystem.cpp" />
+    <ClCompile Include="ProgressManager.cpp" />
     <ClCompile Include="RandomSystem.cpp" />
     <ClCompile Include="RewardSystem.cpp" />
     <ClCompile Include="Rogue.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="PlayerRegistrationState.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="PotionSystem.h" />
+    <ClInclude Include="ProgressManager.h" />
     <ClInclude Include="RandomSystem.h" />
     <ClInclude Include="RewardSystem.h" />
     <ClInclude Include="Rogue.h" />

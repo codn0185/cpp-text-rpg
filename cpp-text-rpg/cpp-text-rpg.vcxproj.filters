@@ -79,6 +79,9 @@
     <Filter Include="StateMachines\GameStateMachine">
       <UniqueIdentifier>{e8513c23-2b56-406f-8fc3-1944f030acf0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Managers\ProgressManager">
+      <UniqueIdentifier>{26f12822-856b-470c-9e8f-e5b8cc98dbe2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="cpp-text-rpg.cpp">
@@ -173,6 +176,9 @@
     </ClCompile>
     <ClCompile Include="GameExitState.cpp">
       <Filter>StateMachines\GameStateMachine</Filter>
+    </ClCompile>
+    <ClCompile Include="ProgressManager.cpp">
+      <Filter>Managers\ProgressManager</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -283,6 +289,9 @@
     </ClInclude>
     <ClInclude Include="GameExitState.h">
       <Filter>StateMachines\GameStateMachine</Filter>
+    </ClInclude>
+    <ClInclude Include="ProgressManager.h">
+      <Filter>Managers\ProgressManager</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
