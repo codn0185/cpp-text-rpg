@@ -61,21 +61,27 @@ void LevelSystem::CheckLevelUp(Player* player)
 		}
 		statIncreaseStr.erase(statIncreaseStr.length() - 2);
 
-		cout << " > Level Up!" << "\n";
-		cout << "    -> " << levelUpStr << "\n";
-		cout << "    -> " << statIncreaseStr << "\n";
-
 		// 플레이어 정보 업데이트
 		player->increaseStat(stat);
 		player->setLevel(nextLevel);
 		player->setExp(nextExp);
 		player->reset();
 		const vector<const Skill*> unlockedSkills = SkillSystem::UnlockSkillsForCurrentLevel(player);
+
+		// 레벨 업 메시지 출력
+		cout << "======================================" << "\n";
+		cout << " > Level Up!" << "\n";
+		cout << "    -> " << levelUpStr << "\n";
+		cout << "    -> " << statIncreaseStr << "\n";
+		if (!unlockedSkills.empty())
+		{
+			cout << " > 새로운 스킬 해금!" << "\n";
+		}
 		for (const Skill* skill : unlockedSkills)
 		{
-			cout << "새로운 스킬 해금!" << "\n";
 			skill->displayInfo();
 		}
+		cout << "======================================" << "\n";
 	}
 }
 
