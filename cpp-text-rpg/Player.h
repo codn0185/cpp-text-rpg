@@ -39,8 +39,10 @@ public:
 
 	virtual void showAttackMessage() const = 0; // 공격 메시지
 
+	// 스킬 메서드
 	void resetSkills(); // 스킬 초기화
 	void addSkill(const Skill* skill); // 스킬 추가
+	const std::vector<const Skill*> getSkills(); // 스킬 반환
 
 	// Getters
 	EPlayerJob getJob();
