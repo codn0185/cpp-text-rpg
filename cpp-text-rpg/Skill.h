@@ -1,0 +1,39 @@
+#pragma once
+
+#include "Player.h";
+
+#include <string>
+
+class Skill
+{
+protected:
+	std::string skillName; // 스킬 이름
+	float damageMultiplier; // 공격력 배율 
+	int attackCount; // 공격 홋수 (최소 1)
+	int mpCost; // 마나 소모량 (최소 0)
+	int cooldownTurn; // 대기 턴 수 (0: 매 턴 사용 가능)
+	int currentCooldownTurn; // 남은 대기 턴 수 (0일 때 사용 가능)
+
+public:
+	virtual ~Skill() = default;
+
+	bool canUse(Player* player) const; // 스킬 사용 가능한지 여부 반환 (마나, 대기 턴 확인)
+	void use(Player* player); // 스킬 사용 (마나 소모 및 대기 턴 수 초기화)
+
+	bool isReady() const; // 스킬 사용 준비 여부 반혼 (현재 대기 턴 확인)
+	void updateCooldownTurn(); // 쿨다운 턴 감소
+	void resetCooldown(); // 쿨다운 초기화 (0 설정)
+	void startCooldown(); // 쿨다운 시작
+
+	void displayInfo() const; // 스킬의 자세한 정보 출력
+	std::string getSummary() const; // 스킬 내용을 요약한 한 줄의 문자열 반환
+
+	// Getters
+	std::string getSkillName() const;
+	float getDamageMultiplier() const;
+	int getAttackCount() const;
+	int getMPCost() const;
+	int getCooldownTurn() const;
+	int getCurrentCooldownTurn() const;
+};
+
