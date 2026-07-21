@@ -28,8 +28,8 @@ public:
 	void resetCooldown(); // 쿨다운 초기화 (0 설정)
 	void startCooldown(); // 쿨다운 시작
 
-	void displayInfo() const; // 스킬의 자세한 정보 출력
-	std::string getSummary() const; // 스킬 내용을 요약한 한 줄의 문자열 반환
+	std::string getInfoText() const; // 스킬 설명 텍스트 반환
+	std::string getCombatMenuText() const; // 전투 메뉴(쿨다운 및 준비 여부 포함) 텍스트 반환
 
 	// Getters
 	std::string getSkillName() const;

@@ -79,7 +79,7 @@ void LevelSystem::CheckLevelUp(Player* player)
 		}
 		for (const Skill* skill : unlockedSkills)
 		{
-			skill->displayInfo();
+			cout << "    -> " << skill->getInfoText() << "\n";
 		}
 		cout << "======================================" << "\n";
 	}

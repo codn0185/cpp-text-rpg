@@ -52,37 +52,35 @@ void Skill::startCooldown()
 	currentCooldownTurn = cooldownTurn;
 }
 
-void Skill::displayInfo() const
+string Skill::getInfoText() const
 {
-	cout
-		<< "──────────────────────────────" << "\n"
-		<< "  📜 [" + skillName + "]" << "\n"
-		<< "──────────────────────────────" << "\n"
-		<< "  • 마나 소모 : " << mpCost << " MP" << "\n"
-		<< "  • 데미지    : " << int(damageMultiplier * 100) << "% x " << attackCount << "\n"
-		<< "  • 재사용 턴 : " << cooldownTurn << "턴\n"
-		<< "──────────────────────────────" << "\n";
+	string infoText =
+		"[" + skillName + "] "
+		"🧪 MP: " + to_string(mpCost) + " | "
+		"⚔️ DMG: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + "타 | "
+		"⏳ CD: " + to_string(cooldownTurn) + "턴";
+	return infoText;
 }
 
-string Skill::getSummary() const
+string Skill::getCombatMenuText() const
 {
-	string summary = skillName + " (마나: " + to_string(mpCost) + " | 데미지: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + ")";
+	string combatMenuText = skillName + " (🧪 마나: " + to_string(mpCost) + " | ⚔️ 데미지: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + ")";
 	if (isReady())
 	{
 		if (cooldownTurn == 0) // 쿨다운 없는 연속 사용 가능
 		{
-			summary = "🟢 " + summary;
+			combatMenuText = "🟢 " + combatMenuText;
 		}
 		else // 쿨다운 존재
 		{
-			summary = "🟢 " + summary + "[0/" + to_string(cooldownTurn) + "턴]";
+			combatMenuText = "🟢 " + combatMenuText + "[0/" + to_string(cooldownTurn) + "턴]";
 		}
 	}
 	else // 쿨다운 중
 	{
-		summary += "⏳ " + summary + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(cooldownTurn) + "]";
+		combatMenuText += "⏳ " + combatMenuText + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(cooldownTurn) + "]";
 	}
-	return summary;
+	return combatMenuText;
 }
 
 string Skill::getSkillName() const
