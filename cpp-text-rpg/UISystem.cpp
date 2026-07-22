@@ -22,7 +22,7 @@ void UISystem::PrintPlayerStat(const Player* player)
 	string goldText = "골드: " + to_string(player->getGold()) + "G";
 
 	string hpText = "HP: " + to_string(player->getCurrentHP()) + "/" + to_string(player->getMaxHP());
-	string mpText = "HP: " + to_string(player->getCurrentMP()) + "/" + to_string(player->getMaxMP());
+	string mpText = "MP: " + to_string(player->getCurrentMP()) + "/" + to_string(player->getMaxMP());
 	string powerText = "공격력: " + to_string(player->getPower());
 	string defenceText = "방어력: " + to_string(player->getDefence());
 
