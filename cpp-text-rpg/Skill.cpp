@@ -4,8 +4,13 @@
 
 using namespace std;
 
-Skill::Skill(string skillName, float damageMultiplier, int attackCount, int mpCost, int cooldownTurn)
-	: skillName(skillName), damageMultiplier(damageMultiplier), attackCount(attackCount), mpCost(mpCost), cooldownTurn(cooldownTurn), currentCooldownTurn(0)
+SkillData::SkillData(string skillName, float damageMultiplier, int attackCount, int mpCost, int cooldownTurn)
+	: skillName(skillName), damageMultiplier(damageMultiplier), attackCount(attackCount), mpCost(mpCost), cooldownTurn(cooldownTurn)
+{
+}
+
+Skill::Skill(const SkillData* skillData)
+	: skillData(skillData), currentCooldownTurn(0)
 {
 }
 
@@ -29,63 +34,63 @@ void Skill::resetCooldown()
 
 void Skill::startCooldown()
 {
-	currentCooldownTurn = cooldownTurn;
+	currentCooldownTurn = skillData->cooldownTurn;
 }
 
 string Skill::getInfoText() const
 {
 	string infoText =
-		"[" + skillName + "] "
-		"🧪 MP: " + to_string(mpCost) + " | "
-		"⚔️ DMG: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + "타 | "
-		"⏳ CD: " + to_string(cooldownTurn) + "턴";
+		"[" + skillData->skillName + "] "
+		"🧪 MP: " + to_string(skillData->mpCost) + " | "
+		"⚔️ DMG: " + to_string(int(skillData->damageMultiplier * 100)) + "% x " + to_string(skillData->attackCount) + "타 | "
+		"⏳ CD: " + to_string(skillData->cooldownTurn) + "턴";
 	return infoText;
 }
 
 string Skill::getCombatMenuText() const
 {
-	string combatMenuText = skillName + " (🧪 마나: " + to_string(mpCost) + " | ⚔️ 데미지: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + ")";
+	string combatMenuText = skillData->skillName + " (🧪 마나: " + to_string(skillData->mpCost) + " | ⚔️ 데미지: " + to_string(int(skillData->damageMultiplier * 100)) + "% x " + to_string(skillData->attackCount) + ")";
 	if (isReady())
 	{
-		if (cooldownTurn == 0) // 쿨다운 없는 연속 사용 가능
+		if (skillData->cooldownTurn == 0) // 쿨다운 없는 연속 사용 가능
 		{
 			combatMenuText = "🟢 " + combatMenuText;
 		}
 		else // 쿨다운 존재
 		{
-			combatMenuText = "🟢 " + combatMenuText + "[0/" + to_string(cooldownTurn) + "턴]";
+			combatMenuText = "🟢 " + combatMenuText + "[0/" + to_string(skillData->cooldownTurn) + "턴]";
 		}
 	}
 	else // 쿨다운 중
 	{
-		combatMenuText += "⏳ " + combatMenuText + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(cooldownTurn) + "]";
+		combatMenuText += "⏳ " + combatMenuText + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(skillData->cooldownTurn) + "]";
 	}
 	return combatMenuText;
 }
 
 string Skill::getSkillName() const
 {
-	return skillName;
+	return skillData->skillName;
 }
 
 float Skill::getDamageMultiplier() const
 {
-	return damageMultiplier;
+	return skillData->damageMultiplier;
 }
 
 int Skill::getAttackCount() const
 {
-	return attackCount;
+	return skillData->attackCount;
 }
 
 int Skill::getMPCost() const
 {
-	return mpCost;
+	return skillData->mpCost;
 }
 
 int Skill::getCooldownTurn() const
 {
-	return cooldownTurn;
+	return skillData->cooldownTurn;
 }
 
 int Skill::getCurrentCooldownTurn() const
