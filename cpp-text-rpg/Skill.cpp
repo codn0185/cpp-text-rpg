@@ -68,7 +68,7 @@ string Skill::getCombatMenuText() const
 	}
 	else // 쿨다운 중
 	{
-		combatMenuText += "⏳ " + combatMenuText + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(skillData->cooldownTurn) + "]";
+		combatMenuText = "⏳ " + combatMenuText + "[대기 " + to_string(currentCooldownTurn) + "/" + to_string(skillData->cooldownTurn) + "]";
 	}
 	return combatMenuText;
 }
