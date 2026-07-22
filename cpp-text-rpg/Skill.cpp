@@ -9,7 +9,7 @@ Skill::Skill(string skillName, float damageMultiplier, int attackCount, int mpCo
 {
 }
 
-bool Skill::canUse(Player* player) const
+bool Skill::canUse(const Player* player) const
 {
 	if (!isReady()						   // 쿨다운
 		|| player->getCurrentMP() < mpCost // 마나 부족
