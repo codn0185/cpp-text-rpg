@@ -60,6 +60,14 @@ vector<shared_ptr<Skill>> Player::getSkills() const
 	return skills;
 }
 
+void Player::updateSkillsCooldown()
+{
+	for (auto skill : skills)
+	{
+		skill->updateCooldownTurn();
+	}
+}
+
 // Getters
 EPlayerJob Player::getJob() const
 {

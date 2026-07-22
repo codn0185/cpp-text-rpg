@@ -44,6 +44,7 @@ public:
 	void resetSkills(); // 스킬 초기화
 	void addSkill(const SkillData* skillData); // 스킬 추가
 	std::vector<std::shared_ptr<Skill>> getSkills() const; // 스킬 반환
+	void updateSkillsCooldown(); // 스킬들 쿨다운 감소
 
 	// Getters
 	EPlayerJob getJob() const;
