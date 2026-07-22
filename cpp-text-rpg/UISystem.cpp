@@ -32,9 +32,9 @@ void UISystem::PrintPlayerStat(const Player* player)
 	cout << " " << hpText << " | " << mpText << " | " << powerText << " | " << defenceText << "\n";
 	cout << "────────────────────────────────────────────────────────────" << "\n";
 	cout << " 스킬 리스트" << "\n";
-	for (const Skill& skill : player->getSkills())
+	for (const shared_ptr<Skill> skill : player->getSkills())
 	{
-		cout << "   - " << skill.getInfoText() << "\n";
+		cout << "   - " << skill->getInfoText() << "\n";
 	}
 	cout << "============================================================" << "\n";
 }
