@@ -50,12 +50,12 @@ void Player::resetSkills()
 	skills.clear();
 }
 
-void Player::addSkill(const Skill* skill)
+void Player::addSkill(const SkillData* skillData)
 {
-	skills.push_back(skill);
+	skills.push_back(Skill(skillData));
 }
 
-const vector<const Skill*> Player::getSkills() const
+vector<Skill> Player::getSkills() const
 {
 	return skills;
 }

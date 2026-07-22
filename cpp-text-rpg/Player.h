@@ -28,7 +28,7 @@ protected:
 	int exp;
 	int gold;
 
-	std::vector<const Skill*> skills;
+	std::vector<Skill> skills;
 
 public:
 	Player(std::string name, int maxHP, int maxMP, int power, int defence, int level = 0, int exp = 0, int gold = 0, EPlayerJob job = EPlayerJob::None);
@@ -41,8 +41,8 @@ public:
 
 	// 스킬 메서드
 	void resetSkills(); // 스킬 초기화
-	void addSkill(const Skill* skill); // 스킬 추가
-	const std::vector<const Skill*> getSkills() const; // 스킬 반환
+	void addSkill(const SkillData* skillData); // 스킬 추가
+	std::vector<Skill> getSkills() const; // 스킬 반환
 
 	// Getters
 	EPlayerJob getJob() const;
