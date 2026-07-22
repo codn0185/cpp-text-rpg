@@ -10,8 +10,13 @@ const map<int, LevelDataRow> LEVEL_TABLE = {
 	{0, LevelDataRow(1, 100, Stat(10, 7, 5, 3))},
 	{1, LevelDataRow(2, 120, Stat(10, 7, 5, 3))},
 	{2, LevelDataRow(3, 150, Stat(10, 7, 5, 3))},
-	{3, LevelDataRow(4, 200, Stat(10, 7, 5, 3))},
-	{4, LevelDataRow(5, 270, Stat(10, 7, 5, 3))},
+	{3, LevelDataRow(4, 160, Stat(10, 7, 5, 3))},
+	{4, LevelDataRow(5, 220, Stat(10, 7, 5, 3))},
+	{5, LevelDataRow(6, 300, Stat(15, 10, 7, 5))},
+	{6, LevelDataRow(7, 400, Stat(15, 10, 7, 5))},
+	{7, LevelDataRow(8, 530, Stat(15, 10, 7, 5))},
+	{8, LevelDataRow(9, 690, Stat(15, 10, 7, 5))},
+	{9, LevelDataRow(10, 880, Stat(15, 10, 7, 5))},
 };
 
 LevelSystem::LevelSystem()
