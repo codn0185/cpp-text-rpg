@@ -2,18 +2,18 @@
 
 using namespace std;
 
-MonsterDataRow::MonsterDataRow(EMosnterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence)
+MonsterDataRow::MonsterDataRow(EMonsterType monsterType, string name, string description, int maxHP, int maxMP, int power, int defence)
 	: monsterType(monsterType), name(name), description(description), maxHP(maxHP), maxMP(maxMP), power(power), defence(defence)
 {
 }
 
-const map<EMosnterType, MonsterDataRow> MONSTER_TABLE = {
-	{EMosnterType::Slime, MonsterDataRow(EMosnterType::Slime, "슬라임", "", 250, 0, 80, 45)},
-	{EMosnterType::Goblin, MonsterDataRow(EMosnterType::Goblin, "고블린", "", 300, 0, 115, 40)},
-	{EMosnterType::Skeleton, MonsterDataRow(EMosnterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30)},
+const map<EMonsterType, MonsterDataRow> MONSTER_TABLE = {
+	{EMonsterType::Slime, MonsterDataRow(EMonsterType::Slime, "슬라임", "", 250, 0, 80, 45)},
+	{EMonsterType::Goblin, MonsterDataRow(EMonsterType::Goblin, "고블린", "", 300, 0, 115, 40)},
+	{EMonsterType::Skeleton, MonsterDataRow(EMonsterType::Skeleton, "스켈레톤", "", 270, 0, 130, 30)},
 };
 
-Monster::Monster(EMosnterType monsterType)
+Monster::Monster(EMonsterType monsterType)
 	: monsterType(monsterType), Character(
 		MONSTER_TABLE.at(monsterType).name,
 		MONSTER_TABLE.at(monsterType).maxHP,
@@ -29,12 +29,12 @@ Monster::Monster(string name, int maxHP, int maxMP, int power, int defence)
 {
 }
 
-EMosnterType Monster::getMonsterType()
+EMonsterType Monster::getMonsterType()
 {
 	return monsterType;
 }
 
-void Monster::setMonsterType(EMosnterType monsterType)
+void Monster::setMonsterType(EMonsterType monsterType)
 {
 	this->monsterType = monsterType;
 }

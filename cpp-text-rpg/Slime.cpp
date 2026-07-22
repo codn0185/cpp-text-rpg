@@ -2,7 +2,7 @@
 
 #include "UISystem.h"
 
-Slime::Slime() : Monster(EMosnterType::Slime)
+Slime::Slime() : Monster(EMonsterType::Slime)
 {
 }
 

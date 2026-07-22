@@ -8,13 +8,13 @@
 class SpawnSystem
 {
 private:
-	std::map<EMosnterType, std::queue<Monster*>> mosnterPoolMap;
+	std::map<EMonsterType, std::queue<Monster*>> mosnterPoolMap;
 
 public:
 	SpawnSystem();
 	~SpawnSystem();
 
-	Monster* getMonsterFromPool(EMosnterType mosnterType);
+	Monster* getMonsterFromPool(EMonsterType mosnterType);
 	Monster* getRandomMonsterFromPool();
 	void returnMonsterToPool(Monster* monster);
 };

@@ -22,19 +22,19 @@ SpawnSystem::~SpawnSystem()
 	}
 }
 
-Monster* SpawnSystem::getMonsterFromPool(EMosnterType mosnterType)
+Monster* SpawnSystem::getMonsterFromPool(EMonsterType mosnterType)
 {
 	if (mosnterPoolMap[mosnterType].empty())
 	{
 		switch (mosnterType)
 		{
-		case EMosnterType::Slime:
+		case EMonsterType::Slime:
 			mosnterPoolMap[mosnterType].push(new Slime());
 			break;
-		case EMosnterType::Goblin:
+		case EMonsterType::Goblin:
 			mosnterPoolMap[mosnterType].push(new Goblin());
 			break;
-		case EMosnterType::Skeleton:
+		case EMonsterType::Skeleton:
 			mosnterPoolMap[mosnterType].push(new Skeleton());
 			break;
 		default:
@@ -51,8 +51,8 @@ Monster* SpawnSystem::getMonsterFromPool(EMosnterType mosnterType)
 
 Monster* SpawnSystem::getRandomMonsterFromPool()
 {
-	vector<EMosnterType> mosnterTypes = {EMosnterType::Slime, EMosnterType::Goblin, EMosnterType::Skeleton};
-	EMosnterType mosnterType = RandomSystem::GetRandomByWeight<EMosnterType>(mosnterTypes, {1, 1, 1});
+	vector<EMonsterType> mosnterTypes = {EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton};
+	EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(mosnterTypes, {1, 1, 1});
 
 	return getMonsterFromPool(mosnterType);
 }

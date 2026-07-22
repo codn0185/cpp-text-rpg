@@ -4,7 +4,7 @@
 
 #include <map>
 
-enum class EMosnterType
+enum class EMonsterType
 {
 	Slime,
 	Goblin,
@@ -13,7 +13,7 @@ enum class EMosnterType
 
 struct MonsterDataRow
 {
-	EMosnterType monsterType;
+	EMonsterType monsterType;
 	std::string name;
 	std::string description;
 	int maxHP;
@@ -21,23 +21,23 @@ struct MonsterDataRow
 	int power;
 	int defence;
 
-	MonsterDataRow(EMosnterType monsterType, std::string name, std::string description, int maxHP, int maxMP, int power, int defence);
+	MonsterDataRow(EMonsterType monsterType, std::string name, std::string description, int maxHP, int maxMP, int power, int defence);
 };
 
-extern const std::map<EMosnterType, MonsterDataRow> MONSTER_TABLE;
+extern const std::map<EMonsterType, MonsterDataRow> MONSTER_TABLE;
 
 class Monster : public Character
 {
 protected:
-	EMosnterType monsterType;
+	EMonsterType monsterType;
 
 public:
-	Monster(EMosnterType monsterType);
+	Monster(EMonsterType monsterType);
 	Monster(std::string name, int maxHP, int maxMP, int power, int defence);
 
 	// Getters
-	EMosnterType getMonsterType();
+	EMonsterType getMonsterType();
 
 	// Setters
-	void setMonsterType(EMosnterType monsterType);
+	void setMonsterType(EMonsterType monsterType);
 };

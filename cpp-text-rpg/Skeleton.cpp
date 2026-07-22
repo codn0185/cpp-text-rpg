@@ -2,7 +2,7 @@
 
 #include "UISystem.h"
 
-Skeleton::Skeleton() : Monster(EMosnterType::Skeleton)
+Skeleton::Skeleton() : Monster(EMonsterType::Skeleton)
 {
 }
 

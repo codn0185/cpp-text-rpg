@@ -2,7 +2,7 @@
 
 #include "UISystem.h"
 
-Goblin::Goblin() : Monster(EMosnterType::Goblin)
+Goblin::Goblin() : Monster(EMonsterType::Goblin)
 {
 }
 
