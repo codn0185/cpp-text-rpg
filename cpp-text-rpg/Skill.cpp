@@ -9,26 +9,6 @@ Skill::Skill(string skillName, float damageMultiplier, int attackCount, int mpCo
 {
 }
 
-bool Skill::canUse(const Character* character) const
-{
-	if (!isReady()						   // 쿨다운
-		|| character->getCurrentMP() < mpCost // 마나 부족
-		)
-	{
-		return false;
-	}
-	return true;
-}
-
-void Skill::use(Character* character)
-{
-	if (canUse(character))
-	{
-		character->setCurrentMP(character->getCurrentMP() - mpCost); // 마나 소모
-		startCooldown(); // 쿨다운 시작
-	}
-}
-
 bool Skill::isReady() const
 {
 	return currentCooldownTurn == 0;
