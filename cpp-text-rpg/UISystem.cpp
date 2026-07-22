@@ -14,7 +14,7 @@ const map<EPlayerJob, string> UISystem::jobNames = {
 	{EPlayerJob::Warrior, "전사"},
 };
 
-void UISystem::PrintPlayerStat(Player* player)
+void UISystem::PrintPlayerStat(const Player* player)
 {
 	string nameText = "닉네임: " + player->getName();
 	string jobText = "직업: " + jobNames.at(player->getJob());
@@ -39,7 +39,7 @@ void UISystem::PrintPlayerStat(Player* player)
 	cout << "============================================================" << "\n";
 }
 
-void UISystem::PrintBattleLog(Character* attacker, Character* defender, int damage)
+void UISystem::PrintBattleLog(const Character* attacker, const Character* defender, const int damage)
 {
 	cout << "\"" << attacker->getName() << "\"이(가) \"" << defender->getName() << "\"에게 " << damage << "만큼의 데미지를 주었습니다!";
 	cout << " (" << defender->getCurrentHP() << "/" << defender->getMaxHP() << ")" << "\n";

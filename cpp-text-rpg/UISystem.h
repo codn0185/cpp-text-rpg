@@ -10,7 +10,7 @@ class UISystem
 private:
 	static const std::map<EPlayerJob, std::string> jobNames;
 public:
-	static void PrintPlayerStat(Player* player);
-	static void PrintBattleLog(Character* attacker, Character* defender, int damage);
+	static void PrintPlayerStat(const Player* player);
+	static void PrintBattleLog(const Character* attacker, const Character* defender, const int damage);
 };
 
