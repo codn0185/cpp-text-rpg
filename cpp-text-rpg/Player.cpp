@@ -55,28 +55,28 @@ void Player::addSkill(const Skill* skill)
 	skills.push_back(skill);
 }
 
-const vector<const Skill*> Player::getSkills()
+const vector<const Skill*> Player::getSkills() const
 {
 	return skills;
 }
 
 // Getters
-EPlayerJob Player::getJob()
+EPlayerJob Player::getJob() const
 {
 	return job;
 }
 
-int Player::getLevel()
+int Player::getLevel() const
 {
 	return level;
 }
 
-int Player::getExp()
+int Player::getExp() const
 {
 	return exp;
 }
 
-int Player::getGold()
+int Player::getGold() const
 {
 	return gold;
 }

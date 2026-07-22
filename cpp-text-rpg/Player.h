@@ -42,13 +42,13 @@ public:
 	// 스킬 메서드
 	void resetSkills(); // 스킬 초기화
 	void addSkill(const Skill* skill); // 스킬 추가
-	const std::vector<const Skill*> getSkills(); // 스킬 반환
+	const std::vector<const Skill*> getSkills() const; // 스킬 반환
 
 	// Getters
-	EPlayerJob getJob();
-	int getLevel();
-	int getExp();
-	int getGold();
+	EPlayerJob getJob() const;
+	int getLevel() const;
+	int getExp() const;
+	int getGold() const;
 
 	// Setters
 	void setJob(EPlayerJob job);
