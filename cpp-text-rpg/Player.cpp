@@ -52,10 +52,10 @@ void Player::resetSkills()
 
 void Player::addSkill(const SkillData* skillData)
 {
-	skills.push_back(Skill(skillData));
+	skills.push_back(make_shared<Skill>(Skill(skillData)));
 }
 
-vector<Skill> Player::getSkills() const
+vector<shared_ptr<Skill>> Player::getSkills() const
 {
 	return skills;
 }

@@ -86,14 +86,14 @@ const vector<const SkillData*> SkillSystem::UnlockSkillsForCurrentLevel(Player* 
 	return unlockedSkills;
 }
 
-bool SkillSystem::CanUse(const Skill* skill, const Character* character)
+bool SkillSystem::CanUse(const shared_ptr<Skill> skill, const Character* character)
 {
 	if (!skill->isReady()) return false; // 쿨다운
 	if (character->getCurrentMP() < skill->getMPCost()) return false; // 마나 부족
 	return true; // 사용 가능
 }
 
-void SkillSystem::ApplySkill(Skill* skill, Character* attacker, Character* target)
+void SkillSystem::UseSkill(shared_ptr<Skill> skill, Character* attacker, Character* target)
 {
 	if (!CanUse(skill, attacker)) return; // 스킬 사용 불가능
 
