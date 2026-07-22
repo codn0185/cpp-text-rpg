@@ -6,7 +6,7 @@ using namespace std;
 
 GameManager::GameManager() :isRunning(true)
 {
-	spawnManager = new SpawnManager();
+	spawnManager = new SpawnSystem();
 	combatManager = new CombatManager();
 
 	backpackInventory = new Inventory(10, 5); // 배낭

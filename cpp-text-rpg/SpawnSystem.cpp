@@ -1,15 +1,15 @@
-#include "SpawnManager.h"
+#include "SpawnSystem.h"
 
 #include "RandomSystem.h"
 #include "Monsters.h"
 
 using namespace std;
 
-SpawnManager::SpawnManager()
+SpawnSystem::SpawnSystem()
 {
 }
 
-SpawnManager::~SpawnManager()
+SpawnSystem::~SpawnSystem()
 {
 	for (auto iter = mosnterPoolMap.begin(); iter != mosnterPoolMap.end(); iter++)
 	{
@@ -22,7 +22,7 @@ SpawnManager::~SpawnManager()
 	}
 }
 
-Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
+Monster* SpawnSystem::getMonsterFromPool(EMosnterType mosnterType)
 {
 	if (mosnterPoolMap[mosnterType].empty())
 	{
@@ -49,7 +49,7 @@ Monster* SpawnManager::getMonsterFromPool(EMosnterType mosnterType)
 	return monster;
 }
 
-Monster* SpawnManager::getRandomMonsterFromPool()
+Monster* SpawnSystem::getRandomMonsterFromPool()
 {
 	vector<EMosnterType> mosnterTypes = {EMosnterType::Slime, EMosnterType::Goblin, EMosnterType::Skeleton};
 	EMosnterType mosnterType = RandomSystem::GetRandomByWeight<EMosnterType>(mosnterTypes, {1, 1, 1});
@@ -57,7 +57,7 @@ Monster* SpawnManager::getRandomMonsterFromPool()
 	return getMonsterFromPool(mosnterType);
 }
 
-void SpawnManager::returnMonsterToPool(Monster* monster)
+void SpawnSystem::returnMonsterToPool(Monster* monster)
 {
 	mosnterPoolMap[monster->getMonsterType()].push(monster);
 }

@@ -5,14 +5,14 @@
 #include <map>
 #include <queue>
 
-class SpawnManager
+class SpawnSystem
 {
 private:
 	std::map<EMosnterType, std::queue<Monster*>> mosnterPoolMap;
 
 public:
-	SpawnManager();
-	~SpawnManager();
+	SpawnSystem();
+	~SpawnSystem();
 
 	Monster* getMonsterFromPool(EMosnterType mosnterType);
 	Monster* getRandomMonsterFromPool();

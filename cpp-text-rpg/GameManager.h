@@ -3,7 +3,7 @@
 #include "Singleton.h"
 
 #include "ShopManager.h"
-#include "SpawnManager.h"
+#include "SpawnSystem.h"
 #include "CombatManager.h"
 
 #include "InputSystem.h"
@@ -58,7 +58,7 @@ private:
 	bool isRunning;
 
 	CombatManager* combatManager; // 전투 매니저
-	SpawnManager* spawnManager; // 스폰 매니저
+	SpawnSystem* spawnManager; // 스폰 매니저
 
 	Player* player; // 플레이어
 

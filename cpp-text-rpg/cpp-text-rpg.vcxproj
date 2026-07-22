@@ -155,7 +155,7 @@
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="SkillSystem.cpp" />
     <ClCompile Include="Slime.cpp" />
-    <ClCompile Include="SpawnManager.cpp" />
+    <ClCompile Include="SpawnSystem.cpp" />
     <ClCompile Include="UISystem.cpp" />
     <ClCompile Include="Warrior.cpp" />
   </ItemGroup>
@@ -194,7 +194,7 @@
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillSystem.h" />
     <ClInclude Include="Slime.h" />
-    <ClInclude Include="SpawnManager.h" />
+    <ClInclude Include="SpawnSystem.h" />
     <ClInclude Include="IStateMachine.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="Warrior.h" />
