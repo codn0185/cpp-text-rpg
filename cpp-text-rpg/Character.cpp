@@ -12,43 +12,43 @@ void Character::takeDamage(int damage)
 	currentHP = currentHP < damage ? 0 : currentHP - damage;
 }
 
-bool Character::isDead()
+bool Character::isDead() const
 {
 	return currentHP <= 0;
 }
 
 // Getters
-string Character::getName()
+string Character::getName() const
 {
 	return name;
 }
 
-int Character::getMaxHP()
+int Character::getMaxHP() const
 {
 	return maxHP;
 }
 
-int Character::getCurrentHP()
+int Character::getCurrentHP() const
 {
 	return currentHP;
 }
 
-int Character::getMaxMP()
+int Character::getMaxMP() const
 {
 	return maxMP;
 }
 
-int Character::getCurrentMP()
+int Character::getCurrentMP() const
 {
 	return currentMP;
 }
 
-int Character::getPower()
+int Character::getPower() const
 {
 	return power;
 }
 
-int Character::getDefence()
+int Character::getDefence() const
 {
 	return defence;
 }

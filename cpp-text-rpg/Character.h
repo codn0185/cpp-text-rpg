@@ -36,20 +36,20 @@ public:
 
 	virtual void attack(Character* target) = 0;
 	void takeDamage(int damage);
-	bool isDead();
+	bool isDead() const;
 
 	// Life Cycles
 	//  virtual void onEnable() = 0;
 	//  virtual void onDisable() = 0;
 
 	// Getters
-	std::string getName();
-	int getMaxHP();
-	int getCurrentHP();
-	int getMaxMP();
-	int getCurrentMP();
-	int getPower();
-	int getDefence();
+	std::string getName() const;
+	int getMaxHP() const;
+	int getCurrentHP() const;
+	int getMaxMP() const;
+	int getCurrentMP() const;
+	int getPower() const;
+	int getDefence() const;
 
 	// Setters
 	void setName(std::string name);
