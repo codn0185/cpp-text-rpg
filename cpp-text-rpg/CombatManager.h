@@ -15,6 +15,7 @@ enum class ECombatState
 	PlayerDefeat,
 
 	PlayerUsingItem,
+	PlayerSelectingSkill,
 };
 
 class CombatManager
@@ -48,4 +49,5 @@ public:
 	void onPlayerDefeat();
 
 	void onPlayerUsingItem();
+	void onPlayerSelectingSkill();
 };

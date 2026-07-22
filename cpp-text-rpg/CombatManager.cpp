@@ -4,6 +4,7 @@
 #include "InputSystem.h"
 #include "InventorySystem.h"
 #include "PotionSystem.h"
+#include "SkillSystem.h"
 
 #include <iostream>
 
@@ -63,6 +64,9 @@ void CombatManager::update()
 	case ECombatState::PlayerUsingItem:
 		onPlayerUsingItem();
 		break;
+	case ECombatState::PlayerSelectingSkill:
+		onPlayerSelectingSkill();
+		break;
 	default:
 		break;
 	}
@@ -96,10 +100,14 @@ void CombatManager::onPlayerTurn()
 	switch (option)
 	{
 	case 1:
-		player->showAttackMessage();
-		player->attack(monster);
-		switchCombatState(ECombatState::CheckVictory);
+	{
+		// player->showAttackMessage();
+		// player->attack(monster);
+		// switchCombatState(ECombatState::CheckVictory);
+		switchCombatState(ECombatState::PlayerSelectingSkill);
 		break;
+	}
+	break;
 	case 2:
 		UISystem::PrintPlayerStat(player);
 		break;
@@ -175,4 +183,40 @@ void CombatManager::onPlayerUsingItem()
 			switchCombatState(ECombatState::CheckVictory);
 		}
 	}
+}
+
+void CombatManager::onPlayerSelectingSkill()
+{
+	// 스킬 리스트 출력
+	const vector<shared_ptr<Skill>> skills = player->getSkills();
+	cout << "───── < 스킬 목록 > ─────" << "\n";
+	for (int i = 0; i < skills.size(); i++)
+	{
+		shared_ptr<Skill> skill = skills.at(i);
+		cout << i + 1 << ". " << skill->getCombatMenuText() << "\n";
+	}
+	cout << "────────────────────────" << "\n";
+
+	// 사용할 스킬 선택 (0: 뒤로가기)
+	int skillNumber = InputSystem::InputIntUnitlValid(0, (int) skills.size(), "입력 (0: 뒤로가기): ");
+
+	// 뒤로가기 (0)
+	if (skillNumber == 0)
+	{
+		switchCombatState(ECombatState::PlayerTurn);
+		return;
+	}
+
+	// 스킬 사용
+	shared_ptr<Skill> skill = skills.at(skillNumber - 1);
+	if (!SkillSystem::CanUse(skill, player)) // 스킬 사용 불가
+	{
+		cout << "[" << skill->getSkillName() << "] 사용 불가" << "\n";
+		return;
+	}
+	SkillSystem::UseSkill(skill, player, monster);
+	player->updateSkillsCooldown();
+
+	// 상태 전환 - CheckVictory
+	switchCombatState(ECombatState::CheckVictory);
 }
