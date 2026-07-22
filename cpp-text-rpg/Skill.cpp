@@ -9,10 +9,10 @@ Skill::Skill(string skillName, float damageMultiplier, int attackCount, int mpCo
 {
 }
 
-bool Skill::canUse(const Player* player) const
+bool Skill::canUse(const Character* character) const
 {
 	if (!isReady()						   // 쿨다운
-		|| player->getCurrentMP() < mpCost // 마나 부족
+		|| character->getCurrentMP() < mpCost // 마나 부족
 		)
 	{
 		return false;
@@ -20,11 +20,11 @@ bool Skill::canUse(const Player* player) const
 	return true;
 }
 
-void Skill::use(Player* player)
+void Skill::use(Character* character)
 {
-	if (canUse(player))
+	if (canUse(character))
 	{
-		player->setCurrentMP(player->getCurrentMP() - mpCost); // 마나 소모
+		character->setCurrentMP(character->getCurrentMP() - mpCost); // 마나 소모
 		startCooldown(); // 쿨다운 시작
 	}
 }

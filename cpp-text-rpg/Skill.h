@@ -1,10 +1,8 @@
 #pragma once
 
-#include "Player.h"
+#include "Character.h"
 
 #include <string>
-
-class Player;
 
 class Skill
 {
@@ -20,8 +18,8 @@ public:
 	Skill(std::string skillName, float damageMultiplier = 1, int attackCount = 1, int mpCost = 0, int cooldownTurn = 0);
 	~Skill() = default;
 
-	bool canUse(const Player* player) const; // 스킬 사용 가능한지 여부 반환 (마나, 대기 턴 확인)
-	void use(Player* player); // 스킬 사용 (마나 소모 및 대기 턴 수 초기화)
+	bool canUse(const Character* character) const; // 스킬 사용 가능한지 여부 반환 (마나, 대기 턴 확인)
+	void use(Character* character); // 스킬 사용 (마나 소모 및 대기 턴 수 초기화)
 
 	bool isReady() const; // 스킬 사용 준비 여부 반혼 (현재 대기 턴 확인)
 	void updateCooldownTurn(); // 쿨다운 턴 감소
