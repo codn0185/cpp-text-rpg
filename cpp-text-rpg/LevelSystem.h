@@ -28,8 +28,8 @@ public:
 	~LevelSystem() = default;
 
 	static int GetMaxLevel();
-	static int GetRequiredExp(Player* player);
+	static int GetRequiredExp(const Player* player);
 
-	static void AddExp(Player* player, int amount);
+	static void AddExp(Player* player, const int amount);
 };
 

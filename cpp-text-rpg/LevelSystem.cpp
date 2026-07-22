@@ -85,13 +85,7 @@ void LevelSystem::CheckLevelUp(Player* player)
 	}
 }
 
-void LevelSystem::AddExp(Player* player, int amount)
-{
-	player->setExp(player->getExp() + amount);
-	CheckLevelUp(player);
-}
-
-int LevelSystem::GetRequiredExp(Player* player)
+int LevelSystem::GetRequiredExp(const Player* player)
 {
 	if (LEVEL_TABLE.find(player->getLevel()) == LEVEL_TABLE.end())
 	{
@@ -103,4 +97,11 @@ int LevelSystem::GetRequiredExp(Player* player)
 int LevelSystem::GetMaxLevel()
 {
 	return LEVEL_TABLE.rbegin()->second.targetLevel;
+}
+
+
+void LevelSystem::AddExp(Player* player, const int amount)
+{
+	player->setExp(player->getExp() + amount);
+	CheckLevelUp(player);
 }
