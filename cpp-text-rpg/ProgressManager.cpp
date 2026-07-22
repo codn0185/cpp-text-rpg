@@ -4,12 +4,40 @@
 
 using namespace std;
 
-map<EDungeonProgress, string> DUNGEON_PROGRESS_DISPLAY_NAME = {
-	{EDungeonProgress::None, ""},
-	{EDungeonProgress::Floor1, "던전 1층"},
-	{EDungeonProgress::Floor2, "던전 2층"},
-	{EDungeonProgress::Floor3, "던전 3층"},
-	{EDungeonProgress::Boss, "보스방"},
+DungeonProgressDataRow::DungeonProgressDataRow(EDungeonProgress dungeonProgress, string dungeonDisplayName, int targetKillCount, vector<EMonsterType> spawnMonsterTypes, vector<float> spawnMonsterweights)
+	: dungeonProgress(dungeonProgress), dungeonDisplayName(dungeonDisplayName), targetKillCount(targetKillCount), spawnMonsterTypes(spawnMonsterTypes), spawnMonsterweights(spawnMonsterweights)
+{
+}
+
+const map<EDungeonProgress, DungeonProgressDataRow> DUNGEON_PROGRESS_TABLE = {
+	{EDungeonProgress::Floor1, DungeonProgressDataRow(
+		EDungeonProgress::Floor1,
+		"던전 1층",
+		10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f}
+		)},
+	{EDungeonProgress::Floor2, DungeonProgressDataRow(
+		EDungeonProgress::Floor2,
+		"던전 2층",
+		10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f}
+		)},
+	{EDungeonProgress::Floor3, DungeonProgressDataRow(
+		EDungeonProgress::Floor3,
+		"던전 3층",
+		10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f}
+		)},
+	{EDungeonProgress::Boss, DungeonProgressDataRow(
+		EDungeonProgress::Boss,
+		"보스방",
+		10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f}
+		)},
 };
 
 ProgressManager::ProgressManager()
@@ -48,7 +76,7 @@ void ProgressManager::displayDungeonSelection()
 
 void ProgressManager::displayDungeonEnterMessage(EDungeonProgress dungeonProgress)
 {
-	const string& displayName = DUNGEON_PROGRESS_DISPLAY_NAME.at(dungeonProgress);
+	const string& displayName = DUNGEON_PROGRESS_TABLE.at(dungeonProgress).dungeonDisplayName;
 
 	std::cout << "=======================================" << "\n";
 	switch (dungeonProgress)
@@ -74,7 +102,7 @@ void ProgressManager::displayDungeonEnterMessage(EDungeonProgress dungeonProgres
 
 void ProgressManager::displayAccessDeniedMessage(EDungeonProgress dungeonProgress)
 {
-	const string& displayName = DUNGEON_PROGRESS_DISPLAY_NAME.at(dungeonProgress);
+	const string& displayName = DUNGEON_PROGRESS_TABLE.at(dungeonProgress).dungeonDisplayName;
 
 	std::cout << "=======================================" << "\n";
 	std::cout << "🚫 [접근 불가] 입장할 수 없습니다!" << "\n";
