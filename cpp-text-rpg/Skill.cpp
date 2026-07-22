@@ -9,6 +9,16 @@ SkillData::SkillData(string skillName, float damageMultiplier, int attackCount, 
 {
 }
 
+std::string SkillData::getInfoText() const
+{
+	string infoText =
+		"[" + skillName + "] "
+		"🧪 MP: " + to_string(mpCost) + " | "
+		"⚔️ DMG: " + to_string(int(damageMultiplier * 100)) + "% x " + to_string(attackCount) + "타 | "
+		"⏳ CD: " + to_string(cooldownTurn) + "턴";
+	return infoText;
+}
+
 Skill::Skill(const SkillData* skillData)
 	: skillData(skillData), currentCooldownTurn(0)
 {
@@ -39,12 +49,7 @@ void Skill::startCooldown()
 
 string Skill::getInfoText() const
 {
-	string infoText =
-		"[" + skillData->skillName + "] "
-		"🧪 MP: " + to_string(skillData->mpCost) + " | "
-		"⚔️ DMG: " + to_string(int(skillData->damageMultiplier * 100)) + "% x " + to_string(skillData->attackCount) + "타 | "
-		"⏳ CD: " + to_string(skillData->cooldownTurn) + "턴";
-	return infoText;
+	return skillData->getInfoText();
 }
 
 string Skill::getCombatMenuText() const

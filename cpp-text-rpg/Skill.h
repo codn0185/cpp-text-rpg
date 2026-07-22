@@ -13,6 +13,8 @@ struct SkillData
 	const int cooldownTurn; // 대기 턴 수 (0: 매 턴 사용 가능)
 
 	SkillData(std::string skillName, float damageMultiplier = 1, int attackCount = 1, int mpCost = 0, int cooldownTurn = 0);
+
+	std::string getInfoText() const; // 스킬 설명 텍스트 반환
 };
 
 class Skill
