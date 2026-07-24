@@ -1,0 +1,194 @@
+#include "DungeonManager.h"
+
+#include "SpawnSystem.h"
+#include "InputSystem.h"
+
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+
+DungeonFloorData::DungeonFloorData(EDungeonFloor dungeonFloor, string name, EDungeonFloor prerequisiteFloor, int requiredKillCount)
+	: dungeonFloor(dungeonFloor), name(name), prerequisiteFloor(prerequisiteFloor), requiredKillCount(requiredKillCount)
+{
+}
+
+bool DungeonFloorData::canUnlock(EDungeonFloor currentDugeonFloor, int sessionKillCount) const
+{
+	return (currentDugeonFloor == prerequisiteFloor) && (sessionKillCount >= requiredKillCount);
+}
+
+
+const map<EDungeonFloor, DungeonFloorData> DUNGEON_FLOOR_TABLE = {
+	{EDungeonFloor::None, DungeonFloorData(EDungeonFloor::None, "지상", EDungeonFloor::None, 0)},
+	{EDungeonFloor::Floor1, DungeonFloorData(EDungeonFloor::Floor1, "던전 1층", EDungeonFloor::None, 0)},
+	{EDungeonFloor::Floor2, DungeonFloorData(EDungeonFloor::Floor2, "던전 2층", EDungeonFloor::Floor1, 10)},
+	{EDungeonFloor::Floor3, DungeonFloorData(EDungeonFloor::Floor3, "던전 3층", EDungeonFloor::Floor2, 10)},
+	{EDungeonFloor::Boss, DungeonFloorData(EDungeonFloor::Boss, "보스 방", EDungeonFloor::Floor3, 10)},
+};
+
+DungeonManager::DungeonManager()
+	: currentDungeonFloor(EDungeonFloor::None), sessionKillCount(0)
+{
+	dungeonFloorMenuList = {
+		EDungeonFloor::Floor1,
+		EDungeonFloor::Floor2,
+		EDungeonFloor::Floor3,
+		EDungeonFloor::Boss,
+	};
+	dungeonFloorAvailableList = {
+		{EDungeonFloor::Floor1, true},
+		{EDungeonFloor::Floor2, false},
+		{EDungeonFloor::Floor3, false},
+		{EDungeonFloor::Boss, false},
+	};
+	dungeonFloorMaxKillCount = {
+		{EDungeonFloor::Floor1, 0},
+		{EDungeonFloor::Floor2, 0},
+		{EDungeonFloor::Floor3, 0},
+		{EDungeonFloor::Boss, 0},
+	};
+}
+
+
+DungeonFloorSpawnData::DungeonFloorSpawnData(EDungeonFloor dungeonFloor, vector<EMonsterType> monsterTypes, vector<float> weights)
+	: dungeonFloor(dungeonFloor), monsterTypes(monsterTypes), weights(weights)
+{
+}
+
+const map<EDungeonFloor, DungeonFloorSpawnData> DUNGEON_FLOOR_SPAWN_DATA = {
+	{EDungeonFloor::Floor1, DungeonFloorSpawnData(EDungeonFloor::Floor1,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Floor2, DungeonFloorSpawnData(EDungeonFloor::Floor2,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Floor3, DungeonFloorSpawnData(EDungeonFloor::Floor3,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Boss, DungeonFloorSpawnData(EDungeonFloor::Boss,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+};
+
+
+void DungeonManager::displayDungeonFloorMenu() const
+{
+	cout << "═══════════════ < 던전 입장 > ═══════════════" << "\n";
+	for (int i = 0; i < dungeonFloorMenuList.size(); i++)
+	{
+		EDungeonFloor dungeonFloor = dungeonFloorMenuList[i];
+		const DungeonFloorData& dungeonFloorDataRow = DUNGEON_FLOOR_TABLE.at(dungeonFloor);
+		string name = dungeonFloorDataRow.name;
+		if (isAvailable(dungeonFloor))
+		{
+			string str;
+			cout << i + 1 << ". ✅ [" << name << "] (💀 최고 연속 처치 - " << dungeonFloorMaxKillCount.at(dungeonFloor) << ")" << "\n";
+		}
+		else
+		{
+			const DungeonFloorData& prerequisiteDungeonFloorData = DUNGEON_FLOOR_TABLE.at(dungeonFloorDataRow.prerequisiteFloor);
+			cout << i + 1 << ". 🚫 [" << name << "] (🎯 해금 조건: \"" << prerequisiteDungeonFloorData.name << "\"에서 " << prerequisiteDungeonFloorData.requiredKillCount << " 연속 처치)" << "\n";
+		}
+	}
+	cout << "────────────────────────────────────────────" << "\n";
+	cout << "0. 🔙 돌아가기" << "\n";
+	cout << "════════════════════════════════════════════" << "\n";
+}
+
+void DungeonManager::displayDungeonEnterMessage(EDungeonFloor dungeonProgress) const
+{
+	const string& name = DUNGEON_FLOOR_TABLE.at(dungeonProgress).name;
+	string emoji = dungeonProgress != EDungeonFloor::Boss ? "⚔️" : "👑";
+
+	cout << "───────────────────────────────────────" << "\n";
+	cout << emoji << " [" << name << "]에 입장합니다!" << "\n";
+	cout << "───────────────────────────────────────" << "\n";
+}
+
+void DungeonManager::displayAccessDeniedMessage(EDungeonFloor dungeonProgress) const
+{
+	const string& name = DUNGEON_FLOOR_TABLE.at(dungeonProgress).name;
+
+	cout << "───────────────────────────────────────" << "\n";
+	cout << "🚫 [" << name << "]에 입장할 수 없습니다! " << "\n";
+	cout << " > 아직 해금되지 않은 구역입니다. 이전 구역을 먼저 클리어하세요." << "\n";
+	cout << "───────────────────────────────────────" << "\n";
+}
+
+bool DungeonManager::isAvailable(EDungeonFloor dungeonFloor) const
+{
+	if (dungeonFloorAvailableList.find(dungeonFloor) == dungeonFloorAvailableList.end())
+	{
+		return false;
+	}
+	return dungeonFloorAvailableList.at(dungeonFloor);
+}
+
+void DungeonManager::checkAndUnlockFloor()
+{
+	for (const auto& [targetFloor, requirement] : DUNGEON_FLOOR_TABLE)
+	{
+		if (isAvailable(targetFloor)) // 이미 해금된 던전 층
+		{
+			continue;
+		}
+		if (requirement.canUnlock(currentDungeonFloor, sessionKillCount)) // 조건 만족
+		{
+			// 던전 층 해금
+			dungeonFloorAvailableList[targetFloor] = true;
+			// 플레이어 알림
+			cout << "━━━━━━━━━━━ <🎉 새로운 던전 해금> ━━━━━━━━━━━" << "\n";
+			cout << "🔓 [" << DUNGEON_FLOOR_TABLE.at(targetFloor).name << "] 이(가) 해금되었습니다!" << "\n";
+			cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << "\n";
+		}
+
+	}
+}
+
+bool DungeonManager::tryEnterDungeonFloor(EDungeonFloor dungeonFloor)
+{
+	if (!isAvailable(dungeonFloor)) // 접근 불가
+	{
+		displayAccessDeniedMessage();
+		return false;
+	}
+	// 던전 입장
+	displayDungeonEnterMessage();
+	currentDungeonFloor = dungeonFloor;
+	return true;
+}
+
+bool DungeonManager::tryEnterDungeonFloor(int MenuIndex)
+{
+	return tryEnterDungeonFloor(dungeonFloorMenuList.at(MenuIndex));
+}
+
+void DungeonManager::onMonsterKilled()
+{
+	sessionKillCount++;
+	checkAndUnlockFloor();
+}
+
+void DungeonManager::onExit()
+{
+	// 최고 기록 저장
+	dungeonFloorMaxKillCount[currentDungeonFloor] = max(dungeonFloorMaxKillCount[currentDungeonFloor], sessionKillCount);
+	// 초기화
+	currentDungeonFloor = EDungeonFloor::None;
+	sessionKillCount = 0;
+}
+
+Monster* DungeonManager::getRandomMonsterByCurrentDungeonFloor()
+{
+	return SpawnSystem::GetRandomMonsterFromPool(
+		DUNGEON_FLOOR_SPAWN_DATA.at(currentDungeonFloor).monsterTypes,
+		DUNGEON_FLOOR_SPAWN_DATA.at(currentDungeonFloor).weights
+	);
+}
+
+void DungeonManager::returnMonster(Monster* monster)
+{
+	SpawnSystem::ReturnMonsterToPool(monster);
+}
