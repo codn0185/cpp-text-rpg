@@ -22,8 +22,9 @@ SpawnSystem::~SpawnSystem()
 	}
 }
 
-Monster* SpawnSystem::getMonsterFromPool(EMonsterType mosnterType)
+Monster* SpawnSystem::GetMonsterFromPool(EMonsterType mosnterType)
 {
+	auto& mosnterPoolMap = GetInstance().mosnterPoolMap;
 	if (mosnterPoolMap[mosnterType].empty())
 	{
 		switch (mosnterType)
@@ -49,7 +50,7 @@ Monster* SpawnSystem::getMonsterFromPool(EMonsterType mosnterType)
 	return monster;
 }
 
-Monster* SpawnSystem::getRandomMonsterFromPool(const vector<EMonsterType>& monsterTypes, const vector<float>& weights)
+Monster* SpawnSystem::GetRandomMonsterFromPool(const vector<EMonsterType>& monsterTypes, const vector<float>& weights)
 {
 	// 몬스터 타입 없음
 	if (monsterTypes.empty())
@@ -61,15 +62,15 @@ Monster* SpawnSystem::getRandomMonsterFromPool(const vector<EMonsterType>& monst
 	if (weights.empty())
 	{
 		EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(monsterTypes, vector<float>(monsterTypes.size(), 1.0f));
-		return getMonsterFromPool(mosnterType);
+		return GetMonsterFromPool(mosnterType);
 	}
 
 	// 가중치 기반 확률로 몬스터 반환
 	EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(monsterTypes, weights);
-	return getMonsterFromPool(mosnterType);
+	return GetMonsterFromPool(mosnterType);
 }
 
-void SpawnSystem::returnMonsterToPool(Monster* monster)
+void SpawnSystem::ReturnMonsterToPool(Monster* monster)
 {
-	mosnterPoolMap[monster->getMonsterType()].push(monster);
+	GetInstance().mosnterPoolMap[monster->getMonsterType()].push(monster);
 }
