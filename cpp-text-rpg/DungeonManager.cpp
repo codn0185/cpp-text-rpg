@@ -9,8 +9,8 @@
 using namespace std;
 
 
-DungeonFloorData::DungeonFloorData(EDungeonFloor dungeonFloor, string name, EDungeonFloor prerequisiteFloor, int requiredKillCount)
-	: dungeonFloor(dungeonFloor), name(name), prerequisiteFloor(prerequisiteFloor), requiredKillCount(requiredKillCount)
+DungeonFloorData::DungeonFloorData(EDungeonFloor dungeonFloor, string name, EDungeonFloor prerequisiteFloor, int requiredKillCount, vector<EMonsterType> monsterTypes, vector<float> weights)
+	: dungeonFloor(dungeonFloor), name(name), prerequisiteFloor(prerequisiteFloor), requiredKillCount(requiredKillCount), monsterTypes(monsterTypes), weights(weights)
 {
 }
 
@@ -19,14 +19,24 @@ bool DungeonFloorData::canUnlock(EDungeonFloor currentDugeonFloor, int sessionKi
 	return (currentDugeonFloor == prerequisiteFloor) && (sessionKillCount >= requiredKillCount);
 }
 
-
 const map<EDungeonFloor, DungeonFloorData> DUNGEON_FLOOR_TABLE = {
-	{EDungeonFloor::None, DungeonFloorData(EDungeonFloor::None, "지상", EDungeonFloor::None, 0)},
-	{EDungeonFloor::Floor1, DungeonFloorData(EDungeonFloor::Floor1, "던전 1층", EDungeonFloor::None, 0)},
-	{EDungeonFloor::Floor2, DungeonFloorData(EDungeonFloor::Floor2, "던전 2층", EDungeonFloor::Floor1, 10)},
-	{EDungeonFloor::Floor3, DungeonFloorData(EDungeonFloor::Floor3, "던전 3층", EDungeonFloor::Floor2, 10)},
-	{EDungeonFloor::Boss, DungeonFloorData(EDungeonFloor::Boss, "보스 방", EDungeonFloor::Floor3, 10)},
+	{EDungeonFloor::None, DungeonFloorData(EDungeonFloor::None, "지상", EDungeonFloor::None, 0,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Floor1, DungeonFloorData(EDungeonFloor::Floor1, "던전 1층", EDungeonFloor::None, 0,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Floor2, DungeonFloorData(EDungeonFloor::Floor2, "던전 2층", EDungeonFloor::Floor1, 10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Floor3, DungeonFloorData(EDungeonFloor::Floor3, "던전 3층", EDungeonFloor::Floor2, 10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
+	{EDungeonFloor::Boss, DungeonFloorData(EDungeonFloor::Boss, "보스 방", EDungeonFloor::Floor3, 10,
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{1.0f, 1.0f, 1.0f})},
 };
+
 
 DungeonManager::DungeonManager()
 	: currentDungeonFloor(EDungeonFloor::None), sessionKillCount(0)
@@ -50,28 +60,6 @@ DungeonManager::DungeonManager()
 		{EDungeonFloor::Boss, 0},
 	};
 }
-
-
-DungeonFloorSpawnData::DungeonFloorSpawnData(EDungeonFloor dungeonFloor, vector<EMonsterType> monsterTypes, vector<float> weights)
-	: dungeonFloor(dungeonFloor), monsterTypes(monsterTypes), weights(weights)
-{
-}
-
-const map<EDungeonFloor, DungeonFloorSpawnData> DUNGEON_FLOOR_SPAWN_DATA = {
-	{EDungeonFloor::Floor1, DungeonFloorSpawnData(EDungeonFloor::Floor1,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
-	{EDungeonFloor::Floor2, DungeonFloorSpawnData(EDungeonFloor::Floor2,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
-	{EDungeonFloor::Floor3, DungeonFloorSpawnData(EDungeonFloor::Floor3,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
-	{EDungeonFloor::Boss, DungeonFloorSpawnData(EDungeonFloor::Boss,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
-};
-
 
 void DungeonManager::displayDungeonFloorMenu() const
 {
@@ -214,8 +202,8 @@ void DungeonManager::onExit()
 Monster* DungeonManager::getRandomMonsterByCurrentDungeonFloor()
 {
 	return SpawnSystem::GetRandomMonsterFromPool(
-		DUNGEON_FLOOR_SPAWN_DATA.at(currentDungeonFloor).monsterTypes,
-		DUNGEON_FLOOR_SPAWN_DATA.at(currentDungeonFloor).weights
+		DUNGEON_FLOOR_TABLE.at(currentDungeonFloor).monsterTypes,
+		DUNGEON_FLOOR_TABLE.at(currentDungeonFloor).weights
 	);
 }
 

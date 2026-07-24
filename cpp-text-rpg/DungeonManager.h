@@ -15,30 +15,24 @@ enum class EDungeonFloor
 	Boss,   // 보스
 };
 
+
 struct DungeonFloorData
 {
-	EDungeonFloor dungeonFloor;       // 던전 층
-	std::string name;                 // 이름
-	EDungeonFloor prerequisiteFloor;  // 해금 조건을 수행할 던전 층
-	int requiredKillCount;            // 해금에 필요한 처치 횟수
+	EDungeonFloor dungeonFloor;             // 던전 층
+	std::string name;                       // 이름
 
-	DungeonFloorData(EDungeonFloor dungeonFloor, std::string name, EDungeonFloor prerequisiteFloor = EDungeonFloor::None, int requiredKillCount = 0);
+	EDungeonFloor prerequisiteFloor;        // 해금 조건을 수행할 던전 층
+	int requiredKillCount;                  // 해금에 필요한 처치 횟수
+
+	std::vector<EMonsterType> monsterTypes; // 소환할 몬스터 타입들
+	std::vector<float> weights;             // 소환할 몬스터 가중치들
+
+	DungeonFloorData(EDungeonFloor dungeonFloor, std::string name, EDungeonFloor prerequisiteFloor = EDungeonFloor::None, int requiredKillCount = 0, std::vector<EMonsterType> monsterTypes = {}, std::vector<float> weights = {});
 
 	bool canUnlock(EDungeonFloor currentDugeonFloor, int sessionKillCount) const; // 해금 조건 만족 여부 반환
 };
 
 extern const std::map<EDungeonFloor, DungeonFloorData> DUNGEON_FLOOR_TABLE; // 던전 층 테이블
-
-struct DungeonFloorSpawnData
-{
-	EDungeonFloor dungeonFloor;        // 던전 층
-	std::vector<EMonsterType> monsterTypes; // 소환할 몬스터 타입들
-	std::vector<float> weights;      // 소환할 몬스터 가중치들
-
-	DungeonFloorSpawnData(EDungeonFloor dungeonFloor, std::vector<EMonsterType> monsterTypes, std::vector<float> weights);
-};
-
-extern const std::map<EDungeonFloor, DungeonFloorSpawnData> DUNGEON_FLOOR_SPAWN_DATA; // 던전 층 소환 테이블
 
 
 class DungeonManager
