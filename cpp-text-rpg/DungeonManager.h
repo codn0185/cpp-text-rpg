@@ -58,6 +58,7 @@ public:
 	void displayDungeonFloorMenu() const; // 던전 입장 시 층 선택 메뉴 출력 및 목록 반환
 	void displayDungeonEnterMessage(EDungeonFloor dungeonFloor) const; // 던전 입장 메시지 출력
 	void displayAccessDeniedMessage(EDungeonFloor dungeonFloor) const; // 던전 접근 거부 메시지 출력
+	void displayUnlockProgress() const;
 
 	const std::vector<EDungeonFloor> getDungeonFloorMenuList() const; // 던전 메뉴 리스트 반환
 

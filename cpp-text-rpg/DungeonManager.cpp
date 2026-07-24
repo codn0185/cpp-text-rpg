@@ -117,6 +117,34 @@ void DungeonManager::displayAccessDeniedMessage(EDungeonFloor dungeonProgress) c
 	cout << "───────────────────────────────────────" << "\n";
 }
 
+void DungeonManager::displayUnlockProgress() const
+{
+	for (const auto& [targetFloor, requirement] : DUNGEON_FLOOR_TABLE)
+	{
+		if (currentDungeonFloor == requirement.prerequisiteFloor)
+		{
+			string currentDungeonFloorName = DUNGEON_FLOOR_TABLE.at(currentDungeonFloor).name;
+			string targetDungeonFloorName = DUNGEON_FLOOR_TABLE.at(requirement.prerequisiteFloor).name;
+			int targetKillCount = DUNGEON_FLOOR_TABLE.at(requirement.prerequisiteFloor).requiredKillCount;
+			string progressBar;
+			for (int i = 0; i < sessionKillCount; i++)
+			{
+				progressBar += '■';
+			}
+			for (int i = 0; i < targetKillCount - sessionKillCount; i++)
+			{
+				progressBar += '□';
+			}
+
+			cout << "[" << currentDungeonFloorName << "➔" << targetDungeonFloorName << "] "
+				<< "진행도: [" << progressBar << "] "
+				<< "(" << sessionKillCount << "/" << targetKillCount << ")" << "\n";
+		}
+	}
+
+	// [던전 1층 ➔ 던전 2층] 진행도: [■■■□□□□□□□] (3/10)
+}
+
 const std::vector<EDungeonFloor> DungeonManager::getDungeonFloorMenuList() const
 {
 	return dungeonFloorMenuList;
