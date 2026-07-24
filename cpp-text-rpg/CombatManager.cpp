@@ -79,7 +79,8 @@ void CombatManager::switchCombatState(ECombatState newCombatState)
 
 void CombatManager::onBattleInit()
 {
-	cout << monster->getName() << "이(가) 나타났다!" << "\n";
+	cout << "\n\n";
+	cout << "⚠️ " << monster->getName() << "이(가) 나타났다!" << "\n";
 
 	switchCombatState(ECombatState::PlayerTurn);
 }
