@@ -15,7 +15,7 @@ public:
 	~SpawnSystem();
 
 	Monster* getMonsterFromPool(EMonsterType mosnterType);
-	Monster* getRandomMonsterFromPool(std::vector<EMonsterType> monsterTypes, std::vector<float> weights = {});
+	Monster* getRandomMonsterFromPool(const std::vector<EMonsterType>& monsterTypes, const std::vector<float>& weights = {});
 	void returnMonsterToPool(Monster* monster);
 };
 

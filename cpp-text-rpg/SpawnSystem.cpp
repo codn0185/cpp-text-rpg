@@ -49,7 +49,7 @@ Monster* SpawnSystem::getMonsterFromPool(EMonsterType mosnterType)
 	return monster;
 }
 
-Monster* SpawnSystem::getRandomMonsterFromPool(vector<EMonsterType> monsterTypes, vector<float> weights)
+Monster* SpawnSystem::getRandomMonsterFromPool(const vector<EMonsterType>& monsterTypes, const vector<float>& weights)
 {
 	// 몬스터 타입 없음
 	if (monsterTypes.empty())
@@ -57,10 +57,11 @@ Monster* SpawnSystem::getRandomMonsterFromPool(vector<EMonsterType> monsterTypes
 		return nullptr;
 	}
 
-	// 가중치 없음 - 동일 가중치로 지정
+	// 가중치 없음 - 동일 가중치 설정
 	if (weights.empty())
 	{
-		weights.assign(monsterTypes.size(), 1.0f);
+		EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(monsterTypes, vector<float>(monsterTypes.size(), 1.0f));
+		return getMonsterFromPool(mosnterType);
 	}
 
 	// 가중치 기반 확률로 몬스터 반환
