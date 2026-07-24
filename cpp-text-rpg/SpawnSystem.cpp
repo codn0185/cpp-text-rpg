@@ -49,11 +49,22 @@ Monster* SpawnSystem::getMonsterFromPool(EMonsterType mosnterType)
 	return monster;
 }
 
-Monster* SpawnSystem::getRandomMonsterFromPool()
+Monster* SpawnSystem::getRandomMonsterFromPool(vector<EMonsterType> monsterTypes, vector<float> weights)
 {
-	vector<EMonsterType> mosnterTypes = {EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton};
-	EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(mosnterTypes, {1, 1, 1});
+	// 몬스터 타입 없음
+	if (monsterTypes.empty())
+	{
+		return nullptr;
+	}
 
+	// 가중치 없음 - 동일 가중치로 지정
+	if (weights.empty())
+	{
+		weights.assign(monsterTypes.size(), 1.0f);
+	}
+
+	// 가중치 기반 확률로 몬스터 반환
+	EMonsterType mosnterType = RandomSystem::GetRandomByWeight<EMonsterType>(monsterTypes, weights);
 	return getMonsterFromPool(mosnterType);
 }
 
