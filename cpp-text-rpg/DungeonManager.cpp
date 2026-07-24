@@ -124,25 +124,23 @@ void DungeonManager::displayUnlockProgress() const
 		if (currentDungeonFloor == requirement.prerequisiteFloor)
 		{
 			string currentDungeonFloorName = DUNGEON_FLOOR_TABLE.at(currentDungeonFloor).name;
-			string targetDungeonFloorName = DUNGEON_FLOOR_TABLE.at(requirement.prerequisiteFloor).name;
-			int targetKillCount = DUNGEON_FLOOR_TABLE.at(requirement.prerequisiteFloor).requiredKillCount;
+			string targetDungeonFloorName = requirement.name;
+			int targetKillCount = requirement.requiredKillCount;
 			string progressBar;
 			for (int i = 0; i < sessionKillCount; i++)
 			{
-				progressBar += '■';
+				progressBar += "■";
 			}
 			for (int i = 0; i < targetKillCount - sessionKillCount; i++)
 			{
-				progressBar += '□';
+				progressBar += "□";
 			}
 
-			cout << "[" << currentDungeonFloorName << "➔" << targetDungeonFloorName << "] "
+			cout << "[" << currentDungeonFloorName << " ➔ " << targetDungeonFloorName << "] "
 				<< "진행도: [" << progressBar << "] "
 				<< "(" << sessionKillCount << "/" << targetKillCount << ")" << "\n";
 		}
 	}
-
-	// [던전 1층 ➔ 던전 2층] 진행도: [■■■□□□□□□□] (3/10)
 }
 
 const std::vector<EDungeonFloor> DungeonManager::getDungeonFloorMenuList() const
