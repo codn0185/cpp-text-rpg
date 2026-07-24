@@ -156,11 +156,11 @@ bool DungeonManager::tryEnterDungeonFloor(EDungeonFloor dungeonFloor)
 {
 	if (!isAvailable(dungeonFloor)) // 접근 불가
 	{
-		displayAccessDeniedMessage();
+		displayAccessDeniedMessage(dungeonFloor);
 		return false;
 	}
 	// 던전 입장
-	displayDungeonEnterMessage();
+	displayDungeonEnterMessage(dungeonFloor);
 	currentDungeonFloor = dungeonFloor;
 	return true;
 }
