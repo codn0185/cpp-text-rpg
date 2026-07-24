@@ -59,6 +59,8 @@ public:
 	void displayDungeonEnterMessage(EDungeonFloor dungeonFloor) const; // 던전 입장 메시지 출력
 	void displayAccessDeniedMessage(EDungeonFloor dungeonFloor) const; // 던전 접근 거부 메시지 출력
 
+	const std::vector<EDungeonFloor> getDungeonFloorMenuList() const; // 던전 메뉴 리스트 반환
+
 	bool isAvailable(EDungeonFloor dungeonFloor) const; // 진입 가능 여부 반환
 	void checkAndUnlockFloor(); // 해금 확인
 

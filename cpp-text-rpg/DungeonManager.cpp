@@ -117,6 +117,11 @@ void DungeonManager::displayAccessDeniedMessage(EDungeonFloor dungeonProgress) c
 	cout << "───────────────────────────────────────" << "\n";
 }
 
+const std::vector<EDungeonFloor> DungeonManager::getDungeonFloorMenuList() const
+{
+	return dungeonFloorMenuList;
+}
+
 bool DungeonManager::isAvailable(EDungeonFloor dungeonFloor) const
 {
 	if (dungeonFloorAvailableList.find(dungeonFloor) == dungeonFloorAvailableList.end())
