@@ -3,31 +3,12 @@
 #include "Singleton.h"
 
 #include "ShopManager.h"
-#include "SpawnSystem.h"
+#include "DungeonManager.h"
 #include "CombatManager.h"
-
-#include "InputSystem.h"
-#include "UISystem.h"
-#include "PotionSystem.h"
-#include "InventorySystem.h"
-#include "LevelSystem.h"
-#include "RewardSystem.h"
-#include "CrafterSystem.h"
 
 enum class EGameState
 {
-	/*
-	[ 게임 흐름 ]
-	이름 입력 + 스탯 설정
-		-> 직업 선택
-		-> 메인 메뉴
-			1. 던전 입장 -> 몬스터 전투 -> 아이템 드롭 -> 인벤토리 저장
-			2. 인벤토리 확인
-			3. 포션 제작소 -> 레시피 보기 / 검색
-			0. 게임 종료
-	*/
-
-	// 게임 시작
+	// 게임 초기
 	GAME_START, // 게임 시작
 	PLAYER_REGISTRATION, // 플레이어 이름 및 스탯 입력, 직업 선택
 
@@ -36,6 +17,7 @@ enum class EGameState
 
 	// 던전
 	DUNGEON_ENTER, // 던전 입장
+	DUNGEON_SELECT_FLOOR, // 던전 층 선택
 	DUNGEON_COMBAT, // 몬스터 전투
 
 	// 인벤토리
@@ -57,8 +39,8 @@ private:
 	EGameState currentGameState = EGameState::GAME_START; // 현재 게임 상태
 	bool isRunning;
 
+	DungeonManager* dungeonManager; // 던전 매니저
 	CombatManager* combatManager; // 전투 매니저
-	SpawnSystem* spawnManager; // 스폰 매니저
 
 	Player* player; // 플레이어
 
@@ -87,6 +69,7 @@ public:
 	void onMainMenu(); // 메인 메뉴 
 
 	void onDungeonEnter(); // 던전 입장
+	void onDungeonSelectFloor(); // 던전 층 선택
 	void onDungeonCombat(); // 몬스터와 전투
 
 	void onInventoryOpen();

@@ -1,12 +1,20 @@
 #include "GameManager.h"
 
+#include "InputSystem.h"
+#include "UISystem.h"
+#include "PotionSystem.h"
+#include "InventorySystem.h"
+#include "LevelSystem.h"
+#include "RewardSystem.h"
+#include "CrafterSystem.h"
+
 #include <iostream>
 
 using namespace std;
 
 GameManager::GameManager() :isRunning(true)
 {
-	spawnManager = new SpawnSystem();
+	dungeonManager = new DungeonManager();
 	combatManager = new CombatManager();
 
 	backpackInventory = new Inventory(10, 5); // 배낭
@@ -17,7 +25,7 @@ GameManager::~GameManager()
 {
 	delete player;
 
-	delete spawnManager;
+	delete dungeonManager;
 	delete combatManager;
 
 	delete backpackInventory;
@@ -47,6 +55,9 @@ void GameManager::update()
 		break;
 	case EGameState::DUNGEON_ENTER:
 		onDungeonEnter();
+		break;
+	case EGameState::DUNGEON_SELECT_FLOOR:
+		onDungeonSelectFloor();
 		break;
 	case EGameState::DUNGEON_COMBAT:
 		onDungeonCombat();
@@ -246,7 +257,7 @@ void GameManager::onDungeonEnter()
 	switch (option)
 	{
 	case 1:
-		switchGameState(EGameState::DUNGEON_COMBAT);
+		switchGameState(EGameState::DUNGEON_SELECT_FLOOR);
 		break;
 	case 2:
 		UISystem::PrintPlayerStat(player);
@@ -262,9 +273,18 @@ void GameManager::onDungeonEnter()
 	}
 }
 
+void GameManager::onDungeonSelectFloor()
+{
+	dungeonManager->displayDungeonFloorMenu();
+	int option = InputSystem::InputIntUnitlValid(0, 3, "선택: ", "* 잘못된 입력입니다.\n");
+	dungeonManager->tryEnterDungeonFloor(option);
+
+	switchGameState(EGameState::DUNGEON_COMBAT);
+}
+
 void GameManager::onDungeonCombat()
 {
-	Monster* monster = spawnManager->getRandomMonsterFromPool();
+	Monster* monster = dungeonManager->getRandomMonsterByCurrentDungeonFloor();
 
 	combatManager->start(player, backpackInventory, monster);
 	while (combatManager->isCombatRunning)
@@ -365,7 +385,7 @@ void GameManager::onDungeonCombat()
 		switchGameState(EGameState::MAIN_MENU);
 	}
 
-	spawnManager->returnMonsterToPool(monster);
+	dungeonManager->returnMonster(monster);
 }
 
 void GameManager::onInventoryOpen()
