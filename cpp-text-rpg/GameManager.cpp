@@ -62,6 +62,9 @@ void GameManager::update()
 	case EGameState::DUNGEON_COMBAT:
 		onDungeonCombat();
 		break;
+	case EGameState::DUNGEON_COMBAT_RESULT:
+		onDungeonCombatResult();
+		break;
 	case EGameState::INVENTORY_OPEN:
 		onInventoryOpen();
 		break;
@@ -275,117 +278,177 @@ void GameManager::onDungeonEnter()
 
 void GameManager::onDungeonSelectFloor()
 {
+	// 던전 층 메뉴 출력
 	dungeonManager->displayDungeonFloorMenu();
-	int option = InputSystem::InputIntUnitlValid(0, 3, "선택: ", "* 잘못된 입력입니다.\n");
-	dungeonManager->tryEnterDungeonFloor(option);
 
+	// 입력 (0: 뒤로가기)
+	const vector<EDungeonFloor> dungeonFloorList = dungeonManager->getDungeonFloorMenuList();
+	int option = InputSystem::InputIntUnitlValid(0, (int) dungeonFloorList.size(), "선택: ", "* 잘못된 입력입니다.\n");
+
+	// 뒤로가기 (0)
+	if (option == 0)
+	{
+		switchGameState(EGameState::DUNGEON_ENTER);
+		return;
+	}
+
+	// 입장 불가
+	if (!dungeonManager->tryEnterDungeonFloor(option - 1))
+	{
+		switchGameState(EGameState::DUNGEON_SELECT_FLOOR);
+		return;
+	}
+
+	// 입장 성공
 	switchGameState(EGameState::DUNGEON_COMBAT);
 }
 
 void GameManager::onDungeonCombat()
 {
+	// 몬스터 소환
 	Monster* monster = dungeonManager->getRandomMonsterByCurrentDungeonFloor();
 
+	// 전투 시작
 	combatManager->start(player, backpackInventory, monster);
 	while (combatManager->isCombatRunning)
 	{
 		combatManager->update();
 	}
 
-	if (combatManager->getCurrentCombatState() == ECombatState::PlayerVictory) // 전투 승리
+	// 전투 패배
+	if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat)
 	{
-		// 보상 확인
-		const Reward& reward = RewardSystem::GetReward(monster->getMonsterType());
-		int rewardExp = reward.exp;
-		int rewardGold = reward.gold;
-		EItemID dropItemID = reward.itemID;
-		int dropCount = reward.itemCount;
-		map<EItemID, int> droppedItems = {{dropItemID, dropCount}}; // TODO 이후 몬스터가 여러 종류의 아이템을 드랍하는 경우 수정
+		// TODO: GameOver 상태 추가해서 전환
+		dungeonManager->returnMonster(monster);
+		player->setCurrentHP(1);
+		dungeonManager->onExit();
+		switchGameState(EGameState::MAIN_MENU);
+		return;
+	}
 
-		// 경험치 획득
-		std::cout << "\n";
-		int prevLevel = player->getLevel();
-		int prevExp = player->getExp();
-		std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << LevelSystem::GetRequiredExp(player) << ")" << "\n";
-		LevelSystem::AddExp(player, rewardExp);
+	// 전투 승리
+	// DungeonManager 업데이트
+	dungeonManager->onMonsterKilled();
+	dungeonManager->displayUnlockProgress();
 
-		// 골드 획득
-		std::cout << "\n";
-		cout << " > +" << rewardGold << "G 획득" << "\n";
-		player->setGold(player->getGold() + rewardGold);
+	// 보상 확인
+	const Reward& reward = RewardSystem::GetReward(monster->getMonsterType());
+	int rewardExp = reward.exp;
+	int rewardGold = reward.gold;
+	EItemID dropItemID = reward.itemID;
+	int dropCount = reward.itemCount;
+	map<EItemID, int> droppedItems = {{dropItemID, dropCount}}; // TODO 이후 몬스터가 여러 종류의 아이템을 드랍하는 경우 수정
 
-		// 드랍 아이템 확인
-		std::cout << "\n";
-		for (const auto& [itemID, count] : droppedItems)
-		{
-			std::cout << " > " << monster->getName() << "이(가) \"" << ITEM_TABLE.at(itemID)->name << "\"을(를) " << count << "개 드랍했습니다." << "\n";
-		}
+	// 경험치 획득
+	std::cout << "\n";
+	int prevLevel = player->getLevel();
+	int prevExp = player->getExp();
+	std::cout << " > +" << rewardExp << " EXP (" << prevExp + rewardExp << "/" << LevelSystem::GetRequiredExp(player) << ")" << "\n";
+	LevelSystem::AddExp(player, rewardExp);
 
-		// 아이템 획득 및 남는 아이템 구하기
+	// 골드 획득
+	std::cout << "\n";
+	cout << " > +" << rewardGold << "G 획득" << "\n";
+	player->setGold(player->getGold() + rewardGold);
+
+	// 드랍 아이템 확인
+	std::cout << "\n";
+	for (const auto& [itemID, count] : droppedItems)
+	{
+		std::cout << " > " << monster->getName() << "이(가) \"" << ITEM_TABLE.at(itemID)->name << "\"을(를) " << count << "개 드랍했습니다." << "\n";
+	}
+
+	// 아이템 획득 및 남는 아이템 구하기
+	map<EItemID, int> addedItems = InventorySystem::AddItemsToInventroy(backpackInventory, droppedItems);
+	for (const auto& [addedItemID, addedCount] : addedItems)
+	{
+		std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
+	}
+
+	// 가방 가득차면 자동으로 용량 늘린 후 추가하기 (임시)
+	if (!droppedItems.empty())
+	{
+		int currentSlotSize = backpackInventory->getMaxSlotCount();
+		backpackInventory->setMaxSlotCount(2 * currentSlotSize);
+
+		cout << "가방이 가득 찼습니다!" << "\n";
+		cout << " > 인벤토리 자동 확장! (" << currentSlotSize << " -> " << backpackInventory->getMaxSlotCount() << ")" << "\n";
+
 		map<EItemID, int> addedItems = InventorySystem::AddItemsToInventroy(backpackInventory, droppedItems);
 		for (const auto& [addedItemID, addedCount] : addedItems)
 		{
 			std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
 		}
 
-		// 가방 가득차면 자동으로 용량 늘린 후 추가하기 (임시)
-		if (!droppedItems.empty())
+	} // 아래 아이템 교체 로직 실행 X
+
+	// 남은 아이템 확인
+	for (const auto& [remainedItemID, renmainedCount] : droppedItems)
+	{
+		string remainedItemName = ITEM_TABLE.at(remainedItemID)->name;
+		std::cout << "배낭 공간이 부족합니다!" << " \"" << remainedItemName << "\" " << renmainedCount << "개와 교체할 슬롯을 선택하세요." << "\n";
+		InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
+		std::cout << "교체할 슬롯 번호를 선택하세요. (0: 아이템 포기)" << "\n";
+		while (true)
 		{
-			int currentSlotSize = backpackInventory->getMaxSlotCount();
-			backpackInventory->setMaxSlotCount(2 * currentSlotSize);
-
-			cout << "가방이 가득 찼습니다!" << "\n";
-			cout << " > 인벤토리 자동 확장! (" << currentSlotSize << " -> " << backpackInventory->getMaxSlotCount() << ")" << "\n";
-
-			map<EItemID, int> addedItems = InventorySystem::AddItemsToInventroy(backpackInventory, droppedItems);
-			for (const auto& [addedItemID, addedCount] : addedItems)
+			int slotNumber = InputSystem::InputIntUnitlValid(0, backpackInventory->getUsedSlotCount(), "선택: ", "* 잘못된 입력입니다.\n");
+			if (slotNumber == 0)
 			{
-				std::cout << "    -> \"" << ITEM_TABLE.at(addedItemID)->name << "\" " << addedCount << "개를 배낭에 보관했습니다." << "\n";
+				std::cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
 			}
-
-		} // 아래 아이템 교체 로직 실행 X
-
-		// 남은 아이템 확인
-		for (const auto& [remainedItemID, renmainedCount] : droppedItems)
-		{
-			string remainedItemName = ITEM_TABLE.at(remainedItemID)->name;
-			std::cout << "배낭 공간이 부족합니다!" << " \"" << remainedItemName << "\" " << renmainedCount << "개와 교체할 슬롯을 선택하세요." << "\n";
-			InventorySystem::DisplayInventory(backpackInventory, "배낭 인벤토리");
-			std::cout << "교체할 슬롯 번호를 선택하세요. (0: 아이템 포기)" << "\n";
-			while (true)
+			else
 			{
-				int slotNumber = InputSystem::InputIntUnitlValid(0, backpackInventory->getUsedSlotCount(), "선택: ", "* 잘못된 입력입니다.\n");
-				if (slotNumber == 0)
-				{
-					std::cout << "    -> \"" << remainedItemName << "\"을(를) 포기합니다." << "\n";
-				}
-				else
-				{
-					const vector<Slot>& inventorySlots = backpackInventory->getInventorySlots();
-					const Slot& slot = inventorySlots[slotNumber - 1];
-					EItemID abandonedItemID = slot.itemID;
-					int abandonedAmount = slot.count;
+				const vector<Slot>& inventorySlots = backpackInventory->getInventorySlots();
+				const Slot& slot = inventorySlots[slotNumber - 1];
+				EItemID abandonedItemID = slot.itemID;
+				int abandonedAmount = slot.count;
 
-					backpackInventory->removeItem(abandonedItemID, abandonedAmount);
-					backpackInventory->addItem(remainedItemID, renmainedCount);
+				backpackInventory->removeItem(abandonedItemID, abandonedAmount);
+				backpackInventory->addItem(remainedItemID, renmainedCount);
 
-					std::cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
-					break;
-				}
+				std::cout << "    -> \"" << ITEM_TABLE.at(abandonedItemID)->name << "\" " << abandonedAmount << " 개를 버리고 \"" << remainedItemName << "\" " << renmainedCount << "개를 획득합니다." << "\n";
+				break;
 			}
 		}
-
-		// 전투 종료 후 던전 입구로 귀환
-		switchGameState(EGameState::DUNGEON_ENTER);
-	}
-	else if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat) // 전투 패배
-	{
-		// TODO: GameOver 상태 추가해서 전환
-		player->setCurrentHP(1);
-		switchGameState(EGameState::MAIN_MENU);
 	}
 
+	// 몬스터 제거
 	dungeonManager->returnMonster(monster);
+
+	// 전투 종료 후 전투 결과로 이동
+	switchGameState(EGameState::DUNGEON_COMBAT_RESULT);
+}
+
+void GameManager::onDungeonCombatResult()
+{
+	cout << "\n\n";
+	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << "\n";
+	cout << "1: 계속 탐험하기" << "\n";
+	cout << "2: 스텟 확인하기" << "\n";
+	cout << "3: 배낭 열기" << "\n";
+	cout << "────────────────────────────────────────" << "\n";
+	cout << "0: 던전 입구로 나가기" << "\n";
+	cout << "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━" << "\n";
+
+	int option = InputSystem::InputIntUnitlValid(0, 3, "선택: ", "* 잘못된 입력입니다.\n");
+	switch (option)
+	{
+	case 0: // 던전 입구로 이동
+		dungeonManager->onExit();
+		switchGameState(EGameState::DUNGEON_ENTER);
+		break;
+	case 1: // 계속 탐험 (전투 상태로 이동)
+		switchGameState(EGameState::DUNGEON_COMBAT);
+		break;
+	case 2: // 스텟 확인
+		UISystem::PrintPlayerStat(player);
+		break;
+	case 3: // 배낭 열기
+		InventorySystem::DisplayInventory(backpackInventory);
+		break;
+	default:
+		break;
+	}
 }
 
 void GameManager::onInventoryOpen()

@@ -19,6 +19,7 @@ enum class EGameState
 	DUNGEON_ENTER, // 던전 입장
 	DUNGEON_SELECT_FLOOR, // 던전 층 선택
 	DUNGEON_COMBAT, // 몬스터 전투
+	DUNGEON_COMBAT_RESULT, // 몬스터 전투 결과 (계속하기/돌아가기 선택)
 
 	// 인벤토리
 	INVENTORY_OPEN, // 인벤토리 확인 (창고, 배낭)
@@ -71,6 +72,7 @@ public:
 	void onDungeonEnter(); // 던전 입장
 	void onDungeonSelectFloor(); // 던전 층 선택
 	void onDungeonCombat(); // 몬스터와 전투
+	void onDungeonCombatResult(); // 몬스터와 전투 결과
 
 	void onInventoryOpen();
 
