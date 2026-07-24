@@ -47,13 +47,13 @@ DungeonManager::DungeonManager()
 		EDungeonFloor::Floor3,
 		EDungeonFloor::Boss,
 	};
-	dungeonFloorAvailableList = {
+	dungeonFloorAvailables = {
 		{EDungeonFloor::Floor1, true},
 		{EDungeonFloor::Floor2, false},
 		{EDungeonFloor::Floor3, false},
 		{EDungeonFloor::Boss, false},
 	};
-	dungeonFloorMaxKillCount = {
+	dungeonFloorMaxKillCounts = {
 		{EDungeonFloor::Floor1, 0},
 		{EDungeonFloor::Floor2, 0},
 		{EDungeonFloor::Floor3, 0},
@@ -72,7 +72,7 @@ void DungeonManager::displayDungeonFloorMenu() const
 		if (isAvailable(dungeonFloor))
 		{
 			string str;
-			cout << i + 1 << ". ✅ [" << name << "] (💀 최고 연속 처치 - " << dungeonFloorMaxKillCount.at(dungeonFloor) << ")" << "\n";
+			cout << i + 1 << ". ✅ [" << name << "] (💀 최고 연속 처치 - " << dungeonFloorMaxKillCounts.at(dungeonFloor) << ")" << "\n";
 		}
 		else
 		{
@@ -138,11 +138,11 @@ const std::vector<EDungeonFloor> DungeonManager::getDungeonFloorMenuList() const
 
 bool DungeonManager::isAvailable(EDungeonFloor dungeonFloor) const
 {
-	if (dungeonFloorAvailableList.find(dungeonFloor) == dungeonFloorAvailableList.end())
+	if (dungeonFloorAvailables.find(dungeonFloor) == dungeonFloorAvailables.end())
 	{
 		return false;
 	}
-	return dungeonFloorAvailableList.at(dungeonFloor);
+	return dungeonFloorAvailables.at(dungeonFloor);
 }
 
 void DungeonManager::checkAndUnlockFloor()
@@ -156,7 +156,7 @@ void DungeonManager::checkAndUnlockFloor()
 		if (requirement.canUnlock(currentDungeonFloor, sessionKillCount)) // 조건 만족
 		{
 			// 던전 층 해금
-			dungeonFloorAvailableList[targetFloor] = true;
+			dungeonFloorAvailables[targetFloor] = true;
 			// 플레이어 알림
 			cout << "━━━━━━━━━━━ <🎉 새로운 던전 해금> ━━━━━━━━━━━" << "\n";
 			cout << "🔓 [" << DUNGEON_FLOOR_TABLE.at(targetFloor).name << "] 이(가) 해금되었습니다!" << "\n";
@@ -193,7 +193,7 @@ void DungeonManager::onMonsterKilled()
 void DungeonManager::onExit()
 {
 	// 최고 기록 저장
-	dungeonFloorMaxKillCount[currentDungeonFloor] = max(dungeonFloorMaxKillCount[currentDungeonFloor], sessionKillCount);
+	dungeonFloorMaxKillCounts[currentDungeonFloor] = max(dungeonFloorMaxKillCounts[currentDungeonFloor], sessionKillCount);
 	// 초기화
 	currentDungeonFloor = EDungeonFloor::None;
 	sessionKillCount = 0;

@@ -39,8 +39,8 @@ class DungeonManager
 {
 private:
 	std::vector<EDungeonFloor> dungeonFloorMenuList;         // 던전 입장 시 등장할 던전 층 선택 메뉴 목록
-	std::map<EDungeonFloor, bool> dungeonFloorAvailableList; // 각 던전 층 입장 가능 여부들
-	std::map<EDungeonFloor, int> dungeonFloorMaxKillCount;   // 각 던전 층 최고 처치 횟수
+	std::map<EDungeonFloor, bool> dungeonFloorAvailables; // 각 던전 층 입장 가능 여부들
+	std::map<EDungeonFloor, int> dungeonFloorMaxKillCounts;   // 각 던전 층 최고 처치 횟수
 
 	EDungeonFloor currentDungeonFloor; // 현재 던전 층 위치
 	int sessionKillCount;              // 현재 던전 층의 몬스터 연속 처치 횟수
