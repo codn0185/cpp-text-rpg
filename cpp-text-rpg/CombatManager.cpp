@@ -80,7 +80,12 @@ void CombatManager::switchCombatState(ECombatState newCombatState)
 void CombatManager::onBattleInit()
 {
 	cout << "\n\n";
-	cout << "⚠️ " << monster->getName() << "이(가) 나타났다!" << "\n";
+	cout << "========================================" << "\n";
+	cout << "⚔️ [" << monster->getName() << "]이(가) 나타났다!" << "\n";
+	cout << "─────────── [📊 몬스터 정보] ───────────" << "\n";
+	cout << "HP: " << monster->getMaxHP() << " | " << "MP: " << monster->getMaxMP() << "\n";
+	cout << "ATK: " << monster->getPower() << " | " << "DEF: " << monster->getDefence() << "\n";
+	cout << "========================================" << "\n";
 
 	switchCombatState(ECombatState::PlayerTurn);
 }
