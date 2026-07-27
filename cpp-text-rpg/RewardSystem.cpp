@@ -36,7 +36,13 @@ Reward::Reward(int exp, int gold, EItemID itemID, int itemCount)
 
 Reward RewardSystem::GetReward(EMonsterType mosnterType)
 {
-	vector<float> weights;
+	// REWARD_TABLE에 없음
+	if (REWARD_TABLE.find(mosnterType) == REWARD_TABLE.end())
+	{
+		return Reward(0, 0, EItemID::NONE, 0);
+	}
+
+	vector<float> weights; // 아이템 가중치
 	for (DropItemCandidate dropItemCandidate : REWARD_TABLE.at(mosnterType).dropItemCandidates)
 	{
 		weights.push_back(dropItemCandidate.dropWeight);
