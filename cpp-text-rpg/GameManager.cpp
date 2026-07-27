@@ -12,13 +12,9 @@
 
 using namespace std;
 
-GameManager::GameManager() :isRunning(true)
+GameManager::GameManager()
+	: isRunning(true)
 {
-	dungeonManager = new DungeonManager();
-	combatManager = new CombatManager();
-
-	backpackInventory = new Inventory(10, 5); // 배낭
-	stockInventory = new Inventory(30, 20); // 창고
 }
 
 GameManager::~GameManager()
@@ -95,6 +91,20 @@ void GameManager::switchGameState(EGameState newGameState)
 
 void GameManager::onGameStart()
 {
+	delete player;
+
+	delete dungeonManager;
+	delete combatManager;
+
+	delete backpackInventory;
+	delete stockInventory;
+
+	dungeonManager = new DungeonManager();
+	combatManager = new CombatManager();
+
+	backpackInventory = new Inventory(10, 5); // 배낭
+	stockInventory = new Inventory(30, 20); // 창고
+
 	std::cout << "===========================================" << "\n";
 	std::cout << "          [ 던전 탈출 텍스트 RPG ]          " << "\n";
 	std::cout << "===========================================" << "\n";
