@@ -6,9 +6,23 @@
 
 enum class EMonsterType
 {
+	// 1층
 	Slime,
 	Goblin,
+	Bat,
+
+	// 2층
 	Skeleton,
+	Zombie,
+	Ghost,
+
+	// 3층
+	Ork,
+	Lizardman,
+	Gargoyle,
+
+	// 보스
+	Dragon,
 };
 
 struct MonsterDataRow
@@ -34,6 +48,8 @@ protected:
 public:
 	Monster(EMonsterType monsterType);
 	Monster(std::string name, int maxHP, int maxMP, int power, int defence);
+
+	void attack(Character* target) override;
 
 	// Getters
 	EMonsterType getMonsterType();
