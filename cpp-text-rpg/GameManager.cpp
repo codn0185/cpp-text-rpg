@@ -74,6 +74,12 @@ void GameManager::update()
 	case EGameState::POTION_SHOP_ENTER:
 		onPotionShopEnter();
 		break;
+	case EGameState::GAME_OVER:
+		onGameOver();
+		break;
+	case EGameState::GAME_CLEAR:
+		onGameClear();
+		break;
 	case EGameState::GAME_EXIT:
 		onGameExit();
 		break;
@@ -665,6 +671,70 @@ void GameManager::onPotionShopEnter()
 	}
 	case 0:
 		switchGameState(EGameState::MAIN_MENU);
+		break;
+	default:
+		break;
+	}
+}
+
+void GameManager::onGameOver()
+{
+	cout << "══════════════════════════════════════════════════" << "\n";
+	cout << "              [ G A M E    O V E R ]              " << "\n";
+	cout << "══════════════════════════════════════════════════" << "\n";
+	cout << "\n";
+	cout << "당신은 사망하였습니다..." << "\n";
+	cout << "\n";
+	cout << "────────────────── [ 탐험 기록 ] ──────────────────" << "\n";
+	cout << " - 최고 기록  :  " << DUNGEON_FLOOR_TABLE.at(dungeonManager->getMaxDungeonFloor()).name << "\n";
+	cout << " - 달성 레벨  :  " << player->getLevel() << " Lv" << "\n";
+	cout << " - 획득 골드  :  " << player->getGold() << " G" << "\n";
+	cout << "──────────────────────────────────────────────────" << "\n";
+	cout << "\n";
+	cout << "[1] 다시 시작" << "\n";
+	cout << "[2] 게임 종료" << "\n";
+	cout << "══════════════════════════════════════════════════" << "\n";
+
+	int option = InputSystem::InputIntUnitlValid(1, 2, "입력:");
+	switch (option)
+	{
+	case 1:
+		switchGameState(EGameState::GAME_START);
+		break;
+	case 2:
+		switchGameState(EGameState::GAME_EXIT);
+		break;
+	default:
+		break;
+	}
+}
+
+void GameManager::onGameClear()
+{
+	cout << "══════════════════════════════════════════════════" << "\n";
+	cout << "          ★ [ G A M E    C L E A R ] ★          " << "\n";
+	cout << "══════════════════════════════════════════════════" << "\n";
+	cout << "\n";
+	cout << "당신은 모든 던전을 정복하였습니다!" << "\n";
+	cout << "\n";
+	cout << "────────────────── [ 탐험 기록 ] ──────────────────" << "\n";
+	cout << " - 최고 기록  :  " << DUNGEON_FLOOR_TABLE.at(dungeonManager->getMaxDungeonFloor()).name << "\n";
+	cout << " - 달성 레벨  :  " << player->getLevel() << " Lv" << "\n";
+	cout << " - 획득 골드  :  " << player->getGold() << " G" << "\n";
+	cout << "──────────────────────────────────────────────────" << "\n";
+	cout << "\n";
+	cout << "[1] 다시 시작" << "\n";
+	cout << "[2] 게임 종료" << "\n";
+	cout << "══════════════════════════════════════════════════" << "\n";
+
+	int option = InputSystem::InputIntUnitlValid(1, 2, "입력:");
+	switch (option)
+	{
+	case 1:
+		switchGameState(EGameState::GAME_START);
+		break;
+	case 2:
+		switchGameState(EGameState::GAME_EXIT);
 		break;
 	default:
 		break;

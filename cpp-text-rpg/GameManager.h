@@ -30,6 +30,10 @@ enum class EGameState
 	// 포션 제작소
 	POTION_SHOP_ENTER, // 포션 제작소 입장
 
+	// 게임 오버/클리어
+	GAME_OVER, // 게임 오버 - 플레이어 사망
+	GAME_CLEAR, // 게임 클리어 - 보스 클리어
+
 	// 게임 종료
 	GAME_EXIT,
 };
@@ -79,6 +83,9 @@ public:
 	void onShopEnter(); // 상점 입장
 
 	void onPotionShopEnter(); // 포션 제작소 입장
+
+	void onGameOver();
+	void onGameClear();
 
 	void onGameExit(); // 게임 종료
 };
