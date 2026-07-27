@@ -7,7 +7,7 @@
 enum EItemID
 {
 	// 아이템 없음
-	None,
+	NONE,
 
 	// 포션
 	HP_POTION_20,
