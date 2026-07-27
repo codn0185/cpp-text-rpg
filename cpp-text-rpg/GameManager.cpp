@@ -324,11 +324,9 @@ void GameManager::onDungeonCombat()
 	// 전투 패배
 	if (combatManager->getCurrentCombatState() == ECombatState::PlayerDefeat)
 	{
-		// TODO: GameOver 상태 추가해서 전환
 		dungeonManager->returnMonster(monster);
-		player->setCurrentHP(1);
 		dungeonManager->onExit();
-		switchGameState(EGameState::MAIN_MENU);
+		switchGameState(EGameState::GAME_OVER);
 		return;
 	}
 
@@ -416,6 +414,14 @@ void GameManager::onDungeonCombat()
 				break;
 			}
 		}
+	}
+
+	// 보스 몬스터 (처치 시 게임 클리어)
+	if (monster->getMonsterType() == EMonsterType::Dragon)
+	{
+		dungeonManager->returnMonster(monster);
+		switchGameState(EGameState::GAME_CLEAR);
+		return;
 	}
 
 	// 몬스터 제거
