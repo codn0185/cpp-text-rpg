@@ -718,7 +718,7 @@ void GameManager::onGameOver()
 		switchGameState(EGameState::GAME_START);
 		break;
 	case 2:
-		switchGameState(EGameState::GAME_EXIT);
+		isRunning = false;
 		break;
 	default:
 		break;
@@ -750,7 +750,7 @@ void GameManager::onGameClear()
 		switchGameState(EGameState::GAME_START);
 		break;
 	case 2:
-		switchGameState(EGameState::GAME_EXIT);
+		isRunning = false;
 		break;
 	default:
 		break;
