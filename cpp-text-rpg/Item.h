@@ -6,6 +6,9 @@
 
 enum EItemID
 {
+	// 아이템 없음
+	None,
+
 	// 포션
 	HP_POTION_20,
 	MP_POTION_20,
