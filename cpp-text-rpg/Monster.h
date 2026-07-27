@@ -47,7 +47,7 @@ protected:
 
 public:
 	Monster(EMonsterType monsterType);
-	Monster(std::string name, int maxHP, int maxMP, int power, int defence);
+	Monster(EMonsterType monsterType, std::string name, int maxHP, int maxMP, int power, int defence);
 
 	void attack(Character* target) override;
 

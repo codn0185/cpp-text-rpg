@@ -40,7 +40,7 @@ Monster::Monster(EMonsterType monsterType)
 {
 }
 
-Monster::Monster(string name, int maxHP, int maxMP, int power, int defence)
+Monster::Monster(EMonsterType monsterType, string name, int maxHP, int maxMP, int power, int defence)
 	: Character(name, maxHP, maxMP, power, defence)
 {
 }
