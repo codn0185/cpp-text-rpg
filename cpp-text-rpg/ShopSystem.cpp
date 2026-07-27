@@ -19,7 +19,17 @@ const unordered_map<EItemID, ShopDataRow> SHOP_TABLE =
 
 	{EItemID::SLIME_JELLY, ShopDataRow(EItemID::SLIME_JELLY, 15, 30)},
 	{EItemID::GOBLIN_DAGGER, ShopDataRow(EItemID::GOBLIN_DAGGER, 15, 30)},
-	{EItemID::SKELETON_BONE, ShopDataRow(EItemID::SKELETON_BONE, 15, 30)},
+	{EItemID::BAT_FANG, ShopDataRow(EItemID::BAT_FANG, 15, 30)},
+
+	{EItemID::ZOMBIE_LEATHER, ShopDataRow(EItemID::ZOMBIE_LEATHER, 35, 70)},
+	{EItemID::SKELETON_BONE, ShopDataRow(EItemID::SKELETON_BONE, 35, 70)},
+	{EItemID::GHOST_ESSENCE, ShopDataRow(EItemID::GHOST_ESSENCE, 35, 70)},
+
+	{EItemID::ORK_TENDON, ShopDataRow(EItemID::ORK_TENDON, 80, 160)},
+	{EItemID::LIZARDMAN_SCALE, ShopDataRow(EItemID::LIZARDMAN_SCALE, 80, 160)},
+	{EItemID::GARGOYLE_SHARD, ShopDataRow(EItemID::GARGOYLE_SHARD, 80, 160)},
+
+	{EItemID::DRAGON_CORE, ShopDataRow(EItemID::DRAGON_CORE, 300, 600)},
 };
 
 bool ShopSystem::PruchaseItem(Player* player, Inventory* inventory, EItemID itemID, int count)
