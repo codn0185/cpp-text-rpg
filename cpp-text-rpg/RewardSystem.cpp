@@ -20,12 +20,42 @@ const map<EMonsterType, RewardDataRow> REWARD_TABLE = {
 		DropItemCandidate(EItemID::WATER, 30., 1, 3),
 	})},
 	{EMonsterType::Goblin, RewardDataRow(32, 14, {
-		DropItemCandidate(EItemID::GOBLIN_BLOOD, 40., 1, 3),
+		DropItemCandidate(EItemID::GOBLIN_DAGGER, 40., 1, 3),
 		DropItemCandidate(EItemID::HEALING_HERB, 30., 1, 2),
 	})},
-	{EMonsterType::Skeleton, RewardDataRow(35, 14, {
-		DropItemCandidate(EItemID::SKELETON_BONE, 40., 1, 3),
+	{EMonsterType::Bat, RewardDataRow(28, 11, {
+		DropItemCandidate(EItemID::BAT_FANG, 40., 1, 3),
 		DropItemCandidate(EItemID::MANA_DUST, 30., 1, 2),
+	})},
+
+	{EMonsterType::Zombie, RewardDataRow(60, 25, {
+		DropItemCandidate(EItemID::ZOMBIE_LEATHER, 40., 1, 3),
+		DropItemCandidate(EItemID::BOTTLE, 10., 1, 2),
+	})},
+	{EMonsterType::Skeleton, RewardDataRow(57, 28, {
+		DropItemCandidate(EItemID::SKELETON_BONE, 40., 1, 3),
+		DropItemCandidate(EItemID::HEALING_HERB, 30., 1, 2),
+	})},
+	{EMonsterType::Ghost, RewardDataRow(70, 20, {
+		DropItemCandidate(EItemID::GHOST_ESSENCE, 40., 1, 3),
+		DropItemCandidate(EItemID::MANA_DUST, 30., 1, 2),
+	})},
+
+	{EMonsterType::Ork, RewardDataRow(135, 52, {
+		DropItemCandidate(EItemID::ORK_TENDON, 40., 1, 3),
+		DropItemCandidate(EItemID::BOTTLE, 10., 1, 2),
+	})},
+	{EMonsterType::Lizardman, RewardDataRow(127, 55, {
+		DropItemCandidate(EItemID::LIZARDMAN_SCALE, 40., 1, 3),
+		DropItemCandidate(EItemID::HEALING_HERB, 30., 1, 2),
+	})},
+	{EMonsterType::Gargoyle, RewardDataRow(130, 57, {
+		DropItemCandidate(EItemID::GARGOYLE_SHARD, 40., 1, 3),
+		DropItemCandidate(EItemID::MANA_DUST, 30., 1, 2),
+	})},
+
+	{EMonsterType::Dragon, RewardDataRow(300, 150, {
+		DropItemCandidate(EItemID::DRAGON_CORE, 1., 1, 1),
 	})},
 };
 
