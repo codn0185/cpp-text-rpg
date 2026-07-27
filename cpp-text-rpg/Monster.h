@@ -12,8 +12,8 @@ enum class EMonsterType
 	Bat,
 
 	// 2층
-	Skeleton,
 	Zombie,
+	Skeleton,
 	Ghost,
 
 	// 3층

@@ -21,8 +21,8 @@ const map<EMonsterType, MonsterDataRow> MONSTER_TABLE = {
 	{ EMonsterType::Ghost,     MonsterDataRow(EMonsterType::Ghost,     "고스트",   "",	380, 50, 185, 40) },
 
 	// 3층
-	{ EMonsterType::Lizardman, MonsterDataRow(EMonsterType::Lizardman, "리자드맨", "",	750, 0, 210, 85) },
 	{ EMonsterType::Ork,       MonsterDataRow(EMonsterType::Ork,       "오크",     "",	950, 0, 240, 65) },
+	{ EMonsterType::Lizardman, MonsterDataRow(EMonsterType::Lizardman, "리자드맨", "",	750, 0, 210, 85) },
 	{ EMonsterType::Gargoyle,  MonsterDataRow(EMonsterType::Gargoyle,  "가고일",   "",	800, 30, 225, 110) },
 
 	// 보스방
