@@ -77,7 +77,7 @@ void DungeonManager::displayDungeonFloorMenu() const
 		else
 		{
 			const DungeonFloorData& prerequisiteDungeonFloorData = DUNGEON_FLOOR_TABLE.at(dungeonFloorDataRow.prerequisiteFloor);
-			cout << i + 1 << ". 🚫 [" << name << "] (🎯 해금 조건: \"" << prerequisiteDungeonFloorData.name << "\"에서 " << prerequisiteDungeonFloorData.requiredKillCount << " 연속 처치)" << "\n";
+			cout << i + 1 << ". 🚫 [" << name << "] (🎯 해금 조건: \"" << prerequisiteDungeonFloorData.name << "\"에서 " << dungeonFloorDataRow.requiredKillCount << " 연속 처치)" << "\n";
 		}
 	}
 	cout << "────────────────────────────────────────────" << "\n";
