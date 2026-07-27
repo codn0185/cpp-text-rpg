@@ -1,7 +1,6 @@
 #include "SpawnSystem.h"
 
 #include "RandomSystem.h"
-#include "Monsters.h"
 
 using namespace std;
 
@@ -27,20 +26,7 @@ Monster* SpawnSystem::GetMonsterFromPool(EMonsterType mosnterType)
 	auto& mosnterPoolMap = GetInstance().mosnterPoolMap;
 	if (mosnterPoolMap[mosnterType].empty())
 	{
-		switch (mosnterType)
-		{
-		case EMonsterType::Slime:
-			mosnterPoolMap[mosnterType].push(new Slime());
-			break;
-		case EMonsterType::Goblin:
-			mosnterPoolMap[mosnterType].push(new Goblin());
-			break;
-		case EMonsterType::Skeleton:
-			mosnterPoolMap[mosnterType].push(new Skeleton());
-			break;
-		default:
-			break;
-		}
+		mosnterPoolMap[mosnterType].push(new Monster(mosnterType));
 	}
 
 	Monster* monster = mosnterPoolMap[mosnterType].front();

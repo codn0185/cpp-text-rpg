@@ -28,9 +28,6 @@
     <Filter Include="Systems\PotionSystem">
       <UniqueIdentifier>{2a1c7701-af99-4d80-860a-d4d87474b7dc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Systems\SpawnManager">
-      <UniqueIdentifier>{3b660045-3222-47f0-9a9b-f99583fc3345}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Systems\UISystem">
       <UniqueIdentifier>{c3380df3-3c2e-44f6-a28f-852aa95c191a}</UniqueIdentifier>
     </Filter>
@@ -79,14 +76,17 @@
     <Filter Include="StateMachines\GameStateMachine">
       <UniqueIdentifier>{e8513c23-2b56-406f-8fc3-1944f030acf0}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Managers\ProgressManager">
-      <UniqueIdentifier>{26f12822-856b-470c-9e8f-e5b8cc98dbe2}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Skill">
       <UniqueIdentifier>{632e2861-f107-4b69-bc78-a91defd05629}</UniqueIdentifier>
     </Filter>
     <Filter Include="Systems\SkillSystem">
       <UniqueIdentifier>{b8d16026-968b-40ae-9234-61c941fa583f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\DungeonManager">
+      <UniqueIdentifier>{26f12822-856b-470c-9e8f-e5b8cc98dbe2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Systems\SpawnSystem">
+      <UniqueIdentifier>{3b660045-3222-47f0-9a9b-f99583fc3345}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -117,15 +117,6 @@
     <ClCompile Include="NoJob.cpp">
       <Filter>Characters\Players</Filter>
     </ClCompile>
-    <ClCompile Include="Slime.cpp">
-      <Filter>Characters\Monsters</Filter>
-    </ClCompile>
-    <ClCompile Include="Goblin.cpp">
-      <Filter>Characters\Monsters</Filter>
-    </ClCompile>
-    <ClCompile Include="Skeleton.cpp">
-      <Filter>Characters\Monsters</Filter>
-    </ClCompile>
     <ClCompile Include="CombatManager.cpp">
       <Filter>Managers\CombatManager</Filter>
     </ClCompile>
@@ -134,9 +125,6 @@
     </ClCompile>
     <ClCompile Include="PotionSystem.cpp">
       <Filter>Systems\PotionSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="SpawnManager.cpp">
-      <Filter>Systems\SpawnManager</Filter>
     </ClCompile>
     <ClCompile Include="UISystem.cpp">
       <Filter>Systems\UISystem</Filter>
@@ -183,14 +171,17 @@
     <ClCompile Include="GameExitState.cpp">
       <Filter>StateMachines\GameStateMachine</Filter>
     </ClCompile>
-    <ClCompile Include="ProgressManager.cpp">
-      <Filter>Managers\ProgressManager</Filter>
-    </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Skill</Filter>
     </ClCompile>
     <ClCompile Include="SkillSystem.cpp">
       <Filter>Systems\SkillSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="DungeonManager.cpp">
+      <Filter>Managers\DungeonManager</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnSystem.cpp">
+      <Filter>Systems\SpawnSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -221,18 +212,6 @@
     <ClInclude Include="Players.h">
       <Filter>Characters\Players</Filter>
     </ClInclude>
-    <ClInclude Include="Slime.h">
-      <Filter>Characters\Monsters</Filter>
-    </ClInclude>
-    <ClInclude Include="Goblin.h">
-      <Filter>Characters\Monsters</Filter>
-    </ClInclude>
-    <ClInclude Include="Skeleton.h">
-      <Filter>Characters\Monsters</Filter>
-    </ClInclude>
-    <ClInclude Include="Monsters.h">
-      <Filter>Characters\Monsters</Filter>
-    </ClInclude>
     <ClInclude Include="CombatManager.h">
       <Filter>Managers\CombatManager</Filter>
     </ClInclude>
@@ -244,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="UISystem.h">
       <Filter>Systems\UISystem</Filter>
-    </ClInclude>
-    <ClInclude Include="SpawnManager.h">
-      <Filter>Systems\SpawnManager</Filter>
     </ClInclude>
     <ClInclude Include="InventorySystem.h">
       <Filter>Systems\InventorySystem</Filter>
@@ -302,14 +278,17 @@
     <ClInclude Include="GameExitState.h">
       <Filter>StateMachines\GameStateMachine</Filter>
     </ClInclude>
-    <ClInclude Include="ProgressManager.h">
-      <Filter>Managers\ProgressManager</Filter>
-    </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>Skill</Filter>
     </ClInclude>
     <ClInclude Include="SkillSystem.h">
       <Filter>Systems\SkillSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="DungeonManager.h">
+      <Filter>Managers\DungeonManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnSystem.h">
+      <Filter>Systems\SpawnSystem</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

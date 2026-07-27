@@ -20,21 +20,18 @@ bool DungeonFloorData::canUnlock(EDungeonFloor currentDugeonFloor, int sessionKi
 }
 
 const map<EDungeonFloor, DungeonFloorData> DUNGEON_FLOOR_TABLE = {
-	{EDungeonFloor::None, DungeonFloorData(EDungeonFloor::None, "지상", EDungeonFloor::None, 0,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
 	{EDungeonFloor::Floor1, DungeonFloorData(EDungeonFloor::Floor1, "던전 1층", EDungeonFloor::None, 0,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Bat},
 		{1.0f, 1.0f, 1.0f})},
 	{EDungeonFloor::Floor2, DungeonFloorData(EDungeonFloor::Floor2, "던전 2층", EDungeonFloor::Floor1, 10,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{EMonsterType::Zombie, EMonsterType::Skeleton, EMonsterType::Ghost},
 		{1.0f, 1.0f, 1.0f})},
 	{EDungeonFloor::Floor3, DungeonFloorData(EDungeonFloor::Floor3, "던전 3층", EDungeonFloor::Floor2, 10,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
+		{EMonsterType::Ork, EMonsterType::Lizardman, EMonsterType::Gargoyle},
 		{1.0f, 1.0f, 1.0f})},
 	{EDungeonFloor::Boss, DungeonFloorData(EDungeonFloor::Boss, "보스 방", EDungeonFloor::Floor3, 10,
-		{EMonsterType::Slime, EMonsterType::Goblin, EMonsterType::Skeleton},
-		{1.0f, 1.0f, 1.0f})},
+		{EMonsterType::Dragon},
+		{1.0f})},
 };
 
 
