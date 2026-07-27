@@ -18,7 +18,7 @@ const unordered_map<EItemID, ShopDataRow> SHOP_TABLE =
 	{EItemID::MANA_DUST, ShopDataRow(EItemID::MANA_DUST, 25, 50)},
 
 	{EItemID::SLIME_JELLY, ShopDataRow(EItemID::SLIME_JELLY, 15, 30)},
-	{EItemID::GOBLIN_BLOOD, ShopDataRow(EItemID::GOBLIN_BLOOD, 15, 30)},
+	{EItemID::GOBLIN_DAGGER, ShopDataRow(EItemID::GOBLIN_DAGGER, 15, 30)},
 	{EItemID::SKELETON_BONE, ShopDataRow(EItemID::SKELETON_BONE, 15, 30)},
 };
 
