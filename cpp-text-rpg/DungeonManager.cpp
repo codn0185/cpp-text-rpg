@@ -133,6 +133,19 @@ const std::vector<EDungeonFloor> DungeonManager::getDungeonFloorMenuList() const
 	return dungeonFloorMenuList;
 }
 
+const EDungeonFloor DungeonManager::getMaxDungeonFloor() const
+{
+	for (int i = (int) dungeonFloorMenuList.size() - 1; i >= 0; i--)
+	{
+		EDungeonFloor dungeonFloor = dungeonFloorMenuList.at(i);
+		if (isAvailable(dungeonFloor))
+		{
+			return dungeonFloor;
+		}
+	}
+	return EDungeonFloor::None;
+}
+
 bool DungeonManager::isAvailable(EDungeonFloor dungeonFloor) const
 {
 	if (dungeonFloorAvailables.find(dungeonFloor) == dungeonFloorAvailables.end())

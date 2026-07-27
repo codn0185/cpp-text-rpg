@@ -55,6 +55,7 @@ public:
 	void displayUnlockProgress() const;
 
 	const std::vector<EDungeonFloor> getDungeonFloorMenuList() const; // 던전 메뉴 리스트 반환
+	const EDungeonFloor getMaxDungeonFloor() const; // 도달한 최상 던전 층 반환
 
 	bool isAvailable(EDungeonFloor dungeonFloor) const; // 진입 가능 여부 반환
 	void checkAndUnlockFloor(); // 해금 확인
