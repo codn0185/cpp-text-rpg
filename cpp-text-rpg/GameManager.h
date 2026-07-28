@@ -62,6 +62,9 @@ public:
 	// 게임 업데이트
 	void update();
 
+	// 게임 종료
+	void exit();
+
 	// 게임 상태 전환
 	void switchGameState(EGameState newGameState);
 

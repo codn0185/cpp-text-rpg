@@ -13,16 +13,21 @@
 using namespace std;
 
 GameManager::GameManager()
-	: isRunning(true)
+	: isRunning(true),
+	dungeonManager(nullptr),
+	combatManager(nullptr),
+	player(nullptr),
+	backpackInventory(nullptr),
+	stockInventory(nullptr)
 {
 }
 
 GameManager::~GameManager()
 {
-	delete player;
-
 	delete dungeonManager;
 	delete combatManager;
+
+	delete player;
 
 	delete backpackInventory;
 	delete stockInventory;
@@ -84,6 +89,19 @@ void GameManager::update()
 	}
 }
 
+void GameManager::exit()
+{
+	delete dungeonManager;
+	delete combatManager;
+
+	delete player;
+
+	delete backpackInventory;
+	delete stockInventory;
+
+	isRunning = false;
+}
+
 void GameManager::switchGameState(EGameState newGameState)
 {
 	currentGameState = newGameState;
@@ -91,14 +109,6 @@ void GameManager::switchGameState(EGameState newGameState)
 
 void GameManager::onGameStart()
 {
-	delete player;
-
-	delete dungeonManager;
-	delete combatManager;
-
-	delete backpackInventory;
-	delete stockInventory;
-
 	dungeonManager = new DungeonManager();
 	combatManager = new CombatManager();
 
@@ -718,7 +728,7 @@ void GameManager::onGameOver()
 		switchGameState(EGameState::GAME_START);
 		break;
 	case 2:
-		isRunning = false;
+		exit();
 		break;
 	default:
 		break;
@@ -750,7 +760,7 @@ void GameManager::onGameClear()
 		switchGameState(EGameState::GAME_START);
 		break;
 	case 2:
-		isRunning = false;
+		exit();
 		break;
 	default:
 		break;
@@ -768,7 +778,7 @@ void GameManager::onGameExit()
 		std::cout << "============================================" << "\n";
 		std::cout << "                  게임 종료                  " << "\n";
 		std::cout << "============================================" << "\n";
-		isRunning = false;
+		exit();
 	}
 	else if (check == "N" || check == "n")
 	{
