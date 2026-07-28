@@ -70,12 +70,6 @@
     <Filter Include="Systems\ShopSystem">
       <UniqueIdentifier>{38adc304-4e0c-4be2-99bb-7f4928bbb1e2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="StateMachines">
-      <UniqueIdentifier>{175caf53-6e96-4eb3-9737-93e175ea2b01}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="StateMachines\GameStateMachine">
-      <UniqueIdentifier>{e8513c23-2b56-406f-8fc3-1944f030acf0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Skill">
       <UniqueIdentifier>{632e2861-f107-4b69-bc78-a91defd05629}</UniqueIdentifier>
     </Filter>
@@ -158,18 +152,6 @@
     </ClCompile>
     <ClCompile Include="ShopSystem.cpp">
       <Filter>Systems\ShopSystem</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStartState.cpp">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameStateMachine.cpp">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="PlayerRegistrationState.cpp">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClCompile>
-    <ClCompile Include="GameExitState.cpp">
-      <Filter>StateMachines\GameStateMachine</Filter>
     </ClCompile>
     <ClCompile Include="Skill.cpp">
       <Filter>Skill</Filter>
@@ -256,27 +238,6 @@
     </ClInclude>
     <ClInclude Include="ShopSystem.h">
       <Filter>Systems\ShopSystem</Filter>
-    </ClInclude>
-    <ClInclude Include="IState.h">
-      <Filter>StateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="IStateMachine.h">
-      <Filter>StateMachines</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStateMachine.h">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="IGameState.h">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameStartState.h">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerRegistrationState.h">
-      <Filter>StateMachines\GameStateMachine</Filter>
-    </ClInclude>
-    <ClInclude Include="GameExitState.h">
-      <Filter>StateMachines\GameStateMachine</Filter>
     </ClInclude>
     <ClInclude Include="Skill.h">
       <Filter>Skill</Filter>

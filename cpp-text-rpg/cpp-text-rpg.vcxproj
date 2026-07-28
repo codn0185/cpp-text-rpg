@@ -129,10 +129,7 @@
     <ClCompile Include="CombatManager.cpp" />
     <ClCompile Include="cpp-text-rpg.cpp" />
     <ClCompile Include="CrafterSystem.cpp" />
-    <ClCompile Include="GameExitState.cpp" />
     <ClCompile Include="GameManager.cpp" />
-    <ClCompile Include="GameStartState.cpp" />
-    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="InputSystem.cpp" />
     <ClCompile Include="Inventory.cpp" />
     <ClCompile Include="InventorySystem.cpp" />
@@ -142,7 +139,6 @@
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="NoJob.cpp" />
     <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PlayerRegistrationState.cpp" />
     <ClCompile Include="PotionSystem.cpp" />
     <ClCompile Include="DungeonManager.cpp" />
     <ClCompile Include="RandomSystem.cpp" />
@@ -161,22 +157,16 @@
     <ClInclude Include="Character.h" />
     <ClInclude Include="CombatManager.h" />
     <ClInclude Include="CrafterSystem.h" />
-    <ClInclude Include="GameExitState.h" />
     <ClInclude Include="GameManager.h" />
-    <ClInclude Include="GameStartState.h" />
-    <ClInclude Include="GameStateMachine.h" />
-    <ClInclude Include="IGameState.h" />
     <ClInclude Include="InputSystem.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventorySystem.h" />
-    <ClInclude Include="IState.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="LevelSystem.h" />
     <ClInclude Include="Mage.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="NoJob.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="PlayerRegistrationState.h" />
     <ClInclude Include="Players.h" />
     <ClInclude Include="PotionSystem.h" />
     <ClInclude Include="DungeonManager.h" />
@@ -189,7 +179,6 @@
     <ClInclude Include="Skill.h" />
     <ClInclude Include="SkillSystem.h" />
     <ClInclude Include="SpawnSystem.h" />
-    <ClInclude Include="IStateMachine.h" />
     <ClInclude Include="UISystem.h" />
     <ClInclude Include="Warrior.h" />
   </ItemGroup>
